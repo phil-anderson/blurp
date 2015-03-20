@@ -6,10 +6,16 @@ class Repository {
 
     private static Repository instance;
 
-    private List<Image> images = new ArrayList<Image>();
-    private List<ImageSprite> imageSprites = new ArrayList<ImageSprite>();
+    private Backdrop backdrop;
+    private List<Image> images;
+    private List<ImageSprite> imageSprites;
 
-    private Repository() {}
+    private Repository() {
+
+        backdrop = new Backdrop();
+        images = new ArrayList<Image>();
+        imageSprites = new ArrayList<ImageSprite>();
+    }
 
     static synchronized Repository getInstance() {
 
@@ -27,6 +33,11 @@ class Repository {
     void addImageSprite(ImageSprite imageSprite) {
 
         imageSprites.add(imageSprite);
+    }
+
+    Backdrop getBackdrop() {
+
+        return backdrop;
     }
 
     List<Image> getImages() {

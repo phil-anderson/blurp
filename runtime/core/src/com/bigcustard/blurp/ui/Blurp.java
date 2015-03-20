@@ -8,7 +8,7 @@ public class Blurp extends Game {
     @Override
     public void create() {
 
-        BlurpScreen screen = new BlurpScreen();
+        BlurpScreen screen = new BlurpScreen(800, 600);
         setScreen(screen);
     }
 }

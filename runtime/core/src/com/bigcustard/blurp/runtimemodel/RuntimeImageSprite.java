@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
 
-public class RuntimeImageSprite extends RuntimeSprite implements RuntimeObject<ImageSprite> {
+public class RuntimeImageSprite extends RuntimeSprite<ImageSprite> {
 
     private RuntimeImage image;
 
@@ -29,5 +29,6 @@ public class RuntimeImageSprite extends RuntimeSprite implements RuntimeObject<I
     @Override
     public void dispose() {
 
+        super.remove();
     }
 }
