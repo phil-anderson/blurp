@@ -25,4 +25,9 @@ public class RuntimeImageSprite extends RuntimeSprite implements RuntimeObject<I
         super.sync(modelImageSprite);
         image = RuntimeRepository.getInstance().getImage(modelImageSprite.image);
     }
+
+    @Override
+    public void dispose() {
+
+    }
 }

@@ -10,16 +10,8 @@ public class RuntimeImage implements RuntimeObject<Image> {
 
     public RuntimeImage(Image modelImage) {
 
-        loadImage(modelImage.filename);
-    }
-
-    @Override
-    public void sync(Image modelImage) {
-
-        if(!modelImage.filename.equals(filename)) {
-            texture.dispose();
-            loadImage(modelImage.filename);
-        }
+        this.filename = modelImage.filename;
+        texture = new Texture(modelImage.filename);
     }
 
     Texture getTexture() {
@@ -27,9 +19,12 @@ public class RuntimeImage implements RuntimeObject<Image> {
         return texture;
     }
 
-    private void loadImage(String imageFilename) {
+    @Override
+    public void sync(Image modelImage) { } // Images are immutable so never need syncing.
 
-        this.filename = imageFilename;
-        texture = new Texture(imageFilename);
+    @Override
+    public void dispose() {
+
+        texture.dispose();
     }
 }

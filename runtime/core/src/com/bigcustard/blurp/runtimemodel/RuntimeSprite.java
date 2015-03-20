@@ -7,11 +7,12 @@ public class RuntimeSprite extends Actor {
 
     public void sync(Sprite modelSprite) {
 
-        setX((float) modelSprite.x);
-        setY((float) modelSprite.y);
-        setScaleX((float) modelSprite.scaleX);
-        setScaleY((float) modelSprite.scaleY);
+        setPosition((float) modelSprite.x, (float) modelSprite.y);
+
+        setScale((float) modelSprite.scaleX, (float) modelSprite.scaleY);
+
         setRotation((float) modelSprite.rotation);
-        setColor(1, 1, 1, (float) modelSprite.alpha); // TODO: Handle colour-tinting.
+
+        setColor(1, 1, 1, (float) modelSprite.alpha);
     }
 }

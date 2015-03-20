@@ -80,6 +80,9 @@ public class ModelToRuntimeObjectMapTest {
 
             id = modelObject.id;
         }
+
+        @Override
+        public void dispose() { }
     }
 
 }

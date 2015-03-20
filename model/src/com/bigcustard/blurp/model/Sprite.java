@@ -8,8 +8,6 @@ public abstract class Sprite<T> {
 
     private static int instantiationOrder = 0;
 
-    public int zOrder;
-
     /**
      * The position of the sprite in your Blurp {@link World World}, or to be more
      * precise, the position of the <i>center</i> of the sprite in your Blurp World
@@ -45,7 +43,7 @@ public abstract class Sprite<T> {
      * The angle that the sprite is rotated by. A positive value is clockwise, whereas a negative one is anti-clockwise
      * (which is UK English for "counter-clockwise" in case you didn't know).
      * <p>
-     * There are 360 degrees in a circle, so setting this to 360 is the same as 0.
+     * There are 360 degrees in a circle, so setting this to 360 is the same as setting it to 0.
      */
     public double rotation;
 
@@ -59,6 +57,13 @@ public abstract class Sprite<T> {
      * Try it out... You'll soon see what it does.
      */
     public double alpha;
+
+    /**
+     * The Z-Order is the order in which the sprites will be drawn on the screen. This means that sprites with a higher
+     * Z-Order will appear on top of ones with a lower Z-Order. It's just like putting stickers on a wall - As you add
+     * more and more, they'll start overlapping and covering the ones behind.
+     */
+    public int zOrder;
 
     protected Sprite() {
 

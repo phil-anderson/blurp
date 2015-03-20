@@ -17,7 +17,7 @@ import com.bigcustard.blurp.runtimemodel.*;
 public class ModelToRuntimeObjectMap<K, V extends RuntimeObject<K>> {
 
     private Map<K, V> store;
-    private Constructor runtimeObjectConstructor;
+    private Constructor<V> runtimeObjectConstructor;
 
     // Wouldn't need the class parameters if Java had proper generics. Sigh.
     public ModelToRuntimeObjectMap(Class<K> modelClass, Class<V> runtimeClass) {
@@ -34,7 +34,7 @@ public class ModelToRuntimeObjectMap<K, V extends RuntimeObject<K>> {
      * Syncs existing runtime objects from their corresponding model objects, and instantiates any new runtime objects
      * that may be required. After which it removes any orphaned runtime objects.
      *
-     * @param modelObjects
+     * @param modelObjects The list of model objects to sync with.
      */
     public void syncAll(List<K> modelObjects) {
 
@@ -61,8 +61,13 @@ public class ModelToRuntimeObjectMap<K, V extends RuntimeObject<K>> {
 
     private void clearOrphans(List<K> modelObjects) {
 
-        for(K storedModelObject : new ArrayList<K>(store.keySet())) {
+        for(Map.Entry<K, V> entry : new ArrayList<Map.Entry<K, V>>(store.entrySet())) {
+
+            K storedModelObject = entry.getKey();
+            V runtimeObject = entry.getValue();
+
             if(!modelObjects.contains(storedModelObject)) {
+                runtimeObject.dispose();
                 store.remove(storedModelObject);
             }
         }

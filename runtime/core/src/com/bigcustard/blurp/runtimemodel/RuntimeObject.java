@@ -6,4 +6,6 @@ package com.bigcustard.blurp.runtimemodel;
 public interface RuntimeObject<T> {
 
     void sync(T modelObject);
+
+    void dispose();
 }

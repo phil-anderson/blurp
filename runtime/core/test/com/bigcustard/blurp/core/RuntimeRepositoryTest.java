@@ -1,12 +1,13 @@
 package com.bigcustard.blurp.core;
 
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.testutils.*;
 import org.junit.*;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
 
-public class RuntimeRepositoryTest {
+public class RuntimeRepositoryTest extends LibGdxTest {
 
     private RuntimeRepository testCandidate = RuntimeRepository.getInstance();
     private Image image;
@@ -16,7 +17,7 @@ public class RuntimeRepositoryTest {
     public void setUp() throws Exception {
 
         // Instantiate an instance of each type of object
-        image = new Image("TestImage.png");
+        image = new Image("libgdx.png");
         imageSprite = new ImageSprite(image);
     }
 

@@ -9,8 +9,9 @@ package com.bigcustard.blurp.model;
  */
 public class ImageSprite extends Sprite<ImageSprite> {
 
-
     public Image image;
+
+    private boolean boundImage;
 
     /**
      * Constructs a new ImageSprite using the image file specified. The {@link #image} property will be set accordingly.
@@ -23,6 +24,7 @@ public class ImageSprite extends Sprite<ImageSprite> {
     public ImageSprite(String imageFileName) {
 
         this(new Image(imageFileName));
+        boundImage = true;
     }
 
     /**
@@ -57,5 +59,26 @@ public class ImageSprite extends Sprite<ImageSprite> {
 
         scaleY = -scaleY;
         return this;
+    }
+
+    /**
+     * First off, let me say that you'll almost certainly never need to use this method. Seriously. Move on. You have
+     * better things to do with your time.
+     * <p>
+     * Still reading? Excellent! Clearly you're curious, and curiosity is a wondeful thing as far as I'm concerned.
+     * So... What's this method all about then?
+     * <p>
+     * If you created this ImageSprite by specifying an image filename then behind the scenes Blurp will have created
+     * its own Image and used that. That Image is said to be "bound" to the ImageSprite because the ImageSprite is the
+     * only thing that knows about it and is the only thing that uses it.
+     * <p>
+     * When you remove the ImageSprite, Blurp will check whether the image was bound using this method, and if it was
+     * it will also remove the image.
+     *
+     * @return True if the ImageSprite was created with an image filename and so had to create an Image itself.
+     */
+    public boolean isImageBound() {
+
+        return boundImage;
     }
 }

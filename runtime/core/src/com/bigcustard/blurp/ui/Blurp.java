@@ -4,7 +4,7 @@ import com.badlogic.gdx.*;
 
 public class Blurp extends Game {
 
-    // TODO - Need to override lifecycle methods - Especially dispose.
+    // TODO - Need to override lifecycle methods
     @Override
     public void create() {
 
