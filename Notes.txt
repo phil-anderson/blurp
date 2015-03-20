@@ -1,0 +1,6 @@
+
+
+
+Glossary
+Model = The public facing api model
+RuntimeModel = The runtime model that will be used to render the scene
