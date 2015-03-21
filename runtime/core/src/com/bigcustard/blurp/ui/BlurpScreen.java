@@ -2,16 +2,18 @@ package com.bigcustard.blurp.ui;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.utils.viewport.*;
 
 public class BlurpScreen extends ScreenAdapter {
 
-    private Viewport viewPort;
+    private final Stage stage;
+    private Viewport viewport;
 
+    public BlurpScreen(int width, int height) {
 
-    public BlurpScreen(int worldWidth, int worldHeight) {
-
-        viewPort = new FitViewport(worldWidth, worldHeight);
+        viewport = new FitViewport(width, height);
+        stage = new Stage(viewport);
     }
 
     @Override

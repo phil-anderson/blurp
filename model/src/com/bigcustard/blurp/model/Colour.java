@@ -49,12 +49,11 @@ public class Colour {
     }
 
     /**
-     * Returns a new Colour based on this colour but with it's brightess changes.
+     * Returns a new Colour based on this colour but with it's brightness changed.
      *
      * @param factor The brightness factor. Values greater than 1 will make the colour brighter, whereas values less
      *               than 1 will make it darker. It's a multiplier, so for example a brightness factor of 2 will return
      *               a colour twice as bright, whereas a factor of 0.5 will be half as bright.
-     * @return
      */
     public Colour withBrightness(double factor) {
 

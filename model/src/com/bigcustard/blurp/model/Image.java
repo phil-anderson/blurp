@@ -1,8 +1,8 @@
 package com.bigcustard.blurp.model;
 
 /**
- * An Image object is a holder for pictures and images that you want to use iin your game. They load the image file and
- * make it available for use by Blurp.
+ * An Image object is a holder for pictures and images that you want to use in your program. They load the image file
+ * and make it available for use by Blurp.
  *
  * Images can be used to construct {@link ImageSprite ImageSprites} which then allow you to whiz them around the screen,
  * grow or shrink them, rotate them and more.
@@ -12,6 +12,9 @@ package com.bigcustard.blurp.model;
  */
 public class Image {
 
+    /**
+     * The name of the image file that this image was created with. This property is read-only.
+     */
     public final String filename;
 
     /**

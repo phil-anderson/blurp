@@ -49,7 +49,7 @@ public class ModelToRuntimeObjectMap<K, V extends RuntimeObject<K>> {
         V runtimeObject = store.get(modelObject);
         if(runtimeObject == null) {
             try {
-                runtimeObject = (V) runtimeObjectConstructor.newInstance(modelObject);
+                runtimeObject = runtimeObjectConstructor.newInstance(modelObject);
                 store.put(modelObject, runtimeObject);
             } catch(Exception e) {
                 throw new RuntimeException("Error instantiating the runtime object", e);
