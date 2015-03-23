@@ -7,10 +7,6 @@ import com.bigcustard.blurp.model.*;
 
 public class BackdropRenderer {
 
-    // TODO pre and post render hooks in renderer
-    // TODO Script runner
-    // TODO Think about ways to hide the Blurpifier from the users (or email Spence)
-
     public void render() {
 
         Backdrop backdrop = RuntimeRepository.getInstance().getBackdrop();
