@@ -1,6 +1,7 @@
 package com.bigcustard.blurp.model;
 
 import java.util.*;
+import com.bigcustard.blurp.core.*;
 
 /**
  * This class acts as the root of the Blurp model, and is what will be transformed, synced and rendered by the runtime.
@@ -8,7 +9,7 @@ import java.util.*;
  * like Backdrop, are instantiated directly here.
  * <p>
  * Everything in here is package-private as I don't want the users accessing it. If it should be accessible by the user
- * then expose it via {@link BlurpMasterpiece} which their script / class will extend.
+ * then expose it via {@link BlurpMain} which their script / class will extend.
  */
 class Repository {
 
@@ -17,6 +18,10 @@ class Repository {
     private Backdrop backdrop;
     private List<Image> images;
     private List<ImageSprite> imageSprites;
+
+    private IBlurpifier blurpifier;
+
+    private boolean initialised;
 
     public static Repository getInstance() {
 
@@ -43,6 +48,11 @@ class Repository {
         imageSprites.add(imageSprite);
     }
 
+    synchronized void requestBlurpify() {
+
+        blurpifier.blurpify();
+    }
+
     Backdrop getBackdrop() {
 
         return backdrop;
@@ -56,5 +66,12 @@ class Repository {
     List<ImageSprite> getImageSprites() {
 
         return imageSprites;
+    }
+
+    public synchronized void initialise(IBlurpifier blurpifier) {
+
+        if(initialised) throw new IllegalStateException("Repository already initialised");
+
+        this.blurpifier = blurpifier;
     }
 }

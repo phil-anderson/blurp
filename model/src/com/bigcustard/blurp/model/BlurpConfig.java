@@ -1,10 +1,8 @@
 package com.bigcustard.blurp.model;
 
+/**
+ * Blurp configuration. These settings affect Blurp as a whole, and how it runs your program.
+ */
 public class BlurpConfig {
 
-    public int width = 1024;
-
-    public int height = 768;
-
-    public double maxFrameRate = 60;
 }

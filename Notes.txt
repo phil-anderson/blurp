@@ -1,4 +1,5 @@
-
+Need to write up the way this all works
+Should include why not every model object has a corresponding runtime object (immutable / intentional state share)
 
 
 Glossary

@@ -13,16 +13,19 @@ public class RuntimeRepository {
 
     private static RuntimeRepository instance;
 
-    private ModelRepositoryWrapper modelRepository;
-
-    private ModelToRuntimeObjectMap<Image, RuntimeImage> runtimeImages;
-    private ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite> runtimeImageSprites;
+    private final ModelRepositoryWrapper modelRepository;
+    private final ModelToRuntimeObjectMap<Image, RuntimeImage> runtimeImages;
+    private final ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite> runtimeImageSprites;
+    private final Blurpifier blurpifier;
 
     private RuntimeRepository() {
 
         modelRepository = new ModelRepositoryWrapper();
         runtimeImages = new ModelToRuntimeObjectMap<Image, RuntimeImage>(Image.class, RuntimeImage.class);
         runtimeImageSprites = new ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite>(ImageSprite.class, RuntimeImageSprite.class);
+        blurpifier = new Blurpifier();
+
+        modelRepository.setBlurpifier(blurpifier);
     }
 
     public static synchronized RuntimeRepository getInstance() {
@@ -48,6 +51,16 @@ public class RuntimeRepository {
     public RuntimeImageSprite getImageSprite(ImageSprite modelImageSprite) {
 
         return runtimeImageSprites.get(modelImageSprite);
+    }
+
+    public Blurpifier getBlurpifier() {
+
+        return blurpifier;
+    }
+
+    public Backdrop getBackdrop() {
+
+        return modelRepository.getBackdrop();
     }
 }
 
