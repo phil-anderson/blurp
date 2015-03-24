@@ -10,6 +10,9 @@ import com.bigcustard.blurp.core.*;
  * <p>
  * Everything in here is package-private as I don't want the users accessing it. If it should be accessible by the user
  * then expose it via {@link BlurpMain} which their script / class will extend.
+ * <p>
+ * I'm considering moving this to the runtime module and just having an interface in here, but still thinking it
+ * through. Perhaps there'll be a tipping point that'll make me decide to do it.
  */
 class Repository {
 
@@ -73,5 +76,6 @@ class Repository {
         if(initialised) throw new IllegalStateException("Repository already initialised");
 
         this.blurpifier = blurpifier;
+        initialised = true;
     }
 }

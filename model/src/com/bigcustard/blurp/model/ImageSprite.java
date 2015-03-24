@@ -77,7 +77,7 @@ public class ImageSprite extends Sprite<ImageSprite> {
      *
      * @return True if the ImageSprite was created with an image filename and so had to create an Image itself.
      */
-    public boolean isImageBound() {
+    public boolean isBoundImage() {
 
         return boundImage;
     }

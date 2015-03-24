@@ -6,8 +6,6 @@ package com.bigcustard.blurp.model;
  */
 public abstract class Sprite<T> {
 
-    private static int instantiationOrder = 0;
-
     /**
      * The position of the sprite in your Blurp {@link World World}, or to be more
      * precise, the position of the <i>center</i> of the sprite in your Blurp World
@@ -57,18 +55,6 @@ public abstract class Sprite<T> {
      * Try it out... You'll soon see what it does.
      */
     public double alpha;
-
-    /**
-     * The Z-Order is the order in which the sprites will be drawn on the screen. This means that sprites with a higher
-     * Z-Order will appear on top of ones with a lower Z-Order. It's just like putting stickers on a wall - As you add
-     * more and more, they'll start overlapping and covering the ones behind.
-     */
-    public int zOrder;
-
-    protected Sprite() {
-
-        zOrder = instantiationOrder++;
-    }
 
     /**
      * Rotates the sprite around its center by the specified amount. This is cumulative, which means that if I call it
