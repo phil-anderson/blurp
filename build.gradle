@@ -1,3 +1,5 @@
+import sun.misc.ExtensionDependency
+
 buildscript {
     repositories {
         mavenCentral()
@@ -29,12 +31,36 @@ allprojects {
     }
 }
 
-project(":desktop") {
+
+project("model") {
+    apply plugin: "java"
+
+    // TODO: I have literally no idea why I need to do this for model, but not for other projects with the exact same structure.
+    sourceSets {
+        main {
+            java.srcDir 'src'
+            resources.srcDir 'resources'
+        }
+        test {
+            java.srcDir 'test'
+        }
+    }
+}
+
+project("samples") {
+    apply plugin: "java"
+
+    dependencies {
+        compile project(":runtime:desktop")
+    }
+}
+
+project("runtime:desktop") {
     apply plugin: "java"
 
 
     dependencies {
-        compile project(":core")
+        compile project(":runtime:core")
         compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
         compile "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
@@ -42,29 +68,31 @@ project(":desktop") {
     }
 }
 
-project(":android") {
-    apply plugin: "android"
+// TODO: Get this working.
+//project(":android") {
+//    apply plugin: "android"
+//
+//    configurations { natives }
+//
+//    dependencies {
+//        compile project(":core")
+//        compile "com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"
+//        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi"
+//        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"
+//        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86"
+//        compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+//        natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi"
+//        natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi-v7a"
+//        natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86"
+//    }
+//}
 
-    configurations { natives }
-
-    dependencies {
-        compile project(":core")
-        compile "com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"
-        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi"
-        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"
-        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86"
-        compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
-        natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi"
-        natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi-v7a"
-        natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86"
-    }
-}
-
-project(":core") {
+project("runtime:core") {
     apply plugin: "java"
 
 
     dependencies {
+        compile project(":model")
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
     }
