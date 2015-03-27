@@ -1,40 +1,51 @@
 package com.bigcustard.blurp.core;
 
+import com.badlogic.gdx.*;
+import com.badlogic.gdx.utils.viewport.*;
 import com.bigcustard.blurp.model.*;
-import com.bigcustard.blurp.ui.*;
 import com.bigcustard.blurp.utils.*;
 
 public class Runner {
 
-    private BlurpMain script;
 
-    private BlurpScreen screen;
+    private Blurpifier blurpifier;
+    private RuntimeRepository runtimeRepository;
 
-    public Runner(BlurpMain script, int width, int height) {
+    private final Thread scriptThread;
 
-        this.script = script;
-        screen = new BlurpScreen(width, height);
+    public Runner(BlurpMain script, Viewport viewport) {
 
-
-        // TODO: Refactor singletons to have instance manager classes that can initialise.
-        RuntimeRepository.getInstance(); // This makes me want to cry.
+        SF.instantiateSingletons(viewport);
+        scriptThread = new Thread(new ScriptRunnable(script));
     }
 
-    public BlurpScreen getScreen() {
+    public Screen getScreen() {
 
-        return screen;
+        return SF.getBlurpScreen();
     }
 
     public void start() {
 
-        Thread scriptThread = new Thread(new ScriptRunnable());
         scriptThread.start();
+    }
+
+    // TODO: Implement this properly
+    public void stop() {
+
+        SF.dispose();
     }
 
     // TODO: Need a way to pause / resume / restart / stop the script. Communicate via flags in Repository? Blurpifier states?
     //       Note - When paused, the Blurpifier will still have to allow renders to continue so that input gestures
     //              (e.g. to resume) get picked up.
     private class ScriptRunnable implements Runnable {
+
+        private BlurpMain script;
+
+        private ScriptRunnable(BlurpMain script) {
+
+            this.script = script;
+        }
 
         @Override
         public void run() {

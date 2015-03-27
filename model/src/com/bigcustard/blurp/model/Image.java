@@ -25,7 +25,7 @@ public class Image {
 
         if(filename == null) throw new RuntimeException("Image filename must not be null");
         this.filename = filename;
-        Repository.getInstance().addImage(this);
+        ModelRepository.getInstance().addImage(this);
     }
 
     /**
@@ -38,7 +38,7 @@ public class Image {
      */
     public void remove() {
 
-        Repository.getInstance().removeImage(this);
+        ModelRepository.getInstance().removeImage(this);
     }
 
     @Override

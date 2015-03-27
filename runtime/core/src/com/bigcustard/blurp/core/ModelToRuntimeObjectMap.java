@@ -14,7 +14,7 @@ import com.bigcustard.blurp.runtimemodel.*;
  * @param <K> The model object type
  * @param <V> The runtime model object type
  */
-public class ModelToRuntimeObjectMap<K, V extends RuntimeObject<K>> {
+public class ModelToRuntimeObjectMap<K, V extends RuntimeObject<K>> implements Iterable<V> {
 
     private Map<K, V> store;
     private Constructor<V> runtimeObjectConstructor;
@@ -76,5 +76,15 @@ public class ModelToRuntimeObjectMap<K, V extends RuntimeObject<K>> {
     public V get(K modelObject) {
 
         return store.get(modelObject);
+    }
+
+    public Iterator<V> iterator() {
+
+        return store.values().iterator();
+    }
+
+    public void clear() {
+
+        store.clear();
     }
 }

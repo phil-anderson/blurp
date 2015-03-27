@@ -5,40 +5,38 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.utils.viewport.*;
 import com.bigcustard.blurp.core.*;
+import com.bigcustard.blurp.ui.RenderListener.*;
 
-// TODO: This is an externally instantiated singleton. I'm not wild about it, but it's better than anything else I
-//       could think of. I think Spencer will really hate it though.
+import static com.bigcustard.blurp.core.Blurpifier.State.*;
+
 public class BlurpScreen extends ScreenAdapter {
 
-    private static BlurpScreen instance;
-
-    private final Stage stage;
-    private final Viewport viewport;
-    private final BackdropRenderer backdropRenderer;
+    private final CanvasRenderer canvasRenderer;
 
     private RenderListener renderListener = RenderListenerAdapter.NULL_IMPLEMENTATION;
 
-    public BlurpScreen(int width, int height) {
+    private Viewport viewport;
+    private Batch batch;
+    private Stage stage;
 
-        if(BlurpScreen.instance != null) throw new IllegalStateException("Can only have one BlurpScreen");
+    public BlurpScreen(Viewport viewport) {
 
-        viewport = new FitViewport(width, height);
-        stage = new Stage(viewport);
-        backdropRenderer = new BackdropRenderer();
-        BlurpScreen.instance = this;
+        this.viewport = viewport;
+        canvasRenderer = new CanvasRenderer();
     }
 
-    public static BlurpScreen getInstance() {
+    public void addActor(Actor actor) {
 
-        return instance;
+        stage.addActor(actor);
     }
+
 
     @Override
     public void render(float delta) {
 
         try {
-            Batch batch = beginBatch();
-            doFrame(batch, delta);
+            beginBatch();
+            doFrame(delta);
             endBatch();
         } catch(Exception e) {
             // Do nothing for now - Swallowing allows libgdx to continue rendering, and thus allows the app to be closed.
@@ -47,61 +45,69 @@ public class BlurpScreen extends ScreenAdapter {
         }
     }
 
-    private void doFrame(Batch batch, float delta) {
+    @Override
+    public void dispose() {
 
-        renderListener.handleRenderEvent(batch, delta, RenderListener.EventType.PreFrame);
+        if(batch != null) {
+            stage.dispose();
+            batch.dispose();
+        }
+    }
+
+    private void doFrame(float delta) {
+
+        renderListener.handleRenderEvent(batch, delta, EventType.PreFrame);
 
         stage.act(delta);
         // Tweener update goes here too.
 
-        if(RuntimeRepository.getInstance().getBlurpifier().getState() == Blurpifier.State.Requested) {
-            doRender(batch, delta);
+        if(SF.getBlurpifier().getState() == Requested) {
+            doRender(delta);
         }
 
-        renderListener.handleRenderEvent(batch, delta, RenderListener.EventType.PostFrame);
+        renderListener.handleRenderEvent(batch, delta, EventType.PostFrame);
     }
 
-    private void doRender(Batch batch, float delta) {
+    private void doRender(float delta) {
 
-        renderListener.handleRenderEvent(batch, delta, RenderListener.EventType.PreFrame);
+        renderListener.handleRenderEvent(batch, delta, EventType.PreRender);
 
         try {
+            SF.getRuntimeRepository().syncWithModelRepository();
 
-            RuntimeRepository.getInstance().syncWithModelRepository();
-
-            beginBatch(); // In case a RenderListener ended it.
-            backdropRenderer.render();
+            beginBatch(); // In case the RenderListener ended it.
+            canvasRenderer.render();
             endBatch();
 
             stage.draw();
 
         } finally {
-            RuntimeRepository.getInstance().getBlurpifier().setState(Blurpifier.State.Complete);
+            SF.getBlurpifier().setState(Complete);
         }
 
-        renderListener.handleRenderEvent(batch, delta, RenderListener.EventType.PostFrame);
+        beginBatch();
+        renderListener.handleRenderEvent(batch, delta, EventType.PostRender);
+        endBatch();
     }
 
-    private Batch beginBatch() {
+    private void beginBatch() {
 
-        Batch batch = stage.getBatch();
+        // Lazily initialise to give libgdx a chance to start up
+        if(batch == null) {
+            batch = new SpriteBatch();
+            stage = new Stage(viewport, batch);
+        }
+
         if(!batch.isDrawing()) {
             batch.begin();
         }
-        return batch;
     }
 
     private void endBatch() {
 
-        Batch batch = stage.getBatch();
         if(batch.isDrawing()) {
             batch.end();
         }
-    }
-
-    public RenderListener getRenderListener() {
-
-        return renderListener;
     }
 
     public void setRenderListener(RenderListener listener) {
@@ -109,14 +115,8 @@ public class BlurpScreen extends ScreenAdapter {
         this.renderListener = listener != null ? listener : RenderListenerAdapter.NULL_IMPLEMENTATION;
     }
 
-    public Stage getStage() {
+    public RenderListener getRenderListener() {
 
-        return stage;
-    }
-
-    @Override
-    public void dispose() {
-
-        BlurpScreen.instance = null;
+        return renderListener;
     }
 }

@@ -1,6 +1,7 @@
 package com.bigcustard.blurp.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.*;
+import com.badlogic.gdx.utils.viewport.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.ui.*;
 
@@ -25,6 +26,8 @@ public class DesktopLauncher {
             throw new IllegalArgumentException(USAGE_MESSAGE, e);
         }
 
-		new LwjglApplication(new Blurp(script, config.width, config.height), config);
+		new LwjglApplication(new Blurp(script,
+                             new FitViewport(config.width, config.height)),
+                             config);
 	}
 }

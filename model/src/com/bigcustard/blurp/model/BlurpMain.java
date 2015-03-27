@@ -12,9 +12,9 @@ package com.bigcustard.blurp.model;
 public abstract class BlurpMain implements Runnable {
 
     /**
-     * The Blurp {@link Screen}, which will be drawn before anything else.
+     * The Blurp {@link Canvas}, which will be drawn before anything else.
      */
-    protected final Screen screen;
+    protected final Canvas canvas;
 
     /**
      * The {@link BlurpConfig} that can be used to change Blurp's settings
@@ -24,7 +24,7 @@ public abstract class BlurpMain implements Runnable {
     protected BlurpMain() {
 
         config = new BlurpConfig();
-        screen = Repository.getInstance().getScreen();
+        canvas = ModelRepository.getInstance().getCanvas();
     }
 
     /**
@@ -56,12 +56,6 @@ public abstract class BlurpMain implements Runnable {
      */
     public void blurpify() {
 
-        Repository.getInstance().requestBlurpify();
+        ModelRepository.getInstance().requestBlurpify();
     }
-
-    // TODO: Write and document this. Can only be called once, and then it MUST be before a call to blurpify. Or something. Dunno at the moment
-    public void initialise(int width, int height) {
-
-    }
-
 }

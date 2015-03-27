@@ -11,34 +11,25 @@ import com.bigcustard.blurp.runtimemodel.*;
  */
 public class RuntimeRepository {
 
-    private static RuntimeRepository instance;
 
-    private final ModelRepositoryWrapper modelRepository;
+    private final ModelRepositoryWrapper modelRepositoryWrapper;
+
     private final ModelToRuntimeObjectMap<Image, RuntimeImage> runtimeImages;
     private final ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite> runtimeImageSprites;
-    private final Blurpifier blurpifier;
 
-    private RuntimeRepository() {
+    RuntimeRepository(ModelRepositoryWrapper modelRepositoryWrapper) {
 
-        blurpifier = new Blurpifier();
-        modelRepository = new ModelRepositoryWrapper(blurpifier);
+        this.modelRepositoryWrapper = modelRepositoryWrapper;
+
         runtimeImages = new ModelToRuntimeObjectMap<Image, RuntimeImage>(Image.class, RuntimeImage.class);
         runtimeImageSprites = new ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite>(ImageSprite.class, RuntimeImageSprite.class);
-    }
-
-    public static synchronized RuntimeRepository getInstance() {
-
-        if(instance == null) {
-            instance = new RuntimeRepository();
-        }
-        return instance;
     }
 
     public void syncWithModelRepository() {
 
         // Sync the various object types
-        runtimeImages.syncAll(modelRepository.getImages());
-        runtimeImageSprites.syncAll(modelRepository.getImageSprites());
+        runtimeImages.syncAll(modelRepositoryWrapper.getImages());
+        runtimeImageSprites.syncAll(modelRepositoryWrapper.getImageSprites());
     }
 
     public RuntimeImage getImage(Image modelImage) {
@@ -51,14 +42,18 @@ public class RuntimeRepository {
         return runtimeImageSprites.get(modelImageSprite);
     }
 
-    public Blurpifier getBlurpifier() {
+    public Canvas getScreen() {
 
-        return blurpifier;
+        return modelRepositoryWrapper.getScreen();
     }
 
-    public Screen getBackdrop() {
+    public void dispose() {
 
-        return modelRepository.getBackdrop();
+        for(RuntimeImage image : runtimeImages) {
+            image.dispose();
+        }
+        runtimeImages.clear();
+        runtimeImageSprites.clear();
     }
 }
 

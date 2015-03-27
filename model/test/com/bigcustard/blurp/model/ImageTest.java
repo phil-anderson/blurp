@@ -11,19 +11,19 @@ public class ImageTest {
     @Before
     public void setUp() throws Exception {
 
-        Repository.getInstance().getImages().clear();
+        ModelRepository.getInstance().getImages().clear();
     }
 
 
     @Test
     public void instantiatedImagesGetAddedToRepository() throws Exception {
 
-        assertThat(Repository.getInstance().getImages().size(), is(0));
+        assertThat(ModelRepository.getInstance().getImages().size(), is(0));
 
         Image testImage = new Image("xyzzy");
 
         // TODO: Get proper hamcrest matchers into the classpath.
-        assertThat(Repository.getInstance().getImages().size(), is(1));
-        assertThat(Repository.getInstance().getImages().contains(testImage), is(true));
+        assertThat(ModelRepository.getInstance().getImages().size(), is(1));
+        assertThat(ModelRepository.getInstance().getImages().contains(testImage), is(true));
     }
 }

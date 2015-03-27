@@ -3,7 +3,6 @@ package com.bigcustard.blurp.runtimemodel;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
-import com.bigcustard.blurp.ui.*;
 
 public class RuntimeImageSprite extends RuntimeSprite<ImageSprite> {
 
@@ -17,7 +16,7 @@ public class RuntimeImageSprite extends RuntimeSprite<ImageSprite> {
         int height = image.getTextureRegion().getRegionHeight();
         setSize(width, height);
         setOrigin(width / 2, height / 2);
-        BlurpScreen.getInstance().getStage().addActor(this);
+        SF.getBlurpScreen().addActor(this);
     }
 
     @Override
@@ -38,7 +37,7 @@ public class RuntimeImageSprite extends RuntimeSprite<ImageSprite> {
     public void sync(ImageSprite modelImageSprite) {
 
         super.sync(modelImageSprite);
-        image = RuntimeRepository.getInstance().getImage(modelImageSprite.image);
+        image = SF.getRuntimeRepository().getImage(modelImageSprite.image);
     }
 
     @Override

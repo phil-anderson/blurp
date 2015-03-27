@@ -51,8 +51,6 @@ public class ImageSprite extends Sprite<ImageSprite> {
     public ImageSprite(Image image, double x, double y) {
 
         this(image, x, y, 1, 1, 0);
-
-        Repository.getInstance().addImageSprite(this);
     }
 
     /**
@@ -74,7 +72,7 @@ public class ImageSprite extends Sprite<ImageSprite> {
         this.scaleY = scaleY;
         this.rotation = rotation;
 
-        Repository.getInstance().addImageSprite(this);
+        ModelRepository.getInstance().addImageSprite(this);
     }
 
     /**
@@ -86,7 +84,7 @@ public class ImageSprite extends Sprite<ImageSprite> {
      */
     public void remove() {
 
-        Repository.getInstance().removeImageSprite(this);
+        ModelRepository.getInstance().removeImageSprite(this);
     }
 
     /**

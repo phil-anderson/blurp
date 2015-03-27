@@ -1,5 +1,7 @@
 package com.bigcustard.blurp.core;
 
+import static com.bigcustard.blurp.core.Blurpifier.State.*;
+
 /**
  * Handles synchronization between model and runtime during a blurpify, and handles blocking until it's done.
  */
@@ -10,20 +12,20 @@ public class Blurpifier implements IBlurpifier {
         Dormant, Requested, Complete
     }
 
-    private volatile State state = State.Dormant;
+    private volatile State state = Dormant;
 
     @Override
     public synchronized void blurpify() {
 
-        if(state != State.Dormant) throw new IllegalStateException("Already blurpifying"); // Shouldn't be possible.
+        if(state != Dormant) throw new IllegalStateException("Already blurpifying"); // Shouldn't be possible.
 
-        state = State.Requested;
-        while(state != State.Complete) {
+        state = Requested;
+        while(state != Complete) {
             try {
                 wait();
             } catch(InterruptedException e) { } // Do nothing, never going to happen.
         }
-        state = State.Dormant;
+        state = Dormant;
     }
 
     public synchronized State getState() {

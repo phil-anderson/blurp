@@ -14,21 +14,26 @@ public class ModelRepositoryWrapper {
 
     public ModelRepositoryWrapper(Blurpifier blurpifier) {
 
-        Repository.getInstance().initialise(blurpifier, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        ModelRepository.getInstance().initialise(blurpifier, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
-    public Screen getBackdrop() {
+    public Canvas getScreen() {
 
-        return Repository.getInstance().getScreen();
+        return ModelRepository.getInstance().getCanvas();
     }
 
     public List<Image> getImages() {
 
-        return Repository.getInstance().getImages();
+        return ModelRepository.getInstance().getImages();
     }
 
     public List<ImageSprite> getImageSprites() {
 
-        return Repository.getInstance().getImageSprites();
+        return ModelRepository.getInstance().getImageSprites();
+    }
+
+    public void dispose() {
+
+        ModelRepository.getInstance().dispose();
     }
 }

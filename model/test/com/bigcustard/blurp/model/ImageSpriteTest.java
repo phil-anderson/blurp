@@ -10,19 +10,19 @@ public class ImageSpriteTest {
     @Before
     public void setUp() throws Exception {
 
-        Repository.getInstance().getImageSprites().clear();
+        ModelRepository.getInstance().getImageSprites().clear();
     }
 
     @Test
     public void instantiatedImageSpritesGetAddedToRepository() throws Exception {
 
-        assertThat(Repository.getInstance().getImageSprites().size(), is(0));
+        assertThat(ModelRepository.getInstance().getImageSprites().size(), is(0));
 
         ImageSprite testImageSprite = new ImageSprite("xyzzy", 100, 100);
 
         // TODO: Get proper hamcrest matchers into the classpath.
-        assertThat(Repository.getInstance().getImageSprites().size(), is(1));
-        assertThat(Repository.getInstance().getImageSprites().contains(testImageSprite), is(true));
+        assertThat(ModelRepository.getInstance().getImageSprites().size(), is(1));
+        assertThat(ModelRepository.getInstance().getImageSprites().contains(testImageSprite), is(true));
     }
 
     @Test

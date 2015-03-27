@@ -7,7 +7,7 @@ import com.bigcustard.blurp.core.*;
 /**
  * This class acts as the root of the Blurp model, and is what will be transformed, synced and rendered by the runtime.
  * The various model objects either add themselves to this as they are instantiated, or in the case of singleton objects
- * like Screen, are instantiated directly here.
+ * like Canvas, are instantiated directly here.
  * <p>
  * Everything in here is package-private as I don't want the users accessing it. If it should be accessible by the user
  * then expose it via {@link BlurpMain} which their script / class will extend.
@@ -15,11 +15,11 @@ import com.bigcustard.blurp.core.*;
  * I'm considering moving this to the runtime module and just having an interface in here, but still thinking it
  * through. Perhaps there'll be a tipping point that'll make me decide to do it.
  */
-class Repository {
+class ModelRepository {
 
-    private static Repository instance;
+    private static ModelRepository instance;
 
-    private Screen screen;
+    private Canvas canvas;
     private List<Image> images;
     private List<ImageSprite> imageSprites;
 
@@ -27,15 +27,15 @@ class Repository {
 
     private boolean initialised;
 
-    public static Repository getInstance() {
+    public static ModelRepository getInstance() {
 
         if(instance == null) {
-            instance = new Repository();
+            instance = new ModelRepository();
         }
         return instance;
     }
 
-    private Repository() {
+    private ModelRepository() {
 
         images = new ArrayList<Image>();
         imageSprites = new ArrayList<ImageSprite>();
@@ -66,9 +66,9 @@ class Repository {
         blurpifier.blurpify();
     }
 
-    Screen getScreen() {
+    Canvas getCanvas() {
 
-        return screen;
+        return canvas;
     }
 
     List<Image> getImages() {
@@ -85,16 +85,14 @@ class Repository {
     // TODO: THIS MUST DIE!
     public synchronized void initialise(IBlurpifier blurpifier, int width, int height) {
 
-        if(initialised) throw new IllegalStateException("Repository already initialised");
+        if(initialised) throw new IllegalStateException("ModelRepository already initialised");
 
         this.blurpifier = blurpifier;
-        this.screen = new Screen(width, height);
+        this.canvas = new Canvas(width, height);
         initialised = true;
     }
 
-
-    // Test purposes only
-    void resetSingleton() {
+    void dispose() {
         instance = null;
         initialised = false;
     }
