@@ -4,6 +4,8 @@ package com.bigcustard.blurp.model;
  * A sprite is an object that can be put on the screen, moved around, rotated, and generally mucked about with in
  * various ways. For more details, check the subclasses.
  */
+
+// TODO: Give control over the origin. Use this as the positional point and use metaphor of a pin (hence rotation also works as expected)
 public abstract class Sprite<T> {
 
     /**
@@ -55,6 +57,19 @@ public abstract class Sprite<T> {
      * Try it out... You'll soon see what it does.
      */
     public double alpha;
+
+    /**
+     * This method provides a handy way to set both X and Y coordinates in one hit.
+     * @param x The new X coordinate
+     * @param y The new Y coordinate
+     * @return Itself
+     */
+    public T setPosition(double x, double y) {
+
+        this.x = x;
+        this.y = y;
+        return (T) this;
+    }
 
     /**
      * Rotates the sprite around its center by the specified amount. This is cumulative, which means that if I call it

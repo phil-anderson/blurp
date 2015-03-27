@@ -11,32 +11,82 @@ public class ImageSprite extends Sprite<ImageSprite> {
 
     public Image image;
 
-    private boolean boundImage;
-
     /**
-     * Constructs a new ImageSprite using the image file specified. The {@link #image} property will be set accordingly.
+     * Constructs a new ImageSprite using the image file specified, and places it at the X and Y coordinates specified.
+     * A new Image will be created just for this ImageSprite, and the {@link #image} property will be set accordingly.
      * <p>
      * If you want more than one ImageSprite to share the same image, then you should create a single {@link Image}
-     * object for the image and construct the imagesprites using that instead as it'll be more efficient.
+     * object for the image and construct all of the ImageSprites using that instead. It'll be more efficient as the
+     * image will only be loaded once.
      *
      * @param imageFileName The name of the image file to load
+     * @param x The X coordinate
+     * @param y The Y coordinate
      */
-    public ImageSprite(String imageFileName) {
+    public ImageSprite(String imageFileName, double x, double y) {
 
-        this(new Image(imageFileName));
-        boundImage = true;
+        this(new Image(imageFileName), x, y);
     }
 
+
     /**
-     * Constructs a new ImageSprite using the {@link Image} specified. This is the preferred way of creating
-     * ImageSprites.
+     * Constructs a new ImageSprite using the {@link Image} specified.
      *
      * @param image The {@link Image} object to use
      */
     public ImageSprite(Image image) {
 
-        this.image = image;
+        // TODO: Better defaults
+        this(image, 0, 0);
+    }
+
+    /**
+     * Constructs a new ImageSprite using the {@link Image} specified, and places it at the X and Y coordinates
+     * specified.
+     *
+     * @param image The image to use
+     * @param x The X coordinate
+     * @param y The Y coordinate
+     */
+    public ImageSprite(Image image, double x, double y) {
+
+        this(image, x, y, 1, 1, 0);
+
         Repository.getInstance().addImageSprite(this);
+    }
+
+    /**
+     * Constructs a new ImageSprite using the {@link Image} specified, places it at the X and Y coordinates specified,
+     * sets its x and y scales to those provided, and gives it teh specified rotation.
+     *
+     * @param image The image to use
+     * @param x The X coordinate
+     * @param y The Y coordinate
+     * @param scaleX The scaling factor of the ImageSprite along the X axis
+     * @param scaleY The scaling factor of the ImageSprite along the Y axis
+     * @param rotation The angle (in degrees) that the ImageSprite should be rotated by
+     */
+    public ImageSprite(Image image, double x, double y, double scaleX, double scaleY, double rotation) {
+
+        this.image = image;
+        this.setPosition(x, y);
+        this.scaleX = scaleX;
+        this.scaleY = scaleY;
+        this.rotation = rotation;
+
+        Repository.getInstance().addImageSprite(this);
+    }
+
+    /**
+     * Removes the ImageSprite completely from Blurp. It will be destroyed, and no longer appear on screen. Other
+     * ImageSprites that use the same Image will (of course) be fine.
+     * <p>
+     * Removing things from Blurp when you no longer need them is a really good thing to do, as any resources they use
+     * up is freed and available for the rest of your program to use.
+     */
+    public void remove() {
+
+        Repository.getInstance().removeImageSprite(this);
     }
 
     /**
@@ -61,24 +111,8 @@ public class ImageSprite extends Sprite<ImageSprite> {
         return this;
     }
 
-    /**
-     * First off, let me say that you'll almost certainly never need to use this method. Seriously. Move on. You have
-     * better things to do with your time.
-     * <p>
-     * Still reading? Excellent! Clearly you're curious, and curiosity is a wondeful thing as far as I'm concerned.
-     * So... What's this method all about then?
-     * <p>
-     * If you created this ImageSprite by specifying an image filename then behind the scenes Blurp will have created
-     * its own Image and used that. That Image is said to be "bound" to the ImageSprite because the ImageSprite is the
-     * only thing that knows about it and is the only thing that uses it.
-     * <p>
-     * When you remove the ImageSprite, Blurp will check whether the image was bound using this method, and if it was
-     * it will also remove the image.
-     *
-     * @return True if the ImageSprite was created with an image filename and so had to create an Image itself.
-     */
-    public boolean isBoundImage() {
+    public void dispose() {
 
-        return boundImage;
+        remove();
     }
 }

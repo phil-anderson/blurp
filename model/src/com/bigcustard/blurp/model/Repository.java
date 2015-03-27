@@ -3,10 +3,11 @@ package com.bigcustard.blurp.model;
 import java.util.*;
 import com.bigcustard.blurp.core.*;
 
+// TODO: This is a one-time-mutable singleton. I'm not wild about it, but it's better than anything else I could think of.
 /**
  * This class acts as the root of the Blurp model, and is what will be transformed, synced and rendered by the runtime.
  * The various model objects either add themselves to this as they are instantiated, or in the case of singleton objects
- * like Backdrop, are instantiated directly here.
+ * like Screen, are instantiated directly here.
  * <p>
  * Everything in here is package-private as I don't want the users accessing it. If it should be accessible by the user
  * then expose it via {@link BlurpMain} which their script / class will extend.
@@ -18,7 +19,7 @@ class Repository {
 
     private static Repository instance;
 
-    private Backdrop backdrop;
+    private Screen screen;
     private List<Image> images;
     private List<ImageSprite> imageSprites;
 
@@ -36,7 +37,6 @@ class Repository {
 
     private Repository() {
 
-        backdrop = new Backdrop();
         images = new ArrayList<Image>();
         imageSprites = new ArrayList<ImageSprite>();
     }
@@ -46,9 +46,19 @@ class Repository {
         images.add(image);
     }
 
+    void removeImage(Image image) {
+
+        images.remove(image);
+    }
+
     void addImageSprite(ImageSprite imageSprite) {
 
         imageSprites.add(imageSprite);
+    }
+
+    void removeImageSprite(ImageSprite imageSprite) {
+
+        imageSprites.remove(imageSprite);
     }
 
     synchronized void requestBlurpify() {
@@ -56,9 +66,9 @@ class Repository {
         blurpifier.blurpify();
     }
 
-    Backdrop getBackdrop() {
+    Screen getScreen() {
 
-        return backdrop;
+        return screen;
     }
 
     List<Image> getImages() {
@@ -71,11 +81,21 @@ class Repository {
         return imageSprites;
     }
 
-    public synchronized void initialise(IBlurpifier blurpifier) {
+
+    // TODO: THIS MUST DIE!
+    public synchronized void initialise(IBlurpifier blurpifier, int width, int height) {
 
         if(initialised) throw new IllegalStateException("Repository already initialised");
 
         this.blurpifier = blurpifier;
+        this.screen = new Screen(width, height);
         initialised = true;
+    }
+
+
+    // Test purposes only
+    void resetSingleton() {
+        instance = null;
+        initialised = false;
     }
 }

@@ -16,6 +16,6 @@ public class LibGdxTest {
         Gdx.gl = mock(GL20.class);
         final HeadlessApplicationConfiguration config = new HeadlessApplicationConfiguration();
         config.renderInterval = 1f / 60f;
-        new HeadlessApplication(new Blurp(), config);
+        new HeadlessApplication(new Blurp(null, 100, 100), config);
     }
 }

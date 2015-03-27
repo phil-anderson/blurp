@@ -18,7 +18,7 @@ public class ImageSpriteTest {
 
         assertThat(Repository.getInstance().getImageSprites().size(), is(0));
 
-        ImageSprite testImageSprite = new ImageSprite("xyzzy");
+        ImageSprite testImageSprite = new ImageSprite("xyzzy", 100, 100);
 
         // TODO: Get proper hamcrest matchers into the classpath.
         assertThat(Repository.getInstance().getImageSprites().size(), is(1));
@@ -28,7 +28,7 @@ public class ImageSpriteTest {
     @Test
     public void flipsReverseScale() throws Exception {
 
-        ImageSprite testImageSprite = new ImageSprite("xyzzy");
+        ImageSprite testImageSprite = new ImageSprite("xyzzy", 100, 100);
         testImageSprite.scaleX = 0.5;
         testImageSprite.scaleY = 1.5;
 
@@ -39,17 +39,6 @@ public class ImageSpriteTest {
 
         testImageSprite.flipY();
         assertScaleXY(testImageSprite, -0.5, -1.5);
-    }
-
-    @Test
-    public void setsBoundImageProperty() throws Exception {
-
-        ImageSprite boundImageSprite = new ImageSprite("xyzzy");
-        assertThat(boundImageSprite.isBoundImage(), is(true));
-
-        Image testImage = new Image("xyzzy");
-        ImageSprite unboundImageSprite = new ImageSprite(testImage);
-        assertThat(unboundImageSprite.isBoundImage(), is(false));
     }
 
     private void assertScaleXY(ImageSprite imageSprite, double expectedX, double expectedY) {

@@ -3,6 +3,7 @@ package com.bigcustard.blurp.runtimemodel;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.ui.*;
 
 public class RuntimeImageSprite extends RuntimeSprite<ImageSprite> {
 
@@ -11,10 +12,24 @@ public class RuntimeImageSprite extends RuntimeSprite<ImageSprite> {
     public RuntimeImageSprite(ImageSprite modelImageSprite) {
 
         sync(modelImageSprite);
+
+        int width = image.getTextureRegion().getRegionWidth();
+        int height = image.getTextureRegion().getRegionHeight();
+        setSize(width, height);
+        setOrigin(width / 2, height / 2);
+        BlurpScreen.getInstance().getStage().addActor(this);
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
+
+        // Draw scaled texture centered at (and rotated around) origin
+        batch.draw(image.getTextureRegion(),
+                   getX() - getOriginX(), getY() - getOriginY(),
+                   getOriginX(), getOriginY(),
+                   getWidth(), getHeight(),
+                   getScaleX(), getScaleY(),
+                   getRotation());
 
         super.draw(batch, parentAlpha);
     }

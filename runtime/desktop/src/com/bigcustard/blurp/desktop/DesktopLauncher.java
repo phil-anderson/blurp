@@ -1,16 +1,30 @@
 package com.bigcustard.blurp.desktop;
 
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.bigcustard.blurp.ui.Blurp;
+import com.badlogic.gdx.backends.lwjgl.*;
+import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.ui.*;
 
 public class DesktopLauncher {
 
-	public static void main (String[] arg) {
+    private static final String USAGE_MESSAGE = "Usage = DesktopLauncher <scriptClassName> <width> <height>";
 
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-        config.width = 1024;
-        config.height = 768;
-		new LwjglApplication(new Blurp(), config);
+    public static void main (String[] args) {
+
+        // TODO: Find a proper args API
+        if(args.length != 3) throw new IllegalArgumentException(USAGE_MESSAGE);
+
+        LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+
+        BlurpMain script;
+        try {
+            Class<BlurpMain> scriptClass = (Class<BlurpMain>) Class.forName(args[0]);
+            script = scriptClass.newInstance();
+            config.width = Integer.valueOf(args[1]);
+            config.height = Integer.valueOf(args[2]);
+        } catch(Exception e) {
+            throw new IllegalArgumentException(USAGE_MESSAGE, e);
+        }
+
+		new LwjglApplication(new Blurp(script, config.width, config.height), config);
 	}
 }

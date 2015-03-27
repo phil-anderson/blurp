@@ -5,14 +5,16 @@ package com.bigcustard.blurp.model;
  * methods in it.
  * <p>
  * If nothing else, you should read the documentation on the {@link #blurpify()} method.
- * </p>
+ * <p>
+ * TEMPORARY - For now, your subclass should implement Runnable.run(). This will change once we establish a solid
+ * scripting strategy.
  */
-public abstract class BlurpMain {
+public abstract class BlurpMain implements Runnable {
 
     /**
-     * The Blurp {@link Backdrop}, which will be drawn before anything else.
+     * The Blurp {@link Screen}, which will be drawn before anything else.
      */
-    protected final Backdrop backdrop;
+    protected final Screen screen;
 
     /**
      * The {@link BlurpConfig} that can be used to change Blurp's settings
@@ -22,7 +24,7 @@ public abstract class BlurpMain {
     protected BlurpMain() {
 
         config = new BlurpConfig();
-        backdrop = Repository.getInstance().getBackdrop();
+        screen = Repository.getInstance().getScreen();
     }
 
     /**
@@ -55,6 +57,11 @@ public abstract class BlurpMain {
     public void blurpify() {
 
         Repository.getInstance().requestBlurpify();
+    }
+
+    // TODO: Write and document this. Can only be called once, and then it MUST be before a call to blurpify. Or something. Dunno at the moment
+    public void initialise(int width, int height) {
+
     }
 
 }

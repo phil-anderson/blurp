@@ -28,6 +28,19 @@ public class Image {
         Repository.getInstance().addImage(this);
     }
 
+    /**
+     * Removes the Image completely from Blurp. It will be destroyed, and no longer be usable. You should only remove
+     * Images when you are sure they are no longer used. Any dependent Blurp objects - e.g. ImageSprites - that refer
+     * to this Image will stop working correctly if it's removed.
+     * <p>
+     * That said, removing things from Blurp when you no longer need them is a really good thing to do, as any resources
+     * they use up is freed and available for the rest of your program to use.
+     */
+    public void remove() {
+
+        Repository.getInstance().removeImage(this);
+    }
+
     @Override
     public boolean equals(Object other) {
 

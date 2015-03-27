@@ -1,20 +1,36 @@
 package com.bigcustard.blurp.runtimemodel;
 
+import com.badlogic.gdx.*;
+import com.badlogic.gdx.files.*;
 import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.bigcustard.blurp.model.*;
 
 public class RuntimeImage implements RuntimeObject<Image> {
 
-    private Texture texture;
+    private TextureRegion textureRegion;
 
     public RuntimeImage(Image modelImage) {
 
-        texture = new Texture(modelImage.filename);
+        FileHandle internalFile = Gdx.files.internal(modelImage.filename);
+        if(internalFile.exists()) {
+            textureRegion = new TextureRegion(new Texture(internalFile));
+        } else {
+            FileHandle externalFile = Gdx.files.classpath(modelImage.filename);
+            if(externalFile.exists()) {
+                textureRegion = new TextureRegion(new Texture(externalFile));
+            } else {
+                System.err.println("Couldn't find image " + modelImage.filename);
+
+                // TODO: Have a pre-canned "not-found" texture.
+                textureRegion = new TextureRegion(new Texture(10, 10, Pixmap.Format.RGBA8888));
+            }
+        }
     }
 
-    Texture getTexture() {
+    TextureRegion getTextureRegion() {
 
-        return texture;
+        return textureRegion;
     }
 
     @Override
@@ -23,6 +39,6 @@ public class RuntimeImage implements RuntimeObject<Image> {
     @Override
     public void dispose() {
 
-        texture.dispose();
+        textureRegion.getTexture().dispose();
     }
 }

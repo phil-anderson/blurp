@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.g2d.*;
 
 public class RenderListenerAdapter implements RenderListener {
 
+    public static RenderListenerAdapter NULL_IMPLEMENTATION = new RenderListenerAdapter();
+
     @Override
     public void handleRenderEvent(Batch batch, float delta, EventType type) {
 
