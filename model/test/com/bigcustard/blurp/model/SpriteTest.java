@@ -12,7 +12,7 @@ public class SpriteTest {
 
         ImageSprite testCandidate = new ImageSprite("ABC", 100, 100);
         testCandidate.rotation = 45;
-        testCandidate.rotate(45);
+        testCandidate.rotateBy(45);
         assertThat(testCandidate.rotation, is(90.0));
     }
 

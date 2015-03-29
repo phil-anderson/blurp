@@ -78,7 +78,7 @@ public abstract class Sprite<T> {
      * @param degrees Degrees to rotate by. See {@link #rotation} for more details.
      * @return Itself.
      */
-    public T rotate(double degrees) {
+    public T rotateBy(double degrees) {
 
         rotation += degrees;
         return (T) this;
