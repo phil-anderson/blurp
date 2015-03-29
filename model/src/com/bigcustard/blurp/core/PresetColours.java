@@ -2,6 +2,7 @@ package com.bigcustard.blurp.core;
 
 import com.bigcustard.blurp.model.*;
 
+@SuppressWarnings("UnusedDeclaration")
 public interface PresetColours {
 
     public Colour ALICE_BLUE = new Colour(0.9411765, 0.972549, 1.0);
