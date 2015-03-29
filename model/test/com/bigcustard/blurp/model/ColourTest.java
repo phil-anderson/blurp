@@ -32,6 +32,13 @@ public class ColourTest {
     @Test
     public void canChangeBrightness() throws Exception {
 
-        assertThat(Colour.DARK_BLUE.withBrightness(2), is(Colour.BLUE));
+        assertThat(Colour.MAROON.withBrightness(2), is(Colour.RED));
+        assertThat(Colour.RED.withBrightness(0.5), is(Colour.MAROON));
+    }
+
+    @Test
+    public void brightnessChangeIsClamped() throws Exception {
+
+        assertThat(Colour.BLUE.withBrightness(2), is(Colour.BLUE));
     }
 }

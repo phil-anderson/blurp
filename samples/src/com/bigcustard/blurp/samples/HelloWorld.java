@@ -7,6 +7,6 @@ public class HelloWorld extends BlurpMain {
     @Override
     public void run() {
 
-        new ImageSprite("star.png", 400, 300);
+        new ImageSprite("world.png", 400, 300);
     }
 }
