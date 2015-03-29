@@ -26,7 +26,7 @@ public class BlurpRuntime {
     }
 
     // TODO: Implement this properly
-    public void stop() {
+    public void end() {
 
         SF.dispose();
     }

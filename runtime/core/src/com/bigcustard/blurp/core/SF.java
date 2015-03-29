@@ -47,6 +47,7 @@ public class SF {
         modelRepository.dispose();
         runtimeRepository.dispose();
         blurpScreen.dispose();
+        MSS.dispose();
 
         modelRepository = null;
         runtimeRepository = null;
