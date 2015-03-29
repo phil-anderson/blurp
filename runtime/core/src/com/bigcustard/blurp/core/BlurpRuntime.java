@@ -1,8 +1,8 @@
 package com.bigcustard.blurp.core;
 
-import com.badlogic.gdx.*;
 import com.badlogic.gdx.utils.viewport.*;
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.ui.*;
 
 public class BlurpRuntime {
 
@@ -14,7 +14,7 @@ public class BlurpRuntime {
         return new BlurpRuntime(viewport);
     }
 
-    public Screen getScreen() {
+    public BlurpScreen getScreen() {
 
         return SF.getBlurpScreen();
     }
