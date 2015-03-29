@@ -27,9 +27,18 @@ public class BlurpScreen extends ScreenAdapter {
 
     public void addActor(Actor actor) {
 
-        stage.addActor(actor);
+        getStage().addActor(actor);
     }
 
+    public RenderListener getRenderListener() {
+
+        return renderListener;
+    }
+
+    public void setRenderListener(RenderListener listener) {
+
+        this.renderListener = listener != null ? listener : RenderListenerAdapter.NULL_IMPLEMENTATION;
+    }
 
     @Override
     public void render(float delta) {
@@ -49,8 +58,11 @@ public class BlurpScreen extends ScreenAdapter {
     public void dispose() {
 
         if(batch != null) {
-            stage.dispose();
             batch.dispose();
+        }
+
+        if(stage != null) {
+            stage.dispose();
         }
     }
 
@@ -58,7 +70,8 @@ public class BlurpScreen extends ScreenAdapter {
 
         renderListener.handleRenderEvent(batch, delta, EventType.PreFrame);
 
-        stage.act(delta);
+        getStage().act(delta);
+
         // Tweener update goes here too.
 
         if(SF.getBlurpifier().getState() == Requested) {
@@ -79,7 +92,7 @@ public class BlurpScreen extends ScreenAdapter {
             canvasRenderer.render();
             endBatch();
 
-            stage.draw();
+            getStage().draw();
 
         } finally {
             SF.getBlurpifier().setState(Complete);
@@ -92,12 +105,7 @@ public class BlurpScreen extends ScreenAdapter {
 
     private void beginBatch() {
 
-        // Lazily initialise to give libgdx a chance to start up
-        if(batch == null) {
-            batch = new SpriteBatch();
-            stage = new Stage(viewport, batch);
-        }
-
+        lazyInitialise();
         if(!batch.isDrawing()) {
             batch.begin();
         }
@@ -110,13 +118,21 @@ public class BlurpScreen extends ScreenAdapter {
         }
     }
 
-    public void setRenderListener(RenderListener listener) {
+    private Stage getStage() {
 
-        this.renderListener = listener != null ? listener : RenderListenerAdapter.NULL_IMPLEMENTATION;
+        lazyInitialise();
+        return stage;
     }
 
-    public RenderListener getRenderListener() {
+    private void lazyInitialise() {
 
-        return renderListener;
+        // Lazily initialise to give libgdx a chance to start up
+        if(batch == null) {
+            batch = new SpriteBatch();
+        }
+
+        if(stage == null) {
+            stage = new Stage(viewport, batch);
+        }
     }
 }

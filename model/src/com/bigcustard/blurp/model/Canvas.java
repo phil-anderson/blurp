@@ -29,7 +29,7 @@ public class Canvas {
      */
     public final int width, height;
 
-    Canvas(int width, int height) {
+    public Canvas(int width, int height) {
 
         this.width = width;
         this.height = height;

@@ -7,12 +7,12 @@ import com.bigcustard.blurp.model.*;
 
 public class Blurp extends Game {
 
-    private BlurpMain script;
+    private String scriptClassName;
     private Viewport viewport;
 
-    public Blurp(BlurpMain script, Viewport viewport) {
+    public Blurp(String scriptClassName, Viewport viewport) {
 
-        this.script = script;
+        this.scriptClassName = scriptClassName;
         this.viewport = viewport;
     }
 
@@ -20,8 +20,18 @@ public class Blurp extends Game {
     @Override
     public void create() {
 
-        Runner runner = new Runner(script, viewport);
-        runner.start();
-        setScreen(runner.getScreen());
+        BlurpRuntime blurpRuntime = BlurpRuntime.begin(viewport);
+
+        BlurpMain script;
+        try {
+            Class<BlurpMain> scriptClass = null;
+            scriptClass = (Class<BlurpMain>) Class.forName(scriptClassName);
+            script = scriptClass.newInstance();
+        } catch(Exception e) {
+            throw new BlurpException("Error instantiating " + scriptClassName + " as an instance of BlurpMain");
+        }
+
+        blurpRuntime.start(script);
+        setScreen(blurpRuntime.getScreen());
     }
 }

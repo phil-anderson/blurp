@@ -12,15 +12,13 @@ import com.bigcustard.blurp.runtimemodel.*;
 public class RuntimeRepository {
 
 
-    private final ModelRepositoryWrapper modelRepositoryWrapper;
-
+    private final ModelRepository modelRepository;
     private final ModelToRuntimeObjectMap<Image, RuntimeImage> runtimeImages;
     private final ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite> runtimeImageSprites;
 
-    RuntimeRepository(ModelRepositoryWrapper modelRepositoryWrapper) {
+    RuntimeRepository(ModelRepository modelRepository) {
 
-        this.modelRepositoryWrapper = modelRepositoryWrapper;
-
+        this.modelRepository = modelRepository;
         runtimeImages = new ModelToRuntimeObjectMap<Image, RuntimeImage>(Image.class, RuntimeImage.class);
         runtimeImageSprites = new ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite>(ImageSprite.class, RuntimeImageSprite.class);
     }
@@ -28,8 +26,8 @@ public class RuntimeRepository {
     public void syncWithModelRepository() {
 
         // Sync the various object types
-        runtimeImages.syncAll(modelRepositoryWrapper.getImages());
-        runtimeImageSprites.syncAll(modelRepositoryWrapper.getImageSprites());
+        runtimeImages.syncAll(modelRepository.getImages());
+        runtimeImageSprites.syncAll(modelRepository.getImageSprites());
     }
 
     public RuntimeImage getImage(Image modelImage) {
@@ -42,9 +40,9 @@ public class RuntimeRepository {
         return runtimeImageSprites.get(modelImageSprite);
     }
 
-    public Canvas getScreen() {
+    public Canvas getCanvas() {
 
-        return modelRepositoryWrapper.getScreen();
+        return modelRepository.getCanvas();
     }
 
     public void dispose() {

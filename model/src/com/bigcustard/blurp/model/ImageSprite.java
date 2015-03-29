@@ -1,5 +1,7 @@
 package com.bigcustard.blurp.model;
 
+import com.bigcustard.blurp.core.*;
+
 /**
  * ImageSprites are the most commonly used type of {@link Sprite}. They (sort of) turn {@link Image Images} into
  * objects that can move around the screen and that the user can interact with.
@@ -72,7 +74,7 @@ public class ImageSprite extends Sprite<ImageSprite> {
         this.scaleY = scaleY;
         this.rotation = rotation;
 
-        ModelRepository.getInstance().addImageSprite(this);
+        MSS.getModelRepository().addImageSprite(this);
     }
 
     /**
@@ -84,7 +86,7 @@ public class ImageSprite extends Sprite<ImageSprite> {
      */
     public void remove() {
 
-        ModelRepository.getInstance().removeImageSprite(this);
+        MSS.getModelRepository().removeImageSprite(this);
     }
 
     /**

@@ -5,7 +5,7 @@ import static com.bigcustard.blurp.core.Blurpifier.State.*;
 /**
  * Handles synchronization between model and runtime during a blurpify, and handles blocking until it's done.
  */
-public class Blurpifier implements IBlurpifier {
+public class Blurpifier {
 
     // No need for an Active state at present, but I'm open to the suggestion.
     public static enum State {
@@ -14,7 +14,6 @@ public class Blurpifier implements IBlurpifier {
 
     private volatile State state = Dormant;
 
-    @Override
     public synchronized void blurpify() {
 
         if(state != Dormant) throw new IllegalStateException("Already blurpifying"); // Shouldn't be possible.

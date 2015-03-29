@@ -3,20 +3,15 @@ package com.bigcustard.blurp.core;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.utils.viewport.*;
 import com.bigcustard.blurp.model.*;
-import com.bigcustard.blurp.utils.*;
 
-public class Runner {
+public class BlurpRuntime {
 
+    private BlurpRuntime(Viewport viewport) { }
 
-    private Blurpifier blurpifier;
-    private RuntimeRepository runtimeRepository;
-
-    private final Thread scriptThread;
-
-    public Runner(BlurpMain script, Viewport viewport) {
+    public static BlurpRuntime begin(Viewport viewport) {
 
         SF.instantiateSingletons(viewport);
-        scriptThread = new Thread(new ScriptRunnable(script));
+        return new BlurpRuntime(viewport);
     }
 
     public Screen getScreen() {
@@ -24,8 +19,9 @@ public class Runner {
         return SF.getBlurpScreen();
     }
 
-    public void start() {
+    public void start(BlurpMain script) {
 
+        Thread scriptThread = new Thread(new ScriptRunnable(script));
         scriptThread.start();
     }
 
@@ -52,8 +48,8 @@ public class Runner {
 
             script.run();
             while(true) {
-                script.blurpify();
-                Sleep.forOneMs();
+                SF.getBlurpifier().blurpify();
+//                Sleep.forOneMs();
             }
         }
     }

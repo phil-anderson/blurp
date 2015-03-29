@@ -1,28 +1,31 @@
 package com.bigcustard.blurp.model;
 
+import com.bigcustard.blurp.core.*;
 import org.junit.*;
+import org.mockito.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.verify;
 
 public class ImageSpriteTest {
+
+    @Mock
+    IModelRepository modelRepository;
 
     @Before
     public void setUp() throws Exception {
 
-        ModelRepository.getInstance().getImageSprites().clear();
+        MockitoAnnotations.initMocks(this);
+        MSS.dispose();
+        MSS.setInstances(modelRepository);
     }
 
     @Test
     public void instantiatedImageSpritesGetAddedToRepository() throws Exception {
 
-        assertThat(ModelRepository.getInstance().getImageSprites().size(), is(0));
-
         ImageSprite testImageSprite = new ImageSprite("xyzzy", 100, 100);
-
-        // TODO: Get proper hamcrest matchers into the classpath.
-        assertThat(ModelRepository.getInstance().getImageSprites().size(), is(1));
-        assertThat(ModelRepository.getInstance().getImageSprites().contains(testImageSprite), is(true));
+        verify(modelRepository).addImageSprite(testImageSprite);
     }
 
     @Test

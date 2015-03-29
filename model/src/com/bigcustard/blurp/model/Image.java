@@ -1,5 +1,7 @@
 package com.bigcustard.blurp.model;
 
+import com.bigcustard.blurp.core.*;
+
 /**
  * An Image object is a holder for pictures and images that you want to use in your program. They load the image file
  * and make it available for use by Blurp.
@@ -25,7 +27,7 @@ public class Image {
 
         if(filename == null) throw new RuntimeException("Image filename must not be null");
         this.filename = filename;
-        ModelRepository.getInstance().addImage(this);
+        MSS.getModelRepository().addImage(this);
     }
 
     /**
@@ -38,7 +40,7 @@ public class Image {
      */
     public void remove() {
 
-        ModelRepository.getInstance().removeImage(this);
+        MSS.getModelRepository().removeImage(this);
     }
 
     @Override
