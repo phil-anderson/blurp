@@ -1,0 +1,191 @@
+package com.bigcustard.blurp.model;
+
+@SuppressWarnings("UnusedDeclaration")
+public enum Key {
+
+    F1("F1", 244),
+    F2("F2", 245),
+    F3("F3", 246),
+    F4("F4", 247),
+    F5("F5", 248),
+    F6("F6", 249),
+    F7("F7", 250),
+    F8("F8", 251),
+    F9("F9", 252),
+    F10("F10", 253),
+    F11("F11", 254),
+    F12("F12", 255),
+
+    NUMBER_0("0", 7),
+    NUMBER_1("1", 8),
+    NUMBER_2("2", 9),
+    NUMBER_3("3", 10),
+    NUMBER_4("4", 11),
+    NUMBER_5("5", 12),
+    NUMBER_6("6", 13),
+    NUMBER_7("7", 14),
+    NUMBER_8("8", 15),
+    NUMBER_9("9", 16),
+
+    A("A", 29),
+    B("B", 30),
+    C("C", 31),
+    D("D", 32),
+    E("E", 33),
+    F("F", 34),
+    G("G", 35),
+    H("H", 36),
+    I("I", 37),
+    J("J", 38),
+    K("K", 39),
+    L("L", 40),
+    M("M", 41),
+    N("N", 42),
+    O("O", 43),
+    P("P", 44),
+    Q("Q", 45),
+    R("R", 46),
+    S("S", 47),
+    T("T", 48),
+    U("U", 49),
+    V("V", 50),
+    W("W", 51),
+    X("X", 52),
+    Y("Y", 53),
+    Z("Z", 54),
+
+    UP("UP", 19),
+    DOWN("DOWN", 20),
+    LEFT("LEFT", 21),
+    RIGHT("RIGHT", 22),
+
+    LEFT_ALT("LEFT_ALT", 57),
+    LEFT_CONTROL("LEFT_CONTROL", 129),
+    LEFT_SHIFT("LEFT_SHIFT", 59),
+    RIGHT_ALT("RIGHT_ALT", 58),
+    RIGHT_CONTROL("RIGHT_CONTROL", 130),
+    RIGHT_SHIFT("RIGHT-SHIFT", 60),
+
+    APOSTROPHE("'", 75),
+    AT("@", 77),
+    BACK("BACK", 4),
+    BACKSLASH("\\", 73),
+    BACKSPACE("BACKSPACE", 67),
+    COLON(":", 243),
+    COMMA(",", 55),
+    DEL("DEL", 67),
+    END("END", 132),
+    ENTER("ENTER", 66),
+    EQUALS("=", 70),
+    ESCAPE("ESCAPE", 131),
+    FORWARD_DEL("FORWARD_DEL", 112),
+    GRAVE("GRAVE", 68),
+    HASH("#", 18),
+    HOME("HOME", 3),
+    INSERT("INSERT", 133),
+    LEFT_BRACKET("[", 71),
+    MINUS("-", 69),
+    PAGE_DOWN("PAGE_DOWN", 93),
+    PAGE_UP("PAGE_UP", 92),
+    PERIOD(".", 56),
+    PLUS("+", 81),
+    POUND("#F", 18),
+    RIGHT_BRACKET("]", 72),
+    SEMICOLON(";", 74),
+    SLASH("/", 76),
+    SPACE(" ", 62),
+    STAR("*", 17),
+    SYM("SYM", 63),
+    TAB("TAB", 61),
+
+    NUM("NUM", 78),
+    NUMPAD_0("NUMPAD_0", 144),
+    NUMPAD_1("NUMPAD_1", 145),
+    NUMPAD_2("NUMPAD_2", 146),
+    NUMPAD_3("NUMPAD_3", 147),
+    NUMPAD_4("NUMPAD_4", 148),
+    NUMPAD_5("NUMPAD_5", 149),
+    NUMPAD_6("NUMPAD_6", 150),
+    NUMPAD_7("NUMPAD_7", 151),
+    NUMPAD_8("NUMPAD_8", 152),
+    NUMPAD_9("NUMPAD_9", 153),
+
+    META_ALT_LEFT_ON("META_ALT_LEFT_ON", 16),
+    META_ALT_ON("META_ALT_ON", 2),
+    META_ALT_RIGHT_ON("META_ALT_RIGHT_ON", 32),
+    META_SHIFT_LEFT_ON("META_SHIFT_LEFT_ON", 64),
+    META_SHIFT_ON("META_SHIFT_ON", 1),
+    META_SHIFT_RIGHT_ON("META_SHIFT_RIGHT_ON", 128),
+    META_SYM_ON("META_SYM_ON", 4),
+
+    CALL("CALL", 5),
+    CAMERA("CAMERA", 27),
+    CENTER("CENTER", 23),
+    CLEAR("CLEAR", 28),
+    ENDCALL("ENDCALL", 6),
+    ENVELOPE("ENVELOPE", 65),
+    EXPLORER("EXPLORER", 64),
+    FOCUS("FOCUS", 80),
+    HEADSETHOOK("HEADSETHOOK", 79),
+    MEDIA_FAST_FORWARD("MEDIA_FAST_FORWARD", 90),
+    MEDIA_NEXT("MEDIA_NEXT", 87),
+    MEDIA_PLAY_PAUSE("MEDIA_PLAY_PAUSE", 85),
+    MEDIA_PREVIOUS("MEDIA_PREVIOUS", 88),
+    MEDIA_REWIND("MEDIA_REWIND", 89),
+    MEDIA_STOP("MEDIA_STOP", 86),
+    MENU("MENU", 82),
+    MUTE("MUTE", 91),
+    NOTIFICATION("NOTIFICATION", 83),
+    PICTSYMBOLS("PICTSYMBOLS", 94),
+    POWER("POWER", 26),
+    SEARCH("SEARCH", 84),
+    SOFT_LEFT("SOFT_LEFT", 1),
+    SOFT_RIGHT("SOFT_RIGHT", 2),
+    SWITCH_CHARSET("SWITCH_CHARSET", 95),
+    VOLUME_DOWN("VOLUME_DOWN", 25),
+    VOLUME_UP("VOLUME_UP", 24),
+
+    DPAD_CENTER("DPAD_CENTER", 23),
+    DPAD_DOWN("DPAD_DOWN", 20),
+    DPAD_LEFT("DPAD_LEFT", 21),
+    DPAD_RIGHT("DPAD_RIGHT", 22),
+    DPAD_UP("DPAD_UP", 19),
+
+    BUTTON_A("BUTTON_A", 96),
+    BUTTON_B("BUTTON_B", 97),
+    BUTTON_C("BUTTON_C", 98),
+    BUTTON_CIRCLE("BUTTON_CIRCLE", 255),
+    BUTTON_L1("BUTTON_L1", 102),
+    BUTTON_L2("BUTTON_L2", 104),
+    BUTTON_MODE("BUTTON_MODE", 110),
+    BUTTON_R1("BUTTON_R1", 103),
+    BUTTON_R2("BUTTON_R2", 105),
+    BUTTON_SELECT("BUTTON_SELECT", 109),
+    BUTTON_START("BUTTON_START", 108),
+    BUTTON_THUMBL("BUTTON_THUMBL", 106),
+    BUTTON_THUMBR("BUTTON_THUMBR", 107),
+    BUTTON_X("BUTTON_X", 99),
+    BUTTON_Y("BUTTON_Y", 100),
+    BUTTON_Z("BUTTON_Z", 101),
+
+    UNKNOWN("UNKNOWN", 0);
+
+    private String keyName;
+    private int keyCode;
+
+    private Key(String keyName, int keyCode) {
+
+        this.keyName = keyName;
+        this.keyCode = keyCode;
+    }
+
+    public String getKeyName() {
+
+        return keyName;
+    }
+
+    public int getKeyCode() {
+
+        return keyCode;
+    }
+}

@@ -40,11 +40,6 @@ public class RuntimeRepository {
         return runtimeImageSprites.get(modelImageSprite);
     }
 
-    public Canvas getCanvas() {
-
-        return modelRepository.getCanvas();
-    }
-
     public void dispose() {
 
         for(RuntimeImage image : runtimeImages) {

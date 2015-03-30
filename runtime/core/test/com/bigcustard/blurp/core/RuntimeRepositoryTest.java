@@ -3,12 +3,15 @@ package com.bigcustard.blurp.core;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.testutils.*;
 import org.junit.*;
+import org.mockito.*;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
 
 @Ignore // I can't get these tests to run.
 public class RuntimeRepositoryTest extends LibGdxTest {
+
+    @Mock Canvas mockCanvas;
 
     private RuntimeRepository testCandidate;
     private Image image;
@@ -17,8 +20,8 @@ public class RuntimeRepositoryTest extends LibGdxTest {
     @Before
     public void setUp() throws Exception {
 
-        ModelRepository modelRepository = new ModelRepository(new Canvas(800, 600));
-        MSS.setInstances(modelRepository);
+        ModelRepository modelRepository = new ModelRepository();
+        MSS.setInstances(modelRepository, mockCanvas);
 
         testCandidate = new RuntimeRepository(modelRepository);
 

@@ -1,12 +1,13 @@
 package com.bigcustard.blurp.samples;
 
+import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
 
-public class HelloWorld extends BlurpMain {
+public class HelloWorld implements IBlurpRunnable {
 
     @Override
-    public void run() {
+    public void run(Blurp blurp, Canvas canvas, IKeyboard keyboard) {
 
-        new ImageSprite("world.png", 400, 300);
+        new ImageSprite("world.png");
     }
 }

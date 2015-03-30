@@ -3,14 +3,13 @@ package com.bigcustard.blurp.ui;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.utils.viewport.*;
 import com.bigcustard.blurp.core.*;
-import com.bigcustard.blurp.model.*;
 
-public class Blurp extends Game {
+public class BlurpApp extends Game {
 
     private String scriptClassName;
     private Viewport viewport;
 
-    public Blurp(String scriptClassName, Viewport viewport) {
+    public BlurpApp(String scriptClassName, Viewport viewport) {
 
         this.scriptClassName = scriptClassName;
         this.viewport = viewport;
@@ -22,13 +21,12 @@ public class Blurp extends Game {
 
         BlurpRuntime blurpRuntime = BlurpRuntime.begin(viewport);
 
-        BlurpMain script;
+        IBlurpRunnable script;
         try {
-            Class<BlurpMain> scriptClass = null;
-            scriptClass = (Class<BlurpMain>) Class.forName(scriptClassName);
+            Class<IBlurpRunnable> scriptClass = (Class<IBlurpRunnable>) Class.forName(scriptClassName);
             script = scriptClass.newInstance();
         } catch(Exception e) {
-            throw new BlurpException("Error instantiating " + scriptClassName + " as an instance of BlurpMain");
+            throw new BlurpException("Error instantiating " + scriptClassName + " as an instance of Blurp");
         }
 
         blurpRuntime.start(script);

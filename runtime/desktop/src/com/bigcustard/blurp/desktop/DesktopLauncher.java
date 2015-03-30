@@ -23,7 +23,7 @@ public class DesktopLauncher {
             throw new IllegalArgumentException(USAGE_MESSAGE, e);
         }
 
-		new LwjglApplication(new Blurp(scriptName,
+		new LwjglApplication(new BlurpApp(scriptName,
                              new FitViewport(config.width, config.height)),
                              config);
 	}

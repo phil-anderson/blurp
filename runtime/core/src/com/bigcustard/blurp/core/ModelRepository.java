@@ -9,20 +9,13 @@ import com.bigcustard.blurp.model.*;
  */
 public class ModelRepository implements IModelRepository {
 
-    private Canvas canvas;
     private List<Image> images;
     private List<ImageSprite> imageSprites;
 
-    public ModelRepository(Canvas canvas) {
+    public ModelRepository() {
 
-        this.canvas = canvas;
         images = new ArrayList<Image>();
         imageSprites = new ArrayList<ImageSprite>();
-    }
-
-    public void removeImage(Image image) {
-
-        images.remove(image);
     }
 
     public void addImage(Image image) {
@@ -33,6 +26,11 @@ public class ModelRepository implements IModelRepository {
     public List<Image> getImages() {
 
         return images;
+    }
+
+    public void removeImage(Image image) {
+
+        images.remove(image);
     }
 
     public void addImageSprite(ImageSprite imageSprite) {
@@ -49,18 +47,6 @@ public class ModelRepository implements IModelRepository {
 
         imageSprites.remove(imageSprite);
     }
-
-    public void requestBlurpify() {
-
-        SF.getBlurpifier().blurpify();
-    }
-
-
-    public Canvas getCanvas() {
-
-        return canvas;
-    }
-
 
     public void dispose() {
 

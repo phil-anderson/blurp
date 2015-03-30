@@ -6,8 +6,8 @@ import com.bigcustard.blurp.ui.*;
 
 /**
  * SF stands for Singleton Factory. It's a single, big-bad place for instantiating and storing singletons that the
- * runtime requires. There's also a {@link MSS MSS (Model Singleton Store) that serves a similar purpose for the
- * model, except that it's singletons are instantiated in here and passed to it.
+ * runtime requires. There's also a {@link MSS MSS (Model Repository Store) that serves a similar purpose for the
+ * model to hold its repository, except that it's instantiated in here and passed on.
  * <p>
  * The shortened name is an attempt to cause minimal visual impact on calling code.
  */
@@ -20,6 +20,9 @@ public class SF {
     private static RuntimeRepository runtimeRepository;
     private static BlurpScreen blurpScreen;
     private static Blurpifier blurpifier;
+    private static Canvas canvas;
+    private static IKeyboard keyboard;
+    private static Blurp blurp;
 
     private SF() { }
 
@@ -32,14 +35,18 @@ public class SF {
         int height = (int) viewport.getWorldHeight();
 
         // Initialise runtime singletons
-        Canvas canvas = new Canvas(width, height);
-        modelRepository = new ModelRepository(canvas);
+        modelRepository = new ModelRepository();
         runtimeRepository = new RuntimeRepository(modelRepository);
         blurpScreen = new BlurpScreen(viewport);
         blurpifier = new Blurpifier();
 
-        // Initialise model singletons
-        MSS.setInstances(modelRepository);
+        // Initialise model objects (i.e. ones that get passed into the running script)
+        canvas = new Canvas(width, height);
+        keyboard = new Keyboard();
+        blurp = new BlurpMethods();
+
+        // Inject the model repository into the model API
+        MSS.setInstances(modelRepository, canvas);
     }
 
     public synchronized static void dispose() {
@@ -53,6 +60,8 @@ public class SF {
         runtimeRepository = null;
         blurpScreen = null;
         blurpifier = null;
+        canvas = null;
+        keyboard = null;
 
         initialised = false;
     }
@@ -76,4 +85,19 @@ public class SF {
 
         return blurpifier;
     }
+
+    public static Canvas getCanvas() {
+
+        return canvas;
     }
+
+    public static IKeyboard getKeyboard() {
+
+        return keyboard;
+    }
+
+    public static Blurp getBlurp() {
+
+        return blurp;
+    }
+}

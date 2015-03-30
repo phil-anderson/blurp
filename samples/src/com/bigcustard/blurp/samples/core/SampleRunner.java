@@ -1,10 +1,10 @@
 package com.bigcustard.blurp.samples.core;
 
 
+import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.desktop.*;
-import com.bigcustard.blurp.model.*;
 
-public abstract class SampleRunner extends BlurpMain {
+public abstract class SampleRunner extends Blurp {
 
     public static void main(String[] args) {
 

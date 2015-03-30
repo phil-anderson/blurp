@@ -1,6 +1,6 @@
 package com.bigcustard.blurp.core;
 
-import com.bigcustard.blurp.utils.*;
+import com.bigcustard.blurp.testutils.*;
 import org.junit.*;
 
 import static org.hamcrest.CoreMatchers.is;

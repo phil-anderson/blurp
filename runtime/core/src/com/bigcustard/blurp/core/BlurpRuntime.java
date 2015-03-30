@@ -1,17 +1,16 @@
 package com.bigcustard.blurp.core;
 
 import com.badlogic.gdx.utils.viewport.*;
-import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.ui.*;
 
 public class BlurpRuntime {
 
-    private BlurpRuntime(Viewport viewport) { }
+    private BlurpRuntime() { }
 
     public static BlurpRuntime begin(Viewport viewport) {
 
         SF.instantiateSingletons(viewport);
-        return new BlurpRuntime(viewport);
+        return new BlurpRuntime();
     }
 
     public BlurpScreen getScreen() {
@@ -19,7 +18,7 @@ public class BlurpRuntime {
         return SF.getBlurpScreen();
     }
 
-    public void start(BlurpMain script) {
+    public void start(IBlurpRunnable script) {
 
         Thread scriptThread = new Thread(new ScriptRunnable(script));
         scriptThread.start();
@@ -36,9 +35,9 @@ public class BlurpRuntime {
     //              (e.g. to resume) get picked up.
     private class ScriptRunnable implements Runnable {
 
-        private BlurpMain script;
+        private IBlurpRunnable script;
 
-        private ScriptRunnable(BlurpMain script) {
+        private ScriptRunnable(IBlurpRunnable script) {
 
             this.script = script;
         }
@@ -46,10 +45,9 @@ public class BlurpRuntime {
         @Override
         public void run() {
 
-            script.run();
+            script.run(SF.getBlurp(), SF.getCanvas(), SF.getKeyboard());
             while(true) {
                 SF.getBlurpifier().blurpify();
-//                Sleep.forOneMs();
             }
         }
     }

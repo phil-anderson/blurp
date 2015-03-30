@@ -8,7 +8,7 @@ public class CanvasRenderer {
 
     public void render() {
 
-        Canvas canvas = SF.getRuntimeRepository().getCanvas();
+        Canvas canvas = SF.getCanvas();
 
         Gdx.gl.glClearColor((float) canvas.backgroundColour.red,
                             (float) canvas.backgroundColour.green,

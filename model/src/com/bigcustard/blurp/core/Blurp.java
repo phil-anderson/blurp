@@ -1,6 +1,4 @@
-package com.bigcustard.blurp.model;
-
-import com.bigcustard.blurp.core.*;
+package com.bigcustard.blurp.core;
 
 /**
  * Behind the scenes, your blurp program extends this class, and will have access to the protected properties and
@@ -11,21 +9,7 @@ import com.bigcustard.blurp.core.*;
  * TEMPORARY - For now, your subclass should implement Runnable.run(). This will change once we establish a solid
  * scripting strategy.
  */
-public abstract class BlurpMain implements Runnable {
-
-    /**
-     * The Blurp {@link Canvas}, which will be drawn before anything else.
-     */
-    protected final Canvas canvas;
-
-    protected BlurpMain() {
-
-        if(!MSS.isBlurpInitialised()) {
-            throw new IllegalStateException("BlurpMain objects can't be instantiated before the Blurp runtime has been " +
-                                            "initialised. This is done using the BlurpRuntime.begin() method.");
-        }
-        canvas = MSS.getModelRepository().getCanvas();
-    }
+public abstract class Blurp {
 
     /**
      * This method is the beating heart of Blurp. It's responsible for telling Blurp to work it's magic, and it keeps
@@ -54,8 +38,5 @@ public abstract class BlurpMain implements Runnable {
      * which is really important. It does this by waiting for the screen to to finish displaying the current frame. On a
      * typical screen, this happens 60 times a second.
      */
-    protected void blurpify() {
-
-        MSS.getModelRepository().requestBlurpify();
-    }
+    public abstract void blurpify();
 }

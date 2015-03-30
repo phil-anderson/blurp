@@ -10,22 +10,22 @@ import static org.mockito.Mockito.verify;
 
 public class ImageSpriteTest {
 
-    @Mock
-    IModelRepository modelRepository;
+    @Mock IModelRepository mockModelRepository;
+    @Mock Canvas mockCanvas;
 
     @Before
     public void setUp() throws Exception {
 
         MockitoAnnotations.initMocks(this);
         MSS.dispose();
-        MSS.setInstances(modelRepository);
+        MSS.setInstances(mockModelRepository, mockCanvas);
     }
 
     @Test
     public void instantiatedImageSpritesGetAddedToRepository() throws Exception {
 
         ImageSprite testImageSprite = new ImageSprite("xyzzy", 100, 100);
-        verify(modelRepository).addImageSprite(testImageSprite);
+        verify(mockModelRepository).addImageSprite(testImageSprite);
     }
 
     @Test

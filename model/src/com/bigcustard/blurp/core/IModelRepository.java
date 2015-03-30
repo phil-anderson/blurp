@@ -7,7 +7,7 @@ import com.bigcustard.blurp.model.*;
  * Blurp runtime.
  * <p>
  * The various model objects either add themselves to this as they are instantiated, or in the case of singleton objects
- * like Canvas, are instantiated by the runtime implementation of this.
+ * like Canvas or Keyboard, are instantiated by the runtime and passed in.
  */
 public interface IModelRepository {
 
@@ -18,8 +18,4 @@ public interface IModelRepository {
     public void addImageSprite(ImageSprite imageSprite);
 
     public void removeImageSprite(ImageSprite imageSprite);
-
-    public void requestBlurpify();
-
-    public Canvas getCanvas();
 }

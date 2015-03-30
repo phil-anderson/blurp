@@ -19,6 +19,9 @@ public class Image {
      */
     public final String filename;
 
+    // TODO: Need to work out width and height (lord alone knows how) so I can expose the pin.
+
+
     /**
      * Construct an Image object from the image file provided.
      * @param filename The filename of the image to load.
@@ -27,6 +30,9 @@ public class Image {
 
         if(filename == null) throw new RuntimeException("Image filename must not be null");
         this.filename = filename;
+
+
+
         MSS.getModelRepository().addImage(this);
     }
 

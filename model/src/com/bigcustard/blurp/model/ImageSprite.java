@@ -14,6 +14,22 @@ public class ImageSprite extends Sprite<ImageSprite> {
     public Image image;
 
     /**
+     * Constructs a new ImageSprite using the image file specified, and places it at the center of the Canvas.
+     * <p>
+     * A new Image will be created just for this ImageSprite, and the {@link #image} property will be set accordingly.
+     * <p>
+     * If you want more than one ImageSprite to share the same image, then you should create a single {@link Image}
+     * object for the image and construct all of the ImageSprites using that instead. It'll be more efficient as the
+     * image will only be loaded once.
+     *
+     * @param imageFileName The name of the image file to load
+     */
+    public ImageSprite(String imageFileName) {
+
+        this(new Image(imageFileName));
+    }
+
+    /**
      * Constructs a new ImageSprite using the image file specified, and places it at the X and Y coordinates specified.
      * A new Image will be created just for this ImageSprite, and the {@link #image} property will be set accordingly.
      * <p>
@@ -30,16 +46,14 @@ public class ImageSprite extends Sprite<ImageSprite> {
         this(new Image(imageFileName), x, y);
     }
 
-
     /**
-     * Constructs a new ImageSprite using the {@link Image} specified.
+     * Constructs a new ImageSprite using the {@link Image} specified and places it at the center of the Canvas.
      *
      * @param image The {@link Image} object to use
      */
     public ImageSprite(Image image) {
 
-        // TODO: Better defaults
-        this(image, 0, 0);
+        this(image, MSS.getCanvas().width / 2.0, MSS.getCanvas().height / 2.0);
     }
 
     /**

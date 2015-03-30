@@ -9,15 +9,15 @@ import static org.mockito.Mockito.*;
 
 public class ImageTest {
 
-    @Mock
-    IModelRepository modelRepository;
+    @Mock IModelRepository modelRepository;
+    @Mock Canvas mockCanvas;
 
     @Before
     public void setUp() throws Exception {
 
         MockitoAnnotations.initMocks(this);
         MSS.dispose();
-        MSS.setInstances(modelRepository);
+        MSS.setInstances(modelRepository, mockCanvas);
     }
 
     @Test

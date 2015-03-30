@@ -1,8 +1,12 @@
 package com.bigcustard.blurp.core;
 
+// TODO: Feels like there's a way of getting rid of this.
+
+import com.bigcustard.blurp.model.*;
+
 /**
- * MSS stands for the Model Singleton Store. It provides a place for the runtime to inject singleton objects that the
- * model can subsequently use. It's not nice, but it is expedient.
+ * MSS stands for the Model Singleton Store. It provides a place for the runtime to inject singletons that the model
+ * code requires access to. It's not nice, but it is expedient.
  * <p>
  * The shortened name is an attempt to cause minimal visual impact on calling code.
  */
@@ -11,20 +15,25 @@ public class MSS {
     private static volatile boolean initialised;
 
     private static IModelRepository modelRepository;
+    private static Canvas canvas;
 
     private MSS() { }
 
-    public synchronized static void setInstances(IModelRepository modelRepository) {
+    public synchronized static void setInstances(IModelRepository modelRepository, Canvas canvas) {
 
         if(initialised) throw new IllegalStateException("The model singletons can only be set once.");
 
         MSS.modelRepository = modelRepository;
+        MSS.canvas = canvas;
+
         initialised = true;
     }
 
     public synchronized static void dispose() {
 
         modelRepository = null;
+        canvas = null;
+
         initialised = false;
     }
 
@@ -33,8 +42,8 @@ public class MSS {
         return modelRepository;
     }
 
-    public static boolean isBlurpInitialised() {
+    public static Canvas getCanvas() {
 
-        return initialised;
+        return canvas;
     }
 }

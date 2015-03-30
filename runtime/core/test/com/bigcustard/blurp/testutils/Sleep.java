@@ -1,4 +1,4 @@
-package com.bigcustard.blurp.utils;
+package com.bigcustard.blurp.testutils;
 
 public class Sleep {
 
