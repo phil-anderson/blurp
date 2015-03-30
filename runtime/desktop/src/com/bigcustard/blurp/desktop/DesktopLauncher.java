@@ -2,7 +2,7 @@ package com.bigcustard.blurp.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.*;
 import com.badlogic.gdx.utils.viewport.*;
-import com.bigcustard.blurp.ui.*;
+import com.bigcustard.blurp.bootstrap.*;
 
 public class DesktopLauncher {
 

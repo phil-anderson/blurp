@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.bigcustard.blurp.ui.BlurpApp;
+import com.bigcustard.blurp.bootstrap.BlurpApp;
 
 public class AndroidLauncher extends AndroidApplication {
 	@Override

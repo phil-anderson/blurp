@@ -1,5 +1,6 @@
-package com.bigcustard.blurp.core;
+package com.bigcustard.blurp.bootstrap;
 
+import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
 
 public interface IBlurpRunnable {

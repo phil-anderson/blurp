@@ -1,6 +1,7 @@
-package com.bigcustard.blurp.core;
+package com.bigcustard.blurp.bootstrap;
 
 import com.badlogic.gdx.utils.viewport.*;
+import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.ui.*;
 
 public class BlurpRuntime {

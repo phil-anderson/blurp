@@ -1,4 +1,4 @@
-package com.bigcustard.blurp.ui;
+package com.bigcustard.blurp.bootstrap;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.utils.viewport.*;
