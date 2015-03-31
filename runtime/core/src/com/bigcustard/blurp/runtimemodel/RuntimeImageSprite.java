@@ -20,7 +20,7 @@ public class RuntimeImageSprite extends RuntimeSprite<ImageSprite> {
     }
 
     @Override
-    public void draw(Batch batch, float parentAlpha) {
+    public void drawImpl(Batch batch, float parentAlpha) {
 
         // Draw scaled texture centered at (and rotated around) origin
         batch.draw(image.getTextureRegion(),
@@ -29,8 +29,6 @@ public class RuntimeImageSprite extends RuntimeSprite<ImageSprite> {
                    getWidth(), getHeight(),
                    getScaleX(), getScaleY(),
                    getRotation());
-
-        super.draw(batch, parentAlpha);
     }
 
     @Override

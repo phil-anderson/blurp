@@ -53,7 +53,7 @@ public class BlurpRuntime {
         @Override
         public void run() {
 
-            script.run(RSS.getBlurp(), RSS.getCanvas(), RSS.getKeyboard());
+            script.run(RSS.getBlurp(), RSS.getCanvas(), RSS.getKeyboard(), RSS.getUtils());
             while(true) {
                 RSS.getBlurpifier().blurpify();
             }

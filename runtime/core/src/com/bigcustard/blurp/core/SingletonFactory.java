@@ -17,9 +17,10 @@ public class SingletonFactory {
     private final RuntimeRepository runtimeRepository;
     private final BlurpScreen blurpScreen;
     private final Blurpifier blurpifier;
+    private final Blurp blurp;
     private final Canvas canvas;
     private final IKeyboard keyboard;
-    private final Blurp blurp;
+    private final Utils utils;
 
     public SingletonFactory(Viewport viewport) {
 
@@ -33,15 +34,21 @@ public class SingletonFactory {
         blurpifier = makeBlurpifier();
 
         // Initialise model objects (i.e. ones that get passed into the running script)
+        blurp = makeBlurpMethods();
         canvas = makeCanvas(width, height);
         keyboard = makeKeyboard();
-        blurp = makeBlurpMethods();
+        utils = makeUtils();
+    }
+
+    private Utils makeUtils() {
+
+        return new Utils();
     }
 
     public void initialiseSingletons() {
 
         MSS.setInstances(modelRepository, canvas);
-        RSS.setInstances(runtimeRepository, blurpScreen, blurpifier, canvas, keyboard, blurp);
+        RSS.setInstances(runtimeRepository, blurpScreen, blurpifier, blurp, canvas, keyboard, utils);
     }
 
     protected BlurpActions makeBlurpMethods() {

@@ -18,27 +18,30 @@ public class RSS {
     private static RuntimeRepository runtimeRepository;
     private static BlurpScreen blurpScreen;
     private static Blurpifier blurpifier;
+    private static Blurp blurp;
     private static Canvas canvas;
     private static IKeyboard keyboard;
-    private static Blurp blurp;
+    private static Utils utils;
 
     private RSS() { }
 
     public synchronized static void setInstances(RuntimeRepository runtimeRepository,
                                                  BlurpScreen blurpScreen,
                                                  Blurpifier blurpifier,
+                                                 Blurp blurp,
                                                  Canvas canvas,
                                                  IKeyboard keyboard,
-                                                 Blurp blurp ) {
+                                                 Utils utils) {
 
         if(initialised) throw new IllegalStateException("Singletons can only be instantiated once.");
 
         RSS.runtimeRepository = runtimeRepository;
         RSS.blurpScreen = blurpScreen;
         RSS.blurpifier = blurpifier;
+        RSS.blurp = blurp;
         RSS.canvas = canvas;
         RSS.keyboard = keyboard;
-        RSS.blurp = blurp;
+        RSS.utils = utils;
     }
 
     public synchronized static void dispose() {
@@ -50,8 +53,10 @@ public class RSS {
         runtimeRepository = null;
         blurpScreen = null;
         blurpifier = null;
+        blurp = null;
         canvas = null;
         keyboard = null;
+        utils = null;
 
         initialised = false;
     }
@@ -71,6 +76,11 @@ public class RSS {
         return blurpifier;
     }
 
+    public static Blurp getBlurp() {
+
+        return blurp;
+    }
+
     public static Canvas getCanvas() {
 
         return canvas;
@@ -81,8 +91,8 @@ public class RSS {
         return keyboard;
     }
 
-    public static Blurp getBlurp() {
+    public static Utils getUtils() {
 
-        return blurp;
+        return utils;
     }
 }

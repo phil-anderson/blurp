@@ -9,8 +9,8 @@ package com.bigcustard.blurp.model;
 public abstract class Sprite<T> {
 
     /**
-     * The position of the sprite in your Blurp {@link World World}, or to be more
-     * precise, the position of the <i>center</i> of the sprite in your Blurp World
+     * The position of the sprite, or to be more precise, the position of the <i>center</i> of the sprite in your Blurp
+     * World
      * <p>
      * The bottom-left of the world is at x=0, y=0, and the top-right will be determined by the height and width of the
      * world you created. The default world (i.e what you get if you don;t define one yourself) is 800 wide and 480

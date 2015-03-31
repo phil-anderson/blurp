@@ -26,7 +26,7 @@ public class BlurpApp extends Game {
             Class<IBlurpRunnable> scriptClass = (Class<IBlurpRunnable>) Class.forName(scriptClassName);
             script = scriptClass.newInstance();
         } catch(Exception e) {
-            throw new BlurpException("Error instantiating " + scriptClassName + " as an instance of Blurp");
+            throw new BlurpException("Error instantiating " + scriptClassName + " as an instance of IBlurpRunnable");
         }
 
         blurpRuntime.start(script);

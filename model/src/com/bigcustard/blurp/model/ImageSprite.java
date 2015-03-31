@@ -82,11 +82,13 @@ public class ImageSprite extends Sprite<ImageSprite> {
      */
     public ImageSprite(Image image, double x, double y, double scaleX, double scaleY, double rotation) {
 
+        // Move this to Sprite?
         this.image = image;
         this.setPosition(x, y);
         this.scaleX = scaleX;
         this.scaleY = scaleY;
         this.rotation = rotation;
+        this.alpha = 1;
 
         MSS.getModelRepository().addImageSprite(this);
     }

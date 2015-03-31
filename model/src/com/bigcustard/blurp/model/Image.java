@@ -19,7 +19,6 @@ public class Image {
      */
     public final String filename;
 
-    // TODO: Need to work out width and height (lord alone knows how) so I can expose the pin.
 
 
     /**
@@ -30,6 +29,11 @@ public class Image {
 
         if(filename == null) throw new RuntimeException("Image filename must not be null");
         this.filename = filename;
+
+
+
+        // TODO: Need to work out width and height (lord alone knows how) so I can expose the pin.
+
 
 
 

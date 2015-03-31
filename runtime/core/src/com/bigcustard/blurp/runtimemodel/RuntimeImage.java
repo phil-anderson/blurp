@@ -26,6 +26,7 @@ public class RuntimeImage implements RuntimeObject<Image> {
                 textureRegion = new TextureRegion(new Texture(10, 10, Pixmap.Format.RGBA8888));
             }
         }
+        textureRegion.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
     }
 
     TextureRegion getTextureRegion() {
