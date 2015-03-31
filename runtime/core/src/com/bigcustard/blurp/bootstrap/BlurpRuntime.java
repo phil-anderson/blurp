@@ -6,17 +6,24 @@ import com.bigcustard.blurp.ui.*;
 
 public class BlurpRuntime {
 
-    private BlurpRuntime() { }
+    private SingletonFactory singletonFactory;
+
+    public BlurpRuntime() { }
 
     public static BlurpRuntime begin(Viewport viewport) {
 
-        SF.instantiateSingletons(viewport);
+        return begin(new SingletonFactory(viewport));
+    }
+
+    public static BlurpRuntime begin(SingletonFactory singletonFactory) {
+
+        singletonFactory.initialiseSingletons();
         return new BlurpRuntime();
     }
 
     public BlurpScreen getScreen() {
 
-        return SF.getBlurpScreen();
+        return RSS.getBlurpScreen();
     }
 
     public void start(IBlurpRunnable script) {
@@ -28,7 +35,7 @@ public class BlurpRuntime {
     // TODO: Implement this properly
     public void end() {
 
-        SF.dispose();
+        RSS.dispose();
     }
 
     // TODO: Need a way to pause / resume / restart / stop the script. Communicate via flags in Repository? Blurpifier states?
@@ -46,9 +53,9 @@ public class BlurpRuntime {
         @Override
         public void run() {
 
-            script.run(SF.getBlurp(), SF.getCanvas(), SF.getKeyboard());
+            script.run(RSS.getBlurp(), RSS.getCanvas(), RSS.getKeyboard());
             while(true) {
-                SF.getBlurpifier().blurpify();
+                RSS.getBlurpifier().blurpify();
             }
         }
     }

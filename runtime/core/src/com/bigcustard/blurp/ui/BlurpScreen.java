@@ -74,7 +74,7 @@ public class BlurpScreen extends ScreenAdapter {
 
         // Tweener update goes here too.
 
-        if(SF.getBlurpifier().getState() == Requested) {
+        if(RSS.getBlurpifier().getState() == Requested) {
             doRender(delta);
         }
 
@@ -86,7 +86,7 @@ public class BlurpScreen extends ScreenAdapter {
         renderListener.handleRenderEvent(batch, delta, EventType.PreRender);
 
         try {
-            SF.getRuntimeRepository().syncWithModelRepository();
+            RSS.getRuntimeRepository().syncWithModelRepository();
 
             beginBatch(); // In case the RenderListener ended it.
             canvasRenderer.render();
@@ -95,7 +95,7 @@ public class BlurpScreen extends ScreenAdapter {
             getStage().draw();
 
         } finally {
-            SF.getBlurpifier().setState(Complete);
+            RSS.getBlurpifier().setState(Complete);
         }
 
         beginBatch();

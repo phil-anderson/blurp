@@ -16,7 +16,7 @@ public class RuntimeImageSprite extends RuntimeSprite<ImageSprite> {
         int height = image.getTextureRegion().getRegionHeight();
         setSize(width, height);
         setOrigin(width / 2, height / 2);
-        SF.getBlurpScreen().addActor(this);
+        RSS.getBlurpScreen().addActor(this);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class RuntimeImageSprite extends RuntimeSprite<ImageSprite> {
     public void sync(ImageSprite modelImageSprite) {
 
         super.sync(modelImageSprite);
-        image = SF.getRuntimeRepository().getImage(modelImageSprite.image);
+        image = RSS.getRuntimeRepository().getImage(modelImageSprite.image);
     }
 
     @Override

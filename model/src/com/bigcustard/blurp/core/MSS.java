@@ -5,8 +5,8 @@ package com.bigcustard.blurp.core;
 import com.bigcustard.blurp.model.*;
 
 /**
- * MSS stands for the Model Singleton Store. It provides a place for the runtime to inject singletons that the model
- * code requires access to. It's not nice, but it is expedient.
+ * MSS stands for the Model Singleton Store. It provides a place to store singletons that the model code requires access
+ * to. It's not nice, but it is expedient.
  * <p>
  * The shortened name is an attempt to cause minimal visual impact on calling code.
  */

@@ -3,12 +3,12 @@ package com.bigcustard.blurp.core;
 /**
  * Allows the user to call methods that specific to the Blurp engine.
  */
-public class BlurpMethods extends Blurp {
+public class BlurpActions extends Blurp {
 
-    BlurpMethods() { }
+    BlurpActions() { }
 
     public void blurpify() {
 
-        SF.getBlurpifier().blurpify();
+        RSS.getBlurpifier().blurpify();
     }
 }

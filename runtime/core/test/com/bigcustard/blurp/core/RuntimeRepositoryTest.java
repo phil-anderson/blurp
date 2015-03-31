@@ -1,17 +1,15 @@
 package com.bigcustard.blurp.core;
 
+import com.badlogic.gdx.utils.viewport.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.testutils.*;
 import org.junit.*;
-import org.mockito.*;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
 
-@Ignore // I can't get these tests to run.
 public class RuntimeRepositoryTest extends LibGdxTest {
 
-    @Mock Canvas mockCanvas;
 
     private RuntimeRepository testCandidate;
     private Image image;
@@ -20,10 +18,11 @@ public class RuntimeRepositoryTest extends LibGdxTest {
     @Before
     public void setUp() throws Exception {
 
-        ModelRepository modelRepository = new ModelRepository();
-        MSS.setInstances(modelRepository, mockCanvas);
 
-        testCandidate = new RuntimeRepository(modelRepository);
+        SingletonFactory singletonFactory = new SingletonFactoryForTests();
+        singletonFactory.initialiseSingletons();
+
+        testCandidate = RSS.getRuntimeRepository();
 
         // Instantiate each type of object
         image = new Image("star.png");
@@ -33,7 +32,7 @@ public class RuntimeRepositoryTest extends LibGdxTest {
     @After
     public void tearDown() throws Exception {
 
-        SF.dispose();
+        RSS.dispose();
     }
 
     @Test
