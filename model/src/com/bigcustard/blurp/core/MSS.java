@@ -1,7 +1,5 @@
 package com.bigcustard.blurp.core;
 
-// TODO: Feels like there's a way of getting rid of this.
-
 import com.bigcustard.blurp.model.*;
 
 /**

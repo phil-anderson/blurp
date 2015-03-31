@@ -49,7 +49,7 @@ public class BlurpScreen extends ScreenAdapter {
             endBatch();
         } catch(Exception e) {
             // Do nothing for now - Swallowing allows libgdx to continue rendering, and thus allows the app to be closed.
-            // TODO: Something more appropriate.
+            // TODO: Rethrow it from the runner
             e.printStackTrace();
         }
     }

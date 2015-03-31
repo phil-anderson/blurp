@@ -24,7 +24,6 @@ public class RSS {
 
     private RSS() { }
 
-    // TODO: Make this take some sort of BlurpConfig object instead.
     public synchronized static void setInstances(RuntimeRepository runtimeRepository,
                                                  BlurpScreen blurpScreen,
                                                  Blurpifier blurpifier,

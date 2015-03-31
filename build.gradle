@@ -35,7 +35,6 @@ allprojects {
 project("model") {
     apply plugin: "java"
 
-    // TODO: I have literally no idea why I need to do this for model, but not for other projects with the exact same structure.
     sourceSets {
         main {
             java.srcDir 'src'

@@ -22,23 +22,6 @@ import com.bigcustard.blurp.core.*;
  */
 public class Colour implements PresetColours {
 
-    // TODO: Change these to web standard colours.
-//    public static final Colour BLACK = new Colour(0, 0, 0);
-//    public static final Colour RED = new Colour(1, 0, 0);
-//    public static final Colour GREEN = new Colour(0, 1, 0);
-//    public static final Colour BLUE = new Colour(0, 0, 1);
-//    public static final Colour YELLOW = new Colour(1, 1, 0);
-//    public static final Colour MAGENTA = new Colour(1, 0, 1);
-//    public static final Colour CYAN = new Colour(0, 1, 1);
-//    public static final Colour WHITE = new Colour(1, 1, 1);
-//    public static final Colour DARK_RED = new Colour(0.5, 0, 0);
-//    public static final Colour DARK_GREEN = new Colour(0, 0.5, 0);
-//    public static final Colour DARK_BLUE = new Colour(0, 0, 0.5);
-//    public static final Colour BROWN = new Colour(0.5, 0.5, 0);
-//    public static final Colour PURPLE = new Colour(0.5, 0, 0.5);
-//    public static final Colour DARK_CYAN = new Colour(0, 0.5, 0.5);
-//    public static final Colour GREY = new Colour(0.5, 0.5, 0.5);
-
     /**
      * The red, green and blue components of the colour. See the {@link Colour} class documentation for more details
      */
