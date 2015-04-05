@@ -12,20 +12,27 @@ import com.bigcustard.blurp.runtimemodel.*;
 public class RuntimeRepository {
 
 
-    private final ModelRepository modelRepository;
+    private final ModelRepositoryImpl modelRepository;
     private final ModelToRuntimeObjectMap<Image, RuntimeImage> runtimeImages;
     private final ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite> runtimeImageSprites;
+    private final CommandExecutor commandExecutor;
 
-    RuntimeRepository(ModelRepository modelRepository) {
+    RuntimeRepository(ModelRepositoryImpl modelRepository) {
 
         this.modelRepository = modelRepository;
         runtimeImages = new ModelToRuntimeObjectMap<Image, RuntimeImage>(Image.class, RuntimeImage.class);
         runtimeImageSprites = new ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite>(ImageSprite.class, RuntimeImageSprite.class);
+
+        commandExecutor = new CommandExecutor();
     }
 
-    public void syncWithModelRepository() {
+    public void syncWithModelRepository(float deltaTime) {
 
-        // Sync the various object types
+        // First run any commands that the model has registered requests for.
+        commandExecutor.executeAll(modelRepository.getCommandRequests(), deltaTime);
+        modelRepository.commandRequestsComplete();
+
+        // Then sync the various model object types
         runtimeImages.syncAll(modelRepository.getImages());
         runtimeImageSprites.syncAll(modelRepository.getImageSprites());
     }

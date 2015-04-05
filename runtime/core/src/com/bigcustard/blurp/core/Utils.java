@@ -6,10 +6,15 @@ public class Utils {
 
     private static final double DEG_TO_RAD = 2 * Math.PI / 360;
 
+    public double random(double limit) {
+
+        return Math.random() * limit;
+    }
+
     public double random(double from, double to) {
 
         double range = to - from;
-        return Math.random() * range + from;
+        return random(range) + from;
     }
 
     public double sin(double angle) {

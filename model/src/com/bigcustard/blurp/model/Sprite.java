@@ -1,5 +1,8 @@
 package com.bigcustard.blurp.model;
 
+import com.bigcustard.blurp.core.*;
+import com.bigcustard.blurp.core.commands.*;
+
 /**
  * A sprite is an object that can be put on the screen, moved around, rotated, and generally mucked about with in
  * various ways. For more details, check the subclasses.
@@ -19,6 +22,7 @@ public abstract class Sprite<T> {
      * You can happily set the coordinates to be outside of the world coordinates, and Blurp won't bat an eyelid.
      * <p>
      * Typically, the whole world is shown on screen, however more advanced programs sometimes use the
+     *
      * {@link Camera Camera} class to zoom into an area and pan around the world.
      */
     public double x, y;
@@ -60,6 +64,7 @@ public abstract class Sprite<T> {
 
     /**
      * This method provides a handy way to set both X and Y coordinates in one hit.
+     *
      * @param x The new X coordinate
      * @param y The new Y coordinate
      * @return Itself
@@ -98,6 +103,27 @@ public abstract class Sprite<T> {
 
         scaleX = factor;
         scaleY = factor;
+        return (T) this;
+    }
+
+    /**
+     * Moves the Sprite towards the specified target coordinates <u>the next time blurpify is called</u>. If you  keep
+     * calling this method then eventually it'll reach the target. The speed parameter specified how fast the Sprite
+     * should move and therefore how quickly it will reach the target. This method does all the hard work of calculating
+     * how far the sprite needs to move in the X and Y dimensions in order to move smoothly, straight towards the
+     * target.
+     * <p>
+     * How much the Sprite will move towards the target depends on the speed parameter, and how much time has passed
+     * since the last call to {@link com.bigcustard.blurp.core.Blurp#blurpify() Blurp.blurpify()}
+     *
+     * @param targetX The target X coordinate
+     * @param targetY The target Y coordinate
+     * @param speed The speed in units-per-second that we want the Sprite to move at.
+     * @return
+     */
+    public T moveTowards(double targetX, double targetY, double speed) {
+
+        MSS.getModelRepository().registerRequest(new MoveTowardsRequest(this, targetX, targetY, speed));
         return (T) this;
     }
 }

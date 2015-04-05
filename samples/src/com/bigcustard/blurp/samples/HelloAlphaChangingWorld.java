@@ -4,18 +4,22 @@ import com.bigcustard.blurp.bootstrap.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
 
-public class HelloAlphaChangingWorld implements IBlurpRunnable {
+public class HelloAlphaChangingWorld implements BlurpRunnable {
 
     @Override
-    public void run(Blurp blurp, Canvas canvas, IKeyboard keyboard, Utils utils) {
+    public void run(Blurp blurp, Canvas canvas, Keyboard keyboard, Utils utils) {
 
-        ImageSprite world = new ImageSprite("world.png");
+        Image worldImage = new Image("world.png");
+
+        ImageSprite upsideDownWorld = new ImageSprite(worldImage);
+        ImageSprite world = new ImageSprite(worldImage).rotateBy(180); // Upside-down world exactly covering the normal one
 
         int index = 0;
 
         while(true) {
+            // Fade the upside-down one in and out, hiding and revealing the normal one.
             world.alpha = utils.sin(index) / 2 + 0.5;
-            index += 3;
+            index += 2;
 
             blurp.blurpify();
         }

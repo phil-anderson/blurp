@@ -3,7 +3,7 @@ package com.bigcustard.blurp.model;
 /**
  * Allows you to get the state of the keyboad - assuming the device your program is running on has a keyboard.
  */
-public interface IKeyboard {
+public interface Keyboard {
 
     /**
      * Determines whether the specified key is currently held down

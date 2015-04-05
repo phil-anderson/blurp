@@ -26,7 +26,7 @@ public class BlurpRuntime {
         return RSS.getBlurpScreen();
     }
 
-    public void start(IBlurpRunnable script) {
+    public void start(BlurpRunnable script) {
 
         Thread scriptThread = new Thread(new ScriptRunnable(script));
         scriptThread.start();
@@ -43,9 +43,9 @@ public class BlurpRuntime {
     //              (e.g. to resume) get picked up.
     private class ScriptRunnable implements Runnable {
 
-        private IBlurpRunnable script;
+        private BlurpRunnable script;
 
-        private ScriptRunnable(IBlurpRunnable script) {
+        private ScriptRunnable(BlurpRunnable script) {
 
             this.script = script;
         }

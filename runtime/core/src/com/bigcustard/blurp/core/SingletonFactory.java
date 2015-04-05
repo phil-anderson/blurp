@@ -13,13 +13,13 @@ public class SingletonFactory {
     private static volatile boolean initialised;
 
     // If adding stuff here, be sure to handle disposal as well as instantiation.
-    private final ModelRepository modelRepository;
+    private final ModelRepositoryImpl modelRepository;
     private final RuntimeRepository runtimeRepository;
     private final BlurpScreen blurpScreen;
     private final Blurpifier blurpifier;
     private final Blurp blurp;
     private final Canvas canvas;
-    private final IKeyboard keyboard;
+    private final Keyboard keyboard;
     private final Utils utils;
 
     public SingletonFactory(Viewport viewport) {
@@ -56,9 +56,9 @@ public class SingletonFactory {
         return new BlurpActions();
     }
 
-    protected  Keyboard makeKeyboard() {
+    protected KeyboardImpl makeKeyboard() {
 
-        return new Keyboard();
+        return new KeyboardImpl();
     }
 
     protected  Canvas makeCanvas(int width, int height) {
@@ -81,8 +81,8 @@ public class SingletonFactory {
         return new RuntimeRepository(modelRepository);
     }
 
-    protected  ModelRepository makeModelRepository() {
+    protected ModelRepositoryImpl makeModelRepository() {
 
-        return new ModelRepository();
+        return new ModelRepositoryImpl();
     }
 }

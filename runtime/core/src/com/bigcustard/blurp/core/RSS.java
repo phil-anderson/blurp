@@ -20,7 +20,7 @@ public class RSS {
     private static Blurpifier blurpifier;
     private static Blurp blurp;
     private static Canvas canvas;
-    private static IKeyboard keyboard;
+    private static Keyboard keyboard;
     private static Utils utils;
 
     private RSS() { }
@@ -30,7 +30,7 @@ public class RSS {
                                                  Blurpifier blurpifier,
                                                  Blurp blurp,
                                                  Canvas canvas,
-                                                 IKeyboard keyboard,
+                                                 Keyboard keyboard,
                                                  Utils utils) {
 
         if(initialised) throw new IllegalStateException("Singletons can only be instantiated once.");
@@ -86,7 +86,7 @@ public class RSS {
         return canvas;
     }
 
-    public static IKeyboard getKeyboard() {
+    public static Keyboard getKeyboard() {
 
         return keyboard;
     }

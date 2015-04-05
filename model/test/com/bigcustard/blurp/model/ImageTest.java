@@ -9,7 +9,8 @@ import static org.mockito.Mockito.*;
 
 public class ImageTest {
 
-    @Mock IModelRepository modelRepository;
+    @Mock
+    ModelRepository modelRepository;
     @Mock Canvas mockCanvas;
 
     @Before

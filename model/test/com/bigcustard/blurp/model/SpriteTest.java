@@ -1,11 +1,24 @@
 package com.bigcustard.blurp.model;
 
+import com.bigcustard.blurp.core.*;
 import org.junit.*;
+import org.mockito.*;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.*;
 
 public class SpriteTest {
+
+    @Mock
+    ModelRepository mockModelRepository;
+
+    @Before
+    public void setUp() throws Exception {
+
+        MockitoAnnotations.initMocks(this);
+        MSS.dispose();
+        MSS.setInstances(mockModelRepository, null);
+    }
 
     @Test
     public void rotateIsAdditive() throws Exception {

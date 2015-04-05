@@ -29,6 +29,18 @@ public class Canvas {
      */
     public final int width, height;
 
+    /**
+     * Determines whether the specified X and Y coordinates are inside the Canvas>
+     *
+     * @param x The x coordinate
+     * @param y The y coordinate
+     * @return True if the sprite is fully contained within the canvas.
+     */
+    public boolean contains(double x, double y) {
+
+        return x >= 0 && x < width && y >= 0 && y < height;
+    }
+
     public Canvas(int width, int height) {
 
         this.width = width;

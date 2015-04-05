@@ -8,9 +8,7 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
 
     private static final int SOLID_WHITE = -1;
 
-    protected RuntimeSprite() {
-
-    }
+    protected RuntimeSprite() { }
 
     @Override
     public void sync(T modelSprite) {

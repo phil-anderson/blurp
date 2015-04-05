@@ -1,6 +1,5 @@
 package com.bigcustard.blurp.core;
 
-import com.badlogic.gdx.utils.viewport.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.testutils.*;
 import org.junit.*;
@@ -17,7 +16,6 @@ public class RuntimeRepositoryTest extends LibGdxTest {
 
     @Before
     public void setUp() throws Exception {
-
 
         SingletonFactory singletonFactory = new SingletonFactoryForTests();
         singletonFactory.initialiseSingletons();
@@ -38,7 +36,7 @@ public class RuntimeRepositoryTest extends LibGdxTest {
     @Test
     public void syncCallsSyncAllForEachTypeOfObject() throws Exception {
 
-        testCandidate.syncWithModelRepository();
+        testCandidate.syncWithModelRepository(1);
         assertThat(testCandidate.getImage(image), notNullValue());
         assertThat(testCandidate.getImageSprite(imageSprite), notNullValue());
     }

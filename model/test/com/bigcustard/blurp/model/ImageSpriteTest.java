@@ -10,7 +10,8 @@ import static org.mockito.Mockito.verify;
 
 public class ImageSpriteTest {
 
-    @Mock IModelRepository mockModelRepository;
+    @Mock
+    ModelRepository mockModelRepository;
     @Mock Canvas mockCanvas;
 
     @Before

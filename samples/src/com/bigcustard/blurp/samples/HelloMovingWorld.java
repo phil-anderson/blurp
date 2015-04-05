@@ -4,17 +4,25 @@ import com.bigcustard.blurp.bootstrap.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
 
-public class HelloScalingWorld implements BlurpRunnable {
+public class HelloMovingWorld implements BlurpRunnable {
 
     @Override
     public void run(Blurp blurp, Canvas canvas, Keyboard keyboard, Utils utils) {
 
         ImageSprite world = new ImageSprite("world.png");
 
+        double targetX = 400;
+        double targetY = 300;
+
         while(true) {
-            // Earthquake!
-            world.scale(utils.random(0.95, 1.05));
+
+            world.moveTowards(targetX, targetY, 500);
             blurp.blurpify();
+
+            if(world.x == targetX && world.y == targetY) {
+                targetX = utils.random(150, 650);
+                targetY = utils.random(150, 450);
+            }
         }
     }
 }

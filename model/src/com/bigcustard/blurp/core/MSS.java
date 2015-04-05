@@ -12,12 +12,12 @@ public class MSS {
 
     private static volatile boolean initialised;
 
-    private static IModelRepository modelRepository;
+    private static ModelRepository modelRepository;
     private static Canvas canvas;
 
     private MSS() { }
 
-    public synchronized static void setInstances(IModelRepository modelRepository, Canvas canvas) {
+    public synchronized static void setInstances(ModelRepository modelRepository, Canvas canvas) {
 
         if(initialised) throw new IllegalStateException("The model singletons can only be set once.");
 
@@ -35,7 +35,7 @@ public class MSS {
         initialised = false;
     }
 
-    public static IModelRepository getModelRepository() {
+    public static ModelRepository getModelRepository() {
 
         return modelRepository;
     }

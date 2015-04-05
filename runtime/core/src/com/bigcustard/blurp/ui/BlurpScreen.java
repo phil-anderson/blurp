@@ -70,6 +70,7 @@ public class BlurpScreen extends ScreenAdapter {
 
         renderListener.handleRenderEvent(batch, delta, EventType.PreFrame);
 
+        // TODO: We don't currently need this - Remove unless needed.
         getStage().act(delta);
 
         // Tweener update goes here too.
@@ -86,7 +87,7 @@ public class BlurpScreen extends ScreenAdapter {
         renderListener.handleRenderEvent(batch, delta, EventType.PreRender);
 
         try {
-            RSS.getRuntimeRepository().syncWithModelRepository();
+            RSS.getRuntimeRepository().syncWithModelRepository(delta);
 
             beginBatch(); // In case the RenderListener ended it.
             canvasRenderer.render();

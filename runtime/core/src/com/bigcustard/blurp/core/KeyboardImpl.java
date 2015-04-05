@@ -3,7 +3,7 @@ package com.bigcustard.blurp.core;
 import com.badlogic.gdx.*;
 import com.bigcustard.blurp.model.*;
 
-public class Keyboard implements IKeyboard {
+public class KeyboardImpl implements Keyboard {
 
 
     @Override

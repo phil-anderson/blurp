@@ -16,7 +16,8 @@ public class ImageSprite extends Sprite<ImageSprite> {
     /**
      * Constructs a new ImageSprite using the image file specified, and places it at the center of the Canvas.
      * <p>
-     * A new Image will be created just for this ImageSprite, and the {@link #image} property will be set accordingly.
+     * A new Image will be created just for this ImageSprite, and the ImageSprite's {@link #image} property will be set
+     * accordingly.
      * <p>
      * If you want more than one ImageSprite to share the same image, then you should create a single {@link Image}
      * object for the image and construct all of the ImageSprites using that instead. It'll be more efficient as the
