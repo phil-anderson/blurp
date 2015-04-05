@@ -17,6 +17,6 @@ public abstract class SampleRunner extends Blurp {
         }
 
         args = new String[] { className, "800", "600" };
-        DesktopLauncher.main(args);
+        BlurpRunner.main(args);
     }
 }
