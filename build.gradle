@@ -32,21 +32,25 @@ allprojects {
 }
 
 
-project("model") {
+project(":model") {
     apply plugin: "java"
 
-    sourceSets {
-        main {
-            java.srcDir 'src'
-            resources.srcDir 'resources'
-        }
-        test {
-            java.srcDir 'test'
-        }
+    dependencies {
+        testCompile "junit:junit:4.12"
+        testCompile "org.mockito:mockito-all:1.9.5"
     }
+//    sourceSets {
+//        main {
+//            java.srcDir 'src'
+//            resources.srcDir 'resources'
+//        }
+//        test {
+//            java.srcDir 'test'
+//        }
+//    }
 }
 
-project("samples") {
+project(":samples") {
     apply plugin: "java"
 
     dependencies {
@@ -54,7 +58,7 @@ project("samples") {
     }
 }
 
-project("runtime:desktop") {
+project(":runtime:desktop") {
     apply plugin: "java"
 
 
@@ -64,6 +68,7 @@ project("runtime:desktop") {
         compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
         compile "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
         compile "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
+        compile "args4j:args4j:2.32"
     }
 }
 
@@ -86,7 +91,7 @@ project("runtime:desktop") {
 //    }
 //}
 
-project("runtime:core") {
+project(":runtime:core") {
     apply plugin: "java"
 
 
@@ -94,6 +99,10 @@ project("runtime:core") {
         compile project(":model")
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+        testCompile "junit:junit:4.12"
+        testCompile "org.mockito:mockito-all:1.9.5"
+        testCompile "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
+        testRuntime project(":runtime:desktop")
     }
 }
 
