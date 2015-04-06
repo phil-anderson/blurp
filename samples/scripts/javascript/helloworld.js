@@ -1,4 +1,4 @@
-print("Running JavaScript!");
+screen.backgroundColour = blurp.colours.darkBlue;
 
-// Need to sort out some imports...
-new com.bigcustard.blurp.model.ImageSprite("world.png");
+blurp.imageSprite("world.png");
+

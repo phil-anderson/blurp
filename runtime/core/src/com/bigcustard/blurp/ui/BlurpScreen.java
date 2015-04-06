@@ -11,18 +11,22 @@ import static com.bigcustard.blurp.core.Blurpifier.State.*;
 
 public class BlurpScreen extends ScreenAdapter {
 
-    private final CanvasRenderer canvasRenderer;
+    private final ModelScreenRenderer modelScreenRenderer;
 
     private RenderListener renderListener = RenderListenerAdapter.NULL_IMPLEMENTATION;
 
-    private Viewport viewport;
+    private final Viewport viewport;
+    private final Blurpifier blurpifier;
+    private final RuntimeRepository runtimeRepository;
     private Batch batch;
     private Stage stage;
 
-    public BlurpScreen(Viewport viewport) {
+    public BlurpScreen(Viewport viewport, Blurpifier blurpifier, RuntimeRepository runtimeRepository, ModelScreenRenderer modelScreenRenderer) {
 
         this.viewport = viewport;
-        canvasRenderer = new CanvasRenderer();
+        this.blurpifier = blurpifier;
+        this.runtimeRepository = runtimeRepository;
+        this.modelScreenRenderer = modelScreenRenderer;
     }
 
     public void addActor(Actor actor) {
@@ -75,7 +79,7 @@ public class BlurpScreen extends ScreenAdapter {
 
         // Tweener update goes here too.
 
-        if(RSS.getBlurpifier().getState() == Requested) {
+        if(blurpifier.getState() == Requested) {
             doRender(delta);
         }
 
@@ -87,16 +91,16 @@ public class BlurpScreen extends ScreenAdapter {
         renderListener.handleRenderEvent(batch, delta, EventType.PreRender);
 
         try {
-            RSS.getRuntimeRepository().syncWithModelRepository(delta);
+            runtimeRepository.syncWithModelRepository(delta);
 
             beginBatch(); // In case the RenderListener ended it.
-            canvasRenderer.render();
+            modelScreenRenderer.render();
             endBatch();
 
             getStage().draw();
 
         } finally {
-            RSS.getBlurpifier().setState(Complete);
+            blurpifier.setState(Complete);
         }
 
         beginBatch();

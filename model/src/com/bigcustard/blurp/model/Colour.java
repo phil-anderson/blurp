@@ -1,7 +1,5 @@
 package com.bigcustard.blurp.model;
 
-import com.bigcustard.blurp.core.*;
-
 /**
  * Yes... That's Color with a 'U'. That's how we spell it in the UK. Live with it.
  * <p>
@@ -20,7 +18,7 @@ import com.bigcustard.blurp.core.*;
  * <p>
  * Colours can't be changed once you've created them, The higher the numbers are in the colour, the brighter the colour will be.
  */
-public class Colour implements PresetColours {
+public class Colour {
 
     /**
      * The red, green and blue components of the colour. See the {@link Colour} class documentation for more details

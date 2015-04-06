@@ -7,6 +7,8 @@ import static org.hamcrest.MatcherAssert.*;
 
 public class ColourTest {
 
+    private static Colours colours = Colours.INSTANCE;
+
     @Test
     public void equalsReturnsTrueForEquivalentColours() throws Exception {
 
@@ -20,25 +22,25 @@ public class ColourTest {
     @Test
     public void equalsReturnsFalseForDifferentColours() throws Exception {
 
-        assertThat(Colour.RED.equals(Colour.BLUE), is(false));
+        assertThat(colours.red.equals(colours.blue), is(false));
     }
 
     @Test
-    public void canMixColours() throws Exception {
+    public void canMixcolourss() throws Exception {
 
-        assertThat(Colour.RED.mixedWith(Colour.BLUE), is(Colour.PURPLE));
+        assertThat(colours.red.mixedWith(colours.blue), is(colours.purple));
     }
 
     @Test
     public void canChangeBrightness() throws Exception {
 
-        assertThat(Colour.MAROON.withBrightness(2), is(Colour.RED));
-        assertThat(Colour.RED.withBrightness(0.5), is(Colour.MAROON));
+        assertThat(colours.maroon.withBrightness(2), is(colours.red));
+        assertThat(colours.red.withBrightness(0.5), is(colours.maroon));
     }
 
     @Test
     public void brightnessChangeIsClamped() throws Exception {
 
-        assertThat(Colour.BLUE.withBrightness(2), is(Colour.BLUE));
+        assertThat(colours.blue.withBrightness(2), is(colours.blue));
     }
 }

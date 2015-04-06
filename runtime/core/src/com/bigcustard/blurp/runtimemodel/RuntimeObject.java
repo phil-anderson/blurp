@@ -1,11 +1,13 @@
 package com.bigcustard.blurp.runtimemodel;
 
+import com.bigcustard.blurp.core.*;
+
 /**
  * @param <T> The type of the corresponding model object.
  */
 public interface RuntimeObject<T> {
 
-    void sync(T modelObject);
+    public abstract void sync(T modelObject, BlurpObjectProvider blurpObjectProvider, boolean newInstance);
 
-    void dispose();
+    public abstract void dispose();
 }

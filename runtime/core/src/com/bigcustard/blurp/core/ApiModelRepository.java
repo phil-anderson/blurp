@@ -5,47 +5,41 @@ import com.bigcustard.blurp.core.commands.*;
 import com.bigcustard.blurp.model.*;
 
 /**
- * This is an implementation of the model module's ModelRepository. It gets instantiated by the runtime, and then used
- * by the various model objects to register their presence.
+ * Stores and manages api model objects that require a different runtime implementation.
  */
-public class ModelRepositoryImpl implements ModelRepository {
+public class ApiModelRepository {
 
     private List<Image> images;
     private List<ImageSprite> imageSprites;
     private List<CommandRequestVisitable> commandRequests;
 
-    public ModelRepositoryImpl() {
+    public ApiModelRepository() {
 
         images = new ArrayList<Image>();
         imageSprites = new ArrayList<ImageSprite>();
         commandRequests = new ArrayList<CommandRequestVisitable>();
     }
 
-    @Override
     public void addImage(Image image) {
 
         images.add(image);
     }
 
-    @Override
     public void removeImage(Image image) {
 
         images.remove(image);
     }
 
-    @Override
     public void addImageSprite(ImageSprite imageSprite) {
 
         imageSprites.add(imageSprite);
     }
 
-    @Override
     public void removeImageSprite(ImageSprite imageSprite) {
 
         imageSprites.remove(imageSprite);
     }
 
-    @Override
     public void registerRequest(CommandRequestVisitable request) {
 
         commandRequests.add(request);
@@ -66,9 +60,18 @@ public class ModelRepositoryImpl implements ModelRepository {
         return commandRequests;
     }
 
+
     public void commandRequestsComplete() {
 
         commandRequests.clear();
+    }
+
+    public Image getImage(String imageFilename) {
+
+        for(Image image : images) {
+            if(image.filename.equals(imageFilename)) return image;
+        }
+        return null;
     }
 
     public void dispose() {

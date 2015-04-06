@@ -12,16 +12,19 @@ import com.bigcustard.blurp.runtimemodel.*;
 public class RuntimeRepository {
 
 
-    private final ModelRepositoryImpl modelRepository;
+    private final BlurpObjectProvider blurpObjectProvider;
+    private final ApiModelRepository apiModelRepository;
+
     private final ModelToRuntimeObjectMap<Image, RuntimeImage> runtimeImages;
     private final ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite> runtimeImageSprites;
     private final CommandExecutor commandExecutor;
 
-    RuntimeRepository(ModelRepositoryImpl modelRepository) {
+    RuntimeRepository(BlurpObjectProvider blurpObjectProvider) {
 
-        this.modelRepository = modelRepository;
-        runtimeImages = new ModelToRuntimeObjectMap<Image, RuntimeImage>(Image.class, RuntimeImage.class);
-        runtimeImageSprites = new ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite>(ImageSprite.class, RuntimeImageSprite.class);
+        this.blurpObjectProvider= blurpObjectProvider;
+        apiModelRepository = blurpObjectProvider.getModelRepository();
+        runtimeImages = new ModelToRuntimeObjectMap<Image, RuntimeImage>(RuntimeImage.class);
+        runtimeImageSprites = new ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite>(RuntimeImageSprite.class);
 
         commandExecutor = new CommandExecutor();
     }
@@ -29,12 +32,12 @@ public class RuntimeRepository {
     public void syncWithModelRepository(float deltaTime) {
 
         // First run any commands that the model has registered requests for.
-        commandExecutor.executeAll(modelRepository.getCommandRequests(), deltaTime);
-        modelRepository.commandRequestsComplete();
+        commandExecutor.executeAll(apiModelRepository.getCommandRequests(), deltaTime);
+        apiModelRepository.commandRequestsComplete();
 
         // Then sync the various model object types
-        runtimeImages.syncAll(modelRepository.getImages());
-        runtimeImageSprites.syncAll(modelRepository.getImageSprites());
+        runtimeImages.syncAll(apiModelRepository.getImages(), blurpObjectProvider);
+        runtimeImageSprites.syncAll(apiModelRepository.getImageSprites(), blurpObjectProvider);
     }
 
     public RuntimeImage getImage(Image modelImage) {

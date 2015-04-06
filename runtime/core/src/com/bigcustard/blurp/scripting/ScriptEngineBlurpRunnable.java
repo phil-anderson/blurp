@@ -20,10 +20,10 @@ public class ScriptEngineBlurpRunnable implements BlurpRunnable {
     }
 
     @Override
-    public void run(Blurp blurp, Canvas canvas, Keyboard keyboard, Utils utils) {
+    public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils) {
 
         scriptEngine.put("blurp", blurp);
-        scriptEngine.put("canvas", canvas);
+        scriptEngine.put("screen", screen);
         scriptEngine.put("keyboard", keyboard);
         scriptEngine.put("utils", utils);
         try {

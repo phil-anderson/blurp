@@ -10,6 +10,6 @@ public class AndroidLauncher extends AndroidApplication {
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-		initialize(new BlurpApp(null, new FitViewport(800, 480)), config);
+		initialize(new BlurpApp(null, null, new FitViewport(800, 480)), config);
 	}
 }

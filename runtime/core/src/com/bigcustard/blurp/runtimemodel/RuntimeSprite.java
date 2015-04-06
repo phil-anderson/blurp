@@ -2,6 +2,7 @@ package com.bigcustard.blurp.runtimemodel;
 
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.*;
+import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.Sprite;
 
 public abstract class RuntimeSprite<T extends Sprite> extends Actor implements RuntimeObject<T> {
@@ -11,14 +12,11 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
     protected RuntimeSprite() { }
 
     @Override
-    public void sync(T modelSprite) {
+    public void sync(T modelSprite, BlurpObjectProvider blurpObjectProvider, boolean newInstance) {
 
         setPosition((float) modelSprite.x, (float) modelSprite.y);
-
         setScale((float) modelSprite.scaleX, (float) modelSprite.scaleY);
-
         setRotation((float) -modelSprite.rotation);
-
         setColor(1, 1, 1, (float) modelSprite.alpha);
     }
 

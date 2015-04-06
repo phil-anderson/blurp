@@ -9,7 +9,7 @@ import com.bigcustard.blurp.runtimemodel.*;
  * of a pre-existing runtime object, or by instantiating a runtime object. It will then remove any orphaned runtime
  * objects.
  *
- * The runtime class must have a monadic constructor that takes an instance of the model class.
+ * The runtime class must have a no-params constructor.
  *
  * @param <K> The model object type
  * @param <V> The runtime model object type
@@ -20,11 +20,11 @@ public class ModelToRuntimeObjectMap<K, V extends RuntimeObject<K>> implements I
     private Constructor<V> runtimeObjectConstructor;
 
     // Wouldn't need the class parameters if Java had proper generics. Sigh.
-    public ModelToRuntimeObjectMap(Class<K> modelClass, Class<V> runtimeClass) {
+    public ModelToRuntimeObjectMap(Class<V> runtimeClass) {
 
         store = new HashMap<K, V>();
         try {
-            runtimeObjectConstructor = runtimeClass.getConstructor(modelClass);
+            runtimeObjectConstructor = runtimeClass.getConstructor();
         } catch(NoSuchMethodException e) {
             throw new BlurpException("The runtime class doesn't have a constructor that takes the model class", e);
         }
@@ -36,27 +36,29 @@ public class ModelToRuntimeObjectMap<K, V extends RuntimeObject<K>> implements I
      *
      * @param modelObjects The list of model objects to sync with.
      */
-    public void syncAll(List<K> modelObjects) {
+    public void syncAll(List<K> modelObjects, BlurpObjectProvider blurpObjectProvider) {
 
         for(K modelObject : modelObjects) {
-            sync(modelObject);
+            sync(modelObject, blurpObjectProvider);
         }
         clearOrphans(modelObjects);
     }
 
-    void sync(K modelObject) {
+    void sync(K modelObject, BlurpObjectProvider blurpObjectProvider) {
 
+        boolean newInstance = false;
         V runtimeObject = store.get(modelObject);
         if(runtimeObject == null) {
             try {
-                runtimeObject = runtimeObjectConstructor.newInstance(modelObject);
+                runtimeObject = runtimeObjectConstructor.newInstance();
+                newInstance = true;
                 store.put(modelObject, runtimeObject);
             } catch(Exception e) {
                 throw new BlurpException("Error instantiating the runtime object", e);
             }
-        } else {
-            runtimeObject.sync(modelObject);
         }
+
+        runtimeObject.sync(modelObject, blurpObjectProvider, newInstance);
     }
 
     private void clearOrphans(List<K> modelObjects) {

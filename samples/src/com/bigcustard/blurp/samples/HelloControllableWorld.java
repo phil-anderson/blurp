@@ -7,9 +7,9 @@ import com.bigcustard.blurp.model.*;
 public class HelloControllableWorld implements BlurpRunnable {
 
     @Override
-    public void run(Blurp blurp, Canvas canvas, Keyboard keyboard, Utils utils) {
+    public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils) {
 
-        ImageSprite world = new ImageSprite("world.png");
+        ImageSprite world = blurp.imageSprite("world.png");
 
         while(true) {
 

@@ -1,8 +1,5 @@
 package com.bigcustard.blurp.model;
 
-import com.bigcustard.blurp.core.*;
-import com.bigcustard.blurp.core.commands.*;
-
 /**
  * A sprite is an object that can be put on the screen, moved around, rotated, and generally mucked about with in
  * various ways. For more details, check the subclasses.
@@ -107,6 +104,28 @@ public abstract class Sprite<T> {
     }
 
     /**
+     * Flips the Sprite on the X-axis (i.e. from left-to-right), so it looks like a mirror-image of the original.
+     *
+     * @return Itself
+     */
+    public T flipX() {
+
+        scaleX = -scaleX;
+        return (T) this;
+    }
+
+    /**
+     * Flips the Sprite on the Y-axis (i.e. from top-to-bottom), so it looks upside-down.
+     *
+     * @return Itself
+     */
+    public T flipY() {
+
+        scaleY = -scaleY;
+        return (T) this;
+    }
+
+    /**
      * Moves the Sprite towards the specified target coordinates <u>the next time blurpify is called</u>. If you  keep
      * calling this method then eventually it'll reach the target. The speed parameter specified how fast the Sprite
      * should move and therefore how quickly it will reach the target. This method does all the hard work of calculating
@@ -114,16 +133,12 @@ public abstract class Sprite<T> {
      * target.
      * <p>
      * How much the Sprite will move towards the target depends on the speed parameter, and how much time has passed
-     * since the last call to {@link com.bigcustard.blurp.core.Blurp#blurpify() Blurp.blurpify()}
+     * since the last call to {@link Blurp#blurpify() Blurp.blurpify()}
      *
      * @param targetX The target X coordinate
      * @param targetY The target Y coordinate
      * @param speed The speed in units-per-second that we want the Sprite to move at.
      * @return
      */
-    public T moveTowards(double targetX, double targetY, double speed) {
-
-        MSS.getModelRepository().registerRequest(new MoveTowardsRequest(this, targetX, targetY, speed));
-        return (T) this;
-    }
+    public abstract T moveTowards(double targetX, double targetY, double speed);
 }

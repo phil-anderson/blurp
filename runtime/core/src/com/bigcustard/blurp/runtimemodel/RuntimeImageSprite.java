@@ -8,17 +8,6 @@ public class RuntimeImageSprite extends RuntimeSprite<ImageSprite> {
 
     private RuntimeImage image;
 
-    public RuntimeImageSprite(ImageSprite modelImageSprite) {
-
-        sync(modelImageSprite);
-
-        int width = image.getTextureRegion().getRegionWidth();
-        int height = image.getTextureRegion().getRegionHeight();
-        setSize(width, height);
-        setOrigin(width / 2, height / 2);
-        RSS.getBlurpScreen().addActor(this);
-    }
-
     @Override
     public void drawImpl(Batch batch, float parentAlpha) {
 
@@ -32,10 +21,20 @@ public class RuntimeImageSprite extends RuntimeSprite<ImageSprite> {
     }
 
     @Override
-    public void sync(ImageSprite modelImageSprite) {
+    public void sync(ImageSprite modelImageSprite, BlurpObjectProvider blurpObjectProvider, boolean newInstance) {
 
-        super.sync(modelImageSprite);
-        image = RSS.getRuntimeRepository().getImage(modelImageSprite.image);
+        super.sync(modelImageSprite, blurpObjectProvider, newInstance);
+
+        image = blurpObjectProvider.getRuntimeRepository().getImage(modelImageSprite.image);
+
+        int width = image.getTextureRegion().getRegionWidth();
+        int height = image.getTextureRegion().getRegionHeight();
+        setSize(width, height);
+        setOrigin(width / 2, height / 2);
+
+        if(newInstance) {
+            blurpObjectProvider.getBlurpScreen().addActor(this);
+        }
     }
 
     @Override

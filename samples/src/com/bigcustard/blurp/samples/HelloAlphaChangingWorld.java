@@ -7,12 +7,12 @@ import com.bigcustard.blurp.model.*;
 public class HelloAlphaChangingWorld implements BlurpRunnable {
 
     @Override
-    public void run(Blurp blurp, Canvas canvas, Keyboard keyboard, Utils utils) {
+    public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils) {
 
-        Image worldImage = new Image("world.png");
+        Image worldImage = blurp.image("world.png");
 
-        ImageSprite upsideDownWorld = new ImageSprite(worldImage);
-        ImageSprite world = new ImageSprite(worldImage).rotateBy(180); // Upside-down world exactly covering the normal one
+        ImageSprite upsideDownWorld = blurp.imageSprite(worldImage);
+        ImageSprite world = blurp.imageSprite(worldImage).rotateBy(180); // Upside-down world exactly covering the normal one
 
         int index = 0;
 

@@ -1,10 +1,9 @@
 package com.bigcustard.blurp.samples.core;
 
 
-import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.desktop.*;
 
-public abstract class SampleRunner extends Blurp {
+public abstract class SampleRunner {
 
     public static void main(String[] args) {
 
@@ -16,7 +15,7 @@ public abstract class SampleRunner extends Blurp {
             className = "com.bigcustard.blurp.samples." + className;
         }
 
-        args = new String[] { className, "800", "600" };
+        args = new String[] { className };
         BlurpRunner.main(args);
     }
 }
