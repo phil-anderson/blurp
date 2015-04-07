@@ -1,8 +1,8 @@
 package com.bigcustard.blurp.core;
 
 import com.bigcustard.blurp.apimodel.*;
-import com.bigcustard.blurp.core.commands.*;
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.model.commands.*;
 import org.junit.*;
 import org.mockito.*;
 

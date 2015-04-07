@@ -1,7 +1,7 @@
 package com.bigcustard.blurp.apimodel;
 
 import com.bigcustard.blurp.core.*;
-import com.bigcustard.blurp.core.commands.*;
+import com.bigcustard.blurp.model.commands.*;
 import com.bigcustard.blurp.model.*;
 
 public class ImageSpriteImpl extends ImageSprite {

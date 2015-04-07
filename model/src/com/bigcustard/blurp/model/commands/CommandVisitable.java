@@ -1,4 +1,4 @@
-package com.bigcustard.blurp.core.commands;
+package com.bigcustard.blurp.model.commands;
 
 public interface CommandVisitable {
 

@@ -59,5 +59,14 @@ public class RuntimeRepository {
         runtimeImages.clear();
         runtimeImageSprites.clear();
     }
+
+    /**
+     * Deprecated as test purposes only
+     */
+    @Deprecated
+    CommandExecutor getCommandExecutor() {
+
+        return commandExecutor;
+    }
 }
 

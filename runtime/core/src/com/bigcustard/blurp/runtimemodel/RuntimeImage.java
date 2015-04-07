@@ -21,17 +21,17 @@ public class RuntimeImage implements RuntimeObject<Image> {
 
         // Images are immutable so only need syncing when new.
         if(newInstance) {
-            FileHandle internalFile = Gdx.files.internal(modelImage.filename);
-            if(internalFile.exists()) {
-                textureRegion = new TextureRegion(new Texture(internalFile));
+            FileHandle localFile = Gdx.files.local(modelImage.filename);
+            if(localFile.exists()) {
+                textureRegion = new TextureRegion(new Texture(localFile));
             } else {
-                FileHandle externalFile = Gdx.files.classpath(modelImage.filename);
-                if(externalFile.exists()) {
-                    textureRegion = new TextureRegion(new Texture(externalFile));
+                FileHandle classpathFile = Gdx.files.classpath(modelImage.filename);
+                if(classpathFile.exists()) {
+                    textureRegion = new TextureRegion(new Texture(classpathFile));
                 } else {
                     System.err.println("Couldn't find image " + modelImage.filename);
 
-                    // TODO: Have a pre-canned "not-found" texture.
+                    // TODO: We should throw here really - Need to sort out tests
                     textureRegion = new TextureRegion(new Texture(10, 10, Pixmap.Format.RGBA8888));
                 }
             }

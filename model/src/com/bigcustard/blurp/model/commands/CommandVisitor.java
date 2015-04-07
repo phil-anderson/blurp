@@ -1,4 +1,4 @@
-package com.bigcustard.blurp.core.commands;
+package com.bigcustard.blurp.model.commands;
 
 // What a crazy load of visitor-pattern-hoops we have to jump through because of Java's type system.
 public interface CommandVisitor {

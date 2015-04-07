@@ -1,4 +1,4 @@
-package com.bigcustard.blurp.core.commands;
+package com.bigcustard.blurp.model.commands;
 
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.testutils.*;
