@@ -22,33 +22,19 @@ public class BlurpObjectProvider {
     private final ModelScreenRenderer modelScreenRenderer;
     private final Keyboard keyboard;
     private final Utils utils;
-    private final Colours colours;
 
     public BlurpObjectProvider(Viewport viewport) {
 
-        int width = (int) viewport.getWorldWidth();
-        int height = (int) viewport.getWorldHeight();
+        modelRepository = new ApiModelRepository();
+        blurpifier = new Blurpifier();
+        keyboard = new KeyboardImpl();
+        utils = new Utils();
 
-        modelRepository = makeModelRepository();
-        runtimeRepository = makeRuntimeRepository();
-        blurpifier = makeBlurpifier();
-        modelScreen = makeModelScreen(width, height);
-        modelScreenRenderer = makeModelScreenRenderer();
-        blurpScreen = makeBlurpScreen(viewport, blurpifier, runtimeRepository, modelScreen);
-        keyboard = makeKeyboard();
-        utils = makeUtils();
-        blurp = makeBlurpImpl(modelRepository, modelScreen, blurpifier);
-        colours = Colours.INSTANCE;
-    }
-
-    protected ModelScreenRenderer makeModelScreenRenderer() {
-
-        return new ModelScreenRenderer(modelScreen);
-    }
-
-    private Utils makeUtils() {
-
-        return new Utils();
+        modelScreen = new Screen(viewport.getWorldWidth(), viewport.getWorldHeight());
+        runtimeRepository = new RuntimeRepository(this);
+        modelScreenRenderer = new ModelScreenRenderer(modelScreen);
+        blurpScreen = new BlurpScreen(viewport, blurpifier, runtimeRepository, new ModelScreenRenderer(modelScreen));
+        blurp = new BlurpImpl(modelRepository, modelScreen, blurpifier);
     }
 
     public ApiModelRepository getModelRepository() {
@@ -89,46 +75,5 @@ public class BlurpObjectProvider {
     public Utils getUtils() {
 
         return utils;
-    }
-
-    // Separate protected factory methods to make it easier to mock for tests
-    protected BlurpImpl makeBlurpImpl(ApiModelRepository apiModelRepository, Screen screen, Blurpifier blurpifier) {
-
-        return new BlurpImpl(apiModelRepository, screen, blurpifier);
-    }
-
-    protected KeyboardImpl makeKeyboard() {
-
-        return new KeyboardImpl();
-    }
-
-    protected Screen makeModelScreen(int width, int height) {
-
-        return new Screen(width, height);
-    }
-
-    protected  Blurpifier makeBlurpifier() {
-
-        return new Blurpifier();
-    }
-
-    protected  BlurpScreen makeBlurpScreen(Viewport viewport, Blurpifier blurpifier, RuntimeRepository runtimeRepository, Screen screen) {
-
-        return new BlurpScreen(viewport, blurpifier, runtimeRepository, new ModelScreenRenderer(screen));
-    }
-
-    protected  RuntimeRepository makeRuntimeRepository() {
-
-        return new RuntimeRepository(this);
-    }
-
-    protected ApiModelRepository makeModelRepository() {
-
-        return new ApiModelRepository();
-    }
-
-    public Colours getColours() {
-
-        return colours;
     }
 }

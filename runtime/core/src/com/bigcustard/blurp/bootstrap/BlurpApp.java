@@ -6,6 +6,8 @@ import com.badlogic.gdx.utils.viewport.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.scripting.*;
 
+// TODO: Test
+// TODO: Move script / class instantiation to BlurpRuntime?
 public class BlurpApp extends Game {
 
     private BlurpRunnable scriptRunnable;
@@ -28,7 +30,6 @@ public class BlurpApp extends Game {
 
     private BlurpRunnable getRunnable(String language, String scriptName) {
 
-        BlurpRunnable blurpRunnable;
         if(language.equalsIgnoreCase("java")) {
             return instantiateJavaClass(scriptName);
         } else {

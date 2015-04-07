@@ -26,7 +26,7 @@ public class ModelToRuntimeObjectMap<K, V extends RuntimeObject<K>> implements I
         try {
             runtimeObjectConstructor = runtimeClass.getConstructor();
         } catch(NoSuchMethodException e) {
-            throw new BlurpException("The runtime class doesn't have a constructor that takes the model class", e);
+            throw new BlurpException("The runtime class doesn't have a no-args constructor", e);
         }
     }
 

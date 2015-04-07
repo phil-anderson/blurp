@@ -29,9 +29,9 @@ public class Screen {
      * You probably don't need to worry about this, and if you do then you're probably advanced enough to know how to
      * deal with it!
      */
-    public final int width, height;
+    public final double width, height;
 
-    public Screen(int width, int height) {
+    public Screen(double width, double height) {
 
         this.width = width;
         this.height = height;

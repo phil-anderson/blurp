@@ -2,7 +2,7 @@ package com.bigcustard.blurp.core.commands;
 
 import com.bigcustard.blurp.model.*;
 
-public class MoveTowardsRequest implements CommandRequestVisitable {
+public class MoveTowardsCommand implements CommandVisitable {
 
     private final Sprite spriteToMove;
 
@@ -10,7 +10,7 @@ public class MoveTowardsRequest implements CommandRequestVisitable {
 
     private final double speed;
 
-    public MoveTowardsRequest(Sprite spriteToMove, double targetX, double targetY, double speed) {
+    public MoveTowardsCommand(Sprite spriteToMove, double targetX, double targetY, double speed) {
 
         this.spriteToMove = spriteToMove;
         this.targetX = targetX;
@@ -19,7 +19,7 @@ public class MoveTowardsRequest implements CommandRequestVisitable {
     }
 
     @Override
-    public void accept(CommandRequestVisitor visitor, float deltaTime) {
+    public void accept(CommandVisitor visitor, float deltaTime) {
         visitor.visit(this, deltaTime);
     }
 

@@ -1,7 +1,7 @@
 package com.bigcustard.blurp.core.commands;
 
 import com.bigcustard.blurp.model.*;
-import com.bigcustard.blurp.testutils.*;
+import com.bigcustard.blurp.model.testutils.*;
 import org.junit.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -24,7 +24,7 @@ public class MoveTowardsExecutorTest {
     public void interpolatesBasicPosition() {
 
         // Should move whole distance in exactly a second.
-        MoveTowardsRequest request = new MoveTowardsRequest(testSprite, 4, 3, 5);
+        MoveTowardsCommand request = new MoveTowardsCommand(testSprite, 4, 3, 5);
 
         testCandidate.execute(request, 0.25f);
         assertThat(testSprite.x, is(1.0));
@@ -42,7 +42,7 @@ public class MoveTowardsExecutorTest {
     @Test
     public void handlesNegativeDirection() {
 
-        MoveTowardsRequest request = new MoveTowardsRequest(testSprite, -4, -3, 5);
+        MoveTowardsCommand request = new MoveTowardsCommand(testSprite, -4, -3, 5);
 
         testCandidate.execute(request, 0.25f);
         assertThat(testSprite.x, is(-1.0));
@@ -60,12 +60,12 @@ public class MoveTowardsExecutorTest {
     @Test
     public void handlesOvershoot() {
 
-        MoveTowardsRequest request = new MoveTowardsRequest(testSprite, 4, 3, 5);
+        MoveTowardsCommand request = new MoveTowardsCommand(testSprite, 4, 3, 5);
         testCandidate.execute(request, 99f);
         assertThat(testSprite.x, is(4.0));
         assertThat(testSprite.y, is(3.0));
 
-        request = new MoveTowardsRequest(testSprite, -1, -1, 5);
+        request = new MoveTowardsCommand(testSprite, -1, -1, 5);
         testCandidate.execute(request, 99f);
         assertThat(testSprite.x, is(-1.0));
         assertThat(testSprite.y, is(-1.0));

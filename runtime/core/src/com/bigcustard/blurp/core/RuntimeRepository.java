@@ -19,9 +19,10 @@ public class RuntimeRepository {
     private final ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite> runtimeImageSprites;
     private final CommandExecutor commandExecutor;
 
-    RuntimeRepository(BlurpObjectProvider blurpObjectProvider) {
+    public RuntimeRepository(BlurpObjectProvider blurpObjectProvider) {
 
         this.blurpObjectProvider= blurpObjectProvider;
+
         apiModelRepository = blurpObjectProvider.getModelRepository();
         runtimeImages = new ModelToRuntimeObjectMap<Image, RuntimeImage>(RuntimeImage.class);
         runtimeImageSprites = new ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite>(RuntimeImageSprite.class);
@@ -33,7 +34,7 @@ public class RuntimeRepository {
 
         // First run any commands that the model has registered requests for.
         commandExecutor.executeAll(apiModelRepository.getCommandRequests(), deltaTime);
-        apiModelRepository.commandRequestsComplete();
+        apiModelRepository.commandExecutionComplete();
 
         // Then sync the various model object types
         runtimeImages.syncAll(apiModelRepository.getImages(), blurpObjectProvider);

@@ -4,7 +4,7 @@ import com.bigcustard.blurp.model.*;
 
 public class MoveTowardsExecutor {
 
-    public void execute(MoveTowardsRequest request, float deltaTime) {
+    public void execute(MoveTowardsCommand request, float deltaTime) {
 
         Sprite sprite = request.getSpriteToMove();
         if(sprite.x == request.getTargetX() && sprite.y == request.getTargetY()) return; //Already there

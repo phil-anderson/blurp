@@ -17,8 +17,6 @@ public class ImageSpriteImpl extends ImageSprite {
         this.scaleX = 1;
         this.scaleY = 1;
         this.alpha = 1;
-
-        apiModelRepository.addImageSprite(this);
     }
 
     @Override
@@ -30,7 +28,7 @@ public class ImageSpriteImpl extends ImageSprite {
     @Override
     public ImageSprite moveTowards(double targetX, double targetY, double speed) {
 
-        apiModelRepository.registerRequest(new MoveTowardsRequest(this, targetX, targetY, speed));
+        apiModelRepository.registerCommand(new MoveTowardsCommand(this, targetX, targetY, speed));
         return this;
     }
 

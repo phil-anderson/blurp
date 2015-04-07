@@ -11,13 +11,13 @@ public class ApiModelRepository {
 
     private List<Image> images;
     private List<ImageSprite> imageSprites;
-    private List<CommandRequestVisitable> commandRequests;
+    private List<CommandVisitable> commandRequests;
 
     public ApiModelRepository() {
 
         images = new ArrayList<Image>();
         imageSprites = new ArrayList<ImageSprite>();
-        commandRequests = new ArrayList<CommandRequestVisitable>();
+        commandRequests = new ArrayList<CommandVisitable>();
     }
 
     public void addImage(Image image) {
@@ -40,9 +40,9 @@ public class ApiModelRepository {
         imageSprites.remove(imageSprite);
     }
 
-    public void registerRequest(CommandRequestVisitable request) {
+    public void registerCommand(CommandVisitable command) {
 
-        commandRequests.add(request);
+        commandRequests.add(command);
     }
 
     List<Image> getImages() {
@@ -55,13 +55,13 @@ public class ApiModelRepository {
         return imageSprites;
     }
 
-    List<CommandRequestVisitable> getCommandRequests() {
+    List<CommandVisitable> getCommandRequests() {
 
         return commandRequests;
     }
 
 
-    public void commandRequestsComplete() {
+    public void commandExecutionComplete() {
 
         commandRequests.clear();
     }
@@ -78,5 +78,6 @@ public class ApiModelRepository {
 
         images.clear();
         imageSprites.clear();
+        commandRequests.clear();
     }
 }

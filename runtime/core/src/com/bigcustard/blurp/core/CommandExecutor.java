@@ -3,7 +3,7 @@ package com.bigcustard.blurp.core;
 import java.util.*;
 import com.bigcustard.blurp.core.commands.*;
 
-public class CommandExecutor implements CommandRequestVisitor {
+public class CommandExecutor implements CommandVisitor {
 
     private MoveTowardsExecutor moveTowardsExecutor;
 
@@ -12,16 +12,16 @@ public class CommandExecutor implements CommandRequestVisitor {
         moveTowardsExecutor = new MoveTowardsExecutor();
     }
 
-    public void executeAll(List<CommandRequestVisitable> commandRequests, float deltaTime) {
+    public void executeAll(List<CommandVisitable> commandRequests, float deltaTime) {
 
-        for(CommandRequestVisitable request : commandRequests) {
+        for(CommandVisitable request : commandRequests) {
             request.accept(this, deltaTime);
         }
     }
 
     @Override
-    public void visit(MoveTowardsRequest moveTowardsRequest, float deltaTime) {
+    public void visit(MoveTowardsCommand moveTowardsCommand, float deltaTime) {
 
-        moveTowardsExecutor.execute(moveTowardsRequest, deltaTime);
+        moveTowardsExecutor.execute(moveTowardsCommand, deltaTime);
     }
 }
