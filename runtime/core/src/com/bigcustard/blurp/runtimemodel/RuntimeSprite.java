@@ -7,8 +7,6 @@ import com.bigcustard.blurp.model.Sprite;
 
 public abstract class RuntimeSprite<T extends Sprite> extends Actor implements RuntimeObject<T> {
 
-    private static final int SOLID_WHITE = -1;
-
     protected RuntimeSprite() { }
 
     @Override
@@ -23,10 +21,9 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
     @Override
     public void draw(Batch batch, float parentAlpha) {
 
-
         batch.setColor(getColor().r, getColor().g, getColor().b, getColor().a * parentAlpha);
         drawImpl(batch, parentAlpha);
-        batch.setColor(SOLID_WHITE);
+        batch.setColor(1, 1, 1, 1);
     }
 
     public abstract void drawImpl(Batch batch, float parentAlpha);
