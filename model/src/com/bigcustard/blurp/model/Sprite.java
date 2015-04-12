@@ -64,7 +64,7 @@ public abstract class Sprite<T> {
      *
      * @param x The new X coordinate
      * @param y The new Y coordinate
-     * @return Itself
+     * @return The Sprite.
      */
     public T setPosition(double x, double y) {
 
@@ -78,7 +78,7 @@ public abstract class Sprite<T> {
      * 10 times with a value of 5 (for example) then it'll end up rotated by 50 degrees.
      *
      * @param degrees Degrees to rotate by. See {@link #rotation} for more details.
-     * @return Itself.
+     * @return The Sprite.
      */
     public T rotateBy(double degrees) {
 
@@ -94,7 +94,7 @@ public abstract class Sprite<T> {
      * 180 degrees. Can you work out why?
      *
      * @param factor The scaling factor to multiply the size by.
-     * @return Itself.
+     * @return The Sprite.
      */
     public T scale(double factor) {
 
@@ -106,7 +106,7 @@ public abstract class Sprite<T> {
     /**
      * Flips the Sprite on the X-axis (i.e. from left-to-right), so it looks like a mirror-image of the original.
      *
-     * @return Itself
+     * @return The Sprite.
      */
     public T flipX() {
 
@@ -117,7 +117,7 @@ public abstract class Sprite<T> {
     /**
      * Flips the Sprite on the Y-axis (i.e. from top-to-bottom), so it looks upside-down.
      *
-     * @return Itself
+     * @return The Sprite.
      */
     public T flipY() {
 
@@ -138,7 +138,7 @@ public abstract class Sprite<T> {
      * @param targetX The target X coordinate
      * @param targetY The target Y coordinate
      * @param speed The speed in units-per-second that we want the Sprite to move at.
-     * @return
+     * @return The Sprite.
      */
     public abstract T moveTowards(double targetX, double targetY, double speed);
 }

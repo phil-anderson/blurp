@@ -1,7 +1,6 @@
 package com.bigcustard.blurp.samples;
 
 import com.bigcustard.blurp.bootstrap.*;
-import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
 
 public class HelloControllableWorld implements BlurpRunnable {
