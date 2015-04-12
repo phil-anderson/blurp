@@ -1,8 +1,8 @@
 package com.bigcustard.blurp.core;
 
 import com.bigcustard.blurp.apimodel.*;
+import com.bigcustard.blurp.core.commands.*;
 import com.bigcustard.blurp.model.*;
-import com.bigcustard.blurp.model.commands.*;
 import com.bigcustard.blurp.testutils.*;
 import org.junit.*;
 import org.mockito.*;
@@ -16,8 +16,6 @@ public class RuntimeRepositoryTest extends LibGdxTest {
 
     @Mock private CommandVisitable mockCommand;
 
-    private BlurpObjectProvider blurpObjectProvider;
-
     private Image image2;
     private Image image1;
     private ImageSprite imageSprite1;
@@ -28,8 +26,8 @@ public class RuntimeRepositoryTest extends LibGdxTest {
 
         MockitoAnnotations.initMocks(this);
 
-        blurpObjectProvider = new BlurpObjectProviderForTests();
-        ApiModelRepository modelRepository = blurpObjectProvider.getModelRepository();
+        BlurpObjectProvider blurpObjectProvider = new BlurpObjectProviderForTests();
+        ModelRepository modelRepository = blurpObjectProvider.getModelRepository();
 
         modelRepository.registerCommand(mockCommand);
 

@@ -5,18 +5,18 @@ import com.bigcustard.blurp.model.*;
 
 public class ImageImpl extends Image {
 
-    private ApiModelRepository apiModelRepository;
+    private ModelRepository modelRepository;
 
-    public ImageImpl(String filename, ApiModelRepository apiModelRepository) {
+    public ImageImpl(String filename, ModelRepository modelRepository) {
 
         super(filename);
-        this.apiModelRepository = apiModelRepository;
+        this.modelRepository = modelRepository;
     }
 
     @Override
     public void remove() {
 
-        apiModelRepository.removeImage(this);
+        modelRepository.removeImage(this);
     }
 
     @Override

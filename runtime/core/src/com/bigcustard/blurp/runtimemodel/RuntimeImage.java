@@ -29,8 +29,6 @@ public class RuntimeImage implements RuntimeObject<Image> {
                 if(classpathFile.exists()) {
                     textureRegion = new TextureRegion(new Texture(classpathFile));
                 } else {
-                    System.err.println("Couldn't find image " + modelImage.filename);
-
                     // TODO: We should throw here really - Need to sort out tests
                     textureRegion = new TextureRegion(new Texture(10, 10, Pixmap.Format.RGBA8888));
                 }

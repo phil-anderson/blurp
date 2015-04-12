@@ -1,17 +1,17 @@
 package com.bigcustard.blurp.core;
 
 import com.bigcustard.blurp.apimodel.*;
+import com.bigcustard.blurp.core.commands.*;
 import com.bigcustard.blurp.model.*;
-import com.bigcustard.blurp.model.commands.*;
 import org.junit.*;
 import org.mockito.*;
 
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.core.Is.*;
 
-public class ApiModelRepositoryTest {
+public class ModelRepositoryTest {
 
-    private ApiModelRepository testCandidate;
+    private ModelRepository testCandidate;
 
     @Mock private Image mockImage;
     @Mock private ImageSprite mockImageSprite;
@@ -21,7 +21,7 @@ public class ApiModelRepositoryTest {
     public void setUp() throws Exception {
 
         MockitoAnnotations.initMocks(this);
-        testCandidate = new ApiModelRepository();
+        testCandidate = new ModelRepository();
     }
 
     @Test

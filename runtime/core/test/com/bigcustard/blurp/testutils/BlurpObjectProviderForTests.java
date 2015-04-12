@@ -1,6 +1,7 @@
 package com.bigcustard.blurp.testutils;
 
 import com.badlogic.gdx.utils.viewport.*;
+import com.bigcustard.blurp.bootstrap.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.ui.*;
 import org.mockito.*;
@@ -11,7 +12,7 @@ public class BlurpObjectProviderForTests extends BlurpObjectProvider {
 
     public BlurpObjectProviderForTests() {
 
-        super(new ScreenViewport());
+        super(new BlurpConfiguration(new ScreenViewport()));
         MockitoAnnotations.initMocks(this);
     }
 

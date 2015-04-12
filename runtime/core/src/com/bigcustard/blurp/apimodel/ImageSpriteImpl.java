@@ -1,18 +1,18 @@
 package com.bigcustard.blurp.apimodel;
 
 import com.bigcustard.blurp.core.*;
-import com.bigcustard.blurp.model.commands.*;
+import com.bigcustard.blurp.core.commands.*;
 import com.bigcustard.blurp.model.*;
 
 public class ImageSpriteImpl extends ImageSprite {
 
-    private final ApiModelRepository apiModelRepository;
+    private final ModelRepository modelRepository;
 
-    public ImageSpriteImpl(Image image, double x, double y, ApiModelRepository apiModelRepository) {
+    public ImageSpriteImpl(Image image, double x, double y, ModelRepository modelRepository) {
 
         this.image = image;
         this.setPosition(x, y);
-        this.apiModelRepository = apiModelRepository;
+        this.modelRepository = modelRepository;
 
         this.scaleX = 1;
         this.scaleY = 1;
@@ -22,13 +22,13 @@ public class ImageSpriteImpl extends ImageSprite {
     @Override
     public void remove() {
 
-        apiModelRepository.removeImageSprite(this);
+        modelRepository.removeImageSprite(this);
     }
 
     @Override
     public ImageSprite moveTowards(double targetX, double targetY, double speed) {
 
-        apiModelRepository.registerCommand(new MoveTowardsCommand(this, targetX, targetY, speed));
+        modelRepository.registerCommand(new MoveTowardsCommand(this, targetX, targetY, speed));
         return this;
     }
 

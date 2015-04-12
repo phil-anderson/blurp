@@ -11,16 +11,12 @@ public class HelloAlphaChangingWorld implements BlurpRunnable {
 
         Image worldImage = blurp.image("world.png");
 
-        ImageSprite upsideDownWorld = blurp.imageSprite(worldImage);
-        ImageSprite world = blurp.imageSprite(worldImage).rotateBy(180); // Upside-down world exactly covering the normal one
-
-        int index = 0;
+        blurp.imageSprite(worldImage);
+        ImageSprite upsideDownWorld = blurp.imageSprite(worldImage).rotateBy(180); // Upside-down world exactly covering the normal one
 
         while(true) {
-            // Fade the upside-down one in and out, hiding and revealing the normal one.
-            world.alpha = utils.sin(index) / 2 + 0.5;
-            index += 2;
-
+            // Fade the upside-down one in and out, thus covering and revealing the normal one.
+            upsideDownWorld.alpha = utils.wave(0, 1, 2000);
             blurp.blurpify();
         }
     }

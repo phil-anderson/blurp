@@ -48,9 +48,7 @@ public class BlurpScreen extends ScreenAdapter {
     public void render(float delta) {
 
         try {
-            beginBatch();
             doFrame(delta);
-            endBatch();
         } catch(Exception e) {
             // Do nothing for now - Swallowing allows libgdx to continue rendering, and thus allows the app to be closed.
             // TODO: Rethrow it from the runner
@@ -80,7 +78,12 @@ public class BlurpScreen extends ScreenAdapter {
         // Tweener update goes here too.
 
         if(blurpifier.getState() == Requested) {
-            doRender(delta);
+            try {
+                doRender(delta);
+            } finally {
+                // This should be done at very end of render.
+                blurpifier.setState(Complete);
+            }
         }
 
         renderListener.handleRenderEvent(batch, delta, EventType.PostFrame);
@@ -90,7 +93,6 @@ public class BlurpScreen extends ScreenAdapter {
 
         renderListener.handleRenderEvent(batch, delta, EventType.PreRender);
 
-        try {
             runtimeRepository.syncWithModelRepository(delta);
 
             beginBatch(); // In case the RenderListener ended it.
@@ -99,13 +101,7 @@ public class BlurpScreen extends ScreenAdapter {
 
             getStage().draw();
 
-        } finally {
-            blurpifier.setState(Complete);
-        }
-
-        beginBatch();
-        renderListener.handleRenderEvent(batch, delta, EventType.PostRender);
-        endBatch();
+            renderListener.handleRenderEvent(batch, delta, EventType.PostRender);
     }
 
     private void beginBatch() {
@@ -139,5 +135,17 @@ public class BlurpScreen extends ScreenAdapter {
         if(stage == null) {
             stage = new Stage(viewport, batch);
         }
+    }
+
+    public void enableDebug(boolean debugHidden) {
+
+        getStage().setDebugAll(true);
+        getStage().setDebugInvisible(debugHidden);
+    }
+
+    public void disableDebug() {
+
+        getStage().setDebugAll(false);
+        getStage().setDebugInvisible(false);
     }
 }

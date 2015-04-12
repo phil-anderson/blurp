@@ -1,6 +1,7 @@
 package com.bigcustard.blurp.core;
 
 import com.badlogic.gdx.utils.viewport.*;
+import com.bigcustard.blurp.bootstrap.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.ui.*;
 
@@ -10,34 +11,32 @@ import com.bigcustard.blurp.ui.*;
  */
 public class BlurpObjectProvider {
 
-    private static volatile boolean initialised;
-
-    // If adding stuff here, be sure to handle disposal as well as instantiation.
-    private final ApiModelRepository modelRepository;
-    private final RuntimeRepository runtimeRepository;
-    private final BlurpScreen blurpScreen;
+    private final ModelRepository modelRepository;
     private final Blurpifier blurpifier;
-    private final Blurp blurp;
-    private final Screen modelScreen;
-    private final ModelScreenRenderer modelScreenRenderer;
     private final Keyboard keyboard;
     private final Utils utils;
+    private final Screen modelScreen;
+    private final RuntimeRepository runtimeRepository;
+    private final BlurpScreen blurpScreen;
+    private final Blurp blurp;
 
-    public BlurpObjectProvider(Viewport viewport) {
+    public BlurpObjectProvider(BlurpConfiguration blurpConfiguration) {
 
-        modelRepository = new ApiModelRepository();
+        Viewport viewport = blurpConfiguration.getViewport();
+
+        modelRepository = new ModelRepository();
         blurpifier = new Blurpifier();
         keyboard = new KeyboardImpl();
         utils = new Utils();
 
         modelScreen = new Screen(viewport.getWorldWidth(), viewport.getWorldHeight());
         runtimeRepository = new RuntimeRepository(this);
-        modelScreenRenderer = new ModelScreenRenderer(modelScreen);
-        blurpScreen = new BlurpScreen(viewport, blurpifier, runtimeRepository, new ModelScreenRenderer(modelScreen));
+        ModelScreenRenderer modelScreenRenderer = new ModelScreenRenderer(modelScreen);
+        blurpScreen = new BlurpScreen(viewport, blurpifier, runtimeRepository, modelScreenRenderer);
         blurp = new BlurpImpl(modelRepository, modelScreen, blurpifier);
     }
 
-    public ApiModelRepository getModelRepository() {
+    public ModelRepository getModelRepository() {
 
         return modelRepository;
     }

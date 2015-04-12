@@ -1,19 +1,19 @@
 package com.bigcustard.blurp.core;
 
 import java.util.*;
-import com.bigcustard.blurp.model.commands.*;
+import com.bigcustard.blurp.core.commands.*;
 import com.bigcustard.blurp.model.*;
 
 /**
  * Stores and manages api model objects that require a different runtime implementation.
  */
-public class ApiModelRepository {
+public class ModelRepository {
 
     private List<Image> images;
     private List<ImageSprite> imageSprites;
     private List<CommandVisitable> commandRequests;
 
-    public ApiModelRepository() {
+    public ModelRepository() {
 
         images = new ArrayList<Image>();
         imageSprites = new ArrayList<ImageSprite>();

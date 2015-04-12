@@ -23,7 +23,8 @@ public class BlurpApp extends Game {
     @Override
     public void create() {
 
-        BlurpRuntime blurpRuntime = BlurpRuntime.begin(viewport);
+        BlurpConfiguration config = new BlurpConfiguration(viewport);
+        BlurpRuntime blurpRuntime = BlurpRuntime.begin(config);
         blurpRuntime.start(scriptRunnable);
         setScreen(blurpRuntime.getScreen());
     }

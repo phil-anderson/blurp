@@ -1,6 +1,7 @@
 package com.bigcustard.blurp.core;
 
 import com.bigcustard.blurp.apimodel.*;
+import com.bigcustard.blurp.core.commands.*;
 import com.bigcustard.blurp.model.*;
 
 /**
@@ -8,20 +9,21 @@ import com.bigcustard.blurp.model.*;
  */
 public class BlurpImpl extends Blurp {
 
-    private final ApiModelRepository apiModelRepository;
+    private final ModelRepository modelRepository;
     private final Screen screen;
     private final Blurpifier blurpifier;
 
-    BlurpImpl(ApiModelRepository apiModelRepository, Screen screen, Blurpifier blurpifier) {
+    BlurpImpl(ModelRepository modelRepository, Screen screen, Blurpifier blurpifier) {
 
-        this.apiModelRepository = apiModelRepository;
+        this.modelRepository = modelRepository;
         this.screen = screen;
         this.blurpifier = blurpifier;
     }
 
-    public void blurpify() {
+    public Blurp blurpify() {
 
         blurpifier.blurpify();
+        return this;
     }
 
     @Override
@@ -30,10 +32,10 @@ public class BlurpImpl extends Blurp {
         if(filename == null) throw new RuntimeException("Image file name can't be null");
 
         // See if we already have one
-        Image image = apiModelRepository.getImage(filename);
+        Image image = modelRepository.getImage(filename);
         if(image == null) {
-            image = new ImageImpl(filename, apiModelRepository);
-            apiModelRepository.addImage(image);
+            image = new ImageImpl(filename, modelRepository);
+            modelRepository.addImage(image);
         }
         return image;
     }
@@ -65,8 +67,8 @@ public class BlurpImpl extends Blurp {
 
         if(image == null) throw new RuntimeException("Image can't be null");
 
-        ImageSprite imageSprite = new ImageSpriteImpl(image, x, y, apiModelRepository);
-        apiModelRepository.addImageSprite(imageSprite);
+        ImageSprite imageSprite = new ImageSpriteImpl(image, x, y, modelRepository);
+        modelRepository.addImageSprite(imageSprite);
         return imageSprite;
     }
 
@@ -74,5 +76,12 @@ public class BlurpImpl extends Blurp {
     public Colour colour(double red, double green, double blue) {
 
         return new Colour(red, green, blue);
+    }
+
+    @Override
+    public Blurp setDebugMode(boolean enable, boolean includeHiddenSprites) {
+
+        modelRepository.registerCommand(new SetDebugModeCommand(enable, includeHiddenSprites));
+        return this;
     }
 }

@@ -4,14 +4,15 @@ import com.bigcustard.blurp.model.*;
 import org.junit.*;
 import org.mockito.*;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.core.Is.*;
 
 public class BlurpImplTest {
 
-    @Mock private ApiModelRepository mockModelRepository;
+    @Mock private ModelRepository mockModelRepository;
     @Mock private Screen mockScreen;
     @Mock private Blurpifier mockBlurpifier;
+
     @Mock private Image mockImage;
 
     private BlurpImpl testCandidate;

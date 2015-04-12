@@ -1,12 +1,13 @@
 package com.bigcustard.blurp.core;
 
 import java.util.*;
-import com.bigcustard.blurp.model.commands.*;
+import com.bigcustard.blurp.core.commands.*;
 import org.junit.*;
 import org.mockito.*;
 
 public class CommandExecutorTest {
 
+    @Mock BlurpObjectProvider mockBlurpObjectProvider;
     @Mock private CommandVisitable mockCommand1;
     @Mock private CommandVisitable mockCommand2;
 
@@ -19,7 +20,7 @@ public class CommandExecutorTest {
     @Test
     public void executesAllCommands() throws Exception {
 
-        CommandExecutor commandExecutor = new CommandExecutor();
+        CommandExecutor commandExecutor = new CommandExecutor(mockBlurpObjectProvider);
         List<CommandVisitable> commands = Arrays.asList(mockCommand1, mockCommand2);
 
         commandExecutor.executeAll(commands, 0.1f);

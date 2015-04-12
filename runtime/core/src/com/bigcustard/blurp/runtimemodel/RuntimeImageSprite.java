@@ -1,10 +1,13 @@
 package com.bigcustard.blurp.runtimemodel;
 
 import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.graphics.glutils.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
 
 public class RuntimeImageSprite extends RuntimeSprite<ImageSprite> {
+
+    private static final Utils UTILS = new Utils();
 
     private RuntimeImage image;
 
@@ -35,6 +38,19 @@ public class RuntimeImageSprite extends RuntimeSprite<ImageSprite> {
         if(newInstance) {
             blurpObjectProvider.getBlurpScreen().addActor(this);
         }
+    }
+
+    @Override
+    protected void drawDebugBounds (ShapeRenderer shapes) {
+
+        shapes.set(ShapeRenderer.ShapeType.Line);
+        float value = (float) UTILS.wave(0, 1, 2000);
+        shapes.setColor(value, 1 - value, 0, 1);
+        shapes.rect(getX() - getOriginX(), getY() - getOriginY(),
+                    getOriginX(), getOriginY(),
+                    getWidth() - 1, getHeight() - 1,
+                    getScaleX(), getScaleY(),
+                    getRotation());
     }
 
     @Override

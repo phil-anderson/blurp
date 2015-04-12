@@ -1,8 +1,8 @@
 package com.bigcustard.blurp.bootstrap;
 
 import java.io.*;
-import com.badlogic.gdx.utils.viewport.*;
 import com.bigcustard.blurp.core.*;
+import com.bigcustard.blurp.core.commands.*;
 import com.bigcustard.blurp.scripting.*;
 import com.bigcustard.blurp.ui.*;
 
@@ -11,19 +11,19 @@ public class BlurpRuntime {
 
     private BlurpObjectProvider blurpObjectProvider;
 
-    private BlurpRuntime(BlurpObjectProvider blurpObjectProvider) {
+    private BlurpRuntime(BlurpConfiguration config) {
 
-        this.blurpObjectProvider = blurpObjectProvider;
+        this.blurpObjectProvider = new BlurpObjectProvider(config);
+
+        if(config.isDebug()) {
+            SetDebugModeCommand debugCommand = new SetDebugModeCommand(config.isDebug(), config.isDebugHidden());
+            blurpObjectProvider.getModelRepository().registerCommand(debugCommand);
+        }
     }
 
-    public static BlurpRuntime begin(Viewport viewport) {
+    public static BlurpRuntime begin(BlurpConfiguration config) {
 
-        return begin(new BlurpObjectProvider(viewport));
-    }
-
-    public static BlurpRuntime begin(BlurpObjectProvider blurpObjectProvider) {
-
-        return new BlurpRuntime(blurpObjectProvider);
+        return new BlurpRuntime(config);
     }
 
     public BlurpScreen getScreen() {

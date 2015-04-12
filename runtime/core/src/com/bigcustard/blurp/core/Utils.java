@@ -4,11 +4,18 @@ import com.badlogic.gdx.math.*;
 
 public class Utils {
 
-    private static final double DEG_TO_RAD = 2 * Math.PI / 360;
-
     public double random(double limit) {
 
         return Math.random() * limit;
+    }
+
+    public double wave(double low, double high, double wavelength) {
+
+        double angle = (System.currentTimeMillis() % wavelength) * 360 / (wavelength - 1);
+
+        double range = high - low;
+        double positiveSine = (sin(angle) + 1) / 2;
+        return positiveSine * range + low;
     }
 
     public double random(double from, double to) {

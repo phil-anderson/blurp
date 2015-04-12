@@ -43,7 +43,7 @@ public abstract class Blurp {
      * which is really important. It does this by waiting for the screen to to finish displaying the current frame. On a
      * typical screen, this happens 60 times a second.
      */
-    public abstract void blurpify();
+    public abstract Blurp blurpify();
 
     // TODO: Javadoc for factory methods
 
@@ -82,4 +82,12 @@ public abstract class Blurp {
     public abstract ImageSprite imageSprite(Image image, double x, double y);
 
     public abstract Colour colour(double red, double green, double blue);
+
+    public Blurp setDebugMode(boolean enable) {
+
+        setDebugMode(enable, false);
+        return this;
+    }
+
+    public abstract Blurp setDebugMode(boolean enable, boolean includeHiddenSprites);
 }

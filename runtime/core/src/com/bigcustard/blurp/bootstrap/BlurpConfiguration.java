@@ -4,37 +4,42 @@ import com.badlogic.gdx.utils.viewport.*;
 
 public class BlurpConfiguration {
 
-    public static enum DebugMode { OFF, VISIBLE_SPRITES, ALL_SPRITES };
-
     private Viewport viewport;
     private String contentRoot;
-    private DebugMode debugMode;
+    private boolean debug;
+    private boolean debugHidden;
 
     public BlurpConfiguration(Viewport viewport) {
 
         this.viewport = viewport;
     }
 
-    public BlurpConfiguration contentRoot(String contentRoot) {
+    public BlurpConfiguration setContentRoot(String contentRoot) {
 
         this.contentRoot = contentRoot;
         return this;
     }
 
-    public BlurpConfiguration debugMode(DebugMode debugMode) {
+    public BlurpConfiguration setDebug(boolean enabled) {
 
-        this.debugMode = debugMode;
+        this.debug = enabled;
         return this;
     }
 
-    public boolean isDebugEnabled() {
+    public BlurpConfiguration setDebugHidden(boolean enabled) {
 
-        return debugMode != DebugMode.OFF;
+        this.debugHidden = enabled;
+        return this;
     }
 
-    public boolean isDebugAll() {
+    public boolean isDebug() {
 
-        return debugMode == DebugMode.ALL_SPRITES;
+        return debug;
+    }
+
+    public boolean isDebugHidden() {
+
+        return debugHidden;
     }
 
     public Viewport getViewport() {
@@ -47,8 +52,4 @@ public class BlurpConfiguration {
         return contentRoot;
     }
 
-    public DebugMode getDebugMode() {
-
-        return debugMode;
-    }
 }

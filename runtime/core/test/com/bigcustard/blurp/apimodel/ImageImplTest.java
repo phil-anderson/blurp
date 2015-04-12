@@ -12,7 +12,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 public class ImageImplTest {
 
-    @Mock private ApiModelRepository mockModelRepository;
+    @Mock private ModelRepository mockModelRepository;
 
     @Before
     public void setUp() throws Exception {

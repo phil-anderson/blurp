@@ -1,8 +1,8 @@
 package com.bigcustard.blurp.apimodel;
 
 import com.bigcustard.blurp.core.*;
+import com.bigcustard.blurp.core.commands.*;
 import com.bigcustard.blurp.model.*;
-import com.bigcustard.blurp.model.commands.*;
 import org.junit.*;
 import org.mockito.*;
 
@@ -10,7 +10,7 @@ public class ImageSpriteImplTest {
 
     private ImageSprite testCandidate;
 
-    @Mock private ApiModelRepository mockModelRepository;
+    @Mock private ModelRepository mockModelRepository;
 
     @Before
     public void setUp() throws Exception {

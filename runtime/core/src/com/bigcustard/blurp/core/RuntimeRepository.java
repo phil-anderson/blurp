@@ -1,5 +1,6 @@
 package com.bigcustard.blurp.core;
 
+import com.bigcustard.blurp.core.commands.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.runtimemodel.*;
 
@@ -13,7 +14,7 @@ public class RuntimeRepository {
 
 
     private final BlurpObjectProvider blurpObjectProvider;
-    private final ApiModelRepository apiModelRepository;
+    private final ModelRepository modelRepository;
 
     private final ModelToRuntimeObjectMap<Image, RuntimeImage> runtimeImages;
     private final ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite> runtimeImageSprites;
@@ -23,22 +24,22 @@ public class RuntimeRepository {
 
         this.blurpObjectProvider= blurpObjectProvider;
 
-        apiModelRepository = blurpObjectProvider.getModelRepository();
+        modelRepository = blurpObjectProvider.getModelRepository();
         runtimeImages = new ModelToRuntimeObjectMap<Image, RuntimeImage>(RuntimeImage.class);
         runtimeImageSprites = new ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite>(RuntimeImageSprite.class);
 
-        commandExecutor = new CommandExecutor();
+        commandExecutor = new CommandExecutor(blurpObjectProvider);
     }
 
     public void syncWithModelRepository(float deltaTime) {
 
         // First run any commands that the model has registered requests for.
-        commandExecutor.executeAll(apiModelRepository.getCommandRequests(), deltaTime);
-        apiModelRepository.commandExecutionComplete();
+        commandExecutor.executeAll(modelRepository.getCommandRequests(), deltaTime);
+        modelRepository.commandExecutionComplete();
 
         // Then sync the various model object types
-        runtimeImages.syncAll(apiModelRepository.getImages(), blurpObjectProvider);
-        runtimeImageSprites.syncAll(apiModelRepository.getImageSprites(), blurpObjectProvider);
+        runtimeImages.syncAll(modelRepository.getImages(), blurpObjectProvider);
+        runtimeImageSprites.syncAll(modelRepository.getImageSprites(), blurpObjectProvider);
     }
 
     public RuntimeImage getImage(Image modelImage) {
