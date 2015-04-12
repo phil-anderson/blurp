@@ -5,7 +5,7 @@ import com.badlogic.gdx.utils.viewport.*;
 public class BlurpConfiguration {
 
     private Viewport viewport;
-    private String contentRoot;
+    private String contentRoot = "";
     private boolean debug;
     private boolean debugHidden;
 

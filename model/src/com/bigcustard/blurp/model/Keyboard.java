@@ -6,18 +6,18 @@ package com.bigcustard.blurp.model;
 public interface Keyboard {
 
     /**
-     * Determines whether the specified key is currently held down
+     * Determines whether the key represented by the specified keyCode is currently held down
      *
-     * @param key {@link Key} to check
+     * @param keyCode The {@link Keys key code} to check.
      * @return True if the key is currently being held down by the user.
      */
-    public boolean isKeyDown(Key key);
+    public boolean isKeyPressed(int keyCode);
 
     /**
-     * Determines whether the specified key has just been pressed.
+     * Determines whether the key represented by the specified keyCode has just been pressed.
      *
-     * @param key {@link Key} to check
+     * @param keyCode The {@link Keys key code} to check.
      * @return True if the key has just been pressed by a user
      */
-    public boolean isKeyJustPressed(Key key);
+    public boolean isKeyJustPressed(int keyCode);
 }

@@ -68,7 +68,11 @@ public class BlurpRuntime {
         @Override
         public void run() {
 
-            script.run(blurpObjectProvider.getBlurp(), blurpObjectProvider.getModelScreen(), blurpObjectProvider.getKeyboard(), blurpObjectProvider.getUtils());
+            script.run(blurpObjectProvider.getBlurp(),
+                       blurpObjectProvider.getModelScreen(),
+                       blurpObjectProvider.getKeyboard(),
+                       blurpObjectProvider.getUtils(),
+                       blurpObjectProvider.getKeys());
             while(true) {
                 blurpObjectProvider.getBlurpifier().blurpify();
             }

@@ -5,16 +5,15 @@ import com.bigcustard.blurp.model.*;
 
 public class KeyboardImpl implements Keyboard {
 
-
     @Override
-    public boolean isKeyDown(Key key) {
+    public boolean isKeyPressed(int keyCode) {
 
-        return Gdx.input.isKeyPressed(key.getKeyCode());
+        return Gdx.input.isKeyPressed(keyCode);
     }
 
     @Override
-    public boolean isKeyJustPressed(Key key) {
+    public boolean isKeyJustPressed(int keyCode) {
 
-        return Gdx.input.isKeyJustPressed(key.getKeyCode());
+        return Gdx.input.isKeyJustPressed(keyCode);
     }
 }
