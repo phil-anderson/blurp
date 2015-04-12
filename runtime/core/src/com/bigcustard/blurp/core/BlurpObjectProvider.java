@@ -11,6 +11,7 @@ import com.bigcustard.blurp.ui.*;
  */
 public class BlurpObjectProvider {
 
+    private final BlurpConfiguration blurpConfiguration;
     private final ModelRepository modelRepository;
     private final Blurpifier blurpifier;
     private final Keyboard keyboard;
@@ -22,18 +23,25 @@ public class BlurpObjectProvider {
 
     public BlurpObjectProvider(BlurpConfiguration blurpConfiguration) {
 
-        Viewport viewport = blurpConfiguration.getViewport();
+        this.blurpConfiguration = blurpConfiguration;
 
         modelRepository = new ModelRepository();
         blurpifier = new Blurpifier();
         keyboard = new KeyboardImpl();
         utils = new Utils();
 
+        Viewport viewport = blurpConfiguration.getViewport();
         modelScreen = new Screen(viewport.getWorldWidth(), viewport.getWorldHeight());
         runtimeRepository = new RuntimeRepository(this);
+
         ModelScreenRenderer modelScreenRenderer = new ModelScreenRenderer(modelScreen);
         blurpScreen = new BlurpScreen(viewport, blurpifier, runtimeRepository, modelScreenRenderer);
         blurp = new BlurpImpl(modelRepository, modelScreen, blurpifier);
+    }
+
+    public BlurpConfiguration getBlurpConfiguration() {
+
+        return blurpConfiguration;
     }
 
     public ModelRepository getModelRepository() {

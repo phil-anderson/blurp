@@ -24,6 +24,11 @@ public class BlurpApp extends Game {
     public void create() {
 
         BlurpConfiguration config = new BlurpConfiguration(viewport);
+
+
+        config.setContentRoot("abcdefg");
+
+
         BlurpRuntime blurpRuntime = BlurpRuntime.begin(config);
         blurpRuntime.start(scriptRunnable);
         setScreen(blurpRuntime.getScreen());

@@ -16,6 +16,7 @@ public class BlurpConfiguration {
 
     public BlurpConfiguration setContentRoot(String contentRoot) {
 
+        if(!contentRoot.endsWith("/")) contentRoot += "/";
         this.contentRoot = contentRoot;
         return this;
     }
