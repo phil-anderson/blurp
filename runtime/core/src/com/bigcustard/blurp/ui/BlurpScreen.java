@@ -49,10 +49,21 @@ public class BlurpScreen extends ScreenAdapter {
 
         try {
             doFrame(delta);
+
+            // TODO: Temporary hack to fix the jittering issue because it gives the client-side blurpify time to spot
+            // the state change and makes skipped frames less likely, although I'm not all that sure why. I need to
+            // really get my head around it.
+            // Slow scripts (e.g. slowscript.js) still jitter. Need to always render and just skip syncs on non-render
+            // frames
+            Thread.sleep(1);
         } catch(Exception e) {
             // Do nothing for now - Swallowing allows libgdx to continue rendering, and thus allows the app to be closed.
-            // TODO: Rethrow it from the runner
+            // TODO: Rethrow it from the runner. UPDATE -  Should be able to do this now, just wrap in a BlurpExceotion
             e.printStackTrace();
+        } finally {
+            if(blurpifier.getState() == Requested) {
+                blurpifier.setState(Complete);
+            }
         }
     }
 
@@ -78,12 +89,7 @@ public class BlurpScreen extends ScreenAdapter {
         // Tweener update goes here too.
 
         if(blurpifier.getState() == Requested) {
-            try {
-                doRender(delta);
-            } finally {
-                // This should be done at very end of render.
-                blurpifier.setState(Complete);
-            }
+            doRender(delta);
         }
 
         renderListener.handleRenderEvent(batch, delta, EventType.PostFrame);
@@ -95,11 +101,15 @@ public class BlurpScreen extends ScreenAdapter {
 
             runtimeRepository.syncWithModelRepository(delta);
 
-            beginBatch(); // In case the RenderListener ended it.
-            modelScreenRenderer.render();
-            endBatch();
+//            try {
+                beginBatch(); // In case the RenderListener ended it.
+                modelScreenRenderer.render();
+                endBatch();
 
-            getStage().draw();
+                getStage().draw();
+//            } finally {
+//                blurpifier.setState(Complete);
+//            }
 
             renderListener.handleRenderEvent(batch, delta, EventType.PostRender);
     }

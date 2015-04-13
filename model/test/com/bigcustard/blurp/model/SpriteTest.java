@@ -30,7 +30,7 @@ public class SpriteTest {
     public void flipsReverseScale() throws Exception {
 
         Sprite testCandidate = new SpriteForTests();
-        testCandidate.setPosition(10, 10);
+        testCandidate.position(10, 10);
         testCandidate.scale(10);
         testCandidate.flipX();
         assertThat(testCandidate.scaleX, is(-10.0));

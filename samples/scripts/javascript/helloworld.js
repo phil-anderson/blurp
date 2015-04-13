@@ -1,4 +1,12 @@
-screen.backgroundColour = blurp.colours.darkBlue;
+//screen.backgroundColour = blurp.colours.darkBlue;
 
-blurp.imageSprite("world.png");
+world = blurp.imageSprite("world.png");
 
+while(true) {
+
+    if(keyboard.isKeyPressed(keys.LEFT)) world.x -= 2;
+    if(keyboard.isKeyPressed(keys.RIGHT)) world.x += 2;
+    if(keyboard.isKeyPressed(keys.UP)) world.y += 2;
+    if(keyboard.isKeyPressed(keys.DOWN)) world.y -= 2;
+    blurp.blurpify();
+}

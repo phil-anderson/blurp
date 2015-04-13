@@ -66,7 +66,7 @@ public abstract class Sprite<T> {
      * @param y The new Y coordinate
      * @return The Sprite.
      */
-    public T setPosition(double x, double y) {
+    public T position(double x, double y) {
 
         this.x = x;
         this.y = y;

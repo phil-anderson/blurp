@@ -30,17 +30,7 @@ public class ScriptEngineBlurpRunnable implements BlurpRunnable {
         try {
             scriptEngine.eval(scriptReader);
         } catch(ScriptException e) {
-            scriptException = e;
+            throw new BlurpException("Error running script", e);
         }
-    }
-
-    public boolean isErrors() {
-
-        return scriptException != null;
-    }
-
-    public ScriptException getScriptException() {
-
-        return scriptException;
     }
 }

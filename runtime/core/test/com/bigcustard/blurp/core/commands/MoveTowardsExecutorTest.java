@@ -17,7 +17,7 @@ public class MoveTowardsExecutorTest {
 
         testCandidate = new MoveTowardsExecutor();
         testSprite = new SpriteForTests();
-        testSprite.setPosition(0, 0);
+        testSprite.position(0, 0);
     }
 
     @Test

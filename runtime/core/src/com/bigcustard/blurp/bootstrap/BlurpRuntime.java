@@ -10,6 +10,7 @@ import com.bigcustard.blurp.ui.*;
 public class BlurpRuntime {
 
     private BlurpObjectProvider blurpObjectProvider;
+    private BlurpExceptionHandler exceptionHandler;
 
     private BlurpRuntime(BlurpConfiguration config) {
 
@@ -24,6 +25,11 @@ public class BlurpRuntime {
     public static BlurpRuntime begin(BlurpConfiguration config) {
 
         return new BlurpRuntime(config);
+    }
+
+    public void onException(BlurpExceptionHandler exceptionHandler) {
+
+        this.exceptionHandler = exceptionHandler;
     }
 
     public BlurpScreen getScreen() {
@@ -68,13 +74,19 @@ public class BlurpRuntime {
         @Override
         public void run() {
 
-            script.run(blurpObjectProvider.getBlurp(),
-                       blurpObjectProvider.getModelScreen(),
-                       blurpObjectProvider.getKeyboard(),
-                       blurpObjectProvider.getUtils(),
-                       blurpObjectProvider.getKeys());
-            while(true) {
-                blurpObjectProvider.getBlurpifier().blurpify();
+            try {
+                script.run(blurpObjectProvider.getBlurp(),
+                           blurpObjectProvider.getModelScreen(),
+                           blurpObjectProvider.getKeyboard(),
+                           blurpObjectProvider.getUtils(),
+                           blurpObjectProvider.getKeys());
+                while(true) {
+                    blurpObjectProvider.getBlurpifier().blurpify();
+                }
+            } catch (RuntimeException e) {
+                if(exceptionHandler != null) {
+                    exceptionHandler.handleException(e);
+                }
             }
         }
     }

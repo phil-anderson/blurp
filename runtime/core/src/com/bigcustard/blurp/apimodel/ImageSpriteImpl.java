@@ -11,7 +11,7 @@ public class ImageSpriteImpl extends ImageSprite {
     public ImageSpriteImpl(Image image, double x, double y, ModelRepository modelRepository) {
 
         this.image = image;
-        this.setPosition(x, y);
+        this.position(x, y);
         this.modelRepository = modelRepository;
 
         this.scaleX = 1;
