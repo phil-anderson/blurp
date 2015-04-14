@@ -5,12 +5,15 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.utils.viewport.*;
 import com.bigcustard.blurp.core.*;
+import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.ui.RenderListener.*;
 
 import static com.bigcustard.blurp.core.Blurpifier.State.*;
 
 // TODO: Add an abstract immutable parent that can be exposed through BlurpRuntime.
 public class BlurpScreen extends ScreenAdapter {
+
+    private static final Utils UTILS = new Utils();
 
     private final RuntimeScreenRenderer runtimeScreenRenderer;
 
@@ -53,10 +56,10 @@ public class BlurpScreen extends ScreenAdapter {
             // TODO: I noticed that frames were being skipped in scripts that did virtually no processing between
             // frames. I put this sleep in to fix it although I have no idea why it works. The script thread should be
             // in a wait state either way!
-            Thread.sleep(1);
-        } catch(Exception e) {
+            UTILS.sleep(1);
+        } catch(RuntimeException exception) {
             // Pass it on so blurpify method can throw it
-            blurpifier.setException(e);
+            blurpifier.setException(exception);
         } finally {
             if(blurpifier.getState() == Requested) {
                 blurpifier.setState(Complete);

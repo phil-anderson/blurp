@@ -80,9 +80,7 @@ public class BlurpRuntime {
                            blurpObjectProvider.getKeyboard(),
                            blurpObjectProvider.getUtils(),
                            blurpObjectProvider.getKeys());
-                while(true) {
-                    blurpObjectProvider.getBlurpifier().blurpify();
-                }
+                blurpObjectProvider.getBlurpifier().blurpify();
             } catch (RuntimeException e) {
                 if(exceptionHandler != null) {
                     exceptionHandler.handleException(e);
