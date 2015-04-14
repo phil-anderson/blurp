@@ -9,6 +9,7 @@ import com.bigcustard.blurp.ui.RenderListener.*;
 
 import static com.bigcustard.blurp.core.Blurpifier.State.*;
 
+// TODO: Add an abstract immutable parent that can be exposed through BlurpRuntime.
 public class BlurpScreen extends ScreenAdapter {
 
     private final RuntimeScreenRenderer runtimeScreenRenderer;
@@ -39,7 +40,7 @@ public class BlurpScreen extends ScreenAdapter {
         return renderListener;
     }
 
-    public void setRenderListener(RenderListener listener) {
+    public void onRenderEvent(RenderListener listener) {
 
         this.renderListener = listener != null ? listener : RenderListenerAdapter.NULL_IMPLEMENTATION;
     }
@@ -50,11 +51,8 @@ public class BlurpScreen extends ScreenAdapter {
         try {
             doFrame(delta);
 
-            // TODO: Temporary hack to fix the jittering issue because it gives the client-side blurpify time to spot
-            // the state change and makes skipped frames less likely, although I'm not all that sure why. I need to
-            // really get my head around it.
-            // Slow scripts (e.g. slowscript.js) still jitter. Need to always render and just skip syncs on non-render
-            // frames
+            // TODO: I noticed that frames were being skipped in scripts that did virtually no processing between
+            // frames. I put this sleep in to fix it although I'm no happy I fully understand why it was occurring.
             Thread.sleep(1);
         } catch(Exception e) {
             // Do nothing for now - Swallowing allows libgdx to continue rendering, and thus allows the app to be closed.
@@ -64,18 +62,6 @@ public class BlurpScreen extends ScreenAdapter {
             if(blurpifier.getState() == Requested) {
                 blurpifier.setState(Complete);
             }
-        }
-    }
-
-    @Override
-    public void dispose() {
-
-        if(batch != null) {
-            batch.dispose();
-        }
-
-        if(stage != null) {
-            stage.dispose();
         }
     }
 
@@ -89,8 +75,9 @@ public class BlurpScreen extends ScreenAdapter {
         // Tweener update goes here too.
 
         if(blurpifier.getState() == Requested) {
-            doRender(delta);
+            runtimeRepository.syncWithModelRepository(delta);
         }
+        doRender(delta);
 
         renderListener.handleRenderEvent(batch, delta, EventType.PostFrame);
     }
@@ -99,19 +86,13 @@ public class BlurpScreen extends ScreenAdapter {
 
         renderListener.handleRenderEvent(batch, delta, EventType.PreRender);
 
-            runtimeRepository.syncWithModelRepository(delta);
+        beginBatch(); // In case the RenderListener ended it.
+        runtimeScreenRenderer.render();
+        endBatch();
 
-//            try {
-                beginBatch(); // In case the RenderListener ended it.
-                runtimeScreenRenderer.render();
-                endBatch();
+        getStage().draw();
 
-                getStage().draw();
-//            } finally {
-//                blurpifier.setState(Complete);
-//            }
-
-            renderListener.handleRenderEvent(batch, delta, EventType.PostRender);
+        renderListener.handleRenderEvent(batch, delta, EventType.PostRender);
     }
 
     private void beginBatch() {
@@ -157,5 +138,17 @@ public class BlurpScreen extends ScreenAdapter {
 
         getStage().setDebugAll(false);
         getStage().setDebugInvisible(false);
+    }
+
+    @Override
+    public void dispose() {
+
+        if(batch != null) {
+            batch.dispose();
+        }
+
+        if(stage != null) {
+            stage.dispose();
+        }
     }
 }
