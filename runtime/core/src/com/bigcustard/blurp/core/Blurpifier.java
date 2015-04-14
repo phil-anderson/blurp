@@ -13,6 +13,7 @@ public class Blurpifier {
     }
 
     private volatile State state = Dormant;
+    private volatile Exception exception;
 
     public synchronized void blurpify() {
 
@@ -25,11 +26,19 @@ public class Blurpifier {
             } catch(InterruptedException e) { } // Do nothing, never going to happen.
         }
         state = Dormant;
+        if(exception != null) {
+            throw new BlurpException("Error blurpifying", exception);
+        }
     }
 
     public synchronized State getState() {
 
         return state;
+    }
+
+    public void setException(Exception exception) {
+
+        this.exception = exception;
     }
 
     public synchronized void setState(State state) {

@@ -50,14 +50,13 @@ public class BlurpScreen extends ScreenAdapter {
 
         try {
             doFrame(delta);
-
             // TODO: I noticed that frames were being skipped in scripts that did virtually no processing between
-            // frames. I put this sleep in to fix it although I'm no happy I fully understand why it was occurring.
+            // frames. I put this sleep in to fix it although I have no idea why it works. The script thread should be
+            // in a wait state either way!
             Thread.sleep(1);
         } catch(Exception e) {
-            // Do nothing for now - Swallowing allows libgdx to continue rendering, and thus allows the app to be closed.
-            // TODO: Rethrow it from the runner. UPDATE -  Should be able to do this now, just wrap in a BlurpExceotion
-            e.printStackTrace();
+            // Pass it on so blurpify method can throw it
+            blurpifier.setException(e);
         } finally {
             if(blurpifier.getState() == Requested) {
                 blurpifier.setState(Complete);

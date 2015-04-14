@@ -83,4 +83,22 @@ public class Utils {
 
         return Math.tan(Math.toRadians(angle));
     }
+
+    /**
+     * Puts your blurp script to sleep for approximately the specified number of milliseconds, after which it'll carry
+     * on normally again.
+     * <p>
+     * Note that although it puts your script to sleep, it doesn't put blurp to sleep, so it will continue to run in
+     * the background.
+     *
+     * @param milliseconds The number of milliseconds to sleep for.
+     */
+    public void sleep(long milliseconds) {
+
+        try {
+            Thread.sleep(milliseconds);
+        } catch(InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
