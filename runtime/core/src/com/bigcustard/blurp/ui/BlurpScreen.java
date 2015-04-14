@@ -11,7 +11,7 @@ import static com.bigcustard.blurp.core.Blurpifier.State.*;
 
 public class BlurpScreen extends ScreenAdapter {
 
-    private final ModelScreenRenderer modelScreenRenderer;
+    private final RuntimeScreenRenderer runtimeScreenRenderer;
 
     private RenderListener renderListener = RenderListenerAdapter.NULL_IMPLEMENTATION;
 
@@ -21,12 +21,12 @@ public class BlurpScreen extends ScreenAdapter {
     private Batch batch;
     private Stage stage;
 
-    public BlurpScreen(Viewport viewport, Blurpifier blurpifier, RuntimeRepository runtimeRepository, ModelScreenRenderer modelScreenRenderer) {
+    public BlurpScreen(Viewport viewport, Blurpifier blurpifier, RuntimeRepository runtimeRepository, RuntimeScreenRenderer runtimeScreenRenderer) {
 
         this.viewport = viewport;
         this.blurpifier = blurpifier;
         this.runtimeRepository = runtimeRepository;
-        this.modelScreenRenderer = modelScreenRenderer;
+        this.runtimeScreenRenderer = runtimeScreenRenderer;
     }
 
     public void addActor(Actor actor) {
@@ -103,7 +103,7 @@ public class BlurpScreen extends ScreenAdapter {
 
 //            try {
                 beginBatch(); // In case the RenderListener ended it.
-                modelScreenRenderer.render();
+                runtimeScreenRenderer.render();
                 endBatch();
 
                 getStage().draw();

@@ -11,7 +11,7 @@ package com.bigcustard.blurp.model;
  */
 
 // TODO: Make this abstract and implement in Runtime
-public class Screen {
+public abstract class Screen {
 
     /**
      * The background colour of the Screen. Blurp will completely fill the Screen with this colour before it does
@@ -31,7 +31,7 @@ public class Screen {
      */
     public final double width, height;
 
-    public Screen(double width, double height) {
+    protected Screen(double width, double height) {
 
         this.width = width;
         this.height = height;

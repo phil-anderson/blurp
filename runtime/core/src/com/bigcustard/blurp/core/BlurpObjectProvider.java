@@ -1,8 +1,10 @@
 package com.bigcustard.blurp.core;
 
 import com.badlogic.gdx.utils.viewport.*;
+import com.bigcustard.blurp.apimodel.*;
 import com.bigcustard.blurp.bootstrap.*;
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.runtimemodel.*;
 import com.bigcustard.blurp.ui.*;
 
 /**
@@ -18,6 +20,7 @@ public class BlurpObjectProvider {
     private final Utils utils;
     private final Keys keys;
     private final Screen modelScreen;
+    private final RuntimeScreen runtimeScreen;
     private final RuntimeRepository runtimeRepository;
     private final BlurpScreen blurpScreen;
     private final Blurp blurp;
@@ -33,11 +36,14 @@ public class BlurpObjectProvider {
         keys = new Keys();
 
         Viewport viewport = blurpConfiguration.getViewport();
-        modelScreen = new Screen(viewport.getWorldWidth(), viewport.getWorldHeight());
-        runtimeRepository = new RuntimeRepository(this);
+        float width = viewport.getWorldWidth();
+        float height = viewport.getWorldHeight();
+        modelScreen = new ScreenImpl(width, height);
+        runtimeScreen = new RuntimeScreen(modelScreen);
 
-        ModelScreenRenderer modelScreenRenderer = new ModelScreenRenderer(modelScreen);
-        blurpScreen = new BlurpScreen(viewport, blurpifier, runtimeRepository, modelScreenRenderer);
+        runtimeRepository = new RuntimeRepository(this);
+        RuntimeScreenRenderer runtimeScreenRenderer = new RuntimeScreenRenderer(runtimeScreen);
+        blurpScreen = new BlurpScreen(viewport, blurpifier, runtimeRepository, runtimeScreenRenderer);
         blurp = new BlurpImpl(modelRepository, modelScreen, blurpifier);
     }
 
@@ -59,6 +65,11 @@ public class BlurpObjectProvider {
     public BlurpScreen getBlurpScreen() {
 
         return blurpScreen;
+    }
+
+    public RuntimeScreen getRuntimeScreen() {
+
+        return runtimeScreen;
     }
 
     public Blurpifier getBlurpifier() {

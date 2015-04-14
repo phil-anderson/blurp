@@ -1,4 +1,4 @@
-//screen.backgroundColour = blurp.colours.darkBlue;
+screen.backgroundColour = blurp.colours.darkBlue;
 
 world = blurp.imageSprite("world.png");
 

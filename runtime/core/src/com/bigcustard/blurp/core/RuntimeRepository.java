@@ -37,6 +37,9 @@ public class RuntimeRepository {
         commandExecutor.executeAll(modelRepository.getCommandRequests(), deltaTime);
         modelRepository.commandExecutionComplete();
 
+        // Sync any singletons that need syncing
+        blurpObjectProvider.getRuntimeScreen().sync();
+
         // Then sync the various model object types
         runtimeImages.syncAll(modelRepository.getImages(), blurpObjectProvider);
         runtimeImageSprites.syncAll(modelRepository.getImageSprites(), blurpObjectProvider);
