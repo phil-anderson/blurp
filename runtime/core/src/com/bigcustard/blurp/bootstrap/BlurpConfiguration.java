@@ -52,5 +52,4 @@ public class BlurpConfiguration {
 
         return contentRoot;
     }
-
 }

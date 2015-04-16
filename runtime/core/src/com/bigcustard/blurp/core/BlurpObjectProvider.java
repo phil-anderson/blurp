@@ -30,7 +30,6 @@ public class BlurpObjectProvider {
         this.blurpConfiguration = blurpConfiguration;
 
         modelRepository = new ModelRepository();
-        blurpifier = new Blurpifier();
         keyboard = new KeyboardImpl();
         utils = new Utils();
         keys = new Keys();
@@ -39,11 +38,12 @@ public class BlurpObjectProvider {
         float width = viewport.getWorldWidth();
         float height = viewport.getWorldHeight();
         modelScreen = new ScreenImpl(width, height);
-        runtimeScreen = new RuntimeScreen(modelScreen);
 
         runtimeRepository = new RuntimeRepository(this);
+        runtimeScreen = new RuntimeScreen(modelScreen);
         RuntimeScreenRenderer runtimeScreenRenderer = new RuntimeScreenRenderer(runtimeScreen);
-        blurpScreen = new BlurpScreen(viewport, blurpifier, runtimeRepository, runtimeScreenRenderer);
+        blurpifier = new Blurpifier();
+        blurpScreen = new BlurpScreen(viewport, runtimeRepository, runtimeScreenRenderer, blurpifier);
         blurp = new BlurpImpl(modelRepository, modelScreen, blurpifier);
     }
 

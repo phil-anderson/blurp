@@ -1,6 +1,7 @@
 package com.bigcustard.blurp.bootstrap;
 
 import java.io.*;
+import com.badlogic.gdx.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.core.commands.*;
 import com.bigcustard.blurp.scripting.*;
@@ -32,9 +33,14 @@ public class BlurpRuntime {
         this.exceptionHandler = exceptionHandler;
     }
 
-    public BlurpScreen getScreen() {
+    public Screen getScreen() {
 
         return blurpObjectProvider.getBlurpScreen();
+    }
+
+    public void onRenderEvent(RenderListener listener) {
+
+        blurpObjectProvider.getBlurpScreen().onRenderEvent(listener);
     }
 
     public void start(String language, String script) {

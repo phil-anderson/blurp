@@ -33,6 +33,7 @@ public class RuntimeImageSprite extends RuntimeSprite<ImageSprite> {
         int width = image.getTextureRegion().getRegionWidth();
         int height = image.getTextureRegion().getRegionHeight();
         setSize(width, height);
+
         setOrigin(width / 2, height / 2);
 
         if(newInstance) {

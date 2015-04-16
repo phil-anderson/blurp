@@ -6,31 +6,29 @@ import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.utils.viewport.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
-import com.bigcustard.blurp.ui.RenderListener.*;
 
-import static com.bigcustard.blurp.core.Blurpifier.State.*;
+import static com.bigcustard.blurp.core.Blurpifier.*;
 
 // TODO: Add an abstract immutable parent that can be exposed through BlurpRuntime.
 public class BlurpScreen extends ScreenAdapter {
 
     private static final Utils UTILS = new Utils();
 
-    private final RuntimeScreenRenderer runtimeScreenRenderer;
-
-    private RenderListener renderListener = RenderListenerAdapter.NULL_IMPLEMENTATION;
-
     private final Viewport viewport;
-    private final Blurpifier blurpifier;
     private final RuntimeRepository runtimeRepository;
+    private final RuntimeScreenRenderer runtimeScreenRenderer;
+    private final Blurpifier blurpifier;
+
     private Batch batch;
     private Stage stage;
+    private RenderListener renderListener = RenderListener.NULL_IMPLEMENTATION;
 
-    public BlurpScreen(Viewport viewport, Blurpifier blurpifier, RuntimeRepository runtimeRepository, RuntimeScreenRenderer runtimeScreenRenderer) {
+    public BlurpScreen(Viewport viewport, RuntimeRepository runtimeRepository, RuntimeScreenRenderer runtimeScreenRenderer, Blurpifier blurpifier) {
 
         this.viewport = viewport;
-        this.blurpifier = blurpifier;
         this.runtimeRepository = runtimeRepository;
         this.runtimeScreenRenderer = runtimeScreenRenderer;
+        this.blurpifier = blurpifier;
     }
 
     public void addActor(Actor actor) {
@@ -45,56 +43,61 @@ public class BlurpScreen extends ScreenAdapter {
 
     public void onRenderEvent(RenderListener listener) {
 
-        this.renderListener = listener != null ? listener : RenderListenerAdapter.NULL_IMPLEMENTATION;
+        this.renderListener = listener != null ? listener : RenderListener.NULL_IMPLEMENTATION;
     }
 
     @Override
     public void render(float delta) {
 
+        renderListener.handlePreRenderEvent(delta);
+
         try {
             doFrame(delta);
-            // TODO: I noticed that frames were being skipped in scripts that did virtually no processing between
-            // frames. I put this sleep in to fix it although I have no idea why it works. The script thread should be
-            // in a wait state either way!
-            UTILS.sleep(1);
         } catch(RuntimeException exception) {
             // Pass it on so blurpify method can throw it
             blurpifier.setException(exception);
-        } finally {
-            if(blurpifier.getState() == Requested) {
-                blurpifier.setState(Complete);
-            }
         }
+        // TODO: I noticed that frames were being skipped in scripts that did virtually no processing between
+        // frames. I put this sleep in to fix it although I'm not at all sure why it works. Render's just about to exit,
+        // so I'd have thought teh script would get plenty of time between frames to do it's stuff.
+        // Maybe libGdx isn't being particularly friendly outside of renders... Hmmmm...
+        // I wonder if this will be an issue n Android?
+        renderListener.handlePostRenderEvent(batch, delta);
+        UTILS.sleep(1);
     }
 
     private void doFrame(float delta) {
-
-        renderListener.handleRenderEvent(batch, delta, EventType.PreFrame);
 
         // TODO: We don't currently need this - Remove unless needed.
         getStage().act(delta);
 
         // Tweener update goes here too.
 
-        if(blurpifier.getState() == Requested) {
-            runtimeRepository.syncWithModelRepository(delta);
+        synchronized(blurpifier) {
+            if(blurpifier.getRequestState() == BlurpifyRequestState.Requested) {
+                blurpifier.setRenderState(BlurpifyRenderState.RequestAcknowledged);
+                try {
+                    runtimeRepository.syncWithModelRepository(delta);
+                } finally {
+                    blurpifier.setRenderState(BlurpifyRenderState.RequestComplete);
+                }
+            } else {
+                blurpifier.setRenderState(BlurpifyRenderState.NoRequest);
+                // TODO: Remove when happy
+                System.out.println("SKIP!");
+            }
         }
-        doRender(delta);
 
-        renderListener.handleRenderEvent(batch, delta, EventType.PostFrame);
+        doRender(delta);
     }
 
     private void doRender(float delta) {
-
-        renderListener.handleRenderEvent(batch, delta, EventType.PreRender);
 
         beginBatch(); // In case the RenderListener ended it.
         runtimeScreenRenderer.render();
         endBatch();
 
         getStage().draw();
-
-        renderListener.handleRenderEvent(batch, delta, EventType.PostRender);
     }
 
     private void beginBatch() {

@@ -5,12 +5,11 @@ package com.bigcustard.blurp.model;
  * various ways. For more details, check the subclasses.
  */
 
-// TODO: Give control over the origin. Use this as the positional point and use metaphor of a pin (hence rotation also works as expected)
+@SuppressWarnings("unchecked")
 public abstract class Sprite<T> {
 
     /**
-     * The position of the sprite, or to be more precise, the position of the <i>center</i> of the sprite in your Blurp
-     * World
+     * The position of the sprite, or to be more precise, the position of the <i>center</i> of the sprite.
      * <p>
      * The bottom-left of the world is at x=0, y=0, and the top-right will be determined by the height and width of the
      * world you created. The default world (i.e what you get if you don;t define one yourself) is 800 wide and 480
@@ -62,14 +61,14 @@ public abstract class Sprite<T> {
     /**
      * This method provides a handy way to set both X and Y coordinates in one hit.
      *
-     * @param x The new X coordinate
-     * @param y The new Y coordinate
+     * @param newX The new X coordinate
+     * @param newY The new Y coordinate
      * @return The Sprite.
      */
-    public T position(double x, double y) {
+    public T position(double newX, double newY) {
 
-        this.x = x;
-        this.y = y;
+        x = newX;
+        y = newY;
         return (T) this;
     }
 

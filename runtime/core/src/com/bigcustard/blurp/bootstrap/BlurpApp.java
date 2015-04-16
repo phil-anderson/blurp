@@ -25,6 +25,7 @@ public class BlurpApp extends Game {
 
         BlurpConfiguration config = new BlurpConfiguration(viewport);
         BlurpRuntime blurpRuntime = BlurpRuntime.begin(config);
+
         blurpRuntime.onException(new BlurpExceptionHandler() {
             @Override
             public void handleException(RuntimeException e) {

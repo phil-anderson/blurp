@@ -1,19 +1,25 @@
 package com.bigcustard.blurp.core;
 
-import com.bigcustard.blurp.testutils.*;
+import com.bigcustard.blurp.model.*;
 import org.junit.*;
+import org.mockito.*;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static com.bigcustard.blurp.core.Blurpifier.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.*;
 
 public class BlurpifierTest {
 
+    private static final Utils UTILS = new Utils();
+
+    @Mock
     private Blurpifier testCandidate;
     private BlurpifierTest.MockRenderer mockRenderer;
 
     @Before
     public void setUp() throws Exception {
 
+        MockitoAnnotations.initMocks(this);
         testCandidate = new Blurpifier();
     }
 
@@ -36,10 +42,10 @@ public class BlurpifierTest {
         new Thread(mockRenderer).start();
 
         // Ensure mock renderer thread has started and has asserted the dormant state before calling blurpify.
-        while(!mockRenderer.dormantAsserted) Sleep.forOneMs();
+        while(!mockRenderer.dormantAsserted) UTILS.sleep(1);
 
         testCandidate.blurpify();
-        assertThat(testCandidate.getState(), is(Blurpifier.State.Dormant)); // Should be back to dormant again
+        assertThat(testCandidate.getRequestState(), is(BlurpifyRequestState.Dormant)); // Should be back to dormant again
         assertThat(mockRenderer.complete, is(true)); // Just in case dormant state got set elsewhere and mock renderer thread is still running
     }
 
@@ -48,25 +54,31 @@ public class BlurpifierTest {
         private volatile boolean dormantAsserted;
         private volatile boolean complete;
 
-        private boolean delayBeforeCompleting;
+        private boolean delayBeforeStateChange;
 
-        private MockRenderer(boolean delayBeforeCompleting) {
+        private MockRenderer(boolean delayBeforeStateChange) {
 
-            this.delayBeforeCompleting = delayBeforeCompleting;
+            this.delayBeforeStateChange = delayBeforeStateChange;
         }
 
         @Override
         public void run() {
 
-            assertThat(testCandidate.getState(), is(Blurpifier.State.Dormant));
+            assertThat(testCandidate.getRequestState(), is(BlurpifyRequestState.Dormant));
             dormantAsserted = true;
 
             // Wait for blurpify request from main thread
-            while(testCandidate.getState() != Blurpifier.State.Requested) Sleep.forOneMs();
+            while(testCandidate.getRequestState() != BlurpifyRequestState.Requested) UTILS.sleep(1);
 
-            // Give the thread plenty of time to block
-            if(delayBeforeCompleting) Sleep.forDuration(10000);
-            testCandidate.setState(Blurpifier.State.Complete);
+            if(delayBeforeStateChange) UTILS.sleep(5000);
+            synchronized(testCandidate) {
+                testCandidate.setRenderState(BlurpifyRenderState.RequestAcknowledged);
+            }
+
+            if(delayBeforeStateChange) UTILS.sleep(5000);
+            synchronized(testCandidate) {
+                testCandidate.setRenderState(BlurpifyRenderState.RequestComplete);
+            }
             complete = true;
         }
     }
