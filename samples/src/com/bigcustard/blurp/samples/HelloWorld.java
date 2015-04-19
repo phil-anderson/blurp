@@ -8,6 +8,6 @@ public class HelloWorld implements BlurpRunnable {
     @Override
     public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils, Keys keys) {
 
-        blurp.imageSprite("world.png");
+        blurp.imageSprite("hello-world.png");
     }
 }

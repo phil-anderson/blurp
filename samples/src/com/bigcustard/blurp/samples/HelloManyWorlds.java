@@ -12,7 +12,7 @@ public class HelloManyWorlds implements BlurpRunnable {
     @Override
     public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils, Keys keys) {
 
-        Image worldImage = blurp.image("world.png");
+        Image worldImage = blurp.image("hello-world.png");
         ImageSprite[] worlds = new ImageSprite[NUM_WORLDS];
         for(int i = 0; i < NUM_WORLDS; i++) {
             double xPos = utils.random(150, 650);

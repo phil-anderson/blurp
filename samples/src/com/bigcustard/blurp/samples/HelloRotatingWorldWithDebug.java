@@ -9,7 +9,7 @@ public class HelloRotatingWorldWithDebug implements BlurpRunnable {
     public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils, Keys keys) {
 
         blurp.setDebugMode(true);
-        ImageSprite world = blurp.imageSprite("world.png");
+        ImageSprite world = blurp.imageSprite("hello-world.png");
 
         while(true) {
             world.rotateBy(1);

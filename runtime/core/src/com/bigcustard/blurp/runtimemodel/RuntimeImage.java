@@ -32,7 +32,7 @@ public class RuntimeImage implements RuntimeObject<Image> {
                     textureRegion = new TextureRegion(new Texture(classpathFile));
                 } else {
                     // TODO: We should throw here really - Need to sort out tests
-                    textureRegion = new TextureRegion(new Texture(10, 10, Pixmap.Format.RGBA8888));
+                    textureRegion = new TextureRegion(new Texture(Gdx.files.classpath("image-error.png")));
                 }
             }
             textureRegion.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);

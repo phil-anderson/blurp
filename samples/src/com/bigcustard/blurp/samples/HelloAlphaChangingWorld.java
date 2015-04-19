@@ -8,7 +8,7 @@ public class HelloAlphaChangingWorld implements BlurpRunnable {
     @Override
     public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils, Keys keys) {
 
-        Image worldImage = blurp.image("world.png");
+        Image worldImage = blurp.image("hello-world.png");
 
         blurp.imageSprite(worldImage);
         ImageSprite upsideDownWorld = blurp.imageSprite(worldImage).rotateBy(180); // Upside-down world exactly covering the normal one

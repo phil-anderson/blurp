@@ -8,7 +8,7 @@ public class HelloRotatingWorld implements BlurpRunnable {
     @Override
     public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils, Keys keys) {
 
-        ImageSprite world = blurp.imageSprite("world.png");
+        ImageSprite world = blurp.imageSprite("hello-world.png");
 
         while(true) {
             world.rotateBy(1);
