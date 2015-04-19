@@ -8,13 +8,14 @@ import com.bigcustard.blurp.model.*;
 
 public class ScriptEngineBlurpRunnable implements BlurpRunnable {
 
-    private Reader scriptReader;
-    private ScriptException scriptException;
-    private ScriptEngine scriptEngine;
+    private final Reader scriptReader;
+    private final ScriptEngine scriptEngine;
+    private final String scriptName;
 
-    public ScriptEngineBlurpRunnable(String language, Reader scriptReader) {
+    public ScriptEngineBlurpRunnable(String language, Reader scriptReader, String scriptName) {
 
         this.scriptReader = scriptReader;
+        this.scriptName = scriptName;
         scriptEngine = new ScriptEngineManager().getEngineByName(language);
         if(scriptEngine == null) throw new BlurpException("Couldn't get ScriptEngine for language name '" + language + "'");
     }
@@ -27,6 +28,7 @@ public class ScriptEngineBlurpRunnable implements BlurpRunnable {
         scriptEngine.put("keyboard", keyboard);
         scriptEngine.put("utils", utils);
         scriptEngine.put("keys", keys);
+        scriptEngine.put(ScriptEngine.FILENAME, scriptName);
         try {
             scriptEngine.eval(scriptReader);
         } catch(ScriptException e) {

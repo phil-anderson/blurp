@@ -59,7 +59,7 @@ public class BlurpApp extends Game {
 
         // TODO: DANGER! Pretty sure this won't work on Android
         try {
-            return new ScriptEngineBlurpRunnable(language, new FileReader(scriptName));
+            return new ScriptEngineBlurpRunnable(language, new FileReader(scriptName), scriptName);
         } catch(FileNotFoundException e) {
             throw new BlurpException("Error loading script file " + scriptName);
         }

@@ -43,15 +43,15 @@ public class BlurpRuntime {
         blurpObjectProvider.getBlurpScreen().onRenderEvent(listener);
     }
 
-    public void start(String language, String script) {
+    public void start(String language, String script, String scriptName) {
 
-        start(language, new StringReader(script));
+        start(language, new StringReader(script), scriptName);
     }
 
     // TODO: DANGER! - Pretty sure this won't work on Android.
-    public void start(String language, Reader scriptReader) {
+    public void start(String language, Reader scriptReader, String scriptName) {
 
-        start(new ScriptEngineBlurpRunnable(language, scriptReader));
+        start(new ScriptEngineBlurpRunnable(language, scriptReader, scriptName));
     }
 
     public void start(BlurpRunnable blurpRunnable) {
