@@ -1,5 +1,6 @@
 package com.bigcustard.blurp.core;
 
+import java.util.*;
 import com.bigcustard.blurp.core.commands.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.runtimemodel.*;
@@ -12,12 +13,14 @@ import com.bigcustard.blurp.runtimemodel.*;
  */
 public class RuntimeRepository {
 
-
     private final BlurpObjectProvider blurpObjectProvider;
     private final ModelRepository modelRepository;
 
     private final ModelToRuntimeObjectMap<Image, RuntimeImage> runtimeImages;
     private final ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite> runtimeImageSprites;
+    private final ModelToRuntimeObjectMap<TextSprite, RuntimeTextSprite> runtimeTextSprites;
+
+    private final List<CommandVisitable> commandRequests;
     private final CommandExecutor commandExecutor;
 
     public RuntimeRepository(BlurpObjectProvider blurpObjectProvider) {
@@ -27,15 +30,17 @@ public class RuntimeRepository {
         modelRepository = blurpObjectProvider.getModelRepository();
         runtimeImages = new ModelToRuntimeObjectMap<Image, RuntimeImage>(RuntimeImage.class);
         runtimeImageSprites = new ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite>(RuntimeImageSprite.class);
+        runtimeTextSprites = new ModelToRuntimeObjectMap<TextSprite, RuntimeTextSprite>(RuntimeTextSprite.class);
 
+        commandRequests = new ArrayList<CommandVisitable>();
         commandExecutor = new CommandExecutor(blurpObjectProvider);
     }
 
     public void syncWithModelRepository(float deltaTime) {
 
         // First run any commands that the model has registered requests for.
-        commandExecutor.executeAll(modelRepository.getCommandRequests(), deltaTime);
-        modelRepository.commandExecutionComplete();
+        commandExecutor.executeAll(commandRequests, deltaTime);
+        commandRequests.clear();
 
         // Sync any singletons that need syncing
         blurpObjectProvider.getRuntimeScreen().sync();
@@ -43,6 +48,7 @@ public class RuntimeRepository {
         // Then sync the various model object types
         runtimeImages.syncAll(modelRepository.getImages(), blurpObjectProvider);
         runtimeImageSprites.syncAll(modelRepository.getImageSprites(), blurpObjectProvider);
+        runtimeTextSprites.syncAll(modelRepository.getTextSprites(), blurpObjectProvider);
     }
 
     public RuntimeImage getImage(Image modelImage) {
@@ -55,6 +61,21 @@ public class RuntimeRepository {
         return runtimeImageSprites.get(modelImageSprite);
     }
 
+    public RuntimeTextSprite getTextSprite(TextSprite modelTextSprite) {
+
+        return runtimeTextSprites.get(modelTextSprite);
+    }
+
+    public void registerCommand(CommandVisitable command) {
+
+        commandRequests.add(command);
+    }
+
+    public List<CommandVisitable> getCommandRequests() {
+
+        return commandRequests;
+    }
+
     public void dispose() {
 
         for(RuntimeImage image : runtimeImages) {
@@ -62,7 +83,10 @@ public class RuntimeRepository {
         }
         runtimeImages.clear();
         runtimeImageSprites.clear();
+        runtimeTextSprites.clear();
+        commandRequests.clear();
     }
+
 
     /**
      * Deprecated as test purposes only

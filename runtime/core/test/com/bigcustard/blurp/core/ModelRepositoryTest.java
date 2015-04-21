@@ -59,22 +59,6 @@ public class ModelRepositoryTest {
         assertThat(testCandidate.getImageSprites().size(), is(0));
     }
 
-    @Test
-    public void canRegisterCommand() throws Exception {
-
-        assertThat(testCandidate.getCommandRequests().size(), is(0));
-        testCandidate.registerCommand(mockCommand);
-        assertThat(testCandidate.getCommandRequests().size(), is(1));
-    }
-
-    @Test
-    public void commandExecutionCompleteClearsCommandRequests() throws Exception {
-
-        testCandidate.registerCommand(mockCommand);
-        assertThat(testCandidate.getCommandRequests().size(), is(1));
-        testCandidate.commandExecutionComplete();
-        assertThat(testCandidate.getCommandRequests().size(), is(0));
-    }
 
     @Test
     public void canGetImageByName() throws Exception {
@@ -92,11 +76,9 @@ public class ModelRepositoryTest {
 
         testCandidate.addImage(mockImage);
         testCandidate.addImageSprite(mockImageSprite);
-        testCandidate.registerCommand(mockCommand);
         testCandidate.dispose();
 
         assertThat(testCandidate.getImages().size(), is(0));
         assertThat(testCandidate.getImageSprites().size(), is(0));
-        assertThat(testCandidate.getCommandRequests().size(), is(0));
     }
 }

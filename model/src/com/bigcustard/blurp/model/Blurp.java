@@ -81,6 +81,10 @@ public abstract class Blurp {
 
     public abstract ImageSprite imageSprite(Image image, double x, double y);
 
+    public abstract TextSprite textSprite(String text);
+
+    public abstract TextSprite textSprite(String text, double x, double y);
+
     public abstract Colour colour(double red, double green, double blue);
 
     public Blurp setDebugMode(boolean enable) {

@@ -10,6 +10,7 @@ public class ImageSpriteImplTest {
 
     private ImageSprite testCandidate;
 
+    @Mock private RuntimeRepository mockRuntimeRepository;
     @Mock private ModelRepository mockModelRepository;
 
     @Before
@@ -17,7 +18,7 @@ public class ImageSpriteImplTest {
 
         MockitoAnnotations.initMocks(this);
         ImageImpl testImage = new ImageImpl("abc", mockModelRepository);
-        testCandidate = new ImageSpriteImpl(testImage, .0, .0, mockModelRepository);
+        testCandidate = new ImageSpriteImpl(testImage, .0, .0, mockRuntimeRepository, mockModelRepository);
     }
 
     @Test
@@ -31,6 +32,6 @@ public class ImageSpriteImplTest {
     public void moveTowardsRegistersACommand() throws Exception {
 
         testCandidate.moveTowards(100.0, 100.0, 50.0);
-        Mockito.verify(mockModelRepository).registerCommand(Mockito.<CommandVisitable>anyObject());
+        Mockito.verify(mockRuntimeRepository).registerCommand(Mockito.<CommandVisitable>anyObject());
     }
 }

@@ -19,7 +19,7 @@ public class BlurpRuntime {
 
         if(config.isDebug()) {
             SetDebugModeCommand debugCommand = new SetDebugModeCommand(config.isDebug(), config.isDebugHidden());
-            blurpObjectProvider.getModelRepository().registerCommand(debugCommand);
+            blurpObjectProvider.getRuntimeRepository().registerCommand(debugCommand);
         }
     }
 
@@ -86,7 +86,7 @@ public class BlurpRuntime {
                            blurpObjectProvider.getKeyboard(),
                            blurpObjectProvider.getUtils(),
                            blurpObjectProvider.getKeys());
-                blurpObjectProvider.getBlurpifier().blurpify();
+//                blurpObjectProvider.getBlurpifier().blurpify();
             } catch (RuntimeException e) {
                 if(exceptionHandler != null) {
                     exceptionHandler.handleException(e);

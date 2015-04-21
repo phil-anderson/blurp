@@ -9,6 +9,7 @@ import org.mockito.*;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.core.Is.is;
 
 public class RuntimeRepositoryTest extends LibGdxTest {
 
@@ -29,12 +30,12 @@ public class RuntimeRepositoryTest extends LibGdxTest {
         BlurpObjectProvider blurpObjectProvider = new BlurpObjectProviderForTests();
         ModelRepository modelRepository = blurpObjectProvider.getModelRepository();
 
-        modelRepository.registerCommand(mockCommand);
+        testCandidate.registerCommand(mockCommand);
 
         image1 = new ImageImpl("abc", modelRepository);
         image2 = new ImageImpl("def", modelRepository);
-        imageSprite1 = new ImageSpriteImpl(image1, 0, 0, modelRepository);
-        imageSprite2 = new ImageSpriteImpl(image2, 0, 0, modelRepository);
+        imageSprite1 = new ImageSpriteImpl(image1, 0, 0, testCandidate, modelRepository);
+        imageSprite2 = new ImageSpriteImpl(image2, 0, 0, testCandidate, modelRepository);
 
         modelRepository.addImage(image1);
         modelRepository.addImage(image2);
@@ -59,5 +60,15 @@ public class RuntimeRepositoryTest extends LibGdxTest {
         assertThat(testCandidate.getImage(image2), notNullValue());
         assertThat(testCandidate.getImageSprite(imageSprite1), notNullValue());
         assertThat(testCandidate.getImageSprite(imageSprite2), notNullValue());
+    }
+
+
+
+    @Test
+    public void canRegisterCommand() throws Exception {
+
+        assertThat(testCandidate.getCommandRequests().size(), is(0));
+        testCandidate.registerCommand(mockCommand);
+        assertThat(testCandidate.getCommandRequests().size(), is(1));
     }
 }

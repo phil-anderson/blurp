@@ -12,23 +12,24 @@ import static com.bigcustard.blurp.core.Blurpifier.*;
 // TODO: Add an abstract immutable parent that can be exposed through BlurpRuntime.
 public class BlurpScreen extends ScreenAdapter {
 
-    private static final Utils UTILS = new Utils();
-
     private final Viewport viewport;
     private final RuntimeRepository runtimeRepository;
     private final RuntimeScreenRenderer runtimeScreenRenderer;
     private final Blurpifier blurpifier;
+    private final BlurpObjectProvider blurpObjectProvider;
 
     private Batch batch;
     private Stage stage;
     private RenderListener renderListener = RenderListener.NULL_IMPLEMENTATION;
+    private boolean firstRender = true;
 
-    public BlurpScreen(Viewport viewport, RuntimeRepository runtimeRepository, RuntimeScreenRenderer runtimeScreenRenderer, Blurpifier blurpifier) {
+    public BlurpScreen(Viewport viewport, RuntimeRepository runtimeRepository, RuntimeScreenRenderer runtimeScreenRenderer, Blurpifier blurpifier, BlurpObjectProvider blurpObjectProvider) {
 
         this.viewport = viewport;
         this.runtimeRepository = runtimeRepository;
         this.runtimeScreenRenderer = runtimeScreenRenderer;
         this.blurpifier = blurpifier;
+        this.blurpObjectProvider = blurpObjectProvider;
     }
 
     public void addActor(Actor actor) {
@@ -49,6 +50,13 @@ public class BlurpScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
 
+        if(firstRender) {
+            blurpObjectProvider.onLibGdxInitialised();
+            batch = new SpriteBatch();
+            stage = new Stage(viewport, batch);
+            firstRender = false;
+        }
+
         renderListener.handlePreRenderEvent(delta);
 
         try {
@@ -63,7 +71,7 @@ public class BlurpScreen extends ScreenAdapter {
         // Maybe libGdx isn't being particularly friendly outside of renders... Hmmmm...
         // I wonder if this will be an issue n Android?
         renderListener.handlePostRenderEvent(batch, delta);
-        UTILS.sleep(1);
+        Utils.ENGINE_INSTANCE.sleep(1);
     }
 
     private void doFrame(float delta) {
@@ -84,7 +92,7 @@ public class BlurpScreen extends ScreenAdapter {
             } else {
                 blurpifier.setRenderState(BlurpifyRenderState.NoRequest);
                 // TODO: Remove when happy
-                System.out.println("SKIP!");
+//                System.out.println("SKIP!");
             }
         }
 
@@ -102,7 +110,6 @@ public class BlurpScreen extends ScreenAdapter {
 
     private void beginBatch() {
 
-        lazyInitialise();
         if(!batch.isDrawing()) {
             batch.begin();
         }
@@ -117,20 +124,7 @@ public class BlurpScreen extends ScreenAdapter {
 
     private Stage getStage() {
 
-        lazyInitialise();
         return stage;
-    }
-
-    private void lazyInitialise() {
-
-        // Lazily initialise to give libgdx a chance to start up
-        if(batch == null) {
-            batch = new SpriteBatch();
-        }
-
-        if(stage == null) {
-            stage = new Stage(viewport, batch);
-        }
     }
 
     public void enableDebug(boolean debugHidden) {

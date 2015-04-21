@@ -9,12 +9,14 @@ import com.bigcustard.blurp.model.*;
  */
 public class BlurpImpl extends Blurp {
 
+    private final RuntimeRepository runtimeRepository;
     private final ModelRepository modelRepository;
     private final Screen screen;
     private final Blurpifier blurpifier;
 
-    BlurpImpl(ModelRepository modelRepository, Screen screen, Blurpifier blurpifier) {
+    BlurpImpl(RuntimeRepository runtimeRepository, ModelRepository modelRepository, Screen screen, Blurpifier blurpifier) {
 
+        this.runtimeRepository = runtimeRepository;
         this.modelRepository = modelRepository;
         this.screen = screen;
         this.blurpifier = blurpifier;
@@ -67,9 +69,26 @@ public class BlurpImpl extends Blurp {
 
         if(image == null) throw new RuntimeException("Image can't be null");
 
-        ImageSprite imageSprite = new ImageSpriteImpl(image, x, y, modelRepository);
+        ImageSprite imageSprite = new ImageSpriteImpl(image, x, y, runtimeRepository, modelRepository);
         modelRepository.addImageSprite(imageSprite);
         return imageSprite;
+    }
+
+    @Override
+    public TextSprite textSprite(String text) {
+
+        return textSprite(text, screen.width / 2.0, screen.height / 2.0);
+    }
+
+
+    @Override
+    public TextSprite textSprite(String text, double x, double y) {
+
+        if(text == null) text = "";
+
+        TextSprite textSprite = new TextSpriteImpl(text, x, y, runtimeRepository, modelRepository);
+        modelRepository.addTextSprite(textSprite);
+        return textSprite;
     }
 
     @Override
@@ -81,7 +100,7 @@ public class BlurpImpl extends Blurp {
     @Override
     public Blurp setDebugMode(boolean enable, boolean includeHiddenSprites) {
 
-        modelRepository.registerCommand(new SetDebugModeCommand(enable, includeHiddenSprites));
+        runtimeRepository.registerCommand(new SetDebugModeCommand(enable, includeHiddenSprites));
         return this;
     }
 }

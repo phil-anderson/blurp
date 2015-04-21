@@ -1,9 +1,12 @@
 package com.bigcustard.blurp.core;
 
+import com.badlogic.gdx.*;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.utils.viewport.*;
 import com.bigcustard.blurp.apimodel.*;
 import com.bigcustard.blurp.bootstrap.*;
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.model.Screen;
 import com.bigcustard.blurp.runtimemodel.*;
 import com.bigcustard.blurp.ui.*;
 
@@ -24,6 +27,7 @@ public class BlurpObjectProvider {
     private final RuntimeRepository runtimeRepository;
     private final BlurpScreen blurpScreen;
     private final Blurp blurp;
+    private BitmapFont systemFont;
 
     public BlurpObjectProvider(BlurpConfiguration blurpConfiguration) {
 
@@ -39,12 +43,19 @@ public class BlurpObjectProvider {
         float height = viewport.getWorldHeight();
         modelScreen = new ScreenImpl(width, height);
 
-        runtimeRepository = new RuntimeRepository(this);
         runtimeScreen = new RuntimeScreen(modelScreen);
         RuntimeScreenRenderer runtimeScreenRenderer = new RuntimeScreenRenderer(runtimeScreen);
         blurpifier = new Blurpifier();
-        blurpScreen = new BlurpScreen(viewport, runtimeRepository, runtimeScreenRenderer, blurpifier);
-        blurp = new BlurpImpl(modelRepository, modelScreen, blurpifier);
+        runtimeRepository = new RuntimeRepository(this);
+        blurp = new BlurpImpl(runtimeRepository, modelRepository, modelScreen, blurpifier);
+        blurpScreen = new BlurpScreen(viewport, runtimeRepository, runtimeScreenRenderer, blurpifier, this);
+    }
+
+    // Stuff that would normally go in the application.create() method, but can;t because we may be hosted in a
+    // pre-existing libGdx app (i.e. PlanetBlurp).
+    public void onLibGdxInitialised() {
+
+        systemFont = new BitmapFont(Gdx.files.classpath("white-rabbit.fnt"), Gdx.files.classpath("white-rabbit.png"), false);
     }
 
     public BlurpConfiguration getBlurpConfiguration() {
@@ -100,5 +111,10 @@ public class BlurpObjectProvider {
     public Keys getKeys() {
 
         return keys;
+    }
+
+    public BitmapFont getSystemFont() {
+
+        return systemFont;
     }
 }

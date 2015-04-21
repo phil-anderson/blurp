@@ -1,7 +1,6 @@
 package com.bigcustard.blurp.core;
 
 import java.util.*;
-import com.bigcustard.blurp.core.commands.*;
 import com.bigcustard.blurp.model.*;
 
 /**
@@ -11,13 +10,13 @@ public class ModelRepository {
 
     private List<Image> images;
     private List<ImageSprite> imageSprites;
-    private List<CommandVisitable> commandRequests;
+    private List<TextSprite> textSprites;
 
     public ModelRepository() {
 
         images = new ArrayList<Image>();
         imageSprites = new ArrayList<ImageSprite>();
-        commandRequests = new ArrayList<CommandVisitable>();
+        textSprites = new ArrayList<TextSprite>();
     }
 
     public void addImage(Image image) {
@@ -40,9 +39,14 @@ public class ModelRepository {
         imageSprites.remove(imageSprite);
     }
 
-    public void registerCommand(CommandVisitable command) {
+    public void addTextSprite(TextSprite textSprite) {
 
-        commandRequests.add(command);
+        textSprites.add(textSprite);
+    }
+
+    public void removeTextSprite(TextSprite textSprite) {
+
+        textSprites.remove(textSprite);
     }
 
     List<Image> getImages() {
@@ -55,15 +59,9 @@ public class ModelRepository {
         return imageSprites;
     }
 
-    List<CommandVisitable> getCommandRequests() {
+    public List<TextSprite> getTextSprites() {
 
-        return commandRequests;
-    }
-
-
-    public void commandExecutionComplete() {
-
-        commandRequests.clear();
+        return textSprites;
     }
 
     public Image getImage(String imageFilename) {
@@ -78,6 +76,5 @@ public class ModelRepository {
 
         images.clear();
         imageSprites.clear();
-        commandRequests.clear();
     }
 }

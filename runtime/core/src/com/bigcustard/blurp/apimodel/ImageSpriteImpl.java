@@ -6,17 +6,19 @@ import com.bigcustard.blurp.model.*;
 
 public class ImageSpriteImpl extends ImageSprite {
 
+    private final RuntimeRepository runtimeRepository;
     private final ModelRepository modelRepository;
 
-    public ImageSpriteImpl(Image image, double x, double y, ModelRepository modelRepository) {
+    public ImageSpriteImpl(Image image, double x, double y, RuntimeRepository runtimeRepository, ModelRepository modelRepository) {
 
         this.image = image;
         this.position(x, y);
-        this.modelRepository = modelRepository;
-
         this.scaleX = 1;
         this.scaleY = 1;
         this.alpha = 1;
+
+        this.runtimeRepository = runtimeRepository;
+        this.modelRepository = modelRepository;
     }
 
     @Override
@@ -28,7 +30,7 @@ public class ImageSpriteImpl extends ImageSprite {
     @Override
     public ImageSprite moveTowards(double targetX, double targetY, double speed) {
 
-        modelRepository.registerCommand(new MoveTowardsCommand(this, targetX, targetY, speed));
+        runtimeRepository.registerCommand(new MoveTowardsCommand(this, targetX, targetY, speed));
         return this;
     }
 

@@ -9,5 +9,7 @@ public class HelloWorld implements BlurpRunnable {
     public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils, Keys keys) {
 
         blurp.imageSprite("hello-world.png");
+
+        blurp.blurpify();
     }
 }

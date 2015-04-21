@@ -4,6 +4,9 @@ import java.util.*;
 
 public class Utils {
 
+    // TODO: Actually... This shouldn't be here in the Model package.
+    public static final Utils ENGINE_INSTANCE = new Utils();
+
     private Random randomiser = new Random();
 
     /**

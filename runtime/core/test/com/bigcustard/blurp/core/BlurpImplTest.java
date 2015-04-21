@@ -9,6 +9,7 @@ import static org.hamcrest.core.Is.*;
 
 public class BlurpImplTest {
 
+    @Mock private RuntimeRepository mockRuntimeRepository;
     @Mock private ModelRepository mockModelRepository;
     @Mock private Screen mockScreen;
     @Mock private Blurpifier mockBlurpifier;
@@ -21,7 +22,7 @@ public class BlurpImplTest {
     public void setUp() throws Exception {
 
         MockitoAnnotations.initMocks(this);
-        testCandidate = new BlurpImpl(mockModelRepository, mockScreen, mockBlurpifier);
+        testCandidate = new BlurpImpl(mockRuntimeRepository, mockModelRepository, mockScreen, mockBlurpifier);
     }
 
     @Test
