@@ -30,8 +30,6 @@ public class RuntimeRepositoryTest extends LibGdxTest {
         BlurpObjectProvider blurpObjectProvider = new BlurpObjectProviderForTests();
         ModelRepository modelRepository = blurpObjectProvider.getModelRepository();
 
-        testCandidate.registerCommand(mockCommand);
-
         image1 = new ImageImpl("abc", modelRepository);
         image2 = new ImageImpl("def", modelRepository);
         imageSprite1 = new ImageSpriteImpl(image1, 0, 0, testCandidate, modelRepository);
@@ -46,13 +44,6 @@ public class RuntimeRepositoryTest extends LibGdxTest {
     }
 
     @Test
-    public void syncExecutesCommands() throws Exception {
-
-        testCandidate.syncWithModelRepository(1);
-        Mockito.verify(mockCommand).accept(testCandidate.getCommandExecutor(), 1);
-    }
-
-    @Test
     public void syncCallsSyncAllForEachTypeOfObject() throws Exception {
 
         testCandidate.syncWithModelRepository(1);
@@ -62,13 +53,19 @@ public class RuntimeRepositoryTest extends LibGdxTest {
         assertThat(testCandidate.getImageSprite(imageSprite2), notNullValue());
     }
 
-
-
     @Test
     public void canRegisterCommand() throws Exception {
 
         assertThat(testCandidate.getCommandRequests().size(), is(0));
         testCandidate.registerCommand(mockCommand);
         assertThat(testCandidate.getCommandRequests().size(), is(1));
+    }
+
+    @Test
+    public void syncExecutesCommands() throws Exception {
+
+        testCandidate.registerCommand(mockCommand);
+        testCandidate.syncWithModelRepository(1);
+        Mockito.verify(mockCommand).accept(testCandidate.getCommandExecutor(), 1);
     }
 }
