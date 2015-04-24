@@ -55,6 +55,6 @@ public class BlurpImplTest {
     @Test
     public void coloursHaveCorrectRedGreenAndBlueComponents() {
 
-        assertThat(testCandidate.colour(1.0, 0.8431373, 0.0), is(Colours.INSTANCE.gold));
+        assertThat(testCandidate.colour(1.0, 0.8431373, 0.0), is(Colours.RUNTIME_INSTANCE.gold));
     }
 }

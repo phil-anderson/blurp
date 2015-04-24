@@ -12,11 +12,6 @@ package com.bigcustard.blurp.model;
 public abstract class Blurp {
 
     /**
-     * A selection of preset colours
-     */
-    public final Colours colours = Colours.INSTANCE;
-
-    /**
      * This method is the beating heart of Blurp. It's responsible for telling Blurp to work it's magic, and it keeps
      * everything running smoothly. Without it, your program will do nothing.
      * <p>

@@ -3,7 +3,7 @@ package com.bigcustard.blurp.model;
 @SuppressWarnings("UnusedDeclaration")
 public class Colours {
 
-    public static final Colours INSTANCE = new Colours();
+    public static final Colours RUNTIME_INSTANCE = new Colours();
 
     public final Colour aliceBlue = new Colour(0.9411765, 0.972549, 1.0);
     public final Colour antiqueWhite = new Colour(0.9803922, 0.9215686, 0.8431373);
@@ -153,5 +153,5 @@ public class Colours {
     public final Colour yellow = new Colour(1.0, 1.0, 0.0);
     public final Colour yellowGreen = new Colour(0.6039216, 0.8039216, 0.1960784);
 
-    private Colours() { }
+    public Colours() { }
 }

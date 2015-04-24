@@ -1,6 +1,7 @@
 package com.bigcustard.blurp.core;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.utils.viewport.*;
 import com.bigcustard.blurp.apimodel.*;
@@ -22,6 +23,7 @@ public class BlurpObjectProvider {
     private final Keyboard keyboard;
     private final Utils utils;
     private final Keys keys;
+    private final Colours colours;
     private final Screen modelScreen;
     private final RuntimeScreen runtimeScreen;
     private final RuntimeRepository runtimeRepository;
@@ -37,6 +39,7 @@ public class BlurpObjectProvider {
         keyboard = new KeyboardImpl();
         utils = new Utils();
         keys = new Keys();
+        colours = new Colours();
 
         Viewport viewport = blurpConfiguration.getViewport();
         float width = viewport.getWorldWidth();
@@ -55,7 +58,9 @@ public class BlurpObjectProvider {
     // pre-existing libGdx app (i.e. PlanetBlurp).
     public void onLibGdxInitialised() {
 
-        systemFont = new BitmapFont(Gdx.files.classpath("white-rabbit.fnt"), Gdx.files.classpath("white-rabbit.png"), false);
+        Texture systemFontTexture = new Texture(Gdx.files.classpath("RobotoCondensed.png"));
+        systemFontTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        systemFont = new BitmapFont(Gdx.files.classpath("RobotoCondensed.fnt"), new TextureRegion(systemFontTexture), false);
     }
 
     public BlurpConfiguration getBlurpConfiguration() {
@@ -111,6 +116,11 @@ public class BlurpObjectProvider {
     public Keys getKeys() {
 
         return keys;
+    }
+
+    public Colours getColours() {
+
+        return colours;
     }
 
     public BitmapFont getSystemFont() {

@@ -15,7 +15,10 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
         setPosition((float) modelSprite.x, (float) modelSprite.y);
         setScale((float) modelSprite.scaleX, (float) modelSprite.scaleY);
         setRotation((float) -modelSprite.rotation);
-        setColor(1, 1, 1, (float) modelSprite.alpha);
+        setColor((float) modelSprite.colour.red,
+                 (float) modelSprite.colour.green,
+                 (float) modelSprite.colour.blue,
+                 (float) modelSprite.alpha);
     }
 
     @Override

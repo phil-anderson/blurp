@@ -85,7 +85,8 @@ public class BlurpRuntime {
                            blurpObjectProvider.getModelScreen(),
                            blurpObjectProvider.getKeyboard(),
                            blurpObjectProvider.getUtils(),
-                           blurpObjectProvider.getKeys());
+                           blurpObjectProvider.getKeys(),
+                           blurpObjectProvider.getColours());
 //                blurpObjectProvider.getBlurpifier().blurpify();
             } catch (RuntimeException e) {
                 if(exceptionHandler != null) {

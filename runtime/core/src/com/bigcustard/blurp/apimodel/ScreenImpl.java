@@ -7,5 +7,6 @@ public class ScreenImpl extends Screen {
     public ScreenImpl(double width, double height) {
 
         super(width, height);
+        this.backgroundColour =  Colours.RUNTIME_INSTANCE.black;
     }
 }

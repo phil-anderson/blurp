@@ -25,6 +25,8 @@ public class TextSpriteImpl extends TextSprite {
         this.scaleX = 1;
         this.scaleY = 1;
         this.alpha = 1;
+        this.colour = Colours.RUNTIME_INSTANCE.white;
+        this.fontSize = 30;
 
         this.runtimeRepository = runtimeRepository;
         this.modelRepository = modelRepository;

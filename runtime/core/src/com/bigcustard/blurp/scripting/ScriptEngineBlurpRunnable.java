@@ -21,13 +21,14 @@ public class ScriptEngineBlurpRunnable implements BlurpRunnable {
     }
 
     @Override
-    public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils, Keys keys) {
+    public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils, Keys keys, Colours colours) {
 
         scriptEngine.put("blurp", blurp);
         scriptEngine.put("screen", screen);
         scriptEngine.put("keyboard", keyboard);
         scriptEngine.put("utils", utils);
         scriptEngine.put("keys", keys);
+        scriptEngine.put("colours", colours);
         scriptEngine.put(ScriptEngine.FILENAME, scriptName);
         try {
             scriptEngine.eval(scriptReader);

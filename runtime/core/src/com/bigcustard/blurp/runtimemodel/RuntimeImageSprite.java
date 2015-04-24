@@ -10,18 +10,6 @@ public class RuntimeImageSprite extends RuntimeSprite<ImageSprite> {
     private RuntimeImage image;
 
     @Override
-    public void drawImpl(Batch batch, float parentAlpha) {
-
-        // Draw scaled texture centered at (and rotated around) origin
-        batch.draw(image.getTextureRegion(),
-                   getX() - getOriginX(), getY() - getOriginY(),
-                   getOriginX(), getOriginY(),
-                   getWidth(), getHeight(),
-                   getScaleX(), getScaleY(),
-                   getRotation());
-    }
-
-    @Override
     public void sync(ImageSprite modelImageSprite, BlurpObjectProvider blurpObjectProvider, boolean newInstance) {
 
         super.sync(modelImageSprite, blurpObjectProvider, newInstance);
@@ -37,6 +25,18 @@ public class RuntimeImageSprite extends RuntimeSprite<ImageSprite> {
         if(newInstance) {
             blurpObjectProvider.getBlurpScreen().addActor(this);
         }
+    }
+
+    @Override
+    public void drawImpl(Batch batch, float parentAlpha) {
+
+        // Draw scaled texture centered at (and rotated around) origin
+        batch.draw(image.getTextureRegion(),
+                   getX() - getOriginX(), getY() - getOriginY(),
+                   getOriginX(), getOriginY(),
+                   getWidth(), getHeight(),
+                   getScaleX(), getScaleY(),
+                   getRotation());
     }
 
     @Override

@@ -7,7 +7,7 @@ import static org.hamcrest.MatcherAssert.*;
 
 public class ColourTest {
 
-    private static Colours colours = Colours.INSTANCE;
+    private static Colours colours = Colours.RUNTIME_INSTANCE;
 
     @Test
     public void equalsReturnsTrueForEquivalentColours() throws Exception {

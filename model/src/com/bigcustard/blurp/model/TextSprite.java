@@ -5,6 +5,12 @@ public abstract class TextSprite extends Sprite<TextSprite> {
     // TODO: Support Markup, which is actually in libgdx!! See TextMarkup class.
     public String text;
 
+
+//    IMPLEMENT THIS, Beef up Hiero font size then do debug draw impl
+//    Size should be in pixels for line height
+
+    public double fontSize;
+
     public abstract TextSprite anchorLeft();
 
     public abstract TextSprite anchorCenter();

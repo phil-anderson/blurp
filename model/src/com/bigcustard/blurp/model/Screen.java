@@ -19,7 +19,7 @@ public abstract class Screen {
      * anything we'd already displayed on the screen, but Blurp's far too clever to let that happen, and makes sure it
      * all works nicely.
      */
-    public Colour backgroundColour = Colours.INSTANCE.black;
+    public Colour backgroundColour;
 
     /**
      * The width and height of the Screen. Well... <i>Sort of</i>... Do be strictly accurate, it's the width and height

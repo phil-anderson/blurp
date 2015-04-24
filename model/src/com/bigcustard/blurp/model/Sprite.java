@@ -5,6 +5,9 @@ package com.bigcustard.blurp.model;
  * various ways. For more details, check the subclasses.
  */
 
+
+// TODO: Refactor to affine2 transforms and add shear effects
+
 @SuppressWarnings("unchecked")
 public abstract class Sprite<T> {
 
@@ -46,6 +49,15 @@ public abstract class Sprite<T> {
      * There are 360 degrees in a circle, so setting this to 360 is the same as setting it to 0.
      */
     public double rotation;
+
+    /**
+     * The colour of the Sprite. This will be used in different ways depending on the type of Sprite. For example
+     * ImageSprites will use it as a tint to overlay on the existing image whereas for TextSprites it is simply the
+     * colour of the text.
+     *
+     * @see Colour
+     */
+    public Colour colour = Colours.RUNTIME_INSTANCE.white;
 
     /**
      * The alpha transparency of the sprite. This odd phrase actual just means how transparent it is.
