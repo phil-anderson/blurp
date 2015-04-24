@@ -1,33 +1,21 @@
 package com.bigcustard.blurp.model;
 
+import com.bigcustard.blurp.model.constants.*;
+
 public abstract class TextSprite extends Sprite<TextSprite> {
 
     // TODO: Support Markup, which is actually in libgdx!! See TextMarkup class.
     public String text;
 
-
-//    IMPLEMENT THIS, Beef up Hiero font size then do debug draw impl
-//    Size should be in pixels for line height
-
     public double fontSize;
 
-    public abstract TextSprite anchorLeft();
+    public double wrapWidth;
 
-    public abstract TextSprite anchorCenter();
+    public Handle handle;
 
-    public abstract TextSprite anchorRight();
+    public Justification justification;
 
-    public abstract TextSprite anchorTop();
-
-    public abstract TextSprite anchorMiddle();
-
-    public abstract TextSprite anchorBottom();
-
-    public abstract TextSprite justifyLeft(double width);
-
-    public abstract TextSprite justifyCenter(double width);
-
-    public abstract TextSprite justifyRight(double width);
+    public abstract TextSprite wrap(double width, Justification justification);
 
     /**
      * Removes the TextSprite completely from Blurp. It will be destroyed, and no longer appear on screen.

@@ -5,6 +5,7 @@ import javax.script.*;
 import com.bigcustard.blurp.bootstrap.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.model.constants.*;
 
 public class ScriptEngineBlurpRunnable implements BlurpRunnable {
 
@@ -29,11 +30,21 @@ public class ScriptEngineBlurpRunnable implements BlurpRunnable {
         scriptEngine.put("utils", utils);
         scriptEngine.put("keys", keys);
         scriptEngine.put("colours", colours);
+        scriptEnginePutEnums(Justification.values());
+        scriptEnginePutEnums(Handle.values());
+
         scriptEngine.put(ScriptEngine.FILENAME, scriptName);
         try {
             scriptEngine.eval(scriptReader);
         } catch(ScriptException e) {
             throw new BlurpException("Error running script", e);
+        }
+    }
+
+    private void scriptEnginePutEnums(Enum[] enumValues){
+
+        for(Enum enumValue : enumValues) {
+            scriptEngine.put(enumValue.name(), enumValue);
         }
     }
 }
