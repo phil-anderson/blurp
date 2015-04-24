@@ -18,7 +18,7 @@ public abstract class Image {
     public final String filename;
 
     /**
-     * This constructor is protected - Use {@link Blurp#image} instead.
+     * This constructor is protected - Use {@link Blurp#loadImage} instead.
      */
     protected Image(String filename) {
 

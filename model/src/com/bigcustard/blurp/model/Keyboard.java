@@ -10,16 +10,16 @@ public interface Keyboard {
     /**
      * Determines whether the key represented by the specified keyCode is currently held down
      *
-     * @param key The {@link Keys key} to check.
+     * @param key The {@link com.bigcustard.blurp.model.constants.Key key} to check.
      * @return True if the key is currently being held down by the user.
      */
-    public boolean isKeyPressed(Keys key);
+    public boolean isKeyPressed(Key key);
 
     /**
      * Determines whether the key represented by the specified keyCode has just been pressed.
      *
-     * @param key The {@link Keys key} to check.
+     * @param key The {@link com.bigcustard.blurp.model.constants.Key key} to check.
      * @return True if the key has just been pressed by a user
      */
-    public boolean isKeyJustPressed(Keys key);
+    public boolean isKeyJustPressed(Key key);
 }

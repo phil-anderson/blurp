@@ -33,7 +33,7 @@ public class ScriptEngineBlurpRunnable implements BlurpRunnable {
         scriptEnginePutConstants(Colours.class);
         scriptEnginePutEnums(Justification.values());
         scriptEnginePutEnums(Handle.values());
-        scriptEnginePutEnums(Keys.values());
+        scriptEnginePutEnums(Key.values());
 
         scriptEngine.put(ScriptEngine.FILENAME, scriptName);
         try {

@@ -4,7 +4,7 @@ package com.bigcustard.blurp.model.constants;
  * A complete set of key codes to use with the Keyboard class.
  */
 @SuppressWarnings("UnusedDeclaration")
-public enum Keys {
+public enum Key {
 
     Key_F1(244),
     Key_F2(245),
@@ -175,7 +175,7 @@ public enum Keys {
 
     public final int keyCode;
 
-    private Keys(int keyCode) {
+    private Key(int keyCode) {
 
         this.keyCode = keyCode;
     }

@@ -8,7 +8,7 @@ public class HelloMovingWorld implements BlurpRunnable {
     @Override
     public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils) {
 
-        ImageSprite world = blurp.imageSprite("hello-world.png");
+        ImageSprite world = blurp.createImageSprite("hello-world.png");
 
         double targetX = 400;
         double targetY = 300;

@@ -27,6 +27,7 @@ public class RuntimeTextSprite extends RuntimeSprite<TextSprite> {
     private Handle.VHandle vHandle;
     private HAlignment alignment;
     private float fontSize;
+    private boolean markupEnabled;
 
     private Matrix4 transformationStorage = new Matrix4();
     private Affine2 transform = new Affine2();
@@ -44,6 +45,7 @@ public class RuntimeTextSprite extends RuntimeSprite<TextSprite> {
         alignment = JUSTIFICATION_TO_ALIGNMENT.get(modelSpriteImpl.getJustification());
         wrapWidth = (float) modelSpriteImpl.getWrapWidth();
         fontSize = (float) modelSprite.fontSize;
+        markupEnabled = modelSprite.enableColorTags;
 
         // TODO: Add ability to change (and hence sync) fonts
         if(newInstance) font = blurpObjectProvider.getSystemFont();
@@ -53,14 +55,14 @@ public class RuntimeTextSprite extends RuntimeSprite<TextSprite> {
         }
     }
 
-//    Also, do I want to change the naming of teh anchor methods?... Theyre a bit counter-intuitive.
-
     @Override
     public void drawImpl(Batch batch, float parentAlpha) {
 
         // TODO: Fix this - bt of a hack... Think I can divide by lineheight  / fontscale.
         font.setScale(1);
         font.setScale(fontSize / font.getLineHeight());
+
+        font.setMarkupEnabled(markupEnabled);
 
         if(wrapWidth == -1) {
             TextBounds bounds = font.getMultiLineBounds(text);
@@ -69,11 +71,6 @@ public class RuntimeTextSprite extends RuntimeSprite<TextSprite> {
             TextBounds bounds = font.getWrappedBounds(text, wrapWidth);
             setSize(wrapWidth, bounds.height);
         }
-
-        // Make height round up to multiple of line height as text bounds don't include descenders.
-//        if(getHeight() % font.getLineHeight() != 0) {
-//            setHeight((float) (Math.ceil(getHeight() / font.getLineHeight()) * font.getLineHeight()));
-//        }
 
         calculateOrigins();
 
@@ -100,9 +97,11 @@ public class RuntimeTextSprite extends RuntimeSprite<TextSprite> {
     protected void drawDebugBounds (ShapeRenderer shapes) {
 
             shapes.set(ShapeRenderer.ShapeType.Line);
-            float value = (float) Utils.ENGINE_INSTANCE.wave(0, 1, 2000);
-            shapes.setColor(value, 1 - value, 0, 1);
-            shapes.rect(getX() - getOriginX() + 1, getY() - getOriginY() + 1, getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
+            shapes.rect(getX() - getOriginX(), getY() - getOriginY(),
+                        getOriginX(), getOriginY(),
+                        getWidth(), getHeight(),
+                        getScaleX(), getScaleY(),
+                        getRotation());
     }
 
     private void calculateOrigins() {

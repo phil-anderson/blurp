@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.Sprite;
+import com.bigcustard.blurp.util.*;
 
 public abstract class RuntimeSprite<T extends Sprite> extends Actor implements RuntimeObject<T> {
 
@@ -15,10 +16,7 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
         setPosition((float) modelSprite.x, (float) modelSprite.y);
         setScale((float) modelSprite.scaleX, (float) modelSprite.scaleY);
         setRotation((float) -modelSprite.rotation);
-        setColor((float) modelSprite.colour.red,
-                 (float) modelSprite.colour.green,
-                 (float) modelSprite.colour.blue,
-                 (float) modelSprite.alpha);
+        setColor(Convert.toGdxColour(modelSprite.colour, modelSprite.alpha));
     }
 
     @Override

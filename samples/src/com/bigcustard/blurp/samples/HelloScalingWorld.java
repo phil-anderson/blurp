@@ -8,7 +8,7 @@ public class HelloScalingWorld implements BlurpRunnable {
     @Override
     public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils) {
 
-        ImageSprite world = blurp.imageSprite("hello-world.png");
+        ImageSprite world = blurp.createImageSprite("hello-world.png");
 
         while(true) {
             // Earthquake!

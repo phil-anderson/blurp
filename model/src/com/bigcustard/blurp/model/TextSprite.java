@@ -15,6 +15,8 @@ public abstract class TextSprite extends Sprite<TextSprite> {
 
     public Justification justification;
 
+    public boolean enableColorTags;
+
     public abstract TextSprite wrap(double width, Justification justification);
 
     /**

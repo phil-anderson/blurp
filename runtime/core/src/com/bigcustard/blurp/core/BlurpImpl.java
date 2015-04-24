@@ -29,7 +29,7 @@ public class BlurpImpl extends Blurp {
     }
 
     @Override
-    public Image image(String filename) {
+    public Image loadImage(String filename) {
 
         if(filename == null) throw new RuntimeException("Image file name can't be null");
 
@@ -43,64 +43,42 @@ public class BlurpImpl extends Blurp {
     }
 
     @Override
-    public ImageSprite imageSprite(String imageFilename) {
+    public ImageSprite createImageSprite(String imageFilename) {
 
         if(imageFilename == null) throw new RuntimeException("Image file name can't be null");
 
-        return imageSprite(image(imageFilename));
+        return createImageSprite(loadImage(imageFilename));
     }
 
-    @Override
-    public ImageSprite imageSprite(String imageFilename, double x, double y) {
-
-        if(imageFilename == null) throw new RuntimeException("Image file name can't be null");
-
-        return imageSprite(image(imageFilename), x, y);
-    }
-
-    @Override
-    public ImageSprite imageSprite(Image image) {
-
-        return imageSprite(image, screen.width / 2.0, screen.height / 2.0);
-    }
-
-    @Override
-    public ImageSprite imageSprite(Image image, double x, double y) {
+    public ImageSprite createImageSprite(Image image) {
 
         if(image == null) throw new RuntimeException("Image can't be null");
 
-        ImageSprite imageSprite = new ImageSpriteImpl(image, x, y, runtimeRepository, modelRepository);
+        ImageSprite imageSprite = new ImageSpriteImpl(image, screen.width / 2.0, screen.height / 2.0, runtimeRepository, modelRepository);
         modelRepository.addImageSprite(imageSprite);
         return imageSprite;
     }
 
     @Override
-    public TextSprite textSprite(String text) {
-
-        return textSprite(text, screen.width / 2.0, screen.height / 2.0);
-    }
-
-
-    @Override
-    public TextSprite textSprite(String text, double x, double y) {
+    public TextSprite createTextSprite(String text) {
 
         if(text == null) text = "";
 
-        TextSprite textSprite = new TextSpriteImpl(text, x, y, runtimeRepository, modelRepository);
+        TextSprite textSprite = new TextSpriteImpl(text, screen.width / 2.0, screen.height / 2.0, runtimeRepository, modelRepository);
         modelRepository.addTextSprite(textSprite);
         return textSprite;
     }
 
     @Override
-    public Colour colour(double red, double green, double blue) {
+    public Colour createColour(double red, double green, double blue) {
 
         return new Colour(red, green, blue);
     }
 
     @Override
-    public Blurp setDebugMode(boolean enable, boolean includeHiddenSprites) {
+    public Blurp setDebugMode(boolean enable, Colour debugColour) {
 
-        runtimeRepository.registerCommand(new SetDebugModeCommand(enable, includeHiddenSprites));
+        runtimeRepository.registerCommand(new SetDebugModeCommand(enable, debugColour));
         return this;
     }
 }

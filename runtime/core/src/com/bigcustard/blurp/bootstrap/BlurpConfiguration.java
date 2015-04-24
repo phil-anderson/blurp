@@ -6,8 +6,7 @@ public class BlurpConfiguration {
 
     private Viewport viewport;
     private String contentRoot = "";
-    private boolean debug;
-    private boolean debugHidden;
+    private boolean debugEnabled;
 
     public BlurpConfiguration(Viewport viewport) {
 
@@ -21,26 +20,15 @@ public class BlurpConfiguration {
         return this;
     }
 
-    public BlurpConfiguration setDebug(boolean enabled) {
+    public BlurpConfiguration setDebugEnabled(boolean enabled) {
 
-        this.debug = enabled;
+        this.debugEnabled = enabled;
         return this;
     }
 
-    public BlurpConfiguration setDebugHidden(boolean enabled) {
+    public boolean isDebugEnabled() {
 
-        this.debugHidden = enabled;
-        return this;
-    }
-
-    public boolean isDebug() {
-
-        return debug;
-    }
-
-    public boolean isDebugHidden() {
-
-        return debugHidden;
+        return debugEnabled;
     }
 
     public Viewport getViewport() {

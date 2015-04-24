@@ -7,13 +7,13 @@ import com.bigcustard.blurp.model.constants.*;
 public class KeyboardImpl implements Keyboard {
 
     @Override
-    public boolean isKeyPressed(Keys key) {
+    public boolean isKeyPressed(Key key) {
 
         return Gdx.input.isKeyPressed(key.keyCode);
     }
 
     @Override
-    public boolean isKeyJustPressed(Keys key) {
+    public boolean isKeyJustPressed(Key key) {
 
         return Gdx.input.isKeyJustPressed(key.keyCode);
     }

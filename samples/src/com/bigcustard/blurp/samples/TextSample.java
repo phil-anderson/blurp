@@ -7,20 +7,25 @@ import com.bigcustard.blurp.model.constants.*;
 public class TextSample implements BlurpRunnable {
 
     private static final String MESSAGE = "The quick, brown fox jumped over the lazy dog.";
+    private static final String COLOURFUL_MESSAGE = "All colours can be specified as [RED]red[], [GREEN]green[] and [BLUE]blue[] components";
 
     @Override
     public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils) {
 
-//        blurp.setDebugMode(true);
+        blurp.setDebugMode(true);
 
-        blurp.textSprite("LEFT-JUSTIFIED\n" + MESSAGE, 150, 500).wrap(220, Justification.AlignLeft);
-        blurp.textSprite("CENTER-JUSTIFIED\n" + MESSAGE, 400, 500).wrap(220, Justification.AlignCenter);
-        blurp.textSprite("RIGHT-JUSTIFIED\n" + MESSAGE, 650, 500).wrap(220, Justification.AlignRight);
+        blurp.createTextSprite("LEFT-JUSTIFIED\n" + MESSAGE).position(150, 500).wrap(220, Justification.AlignLeft);
+        blurp.createTextSprite("CENTER-JUSTIFIED\n" + MESSAGE).position(400, 500).wrap(220, Justification.AlignCenter);
+        blurp.createTextSprite("RIGHT-JUSTIFIED\n" + MESSAGE).position(650, 500).wrap(220, Justification.AlignRight);
 
-        TextSprite anchorText = blurp.textSprite("").position(250, 200);
-        blurp.imageSprite("hello-world.png").position(250, 200).alpha = 0.3;
+        TextSprite colorTagText = blurp.createTextSprite(COLOURFUL_MESSAGE).position(400, 400);
+        colorTagText.handle = Handle.Center;
+        colorTagText.enableColorTags = true;
 
-        TextSprite rotateAndScaleText = blurp.textSprite("Rotate and Scale!").position(600, 200);
+        TextSprite anchorText = blurp.createTextSprite("").position(250, 200);
+        blurp.createImageSprite("hello-world.png").position(250, 200).alpha = 0.3;
+
+        TextSprite rotateAndScaleText = blurp.createTextSprite("Rotate and Scale!").position(600, 200);
         rotateAndScaleText.colour = Colours.DODGER_BLUE;
 
         int frameCount = 0;

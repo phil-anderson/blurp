@@ -6,10 +6,6 @@ public class SetDebugModeExecutor {
 
     public void execute(SetDebugModeCommand request, BlurpScreen screen) {
 
-        if(request.isDebug()) {
-            screen.enableDebug(request.isDebugHidden());
-        } else {
-            screen.disableDebug();
-        }
+        screen.enableDebug(request.isDebugEnabled(), request.getDebugColour());
     }
 }

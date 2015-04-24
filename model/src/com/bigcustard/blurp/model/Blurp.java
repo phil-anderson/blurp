@@ -1,5 +1,7 @@
 package com.bigcustard.blurp.model;
 
+import com.bigcustard.blurp.model.constants.*;
+
 /**
  * Behind the scenes, your blurp program extends this class, and will have access to the protected properties and
  * methods in it.
@@ -42,7 +44,7 @@ public abstract class Blurp {
 
     // TODO: Javadoc for factory methods
 
-    public abstract Image image(String filename);
+    public abstract Image loadImage(String filename);
 
     /**
      * Constructs a new ImageSprite using the image file specified, and places it at the center of the Screen.
@@ -56,37 +58,19 @@ public abstract class Blurp {
      *
      * @param imageFilename The name of the image file to load
      */
-    public abstract ImageSprite imageSprite(String imageFilename);
+    public abstract ImageSprite createImageSprite(String imageFilename);
 
-    /**
-     * Constructs a new ImageSprite using the image file specified, and places it at the X and Y coordinates specified.
-     * A new Image will be created just for this ImageSprite, and the image property will be set accordingly.
-     * <p>
-     * If you want more than one ImageSprite to share the same image, then you should create a single {@link Image}
-     * object for the image and construct all of the ImageSprites using that instead. It'll be more efficient as the
-     * image will only be loaded once.
-     *
-     * @param imageFilename The name of the image file to load
-     * @param x The X coordinate
-     * @param y The Y coordinate
-     */
-    public abstract ImageSprite imageSprite(String imageFilename, double x, double y);
+    public abstract ImageSprite createImageSprite(Image image);
 
-    public abstract ImageSprite imageSprite(Image image);
+    public abstract TextSprite createTextSprite(String text);
 
-    public abstract ImageSprite imageSprite(Image image, double x, double y);
-
-    public abstract TextSprite textSprite(String text);
-
-    public abstract TextSprite textSprite(String text, double x, double y);
-
-    public abstract Colour colour(double red, double green, double blue);
+    public abstract Colour createColour(double red, double green, double blue);
 
     public Blurp setDebugMode(boolean enable) {
 
-        setDebugMode(enable, false);
+        setDebugMode(enable, Colours.LIME_GREEN);
         return this;
     }
 
-    public abstract Blurp setDebugMode(boolean enable, boolean includeHiddenSprites);
+    public abstract Blurp setDebugMode(boolean enable, Colour debugColour);
 }

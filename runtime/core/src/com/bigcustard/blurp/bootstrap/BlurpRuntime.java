@@ -4,6 +4,7 @@ import java.io.*;
 import com.badlogic.gdx.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.core.commands.*;
+import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.scripting.*;
 import com.bigcustard.blurp.ui.*;
 
@@ -17,8 +18,8 @@ public class BlurpRuntime {
 
         this.blurpObjectProvider = new BlurpObjectProvider(config);
 
-        if(config.isDebug()) {
-            SetDebugModeCommand debugCommand = new SetDebugModeCommand(config.isDebug(), config.isDebugHidden());
+        if(config.isDebugEnabled()) {
+            SetDebugModeCommand debugCommand = new SetDebugModeCommand(config.isDebugEnabled(), Colours.LIME_GREEN);
             blurpObjectProvider.getRuntimeRepository().registerCommand(debugCommand);
         }
     }

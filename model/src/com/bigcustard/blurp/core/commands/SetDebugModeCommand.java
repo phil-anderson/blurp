@@ -1,14 +1,16 @@
 package com.bigcustard.blurp.core.commands;
 
+import com.bigcustard.blurp.model.*;
+
 public class SetDebugModeCommand implements CommandVisitable {
 
-    private boolean debug;
-    private boolean debugHidden;
+    private final boolean debugEnabled;
+    private final Colour debugColour;
 
-    public SetDebugModeCommand(boolean debug, boolean debugHidden) {
+    public SetDebugModeCommand(boolean debugEnabled, Colour debugColour) {
 
-        this.debug = debug;
-        this.debugHidden = debugHidden;
+        this.debugEnabled = debugEnabled;
+        this.debugColour = debugColour;
     }
 
     @Override
@@ -17,13 +19,13 @@ public class SetDebugModeCommand implements CommandVisitable {
         visitor.visit(this);
     }
 
-    public boolean isDebug() {
+    public boolean isDebugEnabled() {
 
-        return debug;
+        return debugEnabled;
     }
 
-    public boolean isDebugHidden() {
+    public Colour getDebugColour() {
 
-        return debugHidden;
+        return debugColour;
     }
 }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.utils.viewport.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.util.*;
 
 import static com.bigcustard.blurp.core.Blurpifier.*;
 
@@ -127,16 +128,11 @@ public class BlurpScreen extends ScreenAdapter {
         return stage;
     }
 
-    public void enableDebug(boolean debugHidden) {
+    public void enableDebug(boolean debugEnabled, Colour debugColour) {
 
-        getStage().setDebugAll(true);
-        getStage().setDebugInvisible(debugHidden);
-    }
-
-    public void disableDebug() {
-
-        getStage().setDebugAll(false);
-        getStage().setDebugInvisible(false);
+        getStage().setDebugAll(debugEnabled);
+        getStage().setDebugInvisible(debugEnabled);
+        getStage().getDebugColor().set(Convert.toGdxColour(debugColour));
     }
 
     @Override

@@ -36,26 +36,22 @@ public class BlurpImplTest {
     @Test
     public void creatingImagesAddsThemToModelRepository() {
 
-        Image image = testCandidate.image("abc");
+        Image image = testCandidate.loadImage("abc");
         Mockito.verify(mockModelRepository).addImage(image);
     }
 
     @Test
     public void creatingImageSpritesAddsThemToModelRepository() {
 
-        ImageSprite sprite1 = testCandidate.imageSprite("abc");
-        ImageSprite sprite2 = testCandidate.imageSprite("abc", 0.0, 0.0);
-        ImageSprite sprite3 = testCandidate.imageSprite(mockImage);
-        ImageSprite sprite4 = testCandidate.imageSprite(mockImage, 0.0, 0.0);
+        ImageSprite sprite1 = testCandidate.createImageSprite("abc");
+        ImageSprite sprite2 = testCandidate.createImageSprite(mockImage);
         Mockito.verify(mockModelRepository).addImageSprite(sprite1);
         Mockito.verify(mockModelRepository).addImageSprite(sprite2);
-        Mockito.verify(mockModelRepository).addImageSprite(sprite3);
-        Mockito.verify(mockModelRepository).addImageSprite(sprite4);
     }
 
     @Test
     public void coloursHaveCorrectRedGreenAndBlueComponents() {
 
-        assertThat(testCandidate.colour(1.0, 0.8431373, 0.0), is(Colours.GOLD));
+        assertThat(testCandidate.createColour(1.0, 0.8431373, 0.0), is(Colours.GOLD));
     }
 }

@@ -43,8 +43,6 @@ public class RuntimeImageSprite extends RuntimeSprite<ImageSprite> {
     protected void drawDebugBounds (ShapeRenderer shapes) {
 
         shapes.set(ShapeRenderer.ShapeType.Line);
-        float value = (float) Utils.ENGINE_INSTANCE.wave(0, 1, 2000);
-        shapes.setColor(value, 1 - value, 0, 1);
         shapes.rect(getX() - getOriginX(), getY() - getOriginY(),
                     getOriginX(), getOriginY(),
                     getWidth() - 1, getHeight() - 1,
