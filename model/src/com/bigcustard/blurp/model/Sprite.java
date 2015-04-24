@@ -1,5 +1,7 @@
 package com.bigcustard.blurp.model;
 
+import com.bigcustard.blurp.model.constants.*;
+
 /**
  * A sprite is an object that can be put on the screen, moved around, rotated, and generally mucked about with in
  * various ways. For more details, check the subclasses.
@@ -57,7 +59,7 @@ public abstract class Sprite<T> {
      *
      * @see Colour
      */
-    public Colour colour = Colours.RUNTIME_INSTANCE.white;
+    public Colour colour = Colours.WHITE;
 
     /**
      * The alpha transparency of the sprite. This odd phrase actual just means how transparent it is.

@@ -84,10 +84,8 @@ public class BlurpRuntime {
                 script.run(blurpObjectProvider.getBlurp(),
                            blurpObjectProvider.getModelScreen(),
                            blurpObjectProvider.getKeyboard(),
-                           blurpObjectProvider.getUtils(),
-                           blurpObjectProvider.getKeys(),
-                           blurpObjectProvider.getColours());
-//                blurpObjectProvider.getBlurpifier().blurpify();
+                           blurpObjectProvider.getUtils());
+
             } catch (RuntimeException e) {
                 if(exceptionHandler != null) {
                     exceptionHandler.handleException(e);

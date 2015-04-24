@@ -1,6 +1,7 @@
 package com.bigcustard.blurp.core;
 
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.model.constants.*;
 import org.junit.*;
 import org.mockito.*;
 
@@ -55,6 +56,6 @@ public class BlurpImplTest {
     @Test
     public void coloursHaveCorrectRedGreenAndBlueComponents() {
 
-        assertThat(testCandidate.colour(1.0, 0.8431373, 0.0), is(Colours.RUNTIME_INSTANCE.gold));
+        assertThat(testCandidate.colour(1.0, 0.8431373, 0.0), is(Colours.GOLD));
     }
 }

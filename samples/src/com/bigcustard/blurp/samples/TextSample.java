@@ -9,7 +9,7 @@ public class TextSample implements BlurpRunnable {
     private static final String MESSAGE = "The quick, brown fox jumped over the lazy dog.";
 
     @Override
-    public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils, Keys keys, Colours colours) {
+    public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils) {
 
 //        blurp.setDebugMode(true);
 
@@ -21,7 +21,7 @@ public class TextSample implements BlurpRunnable {
         blurp.imageSprite("hello-world.png").position(250, 200).alpha = 0.3;
 
         TextSprite rotateAndScaleText = blurp.textSprite("Rotate and Scale!").position(600, 200);
-        rotateAndScaleText.colour = colours.dodgerBlue;
+        rotateAndScaleText.colour = Colours.DODGER_BLUE;
 
         int frameCount = 0;
         while(true) {

@@ -1,5 +1,6 @@
 package com.bigcustard.blurp.model;
 
+import com.bigcustard.blurp.model.constants.*;
 import org.junit.*;
 
 import static org.hamcrest.CoreMatchers.*;
@@ -7,7 +8,7 @@ import static org.hamcrest.MatcherAssert.*;
 
 public class ColourTest {
 
-    private static Colours colours = Colours.RUNTIME_INSTANCE;
+//    private static Colours colours = Colours.RUNTIME_INSTANCE;
 
     @Test
     public void equalsReturnsTrueForEquivalentColours() throws Exception {
@@ -22,25 +23,25 @@ public class ColourTest {
     @Test
     public void equalsReturnsFalseForDifferentColours() throws Exception {
 
-        assertThat(colours.red.equals(colours.blue), is(false));
+        assertThat(Colours.RED.equals(Colours.BLUE), is(false));
     }
 
     @Test
     public void canMixcolourss() throws Exception {
 
-        assertThat(colours.red.mixedWith(colours.blue), is(colours.purple));
+        assertThat(Colours.RED.mixedWith(Colours.BLUE), is(Colours.PURPLE));
     }
 
     @Test
     public void canChangeBrightness() throws Exception {
 
-        assertThat(colours.maroon.withBrightness(2), is(colours.red));
-        assertThat(colours.red.withBrightness(0.5), is(colours.maroon));
+        assertThat(Colours.MAROON.withBrightness(2), is(Colours.RED));
+        assertThat(Colours.RED.withBrightness(0.5), is(Colours.MAROON));
     }
 
     @Test
     public void brightnessChangeIsClamped() throws Exception {
 
-        assertThat(colours.blue.withBrightness(2), is(colours.blue));
+        assertThat(Colours.BLUE.withBrightness(2), is(Colours.BLUE));
     }
 }

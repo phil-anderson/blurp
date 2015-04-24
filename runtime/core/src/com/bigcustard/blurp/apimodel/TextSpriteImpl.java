@@ -17,7 +17,7 @@ public class TextSpriteImpl extends TextSprite {
         scaleX = 1;
         scaleY = 1;
         alpha = 1;
-        colour = Colours.RUNTIME_INSTANCE.white;
+        colour = Colours.WHITE;
         fontSize = 30;
         wrapWidth = -1;
         justification = Justification.AlignLeft;

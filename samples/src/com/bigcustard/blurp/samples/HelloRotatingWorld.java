@@ -6,7 +6,7 @@ import com.bigcustard.blurp.model.*;
 public class HelloRotatingWorld implements BlurpRunnable {
 
     @Override
-    public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils, Keys keys, Colours colours) {
+    public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils) {
 
         ImageSprite world = blurp.imageSprite("hello-world.png");
 

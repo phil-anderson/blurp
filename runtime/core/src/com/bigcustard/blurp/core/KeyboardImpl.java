@@ -2,18 +2,19 @@ package com.bigcustard.blurp.core;
 
 import com.badlogic.gdx.*;
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.model.constants.*;
 
 public class KeyboardImpl implements Keyboard {
 
     @Override
-    public boolean isKeyPressed(int keyCode) {
+    public boolean isKeyPressed(Keys key) {
 
-        return Gdx.input.isKeyPressed(keyCode);
+        return Gdx.input.isKeyPressed(key.keyCode);
     }
 
     @Override
-    public boolean isKeyJustPressed(int keyCode) {
+    public boolean isKeyJustPressed(Keys key) {
 
-        return Gdx.input.isKeyJustPressed(keyCode);
+        return Gdx.input.isKeyJustPressed(key.keyCode);
     }
 }

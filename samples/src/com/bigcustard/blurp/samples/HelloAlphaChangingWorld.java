@@ -6,7 +6,7 @@ import com.bigcustard.blurp.model.*;
 public class HelloAlphaChangingWorld implements BlurpRunnable {
 
     @Override
-    public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils, Keys keys, Colours colours) {
+    public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils) {
 
         Image worldImage = blurp.image("hello-world.png");
 

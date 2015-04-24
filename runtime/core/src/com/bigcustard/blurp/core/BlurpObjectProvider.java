@@ -22,8 +22,6 @@ public class BlurpObjectProvider {
     private final Blurpifier blurpifier;
     private final Keyboard keyboard;
     private final Utils utils;
-    private final Keys keys;
-    private final Colours colours;
     private final Screen modelScreen;
     private final RuntimeScreen runtimeScreen;
     private final RuntimeRepository runtimeRepository;
@@ -38,8 +36,6 @@ public class BlurpObjectProvider {
         modelRepository = new ModelRepository();
         keyboard = new KeyboardImpl();
         utils = new Utils();
-        keys = new Keys();
-        colours = new Colours();
 
         Viewport viewport = blurpConfiguration.getViewport();
         float width = viewport.getWorldWidth();
@@ -111,16 +107,6 @@ public class BlurpObjectProvider {
     public Utils getUtils() {
 
         return utils;
-    }
-
-    public Keys getKeys() {
-
-        return keys;
-    }
-
-    public Colours getColours() {
-
-        return colours;
     }
 
     public BitmapFont getSystemFont() {

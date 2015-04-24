@@ -1,6 +1,8 @@
 package com.bigcustard.blurp.scripting;
 
 import java.io.*;
+import java.lang.reflect.*;
+import java.util.*;
 import javax.script.*;
 import com.bigcustard.blurp.bootstrap.*;
 import com.bigcustard.blurp.core.*;
@@ -22,16 +24,16 @@ public class ScriptEngineBlurpRunnable implements BlurpRunnable {
     }
 
     @Override
-    public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils, Keys keys, Colours colours) {
+    public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils) {
 
         scriptEngine.put("blurp", blurp);
         scriptEngine.put("screen", screen);
         scriptEngine.put("keyboard", keyboard);
         scriptEngine.put("utils", utils);
-        scriptEngine.put("keys", keys);
-        scriptEngine.put("colours", colours);
+        scriptEnginePutConstants(Colours.class);
         scriptEnginePutEnums(Justification.values());
         scriptEnginePutEnums(Handle.values());
+        scriptEnginePutEnums(Keys.values());
 
         scriptEngine.put(ScriptEngine.FILENAME, scriptName);
         try {
@@ -44,7 +46,46 @@ public class ScriptEngineBlurpRunnable implements BlurpRunnable {
     private void scriptEnginePutEnums(Enum[] enumValues){
 
         for(Enum enumValue : enumValues) {
+            if(scriptEngine.get(enumValue.name()) != null) {
+                throw new RuntimeException("Conflicting enumerations - " + enumValue.getClass() + " vs " + scriptEngine.get(enumValue.name()).getClass());
+            }
             scriptEngine.put(enumValue.name(), enumValue);
         }
+    }
+
+    private void scriptEnginePutConstants(Class constantsClass) {
+
+        List allConstants = new ArrayList();
+        for(Field field : constantsClass.getFields()) {
+            String fieldName = camelise(field.getName());
+            if(scriptEngine.get(fieldName) != null) {
+                throw new RuntimeException("Conflicting constants - " + constantsClass + " vs " + scriptEngine.get(fieldName).getClass());
+            }
+            try {
+                Object constant = field.get(null);
+                scriptEngine.put(fieldName, constant);
+                allConstants.add(constant);
+            } catch(IllegalAccessException e) {
+                throw new IllegalStateException("Class " + constantsClass + " contains inaccessible, or non-constant fields");
+            }
+        }
+        scriptEngine.put("All" + constantsClass.getSimpleName(), allConstants.toArray());
+    }
+
+    private String camelise(String capsName) {
+
+        StringBuilder result = new StringBuilder();
+        boolean wordBreak = true;
+
+        for(int i = 0; i < capsName.length(); i++) {
+            char ch = capsName.charAt(i);
+            if(ch != '_') {
+                result.append(wordBreak ? ch : Character.toLowerCase(ch));
+                wordBreak = false;
+            } else {
+                wordBreak = true;
+            }
+        }
+        return result.toString();
     }
 }
