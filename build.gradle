@@ -99,6 +99,10 @@ project(":runtime:core") {
         compile project(":model")
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+        compile 'org.jruby:jruby-complete:1.7.19'
+
+
+        testCompile project(":model").sourceSets.test.output
         testCompile "junit:junit:4.12"
         testCompile "org.mockito:mockito-all:1.9.5"
         testCompile "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"

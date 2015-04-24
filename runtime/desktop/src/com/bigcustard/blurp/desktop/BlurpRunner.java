@@ -8,6 +8,9 @@ import org.kohsuke.args4j.*;
 public class BlurpRunner {
 
     public static void main (String[] args) {
+        // TODO - PHIL, see https://github.com/jruby/jruby/wiki/Embedding-with-JSR-223 as to why this is here
+        // To discuss.
+        System.setProperty("org.jruby.embed.localvariable.behavior", "transient");
 
         CommandLineOptions options = new CommandLineOptions();
         CmdLineParser parser = new CmdLineParser(options, ParserProperties.defaults().withUsageWidth(120).withOptionSorter(null));
