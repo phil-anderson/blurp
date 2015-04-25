@@ -1,7 +1,6 @@
 package com.bigcustard.blurp.runtimemodel;
 
 import com.badlogic.gdx.graphics.g2d.*;
-import com.badlogic.gdx.graphics.glutils.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
 
@@ -28,26 +27,9 @@ public class RuntimeImageSprite extends RuntimeSprite<ImageSprite> {
     }
 
     @Override
-    public void drawImpl(Batch batch, float parentAlpha) {
+    public void render(Batch batch, float parentAlpha) {
 
-        // Draw scaled texture centered at (and rotated around) origin
-        batch.draw(image.getTextureRegion(),
-                   getX() - getOriginX(), getY() - getOriginY(),
-                   getOriginX(), getOriginY(),
-                   getWidth(), getHeight(),
-                   getScaleX(), getScaleY(),
-                   getRotation());
-    }
-
-    @Override
-    protected void drawDebugBounds (ShapeRenderer shapes) {
-
-        shapes.set(ShapeRenderer.ShapeType.Line);
-        shapes.rect(getX() - getOriginX(), getY() - getOriginY(),
-                    getOriginX(), getOriginY(),
-                    getWidth() - 1, getHeight() - 1,
-                    getScaleX(), getScaleY(),
-                    getRotation());
+            batch.draw(image.getTextureRegion(), 0, 0);
     }
 
     @Override

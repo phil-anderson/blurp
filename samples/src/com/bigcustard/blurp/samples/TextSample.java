@@ -12,14 +12,13 @@ public class TextSample implements BlurpRunnable {
     @Override
     public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils) {
 
-        blurp.setDebugMode(true);
+//        blurp.setDebugMode(true);
 
         blurp.createTextSprite("LEFT-JUSTIFIED\n" + MESSAGE).position(150, 500).wrap(220, Justification.AlignLeft);
         blurp.createTextSprite("CENTER-JUSTIFIED\n" + MESSAGE).position(400, 500).wrap(220, Justification.AlignCenter);
         blurp.createTextSprite("RIGHT-JUSTIFIED\n" + MESSAGE).position(650, 500).wrap(220, Justification.AlignRight);
 
         TextSprite colorTagText = blurp.createTextSprite(COLOURFUL_MESSAGE).position(400, 400);
-        colorTagText.handle = Handle.Center;
         colorTagText.enableColorTags = true;
 
         TextSprite anchorText = blurp.createTextSprite("").position(250, 200);
@@ -30,6 +29,7 @@ public class TextSample implements BlurpRunnable {
 
         int frameCount = 0;
         while(true) {
+
             if(frameCount == 0) {
                 anchorText.handle = Handle.BottomRight;
                 anchorText.text = "Bottom-Left Handle\nBottom-Left Handle\nBottom-Left Handle";

@@ -2,8 +2,6 @@ package com.bigcustard.blurp.runtimemodel;
 
 import java.util.*;
 import com.badlogic.gdx.graphics.g2d.*;
-import com.badlogic.gdx.graphics.glutils.*;
-import com.badlogic.gdx.math.*;
 import com.bigcustard.blurp.apimodel.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
@@ -29,10 +27,6 @@ public class RuntimeTextSprite extends RuntimeSprite<TextSprite> {
     private float fontSize;
     private boolean markupEnabled;
 
-    private Matrix4 transformationStorage = new Matrix4();
-    private Affine2 transform = new Affine2();
-    private Matrix4 transformMatrix = new Matrix4();
-
     @Override
     public void sync(TextSprite modelSprite, BlurpObjectProvider blurpObjectProvider, boolean newInstance) {
 
@@ -56,11 +50,9 @@ public class RuntimeTextSprite extends RuntimeSprite<TextSprite> {
     }
 
     @Override
-    public void drawImpl(Batch batch, float parentAlpha) {
+    public void preRender() {
 
-        // TODO: Fix this - bt of a hack... Think I can divide by lineheight  / fontscale.
-        font.setScale(1);
-        font.setScale(fontSize / font.getLineHeight());
+        font.setScale(fontSize / (font.getLineHeight() / font.getScaleX()));
 
         font.setMarkupEnabled(markupEnabled);
 
@@ -73,35 +65,17 @@ public class RuntimeTextSprite extends RuntimeSprite<TextSprite> {
         }
 
         calculateOrigins();
-
-        transform.setToTrnRotScl(getX(), getY(), getRotation(), getScaleX(), getScaleY());
-        transform.translate(-getOriginX(), -getOriginY() + getHeight());
-        transformMatrix.set(transform);
-
-        transformationStorage.set(batch.getTransformMatrix());
-
-        batch.setTransformMatrix(transformMatrix);
-        try {
-            font.setColor(getColor());
-            if(wrapWidth == -1) {
-                font.drawMultiLine(batch, text, 0, 0);
-            } else {
-                font.drawWrapped(batch, text, 0, 0, wrapWidth, alignment);
-            }
-        } finally {
-            batch.setTransformMatrix(transformationStorage);
-        }
     }
 
     @Override
-    protected void drawDebugBounds (ShapeRenderer shapes) {
+    public void render(Batch batch, float parentAlpha) {
 
-            shapes.set(ShapeRenderer.ShapeType.Line);
-            shapes.rect(getX() - getOriginX(), getY() - getOriginY(),
-                        getOriginX(), getOriginY(),
-                        getWidth(), getHeight(),
-                        getScaleX(), getScaleY(),
-                        getRotation());
+            font.setColor(getColor());
+            if(wrapWidth == -1) {
+                font.drawMultiLine(batch, text, 0, getHeight());
+            } else {
+                font.drawWrapped(batch, text, 0, getHeight(), wrapWidth, alignment);
+            }
     }
 
     private void calculateOrigins() {

@@ -54,8 +54,8 @@ public class BlurpObjectProvider {
     // pre-existing libGdx app (i.e. PlanetBlurp).
     public void onLibGdxInitialised() {
 
-        Texture systemFontTexture = new Texture(Gdx.files.classpath("RobotoCondensed.png"));
-        systemFontTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        Texture systemFontTexture = new Texture(Gdx.files.classpath("RobotoCondensed.png"), true);
+        systemFontTexture.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.MipMapLinearLinear);
         systemFont = new BitmapFont(Gdx.files.classpath("RobotoCondensed.fnt"), new TextureRegion(systemFontTexture), false);
     }
 
