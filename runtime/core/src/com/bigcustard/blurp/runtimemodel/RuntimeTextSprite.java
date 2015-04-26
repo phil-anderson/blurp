@@ -2,6 +2,7 @@ package com.bigcustard.blurp.runtimemodel;
 
 import java.util.*;
 import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.graphics.glutils.*;
 import com.bigcustard.blurp.apimodel.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
@@ -65,7 +66,21 @@ public class RuntimeTextSprite extends RuntimeSprite<TextSprite> {
             setSize(wrapWidth, bounds.height);
         }
 
+        // Make sprite's height a multiple of the font's line height
+        setHeight((float) (Math.ceil(getHeight() / fontSize) * fontSize));
+
         calculateOrigins();
+    }
+
+    @Override
+    protected void drawDebugBounds(ShapeRenderer shapes) {
+
+        shapes.set(ShapeRenderer.ShapeType.Line);
+        shapes.rect(getX() - getOriginX(), getY() - getOriginY(),
+                    getOriginX(), getOriginY(),
+                    getWidth(), fontSize,
+                    getScaleX(), getScaleY(),
+                    getRotation());
     }
 
     @Override

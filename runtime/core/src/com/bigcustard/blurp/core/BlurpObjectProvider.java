@@ -55,7 +55,7 @@ public class BlurpObjectProvider {
     public void onLibGdxInitialised() {
 
         Texture systemFontTexture = new Texture(Gdx.files.classpath("RobotoCondensed.png"), true);
-        systemFontTexture.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.MipMapLinearLinear);
+        systemFontTexture.setFilter(Texture.TextureFilter.MipMapLinearNearest, Texture.TextureFilter.Linear);
         systemFont = new BitmapFont(Gdx.files.classpath("RobotoCondensed.fnt"), new TextureRegion(systemFontTexture), false);
     }
 
