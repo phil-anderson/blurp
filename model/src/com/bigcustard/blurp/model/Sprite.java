@@ -17,7 +17,7 @@ public abstract class Sprite<T> {
      * The position of the sprite, or to be more precise, the position of the <i>center</i> of the sprite.
      * <p>
      * The bottom-left of the world is at x=0, y=0, and the top-right will be determined by the height and width of the
-     * world you created. The default world (i.e what you get if you don;t define one yourself) is 800 wide and 480
+     * world you created. The default world (i.e what you get if you don;t define one yourself) is 800 wide and 600
      * high.
      * <p>
      * You can happily set the coordinates to be outside of the world coordinates, and Blurp won't bat an eyelid.
@@ -71,6 +71,48 @@ public abstract class Sprite<T> {
      * Try it out... You'll soon see what it does.
      */
     public double alpha;
+
+    public T x(double newX) {
+
+        this.x = newX;
+        return (T) this;
+    }
+
+    public T y(double newY) {
+
+        this.y = newY;
+        return (T) this;
+    }
+
+    public T scaleX(double newScaleX) {
+
+        this.scaleX = newScaleX;
+        return (T) this;
+    }
+
+    public T scaleY(double newScaleY) {
+
+        this.scaleY = newScaleY;
+        return (T) this;
+    }
+
+    public T rotation(double newRotation) {
+
+        this.rotation = newRotation;
+        return (T) this;
+    }
+
+    public T colour(Colour newColour) {
+
+        this.colour = newColour;
+        return (T) this;
+    }
+
+    public T alpha(double newAlpha) {
+
+        this.alpha = newAlpha;
+        return (T) this;
+    }
 
     /**
      * This method provides a handy way to set both X and Y coordinates in one hit.

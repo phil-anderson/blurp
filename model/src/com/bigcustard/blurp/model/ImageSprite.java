@@ -17,6 +17,12 @@ public abstract class ImageSprite extends Sprite<ImageSprite> {
      */
     public Image image;
 
+    public ImageSprite image(Image newImage) {
+
+        image = newImage;
+        return this;
+    }
+
     /**
      * Removes the ImageSprite completely from Blurp. It will be destroyed, and no longer appear on screen. Other
      * ImageSprites that use the same Image will (of course) be fine.

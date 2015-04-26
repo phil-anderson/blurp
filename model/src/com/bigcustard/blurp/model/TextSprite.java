@@ -4,7 +4,6 @@ import com.bigcustard.blurp.model.constants.*;
 
 public abstract class TextSprite extends Sprite<TextSprite> {
 
-    // TODO: Support Markup, which is actually in libgdx!! See TextMarkup class.
     public String text;
 
     public double fontSize;
@@ -15,13 +14,54 @@ public abstract class TextSprite extends Sprite<TextSprite> {
 
     public Justification justification;
 
-    public boolean enableColorTags;
+    public boolean colourTagsEnabled;
 
-    public abstract TextSprite wrap(double width, Justification justification);
+    public TextSprite text(String newText) {
+
+        text = newText;
+        return this;
+    }
+
+    public TextSprite fontSize(double newFontSize) {
+
+        fontSize = newFontSize;
+        return this;
+    }
+
+    public TextSprite wrapWidth(double newWrapWidth) {
+
+        wrapWidth = newWrapWidth;
+        return this;
+    }
+
+    public TextSprite handle(Handle newHandle) {
+
+        handle = newHandle;
+        return this;
+    }
+
+    public TextSprite justification(Justification newJustification) {
+
+        justification = newJustification;
+        return this;
+    }
+
+    public TextSprite colourTagsEnabled(boolean colourTagsEnabled) {
+
+        this.colourTagsEnabled = colourTagsEnabled;
+        return this;
+    }
+
+    public TextSprite wrap(double width, Justification justification) {
+
+        wrapWidth = width;
+        this.justification = justification;
+        return this;
+    }
 
     /**
      * Removes the TextSprite completely from Blurp. It will be destroyed, and no longer appear on screen.
-     * <p>
+     * <p/>
      * Removing things from Blurp when you no longer need them is a really good thing to do, as any resources they use
      * up is freed and available for the rest of your program to use.
      */

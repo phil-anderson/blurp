@@ -28,14 +28,6 @@ public class TextSpriteImpl extends TextSprite {
     }
 
     @Override
-    public TextSprite wrap(double width, Justification justification) {
-
-        wrapWidth = width;
-        this.justification = justification;
-        return this;
-    }
-
-    @Override
     public void remove() {
 
         modelRepository.removeTextSprite(this);

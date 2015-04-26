@@ -39,7 +39,7 @@ public class RuntimeTextSprite extends RuntimeSprite<TextSprite> {
         alignment = JUSTIFICATION_TO_ALIGNMENT.get(modelSpriteImpl.getJustification());
         wrapWidth = (float) modelSpriteImpl.getWrapWidth();
         fontSize = (float) modelSprite.fontSize;
-        markupEnabled = modelSprite.enableColorTags;
+        markupEnabled = modelSprite.colourTagsEnabled;
 
         // TODO: Add ability to change (and hence sync) fonts
         if(newInstance) font = blurpObjectProvider.getSystemFont();
@@ -52,6 +52,7 @@ public class RuntimeTextSprite extends RuntimeSprite<TextSprite> {
     @Override
     public void preRender() {
 
+        // TODO: Fix rounding issue with frequent scaling
         font.setScale(fontSize / (font.getLineHeight() / font.getScaleX()));
 
         font.setMarkupEnabled(markupEnabled);

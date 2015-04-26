@@ -11,13 +11,17 @@ public class HelloColourTintedWorlds implements BlurpRunnable {
     public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils) {
 
         Image worldImage = blurp.loadImage("hello-world.png");
-        ImageSprite redWorld = blurp.createImageSprite(worldImage).position(180, 180);
-        ImageSprite greenWorld = blurp.createImageSprite(worldImage).position(400, 420);
-        ImageSprite blueWorld = blurp.createImageSprite(worldImage).position(620, 180);
+        blurp.createImageSprite(worldImage)
+             .position(180, 180)
+             .colour(Colours.RED);
 
-        redWorld.colour = Colours.RED;
-        greenWorld.colour = Colours.GREEN;
-        blueWorld.colour = Colours.BLUE;
+        blurp.createImageSprite(worldImage)
+             .position(400, 420)
+             .colour(Colours.GREEN);
+
+        blurp.createImageSprite(worldImage)
+             .position(620, 180)
+             .colour(Colours.BLUE);
 
         blurp.blurpify();
     }

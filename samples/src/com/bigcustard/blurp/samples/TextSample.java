@@ -14,15 +14,28 @@ public class TextSample implements BlurpRunnable {
 
 //        blurp.setDebugMode(true);
 
-        blurp.createTextSprite("LEFT-JUSTIFIED\n" + MESSAGE).position(150, 500).wrap(220, Justification.AlignLeft);
-        blurp.createTextSprite("CENTER-JUSTIFIED\n" + MESSAGE).position(400, 500).wrap(220, Justification.AlignCenter);
-        blurp.createTextSprite("RIGHT-JUSTIFIED\n" + MESSAGE).position(650, 500).wrap(220, Justification.AlignRight);
+        blurp.createTextSprite("LEFT-JUSTIFIED\n" + MESSAGE)
+             .position(150, 500)
+             .wrap(220, Justification.AlignLeft);
 
-        TextSprite colorTagText = blurp.createTextSprite(COLOURFUL_MESSAGE).position(400, 400);
-        colorTagText.enableColorTags = true;
+        blurp.createTextSprite("CENTER-JUSTIFIED\n" + MESSAGE)
+             .position(400, 500)
+             .wrap(220, Justification.AlignCenter);
 
-        TextSprite anchorText = blurp.createTextSprite("").position(250, 200);
-        blurp.createImageSprite("hello-world.png").position(250, 200).alpha = 0.3;
+        blurp.createTextSprite("RIGHT-JUSTIFIED\n" + MESSAGE)
+            .position(650, 500)
+            .wrap(220, Justification.AlignRight);
+
+        blurp.createTextSprite(COLOURFUL_MESSAGE)
+                                       .position(400, 400)
+                                       .colourTagsEnabled(true);
+
+        blurp.createImageSprite("hello-world.png")
+             .position(250, 200)
+             .alpha(0.3);
+
+        TextSprite anchorText = blurp.createTextSprite("")
+                                     .position(250, 200);
 
         TextSprite rotateAndScaleText = blurp.createTextSprite("Rotate and Scale!").position(600, 200);
         rotateAndScaleText.colour = Colours.DODGER_BLUE;
