@@ -27,7 +27,7 @@ public class BlurpObjectProvider {
     private final RuntimeRepository runtimeRepository;
     private final BlurpScreen blurpScreen;
     private final Blurp blurp;
-    private BitmapFont systemFont;
+    private FontHolder systemFont;
 
     public BlurpObjectProvider(BlurpConfiguration blurpConfiguration) {
 
@@ -56,7 +56,9 @@ public class BlurpObjectProvider {
 
         Texture systemFontTexture = new Texture(Gdx.files.classpath("RobotoCondensed.png"), true);
         systemFontTexture.setFilter(Texture.TextureFilter.MipMapLinearNearest, Texture.TextureFilter.Linear);
-        systemFont = new BitmapFont(Gdx.files.classpath("RobotoCondensed.fnt"), new TextureRegion(systemFontTexture), false);
+        BitmapFont font = new BitmapFont(Gdx.files.classpath("RobotoCondensed.fnt"),
+                                         new TextureRegion(systemFontTexture), false);
+        systemFont = new FontHolder(font);
     }
 
     public BlurpConfiguration getBlurpConfiguration() {
@@ -109,7 +111,7 @@ public class BlurpObjectProvider {
         return utils;
     }
 
-    public BitmapFont getSystemFont() {
+    public FontHolder getSystemFont() {
 
         return systemFont;
     }

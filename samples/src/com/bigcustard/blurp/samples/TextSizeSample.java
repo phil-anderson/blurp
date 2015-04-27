@@ -14,8 +14,10 @@ public class TextSizeSample implements BlurpRunnable {
             blurp.createTextSprite("Text with line height " + i + "px")
                  .fontSize(i)
                  .position(400, yPosition);
+            blurp.blurpify();
+            utils.sleep(250);
+
             yPosition -= i;
         }
-        blurp.blurpify();
     }
 }

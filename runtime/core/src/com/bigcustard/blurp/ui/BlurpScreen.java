@@ -60,6 +60,8 @@ public class BlurpScreen extends ScreenAdapter {
 
         renderListener.handlePreRenderEvent(delta);
 
+        blurpObjectProvider.getSystemFont().reset();
+
         try {
             doFrame(delta);
         } catch(RuntimeException exception) {
