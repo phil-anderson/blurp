@@ -5,7 +5,6 @@ WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
 * Add on-demand collision detection (text circular)
-* Change moveTowards to take a step size in pixels - More intuitive!
 * Build list of all sprites to add to stage and add them in correct order so later ImageSprites are above earlier TextSprites etc.
 * Provide a proper dispose() method which cleans everything out
 * Make script dispose() and then restart at end after a tap
