@@ -15,7 +15,7 @@ public class HelloMovingWorld implements BlurpRunnable {
 
         while(true) {
 
-            world.moveTowards(targetX, targetY, 500);
+            world.moveTowards(targetX, targetY, 7.5);
             blurp.blurpify();
 
             if(world.x == targetX && world.y == targetY) {

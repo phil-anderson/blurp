@@ -1,7 +1,7 @@
 package com.bigcustard.blurp.apimodel;
 
 import com.bigcustard.blurp.core.*;
-import com.bigcustard.blurp.core.commands.*;
+import com.bigcustard.blurp.core.common.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.constants.*;
 
@@ -44,9 +44,9 @@ public class TextSpriteImpl extends TextSprite {
     }
 
     @Override
-    public TextSprite moveTowards(double targetX, double targetY, double speed) {
+    public TextSprite moveTowards(double targetX, double targetY, double distanceToMove) {
 
-        runtimeRepository.registerCommand(new MoveTowardsCommand(this, targetX, targetY, speed));
+        MoveTowardsHandler.moveTowards(this, targetX, targetY, distanceToMove);
         return this;
     }
 }

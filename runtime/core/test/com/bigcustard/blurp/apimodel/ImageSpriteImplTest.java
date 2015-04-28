@@ -1,7 +1,6 @@
 package com.bigcustard.blurp.apimodel;
 
 import com.bigcustard.blurp.core.*;
-import com.bigcustard.blurp.core.commands.*;
 import com.bigcustard.blurp.model.*;
 import org.junit.*;
 import org.mockito.*;
@@ -26,12 +25,5 @@ public class ImageSpriteImplTest {
 
         testCandidate.remove();
         Mockito.verify(mockModelRepository).removeImageSprite(testCandidate);
-    }
-
-    @Test
-    public void moveTowardsRegistersACommand() throws Exception {
-
-        testCandidate.moveTowards(100.0, 100.0, 50.0);
-        Mockito.verify(mockRuntimeRepository).registerCommand(Mockito.<CommandVisitable>anyObject());
     }
 }
