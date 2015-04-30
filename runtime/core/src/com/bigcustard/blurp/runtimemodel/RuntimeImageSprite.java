@@ -24,6 +24,8 @@ public class RuntimeImageSprite extends RuntimeSprite<ImageSprite> {
         if(newInstance) {
             blurpObjectProvider.getBlurpScreen().addActor(this);
         }
+
+        updateCollisionShapes();
     }
 
     @Override

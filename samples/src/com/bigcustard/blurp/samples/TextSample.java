@@ -51,7 +51,7 @@ public class TextSample implements BlurpRunnable {
                 anchorText.text = "Bottom Handle\nBottom Handle\nBottom Handle";
             } else if(frameCount == 100) {
                 anchorText.handle = Handle.BottomLeft;
-                anchorText.text = "Bottom-Left Handle\nBottom-Left Handle\nBottom-Left Handle";
+                anchorText.text = "Bottom-Right Handle\nBottom-Right Handle\nBottom-Right Handle";
             } else if(frameCount == 150) {
                 anchorText.handle = Handle.Left;
                 anchorText.text = "Left Handle\nLeft Handle\nLeft Handle";
@@ -63,7 +63,7 @@ public class TextSample implements BlurpRunnable {
                 anchorText.text = "Top Handle\nTop Handle\nTop Handle";
             } else if(frameCount == 300) {
                 anchorText.handle = Handle.TopRight;
-                anchorText.text = "Top-Right Handle\nTop-Right Handle\nTop-Right Handle";
+                anchorText.text = "Top-Left Handle\nTop-Left Handle\nTop-Left Handle";
             } else if(frameCount == 350) {
                 anchorText.handle = Handle.Right;
                 anchorText.text = "Right Handle\nRight Handle\nRight Handle";

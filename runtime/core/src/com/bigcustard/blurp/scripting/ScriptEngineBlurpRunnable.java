@@ -34,6 +34,7 @@ public class ScriptEngineBlurpRunnable implements BlurpRunnable {
         scriptEnginePutEnums(Justification.values());
         scriptEnginePutEnums(Handle.values());
         scriptEnginePutEnums(Key.values());
+        scriptEnginePutEnums(CollisionShape.values());
 
         scriptEngine.put(ScriptEngine.FILENAME, scriptName);
         try {

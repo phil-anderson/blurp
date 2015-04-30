@@ -34,6 +34,12 @@ public class ImageSpriteImpl extends ImageSprite {
         return this;
     }
 
+    @Override
+    public boolean collidedWith(Sprite other) {
+
+        return CollisionDetector.detectCollision(this, other, runtimeRepository);
+    }
+
     public void dispose() {
 
         remove();

@@ -72,6 +72,9 @@ public abstract class Sprite<T> {
      */
     public double alpha;
 
+    public CollisionShape collisionShape;
+
+
     public T x(double newX) {
 
         this.x = newX;
@@ -113,6 +116,13 @@ public abstract class Sprite<T> {
         this.alpha = newAlpha;
         return (T) this;
     }
+
+    public T collisionShape(CollisionShape newCollisionShape) {
+
+        this.collisionShape = newCollisionShape;
+        return (T) this;
+    }
+
 
     /**
      * This method provides a handy way to set both X and Y coordinates in one hit.
@@ -196,4 +206,16 @@ public abstract class Sprite<T> {
      * @return The Sprite.
      */
     public abstract T moveTowards(double targetX, double targetY, double speed);
+
+    /**
+     * Checks whether this Sprite has collided with the specified Sprite, or to be more precise, it checks whether this
+     * Sprite's {@link #collisionShape} overlaps the otehr Sprite's {@link #collisionShape}
+     * <p>
+     * Note that collision shapes are initialised on the first call to {@link #Blurp.blurpify()} after they're created.
+     * If either of the Sprites hasn't hasn't been initialised, this will return false.
+     *
+     * @param other The Sprite to check whether we've collided with
+     * @return true If both Sprites have been initialised and are in collision (i.e. their collisionShapes overlap).
+     */
+    public abstract boolean collidedWith(Sprite other);
 }

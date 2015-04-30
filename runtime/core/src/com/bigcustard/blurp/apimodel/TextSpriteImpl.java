@@ -49,4 +49,10 @@ public class TextSpriteImpl extends TextSprite {
         MoveTowardsHandler.moveTowards(this, targetX, targetY, distanceToMove);
         return this;
     }
+
+    @Override
+    public boolean collidedWith(Sprite other) {
+
+        return CollisionDetector.detectCollision(this, other, runtimeRepository);
+    }
 }

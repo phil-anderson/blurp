@@ -9,4 +9,10 @@ public class SpriteForTests extends Sprite {
 
         return null;
     }
+
+    @Override
+    public boolean collidedWith(Sprite other) {
+
+        return false;
+    }
 }

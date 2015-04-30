@@ -66,6 +66,14 @@ public class RuntimeRepository {
         return runtimeTextSprites.get(modelTextSprite);
     }
 
+    // TODO: Would love to get rid of the instanceof usages
+    public RuntimeSprite getSprite(Sprite modelSprite) {
+
+        if(modelSprite instanceof ImageSprite) return getImageSprite((ImageSprite) modelSprite);
+        if(modelSprite instanceof TextSprite) return getTextSprite((TextSprite) modelSprite);
+        return null;
+    }
+
     public void registerCommand(CommandVisitable command) {
 
         commandRequests.add(command);

@@ -46,10 +46,12 @@ public class Utils {
     }
 
     /**
+     * Returns a number between the specified low and high values. Repeatedly calling this will result in a sequence of
+     * numbers that follow a sine wave between the two values.
+     *
      * @param low The lowest value that could be returned
      * @param high The highest value that could be returned
-     * @return A number between the specified low and high values. Repeatedly calling this will result in a sequence of
-     * numbers that follow a sine wave.
+     * @return A number between the specified low and high values.
      */
     public double wave(double low, double high, double wavelength) {
 

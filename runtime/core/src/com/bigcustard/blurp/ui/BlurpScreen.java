@@ -55,6 +55,9 @@ public class BlurpScreen extends ScreenAdapter {
             blurpObjectProvider.onLibGdxInitialised();
             batch = new SpriteBatch();
             stage = new Stage(viewport, batch);
+
+            Gdx.gl.glLineWidth(1.5f);
+
             firstRender = false;
         }
 

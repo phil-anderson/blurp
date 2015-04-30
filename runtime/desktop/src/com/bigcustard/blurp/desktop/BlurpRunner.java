@@ -26,6 +26,7 @@ public class BlurpRunner {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.width = options.width;
         config.height = options.height;
+        config.samples = 1;
 
 		new LwjglApplication(new BlurpApp(options.language, options.scriptName,
                              new FitViewport(config.width, config.height)),
