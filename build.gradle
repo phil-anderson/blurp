@@ -94,13 +94,12 @@ project(":runtime:desktop") {
 project(":runtime:core") {
     apply plugin: "java"
 
-
     dependencies {
         compile project(":model")
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         compile 'org.jruby:jruby-complete:1.7.19'
-        compile fileTree(dir: '../libs', include: '*.jar')
+        compile fileTree(dir: '../../libs', include: '*.jar')
 
         testCompile project(":model").sourceSets.test.output
         testCompile "junit:junit:4.12"
