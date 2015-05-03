@@ -13,6 +13,7 @@ public class BlurpRuntime {
 
     private BlurpObjectProvider blurpObjectProvider;
     private BlurpExceptionHandler exceptionHandler;
+    private Thread scriptThread;
 
     private BlurpRuntime(BlurpConfiguration config) {
 
@@ -57,13 +58,16 @@ public class BlurpRuntime {
 
     public void start(BlurpRunnable blurpRunnable) {
 
-        Thread scriptThread = new Thread(new RunnableWrapper(blurpRunnable));
+        scriptThread = new Thread(new RunnableWrapper(blurpRunnable));
         scriptThread.start();
     }
 
     // TODO: Implement this properly
     public void end() {
 
+
+        // TODO: Add explanation comment
+        scriptThread.stop();
     }
 
     // TODO: Need a way to pause / resume / restart / stop the script. Communicate via flags in Repository? Blurpifier states?

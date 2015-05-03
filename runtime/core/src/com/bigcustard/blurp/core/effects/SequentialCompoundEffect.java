@@ -25,7 +25,7 @@ public class SequentialCompoundEffect extends CompoundEffect {
     @Override
     protected Effect copy(Effect effect) {
 
-        ParallelCompoundEffect copy = new ParallelCompoundEffect(effects);
+        SequentialCompoundEffect copy = new SequentialCompoundEffect(effects);
         copyBasePropertiesTo(copy);
         return copy;
     }
