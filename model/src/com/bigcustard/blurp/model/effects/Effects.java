@@ -4,7 +4,7 @@ import com.bigcustard.blurp.model.*;
 
 public abstract class Effects {
 
-    public int defaultDuration = 1000;
+    public int defaultDuration = 1;
 
     public Effects defaultDuration(int newDefaultDuration) {
 
@@ -34,8 +34,24 @@ public abstract class Effects {
 
     public Effect scale(double newScale) {
 
-        return scale(newScale, newScale, defaultDuration);
+        return scale(newScale, newScale);
     }
+
+    public Effect scale(double newScaleX, double newScaleY) {
+
+        return scale(newScaleX, newScaleY, defaultDuration);
+    }
+
+    public Effect alpha(double newAlpha) {
+
+        return alpha(newAlpha, defaultDuration);
+    }
+
+    public Effect colour(Colour newColour) {
+
+        return colour(newColour, defaultDuration);
+    }
+
 
     public abstract Effect moveTo(double newX, double newY, int duration);
 
@@ -49,7 +65,7 @@ public abstract class Effects {
 
     public abstract Effect alpha(double newAlpha, int duration);
 
-    public abstract Effect changeColour(Colour newColour, int duration);
+    public abstract Effect colour(Colour newColour, int duration);
 
     public abstract BaseEffect pause(int duration);
 

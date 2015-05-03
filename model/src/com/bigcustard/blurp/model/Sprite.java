@@ -1,15 +1,12 @@
 package com.bigcustard.blurp.model;
 
 import com.bigcustard.blurp.model.constants.*;
+import com.bigcustard.blurp.model.effects.*;
 
 /**
  * A sprite is an object that can be put on the screen, moved around, rotated, and generally mucked about with in
  * various ways. For more details, check the subclasses.
  */
-
-
-// TODO: Refactor to affine2 transforms and add shear effects
-
 @SuppressWarnings("unchecked")
 public abstract class Sprite<T> {
 
@@ -71,6 +68,8 @@ public abstract class Sprite<T> {
      * Try it out... You'll soon see what it does.
      */
     public double alpha;
+
+    public Effect effect;
 
     public CollisionShape collisionShape;
 
@@ -168,6 +167,13 @@ public abstract class Sprite<T> {
         return (T) this;
     }
 
+    public T scale(double newScaleX, double newScaleY) {
+
+        this.scaleX = newScaleX;
+        this.scaleY = newScaleY;
+        return (T) this;
+    }
+
     /**
      * Flips the Sprite on the X-axis (i.e. from left-to-right), so it looks like a mirror-image of the original.
      *
@@ -209,13 +215,30 @@ public abstract class Sprite<T> {
 
     /**
      * Checks whether this Sprite has collided with the specified Sprite, or to be more precise, it checks whether this
-     * Sprite's {@link #collisionShape} overlaps the otehr Sprite's {@link #collisionShape}
+     * Sprite's {@link #collisionShape} overlaps the other Sprite's {@link #collisionShape}
      * <p>
-     * Note that collision shapes are initialised on the first call to {@link #Blurp.blurpify()} after they're created.
+     * Note that collision shapes are initialised on the first call to {@link com.bigcustard.blurp.model.Blurp#blurpify()} after they're created.
      * If either of the Sprites hasn't hasn't been initialised, this will return false.
      *
      * @param other The Sprite to check whether we've collided with
      * @return true If both Sprites have been initialised and are in collision (i.e. their collisionShapes overlap).
      */
     public abstract boolean collidedWith(Sprite other);
+
+    public T effect(Effect newEffect) {
+
+        this.effect = newEffect;
+        return (T) this;
+    }
+
+    public boolean effectActive() {
+
+        return this.effect != null;
+    }
+
+    public T stopEffect() {
+
+        this.effect = null;
+        return (T) this;
+    }
 }

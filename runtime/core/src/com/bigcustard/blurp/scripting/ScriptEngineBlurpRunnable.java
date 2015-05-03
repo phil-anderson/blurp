@@ -25,7 +25,7 @@ public class ScriptEngineBlurpRunnable implements BlurpRunnable {
     }
 
     @Override
-    public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils) {
+    public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils, Effects effects) {
 
         Bindings bindings = scriptEngine.createBindings();
         bindings.put("blurp", blurp);

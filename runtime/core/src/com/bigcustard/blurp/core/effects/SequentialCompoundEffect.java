@@ -1,22 +1,32 @@
 package com.bigcustard.blurp.core.effects;
 
-import aurelienribon.tweenengine.Timeline;
-import com.bigcustard.blurp.model.effects.BaseEffect;
+import aurelienribon.tweenengine.*;
+import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.model.effects.*;
 
-public class SequentialCompoundEffect extends CompoundEffect implements TimelineFactory {
+public class SequentialCompoundEffect extends CompoundEffect {
 
     public SequentialCompoundEffect(BaseEffect... effects) {
 
         super(effects);
     }
 
+
     @Override
-    public Timeline createTimeline(Object sprite) {
+    public BaseTween getTween(Sprite sprite) {
 
         Timeline timeline = Timeline.createSequence();
         pushEffectsToTimeline(timeline, sprite);
-        timeline.end();
+        populateTween(timeline);
 
         return timeline;
+    }
+
+    @Override
+    protected Effect copy(Effect effect) {
+
+        ParallelCompoundEffect copy = new ParallelCompoundEffect(effects);
+        copyBasePropertiesTo(copy);
+        return copy;
     }
 }

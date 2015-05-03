@@ -1,5 +1,6 @@
 package com.bigcustard.blurp.ui;
 
+import aurelienribon.tweenengine.*;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.*;
@@ -18,19 +19,21 @@ public class BlurpScreen extends ScreenAdapter {
     private final RuntimeScreenRenderer runtimeScreenRenderer;
     private final Blurpifier blurpifier;
     private final BlurpObjectProvider blurpObjectProvider;
+    private final TweenManager tweener;
 
     private Batch batch;
     private Stage stage;
     private RenderListener renderListener = RenderListener.NULL_IMPLEMENTATION;
     private boolean firstRender = true;
 
-    public BlurpScreen(Viewport viewport, RuntimeRepository runtimeRepository, RuntimeScreenRenderer runtimeScreenRenderer, Blurpifier blurpifier, BlurpObjectProvider blurpObjectProvider) {
+    public BlurpScreen(Viewport viewport, RuntimeRepository runtimeRepository, RuntimeScreenRenderer runtimeScreenRenderer, Blurpifier blurpifier, BlurpObjectProvider blurpObjectProvider, TweenManager tweener) {
 
         this.viewport = viewport;
         this.runtimeRepository = runtimeRepository;
         this.runtimeScreenRenderer = runtimeScreenRenderer;
         this.blurpifier = blurpifier;
         this.blurpObjectProvider = blurpObjectProvider;
+        this.tweener = tweener;
     }
 
     public void addActor(Actor actor) {
@@ -85,13 +88,12 @@ public class BlurpScreen extends ScreenAdapter {
         // TODO: We don't currently need this - Remove unless needed.
         getStage().act(delta);
 
-        // Tweener update goes here too.
-
         synchronized(blurpifier) {
             if(blurpifier.getRequestState() == BlurpifyRequestState.Requested) {
                 blurpifier.setRenderState(BlurpifyRenderState.RequestAcknowledged);
                 try {
                     runtimeRepository.syncWithModelRepository(delta);
+                    tweener.update(delta);
                 } finally {
                     blurpifier.setRenderState(BlurpifyRenderState.RequestComplete);
                 }

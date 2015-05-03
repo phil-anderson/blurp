@@ -1,13 +1,17 @@
 package com.bigcustard.blurp.core;
 
+import aurelienribon.tweenengine.*;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.utils.viewport.*;
 import com.bigcustard.blurp.apimodel.*;
 import com.bigcustard.blurp.bootstrap.*;
+import com.bigcustard.blurp.core.effects.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.Screen;
+import com.bigcustard.blurp.model.Sprite;
+import com.bigcustard.blurp.model.effects.*;
 import com.bigcustard.blurp.runtimemodel.*;
 import com.bigcustard.blurp.ui.*;
 
@@ -25,7 +29,10 @@ public class BlurpObjectProvider {
     private final Screen modelScreen;
     private final RuntimeScreen runtimeScreen;
     private final RuntimeRepository runtimeRepository;
+    private final Effects effects;
+    private final TweenManager tweener;
     private final BlurpScreen blurpScreen;
+
     private final Blurp blurp;
     private FontHolder systemFont;
 
@@ -33,21 +40,30 @@ public class BlurpObjectProvider {
 
         this.blurpConfiguration = blurpConfiguration;
 
-        modelRepository = new ModelRepository();
-        keyboard = new KeyboardImpl();
-        utils = new Utils();
+        this.modelRepository = new ModelRepository();
+        this.keyboard = new KeyboardImpl();
+        this.utils = new Utils();
 
         Viewport viewport = blurpConfiguration.getViewport();
         float width = viewport.getWorldWidth();
         float height = viewport.getWorldHeight();
-        modelScreen = new ScreenImpl(width, height);
+        this.modelScreen = new ScreenImpl(width, height);
 
-        runtimeScreen = new RuntimeScreen(modelScreen);
+        this.effects = new EffectsImpl();
+        this.tweener = initTweener();
+
+        this.runtimeScreen = new RuntimeScreen(modelScreen);
         RuntimeScreenRenderer runtimeScreenRenderer = new RuntimeScreenRenderer(runtimeScreen);
-        blurpifier = new Blurpifier();
-        runtimeRepository = new RuntimeRepository(this);
-        blurp = new BlurpImpl(runtimeRepository, modelRepository, modelScreen, blurpifier);
-        blurpScreen = new BlurpScreen(viewport, runtimeRepository, runtimeScreenRenderer, blurpifier, this);
+        this.blurpifier = new Blurpifier();
+        this.runtimeRepository = new RuntimeRepository(this);
+        this.blurp = new BlurpImpl(runtimeRepository, modelRepository, modelScreen, blurpifier);
+        this.blurpScreen = new BlurpScreen(viewport, runtimeRepository, runtimeScreenRenderer, blurpifier, this, tweener);
+    }
+
+    private TweenManager initTweener() {
+
+        Tween.registerAccessor(Sprite.class, new SpriteAccessor());
+        return new TweenManager();
     }
 
     // Stuff that would normally go in the application.create() method, but can;t because we may be hosted in a
@@ -74,6 +90,11 @@ public class BlurpObjectProvider {
     public RuntimeRepository getRuntimeRepository() {
 
         return runtimeRepository;
+    }
+
+    public TweenManager getTweener() {
+
+        return tweener;
     }
 
     public BlurpScreen getBlurpScreen() {
@@ -114,5 +135,10 @@ public class BlurpObjectProvider {
     public FontHolder getSystemFont() {
 
         return systemFont;
+    }
+
+    public Effects getEffects() {
+
+        return effects;
     }
 }

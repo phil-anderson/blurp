@@ -2,15 +2,16 @@ package com.bigcustard.blurp.core.effects;
 
 import aurelienribon.tweenengine.*;
 import com.bigcustard.blurp.apimodel.*;
+import com.bigcustard.blurp.model.*;
 
-public class TweenEffect extends EffectImpl implements TweenFactory {
+public class TweenEffect extends EffectImpl<TweenEffect> {
 
     private final int tweenType;
-    private final int duration;
+    private final float duration;
     private final boolean relative;
     private final float[] targetValues;
 
-    public TweenEffect(int tweenType, int duration, boolean relative, float... targetValue) {
+    public TweenEffect(int tweenType, float duration, boolean relative, float... targetValue) {
 
         this.tweenType = tweenType;
         this.duration = duration;
@@ -19,7 +20,7 @@ public class TweenEffect extends EffectImpl implements TweenFactory {
     }
 
     @Override
-    public Tween createTween(Object sprite) {
+    public BaseTween getTween(Sprite sprite) {
 
         Tween tween = Tween.to(sprite, tweenType, duration);
         if(relative) {
@@ -31,4 +32,11 @@ public class TweenEffect extends EffectImpl implements TweenFactory {
         return tween;
     }
 
+    @Override
+    protected TweenEffect copy(TweenEffect effect) {
+
+        TweenEffect copy = new TweenEffect(tweenType, duration, relative, targetValues);
+        copyBasePropertiesTo(copy);
+        return copy;
+    }
 }

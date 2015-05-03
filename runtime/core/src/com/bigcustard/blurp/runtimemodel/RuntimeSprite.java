@@ -1,9 +1,11 @@
 package com.bigcustard.blurp.runtimemodel;
 
+import aurelienribon.tweenengine.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.glutils.*;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.scenes.scene2d.*;
+import com.bigcustard.blurp.apimodel.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.Sprite;
 import com.bigcustard.blurp.model.constants.*;
@@ -17,6 +19,7 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
     private Circle collisionCircle = new Circle();
     private Polygon collisionRectangle = new Polygon();
     private CollisionShape collisionShape;
+    private EffectImpl effect;
 
     protected RuntimeSprite() { }
 
@@ -28,6 +31,19 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
         setRotation((float) -modelSprite.rotation);
         setColor(Convert.toGdxColour(modelSprite.colour, modelSprite.alpha));
         this.collisionShape = modelSprite.collisionShape;
+
+        TweenManager tweener = blurpObjectProvider.getTweener();
+        if(modelSprite.effect != this.effect) {
+            tweener.killTarget(modelSprite);
+            this.effect = (EffectImpl) modelSprite.effect;
+            this.effect.getTween(modelSprite).start(tweener);
+        } else {
+            if(modelSprite.effect != null) {
+                if(!tweener.containsTarget(modelSprite)) {
+                    modelSprite.effect = null;
+                }
+            }
+        }
     }
 
     @Override

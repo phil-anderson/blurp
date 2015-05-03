@@ -9,13 +9,13 @@ public class EffectsImpl extends Effects {
     @Override
     public Effect moveTo(double newX, double newY, int duration) {
 
-        return new TweenEffect(TweenTypes.POSITION, duration, false, (float) newX, (float) newY);
+        return new TweenEffect(TweenTypes.MOVE, duration, false, (float) newX, (float) newY);
     }
 
     @Override
     public Effect moveBy(double changeInX, double changeInY, int duration) {
 
-        return new TweenEffect(TweenTypes.POSITION, duration, true, (float) changeInX, (float) changeInY);
+        return new TweenEffect(TweenTypes.MOVE, duration, true, (float) changeInX, (float) changeInY);
     }
 
     @Override
@@ -39,11 +39,11 @@ public class EffectsImpl extends Effects {
     @Override
     public Effect alpha(double newAlpha, int duration) {
 
-        return new TweenEffect(TweenTypes.SCALE, duration, false, (float) newAlpha);
+        return new TweenEffect(TweenTypes.ALPHA, duration, false, (float) newAlpha);
     }
 
     @Override
-    public Effect changeColour(Colour newColour, int duration) {
+    public Effect colour(Colour newColour, int duration) {
 
         return new TweenEffect(TweenTypes.COLOUR, duration, false, (float) newColour.red, (float) newColour.green, (float) newColour.blue);
     }

@@ -5,11 +5,12 @@ import com.bigcustard.blurp.bootstrap.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.Screen;
 import com.bigcustard.blurp.model.constants.*;
+import com.bigcustard.blurp.model.effects.*;
 
 public class CollisionDetectionSample implements BlurpRunnable {
 
     @Override
-    public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils) {
+    public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils, Effects effects) {
 
         blurp.setDebugMode(true);
         Image worldImage = blurp.loadImage("hello-world.png");

@@ -2,27 +2,32 @@ package com.bigcustard.blurp.core.effects;
 
 import aurelienribon.tweenengine.*;
 import com.bigcustard.blurp.apimodel.*;
+import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.effects.*;
 
 public abstract class CompoundEffect extends EffectImpl {
 
-    private final BaseEffect[] effects;
+    protected final BaseEffect[] effects;
 
     public CompoundEffect(BaseEffect... effects) {
 
         this.effects = effects;
     }
 
-    protected void pushEffectsToTimeline(Timeline timeline, Object sprite) {
+    // TODO - Loads of casting to get rid of, but not at the expense of over-complicating wth a visitor pattern.
+    protected void pushEffectsToTimeline(Timeline timeline, Sprite sprite) {
 
         for(BaseEffect effect : effects) {
 
-            if (effect instanceof TweenFactory) {
-                timeline.push(((TweenFactory) effect).createTween(sprite));
-            } else if (effect instanceof TimelineFactory) {
-                timeline.push(((TimelineFactory) effect).createTimeline(sprite));
-            } else if (effect instanceof PauseEffect) {
+            if (effect instanceof PauseEffect) {
                 timeline.pushPause(((PauseEffect) effect).getDuration());
+            } else {
+                BaseTween baseTween = ((EffectImpl) effect).getTween(sprite);
+                if (effect instanceof TweenEffect) {
+                    timeline.push((Tween) baseTween);
+                } else if (effect instanceof CompoundEffect) {
+                    timeline.push((Timeline) baseTween);
+                }
             }
         }
     }

@@ -2,12 +2,13 @@ package com.bigcustard.blurp.samples;
 
 import com.bigcustard.blurp.bootstrap.*;
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.model.effects.*;
 
 public class TextSizeSample implements BlurpRunnable {
 
 
     @Override
-    public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils) {
+    public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils, Effects effects) {
 
         double yPosition = 545;
         for(int i = 100; i > 0; i -= 10) {
