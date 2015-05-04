@@ -12,12 +12,13 @@ import com.bigcustard.blurp.model.effects.*;
 
 public class ScriptEngineBlurpRunnable implements BlurpRunnable {
 
+    private final String language;
     private final Reader scriptReader;
     private final ScriptEngine scriptEngine;
     private final String scriptName;
 
     public ScriptEngineBlurpRunnable(String language, Reader scriptReader, String scriptName) {
-
+        this.language = language;
         this.scriptReader = scriptReader;
         this.scriptName = scriptName;
         scriptEngine = new ScriptEngineManager().getEngineByName(language);
@@ -37,6 +38,8 @@ public class ScriptEngineBlurpRunnable implements BlurpRunnable {
         scriptEnginePutEnums(Handle.values(), bindings);
         scriptEnginePutEnums(Key.values(), bindings);
         scriptEnginePutEnums(CollisionShape.values(), bindings);
+
+        if (language.equals("jruby")) JRubyWrapperSpike.wrap(scriptEngine, bindings);
 
         bindings.put(ScriptEngine.FILENAME, scriptName);
         try {
