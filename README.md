@@ -4,13 +4,14 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
-* Sprite.hide
 * Support for easing functions
+* Console
 * More effect samples
 * RemoveAfterEffects
 * Refactor so effect isn;t ap property but an action - playEffect maybe`
-* Add queueEffect? loopEffect?
+* Add Sprite methods queueEffect? loopEffect?
 * Build list of all sprites to add to stage and add them in correct order so later ImageSprites are above earlier TextSprites etc.
+* Allow control over zOrder (relative methods like Sprite.putBehind(otherSprite))
 * Provide a proper dispose() method which cleans everything out
 * Make script dispose() and then restart at end after a tap
 * Sprite mouse functions

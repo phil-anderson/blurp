@@ -38,7 +38,7 @@ public class BlurpScreen extends ScreenAdapter {
 
     public void addActor(Actor actor) {
 
-        getStage().addActor(actor);
+        stage.addActor(actor);
     }
 
     public RenderListener getRenderListener() {
@@ -55,13 +55,14 @@ public class BlurpScreen extends ScreenAdapter {
     public void render(float delta) {
 
         if(firstRender) {
-            blurpObjectProvider.onLibGdxInitialised();
             batch = new SpriteBatch();
             stage = new Stage(viewport, batch);
 
             Gdx.gl.glLineWidth(1.5f);
 
             firstRender = false;
+
+            blurpObjectProvider.onLibGdxInitialised();
         }
 
         renderListener.handlePreRenderEvent(delta);
@@ -86,7 +87,7 @@ public class BlurpScreen extends ScreenAdapter {
     private void doFrame(float delta) {
 
         // TODO: We don't currently need this - Remove unless needed.
-        getStage().act(delta);
+//        stage.act(delta);
 
         synchronized(blurpifier) {
             if(blurpifier.getRequestState() == BlurpifyRequestState.Requested) {
@@ -104,16 +105,16 @@ public class BlurpScreen extends ScreenAdapter {
             }
         }
 
-        doRender(delta);
+        doRender();
     }
 
-    private void doRender(float delta) {
+    private void doRender() {
 
         beginBatch(); // In case the RenderListener ended it.
         runtimeScreenRenderer.render();
         endBatch();
 
-        getStage().draw();
+        stage.draw();
     }
 
     private void beginBatch() {
@@ -130,16 +131,11 @@ public class BlurpScreen extends ScreenAdapter {
         }
     }
 
-    private Stage getStage() {
-
-        return stage;
-    }
-
     public void enableDebug(boolean debugEnabled, Colour debugColour) {
 
-        getStage().setDebugAll(debugEnabled);
-        getStage().setDebugInvisible(debugEnabled);
-        getStage().getDebugColor().set(Convert.toGdxColour(debugColour));
+        stage.setDebugAll(debugEnabled);
+        stage.setDebugInvisible(debugEnabled);
+        stage.getDebugColor().set(Convert.toGdxColour(debugColour));
     }
 
     @Override
