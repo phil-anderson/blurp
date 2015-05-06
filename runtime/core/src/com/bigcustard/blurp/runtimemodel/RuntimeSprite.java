@@ -30,6 +30,7 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
         setScale((float) modelSprite.scaleX, (float) modelSprite.scaleY);
         setRotation((float) -modelSprite.rotation);
         setColor(Convert.toGdxColour(modelSprite.colour, modelSprite.alpha));
+        setVisible(!modelSprite.hidden);
         this.collisionShape = modelSprite.collisionShape;
 
         TweenManager tweener = blurpObjectProvider.getTweener();

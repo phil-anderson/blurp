@@ -16,7 +16,7 @@ public class TextSizeSample implements BlurpRunnable {
                  .fontSize(i)
                  .position(400, yPosition);
             blurp.blurpify();
-            utils.sleep(250);
+            utils.sleep(0.25);
 
             yPosition -= i;
         }

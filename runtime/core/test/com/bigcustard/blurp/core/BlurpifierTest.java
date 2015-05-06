@@ -40,7 +40,7 @@ public class BlurpifierTest {
         new Thread(mockRenderer).start();
 
         // Ensure mock renderer thread has started and has asserted the dormant state before calling blurpify.
-        while(!mockRenderer.dormantAsserted) Utils.ENGINE_INSTANCE.sleep(1);
+        while(!mockRenderer.dormantAsserted) Utils.ENGINE_INSTANCE.sleep(0.001);
 
         testCandidate.blurpify();
         assertThat(testCandidate.getRequestState(), is(BlurpifyRequestState.Dormant)); // Should be back to dormant again
@@ -66,14 +66,14 @@ public class BlurpifierTest {
             dormantAsserted = true;
 
             // Wait for blurpify request from main thread
-            while(testCandidate.getRequestState() != BlurpifyRequestState.Requested) Utils.ENGINE_INSTANCE.sleep(1);
+            while(testCandidate.getRequestState() != BlurpifyRequestState.Requested) Utils.ENGINE_INSTANCE.sleep(0.001);
 
-            if(delayBeforeStateChange) Utils.ENGINE_INSTANCE.sleep(5000);
+            if(delayBeforeStateChange) Utils.ENGINE_INSTANCE.sleep(5);
             synchronized(testCandidate) {
                 testCandidate.setRenderState(BlurpifyRenderState.RequestAcknowledged);
             }
 
-            if(delayBeforeStateChange) Utils.ENGINE_INSTANCE.sleep(5000);
+            if(delayBeforeStateChange) Utils.ENGINE_INSTANCE.sleep(5);
             synchronized(testCandidate) {
                 testCandidate.setRenderState(BlurpifyRenderState.RequestComplete);
             }

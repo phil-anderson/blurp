@@ -5,12 +5,11 @@ WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
 * Sprite.hide
-* Text markup - Honour our colours
-* Work out a better approach to PauseEffect - Get rid of it? Get rid of it as can use delays??
-* Make CompoundEffects deep copy.
 * Support for easing functions
 * More effect samples
 * RemoveAfterEffects
+* Refactor so effect isn;t ap property but an action - playEffect maybe`
+* Add queueEffect? loopEffect?
 * Build list of all sprites to add to stage and add them in correct order so later ImageSprites are above earlier TextSprites etc.
 * Provide a proper dispose() method which cleans everything out
 * Make script dispose() and then restart at end after a tap

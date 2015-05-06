@@ -80,7 +80,7 @@ public class BlurpScreen extends ScreenAdapter {
         // Maybe libGdx isn't being particularly friendly outside of renders... Hmmmm...
         // I wonder if this will be an issue n Android?
         renderListener.handlePostRenderEvent(batch, delta);
-        Utils.ENGINE_INSTANCE.sleep(1);
+        Utils.ENGINE_INSTANCE.sleep(0.001);
     }
 
     private void doFrame(float delta) {

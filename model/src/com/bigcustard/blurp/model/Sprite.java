@@ -69,6 +69,8 @@ public abstract class Sprite<T> {
      */
     public double alpha;
 
+    public boolean hidden;
+
     public Effect effect;
 
     public CollisionShape collisionShape;
@@ -113,6 +115,12 @@ public abstract class Sprite<T> {
     public T alpha(double newAlpha) {
 
         this.alpha = newAlpha;
+        return (T) this;
+    }
+
+    public T hidden(boolean newHidden) {
+
+        this.hidden = newHidden;
         return (T) this;
     }
 

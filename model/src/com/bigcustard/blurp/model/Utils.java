@@ -89,6 +89,20 @@ public class Utils {
         return Math.tan(Math.toRadians(angle));
     }
 
+    public boolean timedToggle(double timeBetweenToggles) {
+
+        long millis = (long) (timeBetweenToggles * 1000);
+        return (System.currentTimeMillis() % millis * 2) > millis;
+    }
+
+    public boolean timedToggle(double timeTrue, double timeFalse) {
+
+        long trueMillis = (long) (timeTrue * 1000);
+        long falseMillis = (long) (timeFalse * 1000);
+
+        return (System.currentTimeMillis() % trueMillis + falseMillis) > trueMillis;
+    }
+
     /**
      * Puts your blurp script to sleep for approximately the specified number of milliseconds, after which it'll carry
      * on normally again.
@@ -96,12 +110,12 @@ public class Utils {
      * Note that although it puts your script to sleep, it doesn't put blurp to sleep, so it will continue to run in
      * the background.
      *
-     * @param milliseconds The number of milliseconds to sleep for.
+     * @param seconds The number of seconds to sleep for.
      */
-    public void sleep(long milliseconds) {
+    public void sleep(double seconds) {
 
         try {
-            Thread.sleep(milliseconds);
+            Thread.sleep((long) (seconds * 1000));
         } catch(InterruptedException e) {
             e.printStackTrace();
         }
