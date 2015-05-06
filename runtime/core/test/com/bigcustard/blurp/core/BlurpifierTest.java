@@ -28,7 +28,7 @@ public class BlurpifierTest {
         assertBlocksUntilComplete();
     }
 
-    @Test //@Ignore
+    @Test @Ignore
     public void blurpifyBlocksUntilStateIsCompleteWithSlowRenderer() throws Exception {
 
         mockRenderer = new MockRenderer(true);
