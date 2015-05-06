@@ -17,4 +17,22 @@ public class Convert {
                          (float) colour.blue,
                          (float) alpha);
     }
+
+    public static String toCamelCase(String capsName) {
+
+        StringBuilder result = new StringBuilder();
+        boolean wordBreak = true;
+
+        for(int i = 0; i < capsName.length(); i++) {
+            char ch = capsName.charAt(i);
+            if(ch != '_') {
+                result.append(wordBreak ? ch : Character.toLowerCase(ch));
+                wordBreak = false;
+            } else {
+                wordBreak = true;
+            }
+        }
+        return result.toString();
+    }
+
 }

@@ -9,6 +9,7 @@ import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.model.effects.*;
+import com.bigcustard.blurp.util.*;
 
 public class ScriptEngineBlurpRunnable implements BlurpRunnable {
 
@@ -60,7 +61,7 @@ public class ScriptEngineBlurpRunnable implements BlurpRunnable {
 
         List allConstants = new ArrayList();
         for(Field field : constantsClass.getFields()) {
-            String fieldName = camelise(field.getName());
+            String fieldName = Convert.toCamelCase(field.getName());
             if(bindings.get(fieldName) != null) {
                 throw new RuntimeException("Conflicting constants - " + constantsClass + " vs " + bindings.get(fieldName).getClass());
             }
@@ -73,22 +74,5 @@ public class ScriptEngineBlurpRunnable implements BlurpRunnable {
             }
         }
         bindings.put("All" + constantsClass.getSimpleName(), allConstants.toArray());
-    }
-
-    private String camelise(String capsName) {
-
-        StringBuilder result = new StringBuilder();
-        boolean wordBreak = true;
-
-        for(int i = 0; i < capsName.length(); i++) {
-            char ch = capsName.charAt(i);
-            if(ch != '_') {
-                result.append(wordBreak ? ch : Character.toLowerCase(ch));
-                wordBreak = false;
-            } else {
-                wordBreak = true;
-            }
-        }
-        return result.toString();
     }
 }
