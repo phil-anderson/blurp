@@ -13,9 +13,6 @@ import com.bigcustard.blurp.runtimemodel.*;
  */
 public class RuntimeRepository {
 
-    private final BlurpObjectProvider blurpObjectProvider;
-    private final ModelRepository modelRepository;
-
     private final ModelToRuntimeObjectMap<Image, RuntimeImage> runtimeImages;
     private final ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite> runtimeImageSprites;
     private final ModelToRuntimeObjectMap<TextSprite, RuntimeTextSprite> runtimeTextSprites;
@@ -23,17 +20,14 @@ public class RuntimeRepository {
     private final List<CommandVisitable> commandRequests;
     private final CommandExecutor commandExecutor;
 
-    public RuntimeRepository(BlurpObjectProvider blurpObjectProvider) {
+    public RuntimeRepository() {
 
-        this.blurpObjectProvider= blurpObjectProvider;
-
-        modelRepository = blurpObjectProvider.getModelRepository();
         runtimeImages = new ModelToRuntimeObjectMap<Image, RuntimeImage>(RuntimeImage.class);
         runtimeImageSprites = new ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite>(RuntimeImageSprite.class);
         runtimeTextSprites = new ModelToRuntimeObjectMap<TextSprite, RuntimeTextSprite>(RuntimeTextSprite.class);
 
         commandRequests = new ArrayList<CommandVisitable>();
-        commandExecutor = new CommandExecutor(blurpObjectProvider);
+        commandExecutor = new CommandExecutor();
     }
 
     public void syncWithModelRepository(float deltaTime) {
@@ -43,12 +37,12 @@ public class RuntimeRepository {
         commandRequests.clear();
 
         // Sync any singletons that need syncing
-        blurpObjectProvider.getRuntimeScreen().sync();
+        BlurpStore.runtimeScreen.sync();
 
         // Then sync the various model object types
-        runtimeImages.syncAll(modelRepository.getImages(), blurpObjectProvider);
-        runtimeImageSprites.syncAll(modelRepository.getImageSprites(), blurpObjectProvider);
-        runtimeTextSprites.syncAll(modelRepository.getTextSprites(), blurpObjectProvider);
+        runtimeImages.syncAll(BlurpStore.modelRepository.getImages());
+        runtimeImageSprites.syncAll(BlurpStore.modelRepository.getImageSprites());
+        runtimeTextSprites.syncAll(BlurpStore.modelRepository.getTextSprites());
     }
 
     public RuntimeImage getImage(Image modelImage) {

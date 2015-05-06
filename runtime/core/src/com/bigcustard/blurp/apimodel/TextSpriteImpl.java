@@ -7,10 +7,7 @@ import com.bigcustard.blurp.model.constants.*;
 
 public class TextSpriteImpl extends TextSprite {
 
-    private final RuntimeRepository runtimeRepository;
-    private final ModelRepository modelRepository;
-
-    public TextSpriteImpl(String text, double x, double y, RuntimeRepository runtimeRepository, ModelRepository modelRepository) {
+    public TextSpriteImpl(String text, double x, double y) {
 
         this.text = text;
         position(x, y);
@@ -22,15 +19,12 @@ public class TextSpriteImpl extends TextSprite {
         wrapWidth = -1;
         justification = Justification.AlignLeft;
         handle = Handle.Center;
-
-        this.runtimeRepository = runtimeRepository;
-        this.modelRepository = modelRepository;
     }
 
     @Override
     public void remove() {
 
-        modelRepository.removeTextSprite(this);
+        BlurpStore.modelRepository.removeTextSprite(this);
     }
 
     public Justification getJustification() {
@@ -53,6 +47,6 @@ public class TextSpriteImpl extends TextSprite {
     @Override
     public boolean collidedWith(Sprite other) {
 
-        return CollisionDetector.detectCollision(this, other, runtimeRepository);
+        return CollisionDetector.detectCollision(this, other);
     }
 }

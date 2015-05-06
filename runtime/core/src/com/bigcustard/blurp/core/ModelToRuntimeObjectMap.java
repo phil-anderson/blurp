@@ -36,15 +36,15 @@ public class ModelToRuntimeObjectMap<K, V extends RuntimeObject<K>> implements I
      *
      * @param modelObjects The list of model objects to sync with.
      */
-    public void syncAll(List<K> modelObjects, BlurpObjectProvider blurpObjectProvider) {
+    public void syncAll(List<K> modelObjects) {
 
         for(K modelObject : modelObjects) {
-            sync(modelObject, blurpObjectProvider);
+            sync(modelObject);
         }
         clearOrphans(modelObjects);
     }
 
-    void sync(K modelObject, BlurpObjectProvider blurpObjectProvider) {
+    void sync(K modelObject) {
 
         boolean newInstance = false;
         V runtimeObject = store.get(modelObject);
@@ -58,7 +58,7 @@ public class ModelToRuntimeObjectMap<K, V extends RuntimeObject<K>> implements I
             }
         }
 
-        runtimeObject.sync(modelObject, blurpObjectProvider, newInstance);
+        runtimeObject.sync(modelObject, newInstance);
     }
 
     private void clearOrphans(List<K> modelObjects) {

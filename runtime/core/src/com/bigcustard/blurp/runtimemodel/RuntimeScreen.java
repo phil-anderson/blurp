@@ -1,21 +1,20 @@
 package com.bigcustard.blurp.runtimemodel;
 
+import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
 
 public class RuntimeScreen {
 
-    private Screen modelScreen;
     private Colour backgroundColour;
 
-    public RuntimeScreen(Screen modelScreen) {
+    public RuntimeScreen() {
 
-        this.modelScreen = modelScreen;
         sync();
     }
 
     public void sync() {
 
-        this.backgroundColour = modelScreen.backgroundColour;
+        this.backgroundColour = BlurpStore.modelScreen.backgroundColour;
     }
 
     public Colour getBackgroundColour() {

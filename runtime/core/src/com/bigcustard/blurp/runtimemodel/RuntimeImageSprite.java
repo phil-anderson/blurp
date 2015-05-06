@@ -9,11 +9,11 @@ public class RuntimeImageSprite extends RuntimeSprite<ImageSprite> {
     private RuntimeImage image;
 
     @Override
-    public void sync(ImageSprite modelImageSprite, BlurpObjectProvider blurpObjectProvider, boolean newInstance) {
+    public void sync(ImageSprite modelImageSprite, boolean newInstance) {
 
-        super.sync(modelImageSprite, blurpObjectProvider, newInstance);
+        super.sync(modelImageSprite, newInstance);
 
-        image = blurpObjectProvider.getRuntimeRepository().getImage(modelImageSprite.image);
+        image = BlurpStore.runtimeRepository.getImage(modelImageSprite.image);
 
         int width = image.getTextureRegion().getRegionWidth();
         int height = image.getTextureRegion().getRegionHeight();
@@ -22,7 +22,7 @@ public class RuntimeImageSprite extends RuntimeSprite<ImageSprite> {
         setOrigin(width / 2, height / 2);
 
         if(newInstance) {
-            blurpObjectProvider.getBlurpScreen().addActor(this);
+            BlurpStore.blurpScreen.addActor(this);
         }
 
         updateCollisionShapes();

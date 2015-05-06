@@ -2,7 +2,6 @@ package com.bigcustard.blurp.bootstrap;
 
 import java.io.*;
 import java.lang.reflect.*;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.utils.*;
 import com.bigcustard.blurp.core.*;
@@ -16,17 +15,16 @@ import com.bigcustard.blurp.util.*;
 // TODO: Test
 public class BlurpRuntime {
 
-    private BlurpObjectProvider blurpObjectProvider;
     private BlurpExceptionHandler exceptionHandler;
     private Thread scriptThread;
 
     private BlurpRuntime(BlurpConfiguration config) {
 
-        this.blurpObjectProvider = new BlurpObjectProvider(config);
+        BlurpStore.initialise(config);
 
         if(config.isDebugEnabled()) {
             SetDebugModeCommand debugCommand = new SetDebugModeCommand(config.isDebugEnabled(), Colours.LIME_GREEN);
-            blurpObjectProvider.getRuntimeRepository().registerCommand(debugCommand);
+            BlurpStore.runtimeRepository.registerCommand(debugCommand);
         }
     }
 
@@ -41,14 +39,9 @@ public class BlurpRuntime {
         this.exceptionHandler = exceptionHandler;
     }
 
-    public Screen getScreen() {
-
-        return blurpObjectProvider.getBlurpScreen();
-    }
-
     public void onRenderEvent(RenderListener listener) {
 
-        blurpObjectProvider.getBlurpScreen().onRenderEvent(listener);
+        BlurpStore.blurpScreen.onRenderEvent(listener);
     }
 
     public void start(String language, String script, String scriptName) {
@@ -109,11 +102,11 @@ public class BlurpRuntime {
         public void run() {
 
             try {
-                script.run(blurpObjectProvider.getBlurp(),
-                           blurpObjectProvider.getModelScreen(),
-                           blurpObjectProvider.getKeyboard(),
-                           blurpObjectProvider.getUtils(),
-                           blurpObjectProvider.getEffects());
+                script.run(BlurpStore.blurp,
+                           BlurpStore.modelScreen,
+                           BlurpStore.keyboard,
+                           BlurpStore.utils,
+                           BlurpStore.effects);
 
             } catch (RuntimeException e) {
                 if(exceptionHandler != null) {

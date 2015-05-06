@@ -9,22 +9,9 @@ import com.bigcustard.blurp.model.*;
  */
 public class BlurpImpl extends Blurp {
 
-    private final RuntimeRepository runtimeRepository;
-    private final ModelRepository modelRepository;
-    private final Screen screen;
-    private final Blurpifier blurpifier;
-
-    BlurpImpl(RuntimeRepository runtimeRepository, ModelRepository modelRepository, Screen screen, Blurpifier blurpifier) {
-
-        this.runtimeRepository = runtimeRepository;
-        this.modelRepository = modelRepository;
-        this.screen = screen;
-        this.blurpifier = blurpifier;
-    }
-
     public Blurp blurpify() {
 
-        blurpifier.blurpify();
+        BlurpStore.blurpifier.blurpify();
         return this;
     }
 
@@ -34,10 +21,10 @@ public class BlurpImpl extends Blurp {
         if(filename == null) throw new RuntimeException("Image file name can't be null");
 
         // See if we already have one
-        Image image = modelRepository.getImage(filename);
+        Image image = BlurpStore.modelRepository.getImage(filename);
         if(image == null) {
-            image = new ImageImpl(filename, modelRepository);
-            modelRepository.addImage(image);
+            image = new ImageImpl(filename);
+            BlurpStore.modelRepository.addImage(image);
         }
         return image;
     }
@@ -54,8 +41,8 @@ public class BlurpImpl extends Blurp {
 
         if(image == null) throw new RuntimeException("Image can't be null");
 
-        ImageSprite imageSprite = new ImageSpriteImpl(image, screen.width / 2.0, screen.height / 2.0, runtimeRepository, modelRepository);
-        modelRepository.addImageSprite(imageSprite);
+        ImageSprite imageSprite = new ImageSpriteImpl(image, BlurpStore.modelScreen.width / 2.0, BlurpStore.modelScreen.height / 2.0);
+        BlurpStore.modelRepository.addImageSprite(imageSprite);
         return imageSprite;
     }
 
@@ -64,8 +51,8 @@ public class BlurpImpl extends Blurp {
 
         if(text == null) text = "";
 
-        TextSprite textSprite = new TextSpriteImpl(text, screen.width / 2.0, screen.height / 2.0, runtimeRepository, modelRepository);
-        modelRepository.addTextSprite(textSprite);
+        TextSprite textSprite = new TextSpriteImpl(text, BlurpStore.modelScreen.width / 2.0, BlurpStore.modelScreen.height / 2.0);
+        BlurpStore.modelRepository.addTextSprite(textSprite);
         return textSprite;
     }
 
@@ -78,7 +65,7 @@ public class BlurpImpl extends Blurp {
     @Override
     public Blurp setDebugMode(boolean enable, Colour debugColour) {
 
-        runtimeRepository.registerCommand(new SetDebugModeCommand(enable, debugColour));
+        BlurpStore.runtimeRepository.registerCommand(new SetDebugModeCommand(enable, debugColour));
         return this;
     }
 }

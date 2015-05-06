@@ -17,7 +17,7 @@ public class ModelToRuntimeObjectMapTest {
 
         testCandidate = new ModelToRuntimeObjectMap<ModelClass, RuntimeClass>(RuntimeClass.class);
         modelObject = new ModelClass("Ford");
-        testCandidate.sync(modelObject, null);
+        testCandidate.sync(modelObject);
     }
 
     @Test
@@ -35,7 +35,7 @@ public class ModelToRuntimeObjectMapTest {
         RuntimeClass originalRuntimeObject = testCandidate.get(modelObject);
 
         modelObject.id = "Arthur";
-        testCandidate.sync(modelObject, null);
+        testCandidate.sync(modelObject);
 
         RuntimeClass runtimeObject = testCandidate.get(modelObject);
         assertThat(runtimeObject, sameInstance(originalRuntimeObject));
@@ -48,7 +48,7 @@ public class ModelToRuntimeObjectMapTest {
         assertThat(testCandidate.get(modelObject).isNew, is(true));
 
         modelObject.id = "Arthur";
-        testCandidate.sync(modelObject, null);
+        testCandidate.sync(modelObject);
 
         assertThat(testCandidate.get(modelObject).isNew, is(false));
     }
@@ -58,7 +58,7 @@ public class ModelToRuntimeObjectMapTest {
 
         ModelClass otherModelObject = new ModelClass("Test2");
         List<ModelClass> modelObjects = Arrays.asList(otherModelObject);
-        testCandidate.syncAll(modelObjects, null);
+        testCandidate.syncAll(modelObjects);
 
         assertThat(testCandidate.get(modelObject), nullValue());
 
@@ -85,7 +85,7 @@ public class ModelToRuntimeObjectMapTest {
         public RuntimeClass() {}
 
         @Override
-        public void sync(ModelClass modelObject, BlurpObjectProvider blurpObjectProvider, boolean newInstance) {
+        public void sync(ModelClass modelObject, boolean newInstance) {
 
             id = modelObject.id;
             isNew = newInstance;

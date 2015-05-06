@@ -13,10 +13,10 @@ public class CollisionDetector {
     private static Vector2 lastVertex = new Vector2();
     private static Vector2 vertex = new Vector2();
 
-    public static boolean detectCollision(Sprite spriteA, Sprite spriteB, RuntimeRepository runtimeRepository) {
+    public static boolean detectCollision(Sprite spriteA, Sprite spriteB) {
 
-        RuntimeSprite runtimeSpriteA = runtimeRepository.getSprite(spriteA);
-        RuntimeSprite runtimeSpriteB = runtimeRepository.getSprite(spriteB);
+        RuntimeSprite runtimeSpriteA = BlurpStore.runtimeRepository.getSprite(spriteA);
+        RuntimeSprite runtimeSpriteB = BlurpStore.runtimeRepository.getSprite(spriteB);
 
         if(runtimeSpriteA == null || runtimeSpriteB == null) return false;
 

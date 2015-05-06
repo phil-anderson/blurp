@@ -24,7 +24,7 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
     protected RuntimeSprite() { }
 
     @Override
-    public void sync(T modelSprite, BlurpObjectProvider blurpObjectProvider, boolean newInstance) {
+    public void sync(T modelSprite, boolean newInstance) {
 
         setPosition((float) modelSprite.x, (float) modelSprite.y);
         setScale((float) modelSprite.scaleX, (float) modelSprite.scaleY);
@@ -33,7 +33,7 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
         setVisible(!modelSprite.hidden);
         this.collisionShape = modelSprite.collisionShape;
 
-        TweenManager tweener = blurpObjectProvider.getTweener();
+        TweenManager tweener = BlurpStore.tweener;
         if(modelSprite.effect != this.effect) {
             tweener.killTarget(modelSprite);
             this.effect = (EffectImpl) modelSprite.effect;

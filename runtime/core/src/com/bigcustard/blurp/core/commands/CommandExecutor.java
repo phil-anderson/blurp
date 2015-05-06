@@ -5,13 +5,9 @@ import com.bigcustard.blurp.core.*;
 
 public class CommandExecutor implements CommandVisitor {
 
-    private final BlurpObjectProvider blurpObjectProvider;
-
     private final SetDebugModeExecutor setDebugModeExecutor;
 
-    public CommandExecutor(BlurpObjectProvider blurpObjectProvider) {
-
-        this.blurpObjectProvider = blurpObjectProvider;
+    public CommandExecutor() {
 
         setDebugModeExecutor = new SetDebugModeExecutor();
     }
@@ -26,6 +22,6 @@ public class CommandExecutor implements CommandVisitor {
     @Override
     public void visit(SetDebugModeCommand setDebugModeCommand) {
 
-        setDebugModeExecutor.execute(setDebugModeCommand, blurpObjectProvider.getBlurpScreen());
+        setDebugModeExecutor.execute(setDebugModeCommand, BlurpStore.blurpScreen);
     }
 }

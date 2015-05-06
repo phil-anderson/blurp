@@ -23,7 +23,11 @@ public class BlurpImplTest {
     public void setUp() throws Exception {
 
         MockitoAnnotations.initMocks(this);
-        testCandidate = new BlurpImpl(mockRuntimeRepository, mockModelRepository, mockScreen, mockBlurpifier);
+        BlurpStore.runtimeRepository = mockRuntimeRepository;
+        BlurpStore.modelRepository = mockModelRepository;
+        BlurpStore.modelScreen = mockScreen;
+        BlurpStore.blurpifier = mockBlurpifier;
+        testCandidate = new BlurpImpl();
     }
 
     @Test

@@ -28,9 +28,9 @@ public class RuntimeTextSprite extends RuntimeSprite<TextSprite> {
     private boolean markupEnabled;
 
     @Override
-    public void sync(TextSprite modelSprite, BlurpObjectProvider blurpObjectProvider, boolean newInstance) {
+    public void sync(TextSprite modelSprite, boolean newInstance) {
 
-        super.sync(modelSprite, blurpObjectProvider, newInstance);
+        super.sync(modelSprite, newInstance);
         text = modelSprite.text;
 
         TextSpriteImpl modelSpriteImpl = (TextSpriteImpl) modelSprite;
@@ -42,10 +42,10 @@ public class RuntimeTextSprite extends RuntimeSprite<TextSprite> {
         markupEnabled = modelSprite.colourTagsEnabled;
 
         // TODO: Add ability to change (and hence sync) fonts
-        if(newInstance) font = blurpObjectProvider.getSystemFont().getFont();
+        if(newInstance) font = BlurpStore.systemFont.getFont();
 
         if(newInstance) {
-            blurpObjectProvider.getBlurpScreen().addActor(this);
+            BlurpStore.blurpScreen.addActor(this);
         }
     }
 

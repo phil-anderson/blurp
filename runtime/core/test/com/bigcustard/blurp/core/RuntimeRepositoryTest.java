@@ -27,20 +27,18 @@ public class RuntimeRepositoryTest extends LibGdxTest {
 
         MockitoAnnotations.initMocks(this);
 
-        BlurpObjectProvider blurpObjectProvider = new BlurpObjectProviderForTests();
-        ModelRepository modelRepository = blurpObjectProvider.getModelRepository();
+//        BlurpStore blurpStore = new BlurpStoreForTests();
+        image1 = new ImageImpl("abc");
+        image2 = new ImageImpl("def");
+        imageSprite1 = new ImageSpriteImpl(image1, 0, 0);
+        imageSprite2 = new ImageSpriteImpl(image2, 0, 0);
 
-        image1 = new ImageImpl("abc", modelRepository);
-        image2 = new ImageImpl("def", modelRepository);
-        imageSprite1 = new ImageSpriteImpl(image1, 0, 0, testCandidate, modelRepository);
-        imageSprite2 = new ImageSpriteImpl(image2, 0, 0, testCandidate, modelRepository);
+        BlurpStore.modelRepository.addImage(image1);
+        BlurpStore.modelRepository.addImage(image2);
+        BlurpStore.modelRepository.addImageSprite(imageSprite1);
+        BlurpStore.modelRepository.addImageSprite(imageSprite2);
 
-        modelRepository.addImage(image1);
-        modelRepository.addImage(image2);
-        modelRepository.addImageSprite(imageSprite1);
-        modelRepository.addImageSprite(imageSprite2);
-
-        testCandidate = blurpObjectProvider.getRuntimeRepository();
+        testCandidate = BlurpStore.runtimeRepository;
     }
 
     @Test

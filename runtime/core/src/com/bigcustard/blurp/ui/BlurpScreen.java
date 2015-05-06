@@ -1,6 +1,5 @@
 package com.bigcustard.blurp.ui;
 
-import aurelienribon.tweenengine.*;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.*;
@@ -15,25 +14,17 @@ import static com.bigcustard.blurp.core.Blurpifier.*;
 public class BlurpScreen extends ScreenAdapter {
 
     private final Viewport viewport;
-    private final RuntimeRepository runtimeRepository;
     private final RuntimeScreenRenderer runtimeScreenRenderer;
-    private final Blurpifier blurpifier;
-    private final BlurpObjectProvider blurpObjectProvider;
-    private final TweenManager tweener;
 
     private Batch batch;
     private Stage stage;
     private RenderListener renderListener = RenderListener.NULL_IMPLEMENTATION;
     private boolean firstRender = true;
 
-    public BlurpScreen(Viewport viewport, RuntimeRepository runtimeRepository, RuntimeScreenRenderer runtimeScreenRenderer, Blurpifier blurpifier, BlurpObjectProvider blurpObjectProvider, TweenManager tweener) {
+    public BlurpScreen(Viewport viewport, RuntimeScreenRenderer runtimeScreenRenderer) {
 
         this.viewport = viewport;
-        this.runtimeRepository = runtimeRepository;
         this.runtimeScreenRenderer = runtimeScreenRenderer;
-        this.blurpifier = blurpifier;
-        this.blurpObjectProvider = blurpObjectProvider;
-        this.tweener = tweener;
     }
 
     public void addActor(Actor actor) {
@@ -62,18 +53,18 @@ public class BlurpScreen extends ScreenAdapter {
 
             firstRender = false;
 
-            blurpObjectProvider.onLibGdxInitialised();
+            BlurpStore.onLibGdxInitialised();
         }
 
         renderListener.handlePreRenderEvent(delta);
 
-        blurpObjectProvider.getSystemFont().reset();
+        BlurpStore.systemFont.reset();
 
         try {
             doFrame(delta);
         } catch(RuntimeException exception) {
             // Pass it on so blurpify method can throw it
-            blurpifier.setException(exception);
+            BlurpStore.blurpifier.setException(exception);
         }
         // TODO: I noticed that frames were being skipped in scripts that did virtually no processing between
         // frames. I put this sleep in to fix it although I'm not at all sure why it works. Render's just about to exit,
@@ -89,17 +80,17 @@ public class BlurpScreen extends ScreenAdapter {
         // TODO: We don't currently need this - Remove unless needed.
 //        stage.act(delta);
 
-        synchronized(blurpifier) {
-            if(blurpifier.getRequestState() == BlurpifyRequestState.Requested) {
-                blurpifier.setRenderState(BlurpifyRenderState.RequestAcknowledged);
+        synchronized(BlurpStore.blurpifier) {
+            if(BlurpStore.blurpifier.getRequestState() == BlurpifyRequestState.Requested) {
+                BlurpStore.blurpifier.setRenderState(BlurpifyRenderState.RequestAcknowledged);
                 try {
-                    runtimeRepository.syncWithModelRepository(delta);
-                    tweener.update(delta);
+                    BlurpStore.runtimeRepository.syncWithModelRepository(delta);
+                    BlurpStore.tweener.update(delta);
                 } finally {
-                    blurpifier.setRenderState(BlurpifyRenderState.RequestComplete);
+                    BlurpStore.blurpifier.setRenderState(BlurpifyRenderState.RequestComplete);
                 }
             } else {
-                blurpifier.setRenderState(BlurpifyRenderState.NoRequest);
+                BlurpStore.blurpifier.setRenderState(BlurpifyRenderState.NoRequest);
                 // TODO: Remove when happy
 //                System.out.println("SKIP!");
             }

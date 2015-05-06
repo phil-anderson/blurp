@@ -22,6 +22,7 @@ public class ModelRepositoryTest {
 
         MockitoAnnotations.initMocks(this);
         testCandidate = new ModelRepository();
+        BlurpStore.modelRepository = testCandidate;
     }
 
     @Test
@@ -63,8 +64,8 @@ public class ModelRepositoryTest {
     @Test
     public void canGetImageByName() throws Exception {
 
-        Image image1 = new ImageImpl("abc", testCandidate);
-        Image image2 = new ImageImpl("def", testCandidate);
+        Image image1 = new ImageImpl("abc");
+        Image image2 = new ImageImpl("def");
         testCandidate.addImage(image1);
         testCandidate.addImage(image2);
         assertThat(testCandidate.getImages().size(), is(2));

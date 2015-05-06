@@ -34,7 +34,7 @@ public class BlurpApp extends Game {
             }
         });
         blurpRuntime.start(scriptRunnable);
-        setScreen(blurpRuntime.getScreen());
+        setScreen(BlurpStore.blurpScreen);
     }
 
     private BlurpRunnable getRunnable(String language, String scriptName) {

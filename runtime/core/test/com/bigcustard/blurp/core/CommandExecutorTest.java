@@ -7,7 +7,6 @@ import org.mockito.*;
 
 public class CommandExecutorTest {
 
-    @Mock BlurpObjectProvider mockBlurpObjectProvider;
     @Mock private CommandVisitable mockCommand1;
     @Mock private CommandVisitable mockCommand2;
 
@@ -20,7 +19,7 @@ public class CommandExecutorTest {
     @Test
     public void executesAllCommands() throws Exception {
 
-        CommandExecutor commandExecutor = new CommandExecutor(mockBlurpObjectProvider);
+        CommandExecutor commandExecutor = new CommandExecutor();
         List<CommandVisitable> commands = Arrays.asList(mockCommand1, mockCommand2);
 
         commandExecutor.executeAll(commands, 0.1f);
