@@ -1,5 +1,7 @@
 package com.bigcustard.blurp.model;
 
+import com.bigcustard.blurp.model.constants.*;
+
 /**
  * In a way, the Screen object represents the computer screen that your Blurp program is running on. You can change its
  * background colour, and any Sprites you create wll get displayed on it.
@@ -11,7 +13,7 @@ package com.bigcustard.blurp.model;
  */
 
 // TODO: Make this abstract and implement in Runtime
-public abstract class Screen {
+public class Screen {
 
     /**
      * The background colour of the Screen. Blurp will completely fill the Screen with this colour before it does
@@ -19,21 +21,5 @@ public abstract class Screen {
      * anything we'd already displayed on the screen, but Blurp's far too clever to let that happen, and makes sure it
      * all works nicely.
      */
-    public Colour backgroundColour;
-
-    /**
-     * The width and height of the Screen. Well... <i>Sort of</i>... Do be strictly accurate, it's the width and height
-     * of the coordinate system that your Blurp program is using, which doesn't have to be the same as the pixel width
-     * and height of the Screen as it is displayed on your actual computer screen, although it often is.
-     * <p>
-     * You probably don't need to worry about this, and if you do then you're probably advanced enough to know how to
-     * deal with it!
-     */
-    public final double width, height;
-
-    protected Screen(double width, double height) {
-
-        this.width = width;
-        this.height = height;
-    }
+    public Colour backgroundColour = Colours.BLACK;
 }

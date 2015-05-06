@@ -8,7 +8,7 @@ public class RuntimeScreenRenderer {
 
     public void render() {
 
-        Colour backgroundColour = BlurpStore.runtimeScreen.getBackgroundColour();
+        Colour backgroundColour = BlurpStore.modelScreen.backgroundColour;
 
         Gdx.gl.glClearColor((float) backgroundColour.red,
                             (float) backgroundColour.green,

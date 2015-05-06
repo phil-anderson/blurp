@@ -1,9 +1,7 @@
 package com.bigcustard.blurp.samples;
 
-import com.badlogic.gdx.*;
 import com.bigcustard.blurp.bootstrap.*;
 import com.bigcustard.blurp.model.*;
-import com.bigcustard.blurp.model.Screen;
 import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.model.effects.*;
 
@@ -59,13 +57,11 @@ public class CollisionDetectionSample implements BlurpRunnable {
 
     private void handleSpritePair(Sprite leftSprite, Sprite rightSprite) {
 
-        if(Gdx.input.justTouched() || Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-            if(!leftSprite.collidedWith(rightSprite)) {
-                leftSprite.rotateBy(1);
-                rightSprite.rotateBy(-2);
-                leftSprite.x += 2;
-                rightSprite.x -= 2;
-            }
+        if(!leftSprite.collidedWith(rightSprite)) {
+            leftSprite.rotateBy(1);
+            rightSprite.rotateBy(-2);
+            leftSprite.x += 2;
+            rightSprite.x -= 2;
         }
     }
 }

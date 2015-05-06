@@ -41,7 +41,7 @@ public class BlurpImpl extends Blurp {
 
         if(image == null) throw new RuntimeException("Image can't be null");
 
-        ImageSprite imageSprite = new ImageSpriteImpl(image, BlurpStore.modelScreen.width / 2.0, BlurpStore.modelScreen.height / 2.0);
+        ImageSprite imageSprite = new ImageSpriteImpl(image, BlurpStore.screenCenterX(), BlurpStore.screenCenterY());
         BlurpStore.modelRepository.addImageSprite(imageSprite);
         return imageSprite;
     }
@@ -51,7 +51,7 @@ public class BlurpImpl extends Blurp {
 
         if(text == null) text = "";
 
-        TextSprite textSprite = new TextSpriteImpl(text, BlurpStore.modelScreen.width / 2.0, BlurpStore.modelScreen.height / 2.0);
+        TextSprite textSprite = new TextSpriteImpl(text, BlurpStore.screenCenterX(), BlurpStore.screenCenterY());
         BlurpStore.modelRepository.addTextSprite(textSprite);
         return textSprite;
     }

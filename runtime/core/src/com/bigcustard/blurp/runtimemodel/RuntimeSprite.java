@@ -33,19 +33,18 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
         setVisible(!modelSprite.hidden);
         this.collisionShape = modelSprite.collisionShape;
 
-        TweenManager tweener = BlurpStore.tweener;
         if(modelSprite.effect != this.effect) {
-            tweener.killTarget(modelSprite);
+            BlurpStore.tweener.killTarget(modelSprite);
             this.effect = (EffectImpl) modelSprite.effect;
             if(this.effect != null) {
                 BaseTween tween = this.effect.getTween(modelSprite);
                 System.out.println(tween);
-                tween.start(tweener);
+                tween.start(BlurpStore.tweener);
             }
 
         } else {
             if(modelSprite.effect != null) {
-                if(!tweener.containsTarget(modelSprite)) {
+                if(!BlurpStore.tweener.containsTarget(modelSprite)) {
                     modelSprite.effect = null;
                 }
             }

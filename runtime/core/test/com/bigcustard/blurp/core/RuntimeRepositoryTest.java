@@ -1,7 +1,6 @@
 package com.bigcustard.blurp.core;
 
 import com.bigcustard.blurp.core.commands.*;
-import com.bigcustard.blurp.runtimemodel.*;
 import com.bigcustard.blurp.testutils.*;
 import org.junit.*;
 import org.mockito.*;
@@ -21,7 +20,6 @@ public class RuntimeRepositoryTest extends LibGdxTest {
         MockitoAnnotations.initMocks(this);
 
         testCandidate = new RuntimeRepository();
-        BlurpStore.runtimeScreen = new RuntimeScreen();
     }
 
     @Test

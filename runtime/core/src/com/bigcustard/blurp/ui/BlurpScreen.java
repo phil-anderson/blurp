@@ -21,9 +21,9 @@ public class BlurpScreen extends ScreenAdapter {
     private RenderListener renderListener = RenderListener.NULL_IMPLEMENTATION;
     private boolean firstRender = true;
 
-    public BlurpScreen(Viewport viewport, RuntimeScreenRenderer runtimeScreenRenderer) {
+    public BlurpScreen(RuntimeScreenRenderer runtimeScreenRenderer) {
 
-        this.viewport = viewport;
+        this.viewport = BlurpStore.configuration.getViewport();
         this.runtimeScreenRenderer = runtimeScreenRenderer;
     }
 

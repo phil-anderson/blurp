@@ -4,15 +4,11 @@ import aurelienribon.tweenengine.*;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
-import com.badlogic.gdx.utils.viewport.*;
-import com.bigcustard.blurp.apimodel.*;
 import com.bigcustard.blurp.bootstrap.*;
 import com.bigcustard.blurp.core.effects.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.Screen;
 import com.bigcustard.blurp.model.Sprite;
-import com.bigcustard.blurp.model.effects.*;
-import com.bigcustard.blurp.runtimemodel.*;
 import com.bigcustard.blurp.ui.*;
 
 /**
@@ -23,12 +19,9 @@ public class BlurpStore {
 
     public static BlurpConfiguration configuration;
     public static ModelRepository modelRepository;
-    public static Keyboard keyboard;
-    public static Utils utils;
     public static Screen modelScreen;
-    public static Effects effects;
     public static TweenManager tweener;
-    public static RuntimeScreen runtimeScreen;
+//    public static RuntimeScreen runtimeScreen;
     public static Blurpifier blurpifier;
     public static RuntimeRepository runtimeRepository;
     public static Blurp blurp;
@@ -40,24 +33,18 @@ public class BlurpStore {
         configuration = blurpConfiguration;
 
         modelRepository = new ModelRepository();
-        keyboard = new KeyboardImpl();
-        utils = new Utils();
 
-        Viewport viewport = blurpConfiguration.getViewport();
-        float width = viewport.getWorldWidth();
-        float height = viewport.getWorldHeight();
-        modelScreen = new ScreenImpl(width, height);
-
-        effects = new EffectsImpl();
+        modelScreen = new Screen();
 
         Tween.registerAccessor(Sprite.class, new SpriteAccessor());
+
         tweener = new TweenManager();
 
-        runtimeScreen = new RuntimeScreen();
+//        runtimeScreen = new RuntimeScreen();
         blurpifier = new Blurpifier();
         runtimeRepository = new RuntimeRepository();
         blurp = new BlurpImpl();
-        blurpScreen = new BlurpScreen(viewport, new RuntimeScreenRenderer());
+        blurpScreen = new BlurpScreen(new RuntimeScreenRenderer());
     }
 
     // Stuff that would normally go in the application.create() method, but can;t because we may be hosted in a
@@ -69,5 +56,15 @@ public class BlurpStore {
         BitmapFont font = new BitmapFont(Gdx.files.classpath("RobotoCondensed.fnt"),
                                          new TextureRegion(systemFontTexture), false);
         systemFont = new FontHolder(font);
+    }
+
+    public static double screenCenterX() {
+
+        return configuration.getViewport().getWorldWidth() / 2;
+    }
+
+    public static double screenCenterY() {
+
+        return configuration.getViewport().getWorldHeight() / 2;
     }
 }

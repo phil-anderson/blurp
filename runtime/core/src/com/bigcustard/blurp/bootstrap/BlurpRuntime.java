@@ -4,6 +4,7 @@ import java.io.*;
 import java.lang.reflect.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.utils.*;
+import com.bigcustard.blurp.apimodel.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.core.commands.*;
 import com.bigcustard.blurp.model.*;
@@ -104,9 +105,9 @@ public class BlurpRuntime {
             try {
                 script.run(BlurpStore.blurp,
                            BlurpStore.modelScreen,
-                           BlurpStore.keyboard,
-                           BlurpStore.utils,
-                           BlurpStore.effects);
+                           new KeyboardImpl(),
+                           new Utils(),
+                           new EffectsImpl());
 
             } catch (RuntimeException e) {
                 if(exceptionHandler != null) {
