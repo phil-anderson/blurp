@@ -15,9 +15,9 @@ public class ImageSpriteImplTest {
     @Before
     public void setUp() throws Exception {
 
+        MockitoAnnotations.initMocks(this);
         BlurpStore.modelRepository = mockModelRepository;
         BlurpStore.runtimeRepository = mockRuntimeRepository;
-        MockitoAnnotations.initMocks(this);
         ImageImpl testImage = new ImageImpl("abc");
         testCandidate = new ImageSpriteImpl(testImage, .0, .0);
     }
