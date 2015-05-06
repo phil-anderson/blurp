@@ -12,11 +12,7 @@ public abstract class EffectImpl<T extends Effect> extends Effect<T> {
             tween.delay((float) delayBeforeStart);
         }
         if(timesToRun != 1) {
-            if(yoyoMode) {
-                tween.repeatYoyo(timesToRun - 1, (float) delayBetweenRuns);
-            } else {
-                tween.repeat(timesToRun - 1, (float) delayBetweenRuns);
-            }
+            tween.repeatYoyo(timesToRun - 1, (float) delayBetweenRuns);
         }
     }
 

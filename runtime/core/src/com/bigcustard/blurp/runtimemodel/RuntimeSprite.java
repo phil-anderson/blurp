@@ -36,7 +36,12 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
         if(modelSprite.effect != this.effect) {
             tweener.killTarget(modelSprite);
             this.effect = (EffectImpl) modelSprite.effect;
-            this.effect.getTween(modelSprite).start(tweener);
+            if(this.effect != null) {
+                BaseTween tween = this.effect.getTween(modelSprite);
+                System.out.println(tween);
+                tween.start(tweener);
+            }
+
         } else {
             if(modelSprite.effect != null) {
                 if(!tweener.containsTarget(modelSprite)) {

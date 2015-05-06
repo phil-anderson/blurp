@@ -6,7 +6,7 @@ import com.bigcustard.blurp.model.effects.*;
 
 public class ParallelCompoundEffect extends CompoundEffect {
 
-    public ParallelCompoundEffect(BaseEffect... effects) {
+    public ParallelCompoundEffect(Effect... effects) {
 
         super(effects);
     }
@@ -15,8 +15,8 @@ public class ParallelCompoundEffect extends CompoundEffect {
     public BaseTween getTween(Sprite sprite) {
 
         Timeline timeline = Timeline.createParallel();
-        pushEffectsToTimeline(timeline, sprite);
         populateTween(timeline);
+        pushEffectsToTimeline(timeline, sprite);
 
         return timeline;
     }
@@ -26,6 +26,7 @@ public class ParallelCompoundEffect extends CompoundEffect {
 
         ParallelCompoundEffect copy = new ParallelCompoundEffect(effects);
         copyBasePropertiesTo(copy);
+
         return copy;
     }
 }

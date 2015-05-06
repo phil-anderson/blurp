@@ -6,18 +6,17 @@ import com.bigcustard.blurp.model.effects.*;
 
 public class SequentialCompoundEffect extends CompoundEffect {
 
-    public SequentialCompoundEffect(BaseEffect... effects) {
+    public SequentialCompoundEffect(Effect... effects) {
 
         super(effects);
     }
-
 
     @Override
     public BaseTween getTween(Sprite sprite) {
 
         Timeline timeline = Timeline.createSequence();
-        pushEffectsToTimeline(timeline, sprite);
         populateTween(timeline);
+        pushEffectsToTimeline(timeline, sprite);
 
         return timeline;
     }

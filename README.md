@@ -9,7 +9,8 @@ WORK IN PROGRESS - CHECK BACK LATER
 * Work out a better approach to PauseEffect - Get rid of it? Get rid of it as can use delays??
 * Make CompoundEffects deep copy.
 * Support for easing functions
-* Way to expose FOREVER (-1) in timesToRun()
+* More effect samples
+* RemoveAfterEffects
 * Build list of all sprites to add to stage and add them in correct order so later ImageSprites are above earlier TextSprites etc.
 * Provide a proper dispose() method which cleans everything out
 * Make script dispose() and then restart at end after a tap
@@ -19,6 +20,7 @@ WORK IN PROGRESS - CHECK BACK LATER
 * Effects factory with ability to poll for end of effect
 * Background drawing
 * Debug grid overlay
+* Look at gradle build
 * Documentation - Move Javadoc out and turn it into Markdown documentation.
 
 

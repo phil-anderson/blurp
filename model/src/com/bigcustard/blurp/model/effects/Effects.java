@@ -4,9 +4,9 @@ import com.bigcustard.blurp.model.*;
 
 public abstract class Effects {
 
-    public int defaultDuration = 1;
+    public double defaultDuration = 1;
 
-    public Effects defaultDuration(int newDefaultDuration) {
+    public Effects defaultDuration(double newDefaultDuration) {
 
         this.defaultDuration = newDefaultDuration;
         return this;
@@ -52,25 +52,21 @@ public abstract class Effects {
         return colour(newColour, defaultDuration);
     }
 
+    public abstract Effect moveTo(double newX, double newY, double duration);
 
-    public abstract Effect moveTo(double newX, double newY, int duration);
+    public abstract Effect moveBy(double changeInX, double changeInY, double duration);
 
-    public abstract Effect moveBy(double changeInX, double changeInY, int duration);
+    public abstract Effect rotateTo(double newAngle, double duration);
 
-    public abstract Effect rotateTo(double newAngle, int duration);
+    public abstract Effect rotateBy(double changeInAngle, double duration);
 
-    public abstract Effect rotateBy(double changeInAngle, int duration);
+    public abstract Effect scale(double newScaleX, double newScaleY, double duration);
 
-    public abstract Effect scale(double newScaleX, double newScaleY, int duration);
+    public abstract Effect alpha(double newAlpha, double duration);
 
-    public abstract Effect alpha(double newAlpha, int duration);
+    public abstract Effect colour(Colour newColour, double duration);
 
-    public abstract Effect colour(Colour newColour, int duration);
+    public abstract Effect combine(Effect firstEffect, Effect secondEffect, Effect... otherEffects);
 
-    public abstract BaseEffect pause(int duration);
-
-    public abstract Effect combine(BaseEffect firstEffect, BaseEffect secondEffect, BaseEffect... otherEffects);
-
-    public abstract Effect sequence(BaseEffect firstEffect, BaseEffect secondEffect, BaseEffect... otherEffects);
-
+    public abstract Effect sequence(Effect firstEffect, Effect secondEffect, Effect... otherEffects);
 }
