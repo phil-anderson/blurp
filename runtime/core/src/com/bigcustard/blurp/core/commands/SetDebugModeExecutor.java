@@ -1,11 +1,11 @@
 package com.bigcustard.blurp.core.commands;
 
-import com.bigcustard.blurp.ui.*;
+import com.bigcustard.blurp.core.*;
 
 public class SetDebugModeExecutor {
 
-    public void execute(SetDebugModeCommand request, BlurpScreen screen) {
+    public void execute(SetDebugModeCommand request) {
 
-        screen.enableDebug(request.isDebugEnabled(), request.getDebugColour());
+        BlurpStore.blurpScreen.enableDebug(request.isDebugEnabled(), request.getDebugColour());
     }
 }

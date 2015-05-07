@@ -4,4 +4,6 @@ package com.bigcustard.blurp.core.commands;
 public interface CommandVisitor {
 
     void visit(SetDebugModeCommand setDebugModeCommand);
+
+    void visit(RunEffectCommand runEffectCommand);
 }

@@ -1,10 +1,14 @@
 package com.bigcustard.blurp.apimodel;
 
 import com.bigcustard.blurp.core.*;
+import com.bigcustard.blurp.core.commands.*;
 import com.bigcustard.blurp.core.common.*;
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.model.effects.*;
 
-public class ImageSpriteImpl extends ImageSprite {
+public class ImageSpriteImpl extends ImageSprite implements EffectContainer {
+
+    private boolean running;
 
     public ImageSpriteImpl(Image image, double x, double y) {
 
@@ -34,8 +38,23 @@ public class ImageSpriteImpl extends ImageSprite {
         return CollisionDetector.detectCollision(this, other);
     }
 
-    public void dispose() {
+    @Override
+    public ImageSprite runEffect(Effect effectToRun) {
 
-        remove();
+        BlurpStore.runtimeRepository.registerCommand(new RunEffectCommand(this, effectToRun));
+        running = effectToRun != null;
+        return this;
+    }
+
+    @Override
+    public void setRunningEffect(boolean running) {
+
+        this.running = running;
+    }
+
+    @Override
+    public boolean isRunningEffect() {
+
+        return this.running;
     }
 }

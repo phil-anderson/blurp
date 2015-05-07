@@ -502,7 +502,7 @@ public abstract class BaseTween<T> {
                 deltaTime -= delta;
                 currentTime = 0;
 
-//                updateOverride(step, step+1, isIterationStep, delta);
+                updateOverride(step, step, isIterationStep, delta);
                 callCallback(TweenCallback.BACK_END);
 
                 if (step < 0 && repeatCnt >= 0) callCallback(TweenCallback.BACK_COMPLETE);

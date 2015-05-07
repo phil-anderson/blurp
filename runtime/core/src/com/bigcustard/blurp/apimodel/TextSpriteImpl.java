@@ -1,11 +1,15 @@
 package com.bigcustard.blurp.apimodel;
 
 import com.bigcustard.blurp.core.*;
+import com.bigcustard.blurp.core.commands.*;
 import com.bigcustard.blurp.core.common.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.constants.*;
+import com.bigcustard.blurp.model.effects.*;
 
-public class TextSpriteImpl extends TextSprite {
+public class TextSpriteImpl extends TextSprite implements EffectContainer {
+
+    private boolean running;
 
     public TextSpriteImpl(String text, double x, double y) {
 
@@ -48,5 +52,24 @@ public class TextSpriteImpl extends TextSprite {
     public boolean collidedWith(Sprite other) {
 
         return CollisionDetector.detectCollision(this, other);
+    }
+
+    @Override
+    public TextSprite runEffect(Effect effectToRun) {
+
+        BlurpStore.runtimeRepository.registerCommand(new RunEffectCommand(this, effectToRun));
+        return this;
+    }
+
+    @Override
+    public void setRunningEffect(boolean running) {
+
+        this.running = running;
+    }
+
+    @Override
+    public boolean isRunningEffect() {
+
+        return this.running;
     }
 }

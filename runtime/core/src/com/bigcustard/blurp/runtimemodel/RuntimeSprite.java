@@ -1,6 +1,5 @@
 package com.bigcustard.blurp.runtimemodel;
 
-import aurelienribon.tweenengine.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.glutils.*;
 import com.badlogic.gdx.math.*;
@@ -33,22 +32,7 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
         setVisible(!modelSprite.hidden);
         this.collisionShape = modelSprite.collisionShape;
 
-        if(modelSprite.effect != this.effect) {
-            BlurpStore.tweener.killTarget(modelSprite);
-            this.effect = (EffectImpl) modelSprite.effect;
-            if(this.effect != null) {
-                BaseTween tween = this.effect.getTween(modelSprite);
-                System.out.println(tween);
-                tween.start(BlurpStore.tweener);
-            }
-
-        } else {
-            if(modelSprite.effect != null) {
-                if(!BlurpStore.tweener.containsTarget(modelSprite)) {
-                    modelSprite.effect = null;
-                }
-            }
-        }
+        ((EffectContainer) modelSprite).setRunningEffect(BlurpStore.tweener.containsTarget(modelSprite));
     }
 
     @Override
@@ -87,12 +71,9 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
         }
 
         shapes.set(ShapeRenderer.ShapeType.Line);
-        if(collisionShape == CollisionShape.BoundaryRectangle) {
-            shapes.polygon(collisionRectangle.getTransformedVertices());
-        } else {
-            shapes.circle(collisionCircle.x, collisionCircle.y, collisionCircle.radius,
-                          (int)(9 * Math.cbrt(collisionCircle.radius)));
-        }
+        shapes.polygon(collisionRectangle.getTransformedVertices());
+        shapes.circle(collisionCircle.x, collisionCircle.y, collisionCircle.radius,
+                      (int) (9 * Math.cbrt(collisionCircle.radius)));
     }
 
     protected void updateCollisionShapes() {

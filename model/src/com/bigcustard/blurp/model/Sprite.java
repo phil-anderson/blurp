@@ -71,10 +71,7 @@ public abstract class Sprite<T> {
 
     public boolean hidden;
 
-    public Effect effect;
-
     public CollisionShape collisionShape;
-
 
     public T x(double newX) {
 
@@ -233,20 +230,12 @@ public abstract class Sprite<T> {
      */
     public abstract boolean collidedWith(Sprite other);
 
-    public T effect(Effect newEffect) {
+    public abstract T runEffect(Effect effectToRun);
 
-        this.effect = newEffect;
-        return (T) this;
-    }
-
-    public boolean effectActive() {
-
-        return this.effect != null;
-    }
+    public abstract boolean isRunningEffect();
 
     public T stopEffect() {
 
-        this.effect = null;
-        return (T) this;
+        return runEffect(null);
     }
 }

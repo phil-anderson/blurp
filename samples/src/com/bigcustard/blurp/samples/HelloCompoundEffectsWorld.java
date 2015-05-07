@@ -21,14 +21,14 @@ public class HelloCompoundEffectsWorld implements BlurpRunnable {
         Effect spinAndNormalise = effects.combine(spin, normalise);
 
         Effect animation = effects.sequence(squishAndGoRed, spinAndNormalise);
-        animation = animation.timesToRun(4).delayBetweenRuns(0.25f);
+        animation = animation.timesToRun(4).delayBetweenRuns(0.25);
 
         Image worldImage = blurp.loadImage("hello-world.png");
         ImageSprite world1 = blurp.createImageSprite(worldImage).position(250, 300);
         ImageSprite world2 = blurp.createImageSprite(worldImage).position(550, 300);
 
-        world1.effect(animation);
-        world2.effect(animation.delayBeforeStart(1));
+        world1.runEffect(animation);
+        world2.runEffect(animation.delayBeforeStart(1));
 
         while(true) {
             blurp.blurpify();
