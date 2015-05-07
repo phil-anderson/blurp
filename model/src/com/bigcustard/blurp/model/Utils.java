@@ -55,6 +55,7 @@ public class Utils {
      */
     public double wave(double low, double high, double wavelength) {
 
+        wavelength = wavelength * 1000;
         double angle = (System.currentTimeMillis() % wavelength) * 360 / (wavelength - 1);
 
         double range = high - low;

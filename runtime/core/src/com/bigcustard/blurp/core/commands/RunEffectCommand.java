@@ -1,23 +1,22 @@
 package com.bigcustard.blurp.core.commands;
 
 import com.bigcustard.blurp.apimodel.*;
-import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.effects.*;
 
 public class RunEffectCommand implements CommandVisitable {
 
-    private final Sprite sprite;
+    private final Object target;
     private final EffectImpl effect;
 
-    public RunEffectCommand(Sprite sprite, Effect effect) {
+    public RunEffectCommand(Object target, Effect effect) {
 
-        this.sprite = sprite;
+        this.target = target;
         this.effect = (EffectImpl) effect;
     }
 
-    public Sprite getSprite() {
+    public Object getTarget() {
 
-        return sprite;
+        return target;
     }
 
     public EffectImpl getEffect() {

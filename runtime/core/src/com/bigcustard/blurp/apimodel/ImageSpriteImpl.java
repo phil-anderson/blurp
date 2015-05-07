@@ -8,7 +8,7 @@ import com.bigcustard.blurp.model.effects.*;
 
 public class ImageSpriteImpl extends ImageSprite implements EffectContainer {
 
-    private boolean running;
+    private boolean runningEffect;
 
     public ImageSpriteImpl(Image image, double x, double y) {
 
@@ -42,19 +42,19 @@ public class ImageSpriteImpl extends ImageSprite implements EffectContainer {
     public ImageSprite runEffect(Effect effectToRun) {
 
         BlurpStore.runtimeRepository.registerCommand(new RunEffectCommand(this, effectToRun));
-        running = effectToRun != null;
+        runningEffect = effectToRun != null;
         return this;
     }
 
     @Override
     public void setRunningEffect(boolean running) {
 
-        this.running = running;
+        this.runningEffect = running;
     }
 
     @Override
     public boolean isRunningEffect() {
 
-        return this.running;
+        return this.runningEffect;
     }
 }

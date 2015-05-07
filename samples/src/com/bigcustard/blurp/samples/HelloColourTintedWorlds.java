@@ -9,7 +9,7 @@ public class HelloColourTintedWorlds implements BlurpRunnable {
 
 
     @Override
-    public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils, Effects effects) {
+    public void run(Blurp blurp, Screen screen, Camera camera, Keyboard keyboard, Utils utils, Effects effects) {
 
         Image worldImage = blurp.loadImage("hello-world.png");
         blurp.createImageSprite(worldImage)

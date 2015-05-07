@@ -1,7 +1,6 @@
 package com.bigcustard.blurp.apimodel;
 
 import aurelienribon.tweenengine.*;
-import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.effects.*;
 
 public abstract class EffectImpl<T extends Effect> extends Effect<T> {
@@ -16,5 +15,5 @@ public abstract class EffectImpl<T extends Effect> extends Effect<T> {
         }
     }
 
-    public abstract BaseTween getTween(Sprite sprite);
+    public abstract BaseTween getTween(Object target);
 }

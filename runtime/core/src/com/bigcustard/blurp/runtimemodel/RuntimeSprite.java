@@ -1,11 +1,11 @@
 package com.bigcustard.blurp.runtimemodel;
 
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.glutils.*;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.bigcustard.blurp.apimodel.*;
-import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.Sprite;
 import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.util.*;
@@ -31,15 +31,16 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
         setColor(Convert.toGdxColour(modelSprite.colour, modelSprite.alpha));
         setVisible(!modelSprite.hidden);
         this.collisionShape = modelSprite.collisionShape;
-
-        ((EffectContainer) modelSprite).setRunningEffect(BlurpStore.tweener.containsTarget(modelSprite));
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
 
         preRender();
-        batch.setColor(getColor().r, getColor().g, getColor().b, getColor().a * parentAlpha);
+
+        Color originalColour = batch.getColor();
+        Color newColour = originalColour.cpy().mul(getColor());
+        batch.setColor(newColour.r, newColour.g, newColour.b, newColour.a * parentAlpha);
 
         transform.setToTrnRotScl(getX(), getY(), getRotation(), getScaleX(), getScaleY());
         transform.translate(-getOriginX(), -getOriginY());
@@ -51,7 +52,7 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
             render(batch, parentAlpha);
         } finally {
             batch.setTransformMatrix(transformationStorage);
-            batch.setColor(1, 1, 1, 1);
+            batch.setColor(originalColour);
         }
     }
 

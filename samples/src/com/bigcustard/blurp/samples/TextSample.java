@@ -11,7 +11,7 @@ public class TextSample implements BlurpRunnable {
     private static final String COLOURFUL_MESSAGE = "All colours can be specified as [RED]red[], [GREEN]green[] and [BLUE]blue[] components";
 
     @Override
-    public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils, Effects effects) {
+    public void run(Blurp blurp, Screen screen, Camera camera, Keyboard keyboard, Utils utils, Effects effects) {
 
 //        blurp.setDebugMode(true);
 
@@ -73,7 +73,7 @@ public class TextSample implements BlurpRunnable {
                 anchorText.text = "Center Handle\nCenter Handle\nCenter Handle";
             }
             rotateAndScaleText.rotateBy(2);
-            rotateAndScaleText.scale(utils.wave(0.5, 2, 2500));
+            rotateAndScaleText.scale(utils.wave(0.5, 2, 2.5));
             frameCount = (frameCount + 1) % 450;
             blurp.blurpify();
         }

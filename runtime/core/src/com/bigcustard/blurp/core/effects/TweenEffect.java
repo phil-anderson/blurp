@@ -2,7 +2,6 @@ package com.bigcustard.blurp.core.effects;
 
 import aurelienribon.tweenengine.*;
 import com.bigcustard.blurp.apimodel.*;
-import com.bigcustard.blurp.model.*;
 
 public class TweenEffect extends EffectImpl<TweenEffect> {
 
@@ -20,9 +19,9 @@ public class TweenEffect extends EffectImpl<TweenEffect> {
     }
 
     @Override
-    public BaseTween getTween(Sprite sprite) {
+    public BaseTween getTween(Object target) {
 
-        Tween tween = Tween.to(sprite, tweenType, duration);
+        Tween tween = Tween.to(target, tweenType, duration);
         if(relative) {
             tween.targetRelative(targetValues);
         } else {

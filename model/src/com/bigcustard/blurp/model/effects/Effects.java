@@ -32,6 +32,16 @@ public abstract class Effects {
         return rotateBy(changeInAngle, defaultDuration);
     }
 
+    public Effect zoom(double newZoom) {
+
+        return zoom(newZoom, defaultDuration);
+    }
+
+    public Effect zoom(double newZoom, double duration) {
+
+        return scale(newZoom, newZoom, duration);
+    }
+
     public Effect scale(double newScale) {
 
         return scale(newScale, newScale);

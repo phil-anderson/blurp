@@ -9,7 +9,7 @@ import com.bigcustard.blurp.model.effects.*;
 
 public class TextSpriteImpl extends TextSprite implements EffectContainer {
 
-    private boolean running;
+    private boolean runningEffect;
 
     public TextSpriteImpl(String text, double x, double y) {
 
@@ -64,12 +64,12 @@ public class TextSpriteImpl extends TextSprite implements EffectContainer {
     @Override
     public void setRunningEffect(boolean running) {
 
-        this.running = running;
+        this.runningEffect = running;
     }
 
     @Override
     public boolean isRunningEffect() {
 
-        return this.running;
+        return this.runningEffect;
     }
 }

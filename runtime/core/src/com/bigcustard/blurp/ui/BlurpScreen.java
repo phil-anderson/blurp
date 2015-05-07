@@ -45,22 +45,22 @@ public class BlurpScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
 
-        if(firstRender) {
-            batch = new SpriteBatch();
-            stage = new Stage(viewport, batch);
-
-            Gdx.gl.glLineWidth(1.5f);
-
-            firstRender = false;
-
-            BlurpStore.onLibGdxInitialised();
-        }
-
-        renderListener.handlePreRenderEvent(delta);
-
-        BlurpStore.systemFont.reset();
-
         try {
+            if(firstRender) {
+                batch = new SpriteBatch();
+                stage = new Stage(viewport, batch);
+
+                Gdx.gl.glLineWidth(1.5f);
+
+                firstRender = false;
+
+                BlurpStore.onLibGdxInitialised();
+            }
+
+            renderListener.handlePreRenderEvent(delta);
+
+            BlurpStore.systemFont.reset();
+
             doFrame(delta);
         } catch(RuntimeException exception) {
             // Pass it on so blurpify method can throw it
@@ -75,6 +75,17 @@ public class BlurpScreen extends ScreenAdapter {
         Utils.ENGINE_INSTANCE.sleep(0.001);
     }
 
+    private void updateCamera() {
+
+        BlurpStore.gdxCamera.rotate((float) BlurpStore.modelCamera.rotation);
+        BlurpStore.gdxCamera.up.set(0, 1, 0);
+        BlurpStore.gdxCamera.direction.set(0, 0, -1);
+
+        BlurpStore.gdxCamera.position.set((float) BlurpStore.modelCamera.x, (float) BlurpStore.modelCamera.y,0);
+        BlurpStore.gdxCamera.rotate((float) BlurpStore.modelCamera.rotation);
+        BlurpStore.gdxCamera.zoom = (float) (1 / BlurpStore.modelCamera.zoom);
+    }
+
     private void doFrame(float delta) {
 
         // TODO: We don't currently need this - Remove unless needed.
@@ -84,6 +95,7 @@ public class BlurpScreen extends ScreenAdapter {
             if(BlurpStore.blurpifier.getRequestState() == BlurpifyRequestState.Requested) {
                 BlurpStore.blurpifier.setRenderState(BlurpifyRenderState.RequestAcknowledged);
                 try {
+                    updateCamera();
                     BlurpStore.runtimeRepository.syncWithModelRepository(delta);
                     BlurpStore.tweener.update(delta);
                 } finally {
@@ -113,6 +125,7 @@ public class BlurpScreen extends ScreenAdapter {
         if(!batch.isDrawing()) {
             batch.begin();
         }
+        batch.setColor(Convert.toGdxColour(BlurpStore.modelCamera.colour, BlurpStore.modelCamera.alpha));
     }
 
     private void endBatch() {

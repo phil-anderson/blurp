@@ -25,17 +25,17 @@ public class RuntimeImage implements RuntimeObject<Image> {
         if(newInstance) {
             FileHandle localFile = Gdx.files.local(filename);
             if(localFile.exists()) {
-                textureRegion = new TextureRegion(new Texture(localFile));
+                textureRegion = new TextureRegion(new Texture(localFile, true));
             } else {
                 FileHandle classpathFile = Gdx.files.classpath(filename);
                 if(classpathFile.exists()) {
-                    textureRegion = new TextureRegion(new Texture(classpathFile));
+                    textureRegion = new TextureRegion(new Texture(classpathFile, true));
                 } else {
                     // TODO: We should throw here really - Need to sort out tests
-                    textureRegion = new TextureRegion(new Texture(Gdx.files.classpath("image-error.png")));
+                    textureRegion = new TextureRegion(new Texture(Gdx.files.classpath("image-error.png"), true));
                 }
             }
-            textureRegion.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+            textureRegion.getTexture().setFilter(Texture.TextureFilter.MipMapLinearNearest, Texture.TextureFilter.Linear);
         }
     }
 

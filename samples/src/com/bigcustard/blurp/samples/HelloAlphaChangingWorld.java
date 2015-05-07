@@ -7,7 +7,7 @@ import com.bigcustard.blurp.model.effects.*;
 public class HelloAlphaChangingWorld implements BlurpRunnable {
 
     @Override
-    public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils, Effects effects) {
+    public void run(Blurp blurp, Screen screen, Camera camera, Keyboard keyboard, Utils utils, Effects effects) {
 
         Image worldImage = blurp.loadImage("hello-world.png");
 
@@ -16,7 +16,7 @@ public class HelloAlphaChangingWorld implements BlurpRunnable {
 
         while(true) {
             // Fade the upside-down one in and out, thus covering and revealing the normal one.
-            upsideDownWorld.alpha = utils.wave(0, 1, 2000);
+            upsideDownWorld.alpha = utils.wave(0, 1, 2);
             blurp.blurpify();
         }
     }

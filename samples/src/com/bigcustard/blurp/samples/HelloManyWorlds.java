@@ -6,10 +6,10 @@ import com.bigcustard.blurp.model.effects.*;
 
 public class HelloManyWorlds implements BlurpRunnable {
 
-    private static final int NUM_WORLDS = 600;
+    private static final int NUM_WORLDS = 20;
 
     @Override
-    public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils, Effects effects) {
+    public void run(Blurp blurp, Screen screen, Camera camera, Keyboard keyboard, Utils utils, Effects effects) {
 
         Image worldImage = blurp.loadImage("hello-world.png");
         ImageSprite[] worlds = new ImageSprite[NUM_WORLDS];

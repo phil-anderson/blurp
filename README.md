@@ -15,7 +15,7 @@ WORK IN PROGRESS - CHECK BACK LATER
 * Provide a proper dispose() method which cleans everything out
 * Make script dispose() and then restart at end after a tap
 * Sprite mouse functions
-* Implement Camera as a sprite
+* Make Camera not effect HUD (e.g. Spencer's button)
 * World size?
 * Effects factory with ability to poll for end of effect
 * Background drawing

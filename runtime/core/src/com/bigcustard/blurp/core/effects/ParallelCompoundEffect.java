@@ -1,7 +1,6 @@
 package com.bigcustard.blurp.core.effects;
 
 import aurelienribon.tweenengine.*;
-import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.effects.*;
 
 public class ParallelCompoundEffect extends CompoundEffect {
@@ -12,11 +11,11 @@ public class ParallelCompoundEffect extends CompoundEffect {
     }
 
     @Override
-    public BaseTween getTween(Sprite sprite) {
+    public BaseTween getTween(Object target) {
 
         Timeline timeline = Timeline.createParallel();
         populateTween(timeline);
-        pushEffectsToTimeline(timeline, sprite);
+        pushEffectsToTimeline(timeline, target);
 
         return timeline;
     }

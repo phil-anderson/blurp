@@ -4,9 +4,11 @@ import aurelienribon.tweenengine.*;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
+import com.bigcustard.blurp.apimodel.*;
 import com.bigcustard.blurp.bootstrap.*;
 import com.bigcustard.blurp.core.effects.*;
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.model.Camera;
 import com.bigcustard.blurp.model.Screen;
 import com.bigcustard.blurp.model.Sprite;
 import com.bigcustard.blurp.ui.*;
@@ -20,31 +22,36 @@ public class BlurpStore {
     public static BlurpConfiguration configuration;
     public static ModelRepository modelRepository;
     public static Screen modelScreen;
+    public static Camera modelCamera;
     public static TweenManager tweener;
-//    public static RuntimeScreen runtimeScreen;
     public static Blurpifier blurpifier;
     public static RuntimeRepository runtimeRepository;
     public static Blurp blurp;
     public static BlurpScreen blurpScreen;
     public static FontHolder systemFont;
+    public static OrthographicCamera gdxCamera;
 
     public static void initialise(BlurpConfiguration blurpConfiguration) {
 
         configuration = blurpConfiguration;
 
-        modelRepository = new ModelRepository();
+        if(!(blurpConfiguration.getViewport().getCamera() instanceof OrthographicCamera)) {
+            throw new IllegalArgumentException("Viewport must have an OrthographicCamera");
+        }
+        gdxCamera = (OrthographicCamera) blurpConfiguration.getViewport().getCamera();
 
+        modelCamera = new CameraImpl(screenCenterX(), screenCenterY());
         modelScreen = new Screen();
 
         Tween.registerAccessor(Sprite.class, new SpriteAccessor());
-
+        Tween.registerAccessor(Camera.class, new CameraAccessor());
         tweener = new TweenManager();
 
-//        runtimeScreen = new RuntimeScreen();
         blurpifier = new Blurpifier();
+        blurpScreen = new BlurpScreen(new RuntimeScreenRenderer());
+        modelRepository = new ModelRepository();
         runtimeRepository = new RuntimeRepository();
         blurp = new BlurpImpl();
-        blurpScreen = new BlurpScreen(new RuntimeScreenRenderer());
     }
 
     // Stuff that would normally go in the application.create() method, but can;t because we may be hosted in a

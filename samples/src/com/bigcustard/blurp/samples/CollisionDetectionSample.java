@@ -8,7 +8,7 @@ import com.bigcustard.blurp.model.effects.*;
 public class CollisionDetectionSample implements BlurpRunnable {
 
     @Override
-    public void run(Blurp blurp, Screen screen, Keyboard keyboard, Utils utils, Effects effects) {
+    public void run(Blurp blurp, Screen screen, Camera camera, Keyboard keyboard, Utils utils, Effects effects) {
 
         blurp.setDebugMode(true);
         Image worldImage = blurp.loadImage("hello-world.png");
