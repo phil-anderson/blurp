@@ -4,11 +4,9 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
-* Support for easing functions
 * Console
 * More effect samples
 * RemoveAfterEffects
-* Refactor so effect isn;t ap property but an action - playEffect maybe`
 * Add Sprite methods queueEffect? loopEffect?
 * Build list of all sprites to add to stage and add them in correct order so later ImageSprites are above earlier TextSprites etc.
 * Allow control over zOrder (relative methods like Sprite.putBehind(otherSprite))
@@ -17,7 +15,6 @@ WORK IN PROGRESS - CHECK BACK LATER
 * Sprite mouse functions
 * Make Camera not effect HUD (e.g. Spencer's button)
 * World size?
-* Effects factory with ability to poll for end of effect
 * Background drawing
 * Debug grid overlay
 * Look at gradle build
