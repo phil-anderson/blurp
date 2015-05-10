@@ -1,6 +1,5 @@
 package com.bigcustard.blurp.samples;
 
-import com.bigcustard.blurp.bootstrap.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.model.effects.*;
@@ -8,20 +7,20 @@ import com.bigcustard.blurp.model.effects.*;
 public class HelloCompoundEffectsWorld implements BlurpRunnable {
 
     @Override
-    public void run(Blurp blurp, Screen screen, Camera camera, Keyboard keyboard, Utils utils, Effects effects) {
+    public void run(Blurp blurp, Screen screen, Camera camera, Effects effects, Keyboard keyboard, Utils utils) {
 
         effects.defaultDuration(0.5);
 
-        Effect squish = effects.scale(1, 0.7);
-        Effect goRed = effects.colour(Colours.RED);
-        Effect squishAndGoRed = effects.combine(squish, goRed);
+        EffectBase squish = effects.scale(1, 0.7);
+        EffectBase goRed = effects.colour(Colours.RED);
+        EffectBase squishAndGoRed = effects.combine(squish, goRed);
 
-        Effect spin = effects.rotateBy(720);
-        Effect normalise = effects.scale(1);
-        Effect spinAndNormalise = effects.combine(spin, normalise);
+        EffectBase spin = effects.rotateBy(720);
+        EffectBase normalise = effects.scale(1);
+        EffectBase spinAndNormalise = effects.combine(spin, normalise);
 
-        Effect animation = effects.sequence(squishAndGoRed, spinAndNormalise);
-        animation = animation.timesToRun(4).delayBetweenRuns(0.25);
+        EffectBase animation = effects.sequence(squishAndGoRed, spinAndNormalise);
+        animation = animation.timesToRun(4).yoyoMode(true).delayBetweenRuns(0.25);
 
         Image worldImage = blurp.loadImage("hello-world.png");
         ImageSprite world1 = blurp.createImageSprite(worldImage).position(250, 300);

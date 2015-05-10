@@ -18,7 +18,7 @@ public class SpriteForTests extends Sprite {
     }
 
     @Override
-    public Object runEffect(Effect effectToRun) {
+    public Object runEffect(EffectBase effectToRun) {
 
         return null;
     }

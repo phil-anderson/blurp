@@ -4,6 +4,7 @@ import java.io.*;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.utils.viewport.*;
 import com.bigcustard.blurp.core.*;
+import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.scripting.*;
 
 // TODO: Test

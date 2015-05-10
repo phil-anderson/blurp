@@ -8,7 +8,7 @@ public class RunEffectCommand implements CommandVisitable {
     private final Object target;
     private final EffectImpl effect;
 
-    public RunEffectCommand(Object target, Effect effect) {
+    public RunEffectCommand(Object target, EffectBase effect) {
 
         this.target = target;
         this.effect = (EffectImpl) effect;

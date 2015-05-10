@@ -11,6 +11,7 @@ import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.Camera;
 import com.bigcustard.blurp.model.Screen;
 import com.bigcustard.blurp.model.Sprite;
+import com.bigcustard.blurp.model.effects.*;
 import com.bigcustard.blurp.ui.*;
 
 /**
@@ -30,6 +31,7 @@ public class BlurpStore {
     public static BlurpScreen blurpScreen;
     public static FontHolder systemFont;
     public static OrthographicCamera gdxCamera;
+    public static Effects effects;
 
     public static void initialise(BlurpConfiguration blurpConfiguration) {
 
@@ -42,6 +44,7 @@ public class BlurpStore {
 
         modelCamera = new CameraImpl(screenCenterX(), screenCenterY());
         modelScreen = new Screen();
+        effects = new EffectsImpl();
 
         Tween.registerAccessor(Sprite.class, new SpriteAccessor());
         Tween.registerAccessor(Camera.class, new CameraAccessor());

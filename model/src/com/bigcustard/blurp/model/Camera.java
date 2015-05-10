@@ -63,7 +63,7 @@ public abstract class Camera {
         return this;
     }
 
-    public abstract Camera runEffect(Effect effectToRun);
+    public abstract Camera runEffect(EffectBase effectToRun);
 
     public abstract boolean isRunningEffect();
 

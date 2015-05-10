@@ -3,9 +3,9 @@ package com.bigcustard.blurp.core.effects;
 import aurelienribon.tweenengine.*;
 import com.bigcustard.blurp.model.effects.*;
 
-public class ParallelCompoundEffect extends CompoundEffect {
+public class SequentialEffectGroup extends EffectGroupImpl {
 
-    public ParallelCompoundEffect(Effect... effects) {
+    public SequentialEffectGroup(EffectBase... effects) {
 
         super(effects);
     }
@@ -13,7 +13,7 @@ public class ParallelCompoundEffect extends CompoundEffect {
     @Override
     public BaseTween getTween(Object target) {
 
-        Timeline timeline = Timeline.createParallel();
+        Timeline timeline = Timeline.createSequence();
         populateTween(timeline);
         pushEffectsToTimeline(timeline, target);
 
@@ -21,11 +21,10 @@ public class ParallelCompoundEffect extends CompoundEffect {
     }
 
     @Override
-    protected Effect copy(Effect effect) {
+    protected EffectGroup copy(EffectGroup effect) {
 
-        ParallelCompoundEffect copy = new ParallelCompoundEffect(effects);
+        SequentialEffectGroup copy = new SequentialEffectGroup(effects);
         copyBasePropertiesTo(copy);
-
         return copy;
     }
 }

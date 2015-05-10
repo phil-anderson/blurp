@@ -1,6 +1,5 @@
 package com.bigcustard.blurp.samples;
 
-import com.bigcustard.blurp.bootstrap.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.model.effects.*;
@@ -8,7 +7,7 @@ import com.bigcustard.blurp.model.effects.*;
 public class HelloControllableWorld implements BlurpRunnable {
 
     @Override
-    public void run(Blurp blurp, Screen screen, Camera camera, Keyboard keyboard, Utils utils, Effects effects) {
+    public void run(Blurp blurp, Screen screen, Camera camera, Effects effects, Keyboard keyboard, Utils utils) {
 
         ImageSprite world = blurp.createImageSprite("hello-world.png");
 

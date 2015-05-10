@@ -55,7 +55,7 @@ public class TextSpriteImpl extends TextSprite implements EffectContainer {
     }
 
     @Override
-    public TextSprite runEffect(Effect effectToRun) {
+    public TextSprite runEffect(EffectBase effectToRun) {
 
         BlurpStore.runtimeRepository.registerCommand(new RunEffectCommand(this, effectToRun));
         return this;

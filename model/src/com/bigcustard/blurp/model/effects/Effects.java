@@ -1,10 +1,12 @@
 package com.bigcustard.blurp.model.effects;
 
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.model.constants.*;
 
 public abstract class Effects {
 
-    public double defaultDuration = 1;
+    public double defaultDuration;
+    public EffectStyle defaultEffectStyle;
 
     public Effects defaultDuration(double newDefaultDuration) {
 
@@ -12,34 +14,15 @@ public abstract class Effects {
         return this;
     }
 
-    public Effect moveTo(double targetX, double targetY) {
+    public Effects defaultEffectStyle(EffectStyle newDefaultEffectStyle) {
 
-        return moveTo(targetX, targetY, defaultDuration);
-    }
-
-    public Effect moveBy(double targetX, double targetY) {
-
-        return moveBy(targetX, targetY, defaultDuration);
-    }
-
-    public Effect rotateTo(double newAngle) {
-
-        return rotateTo(newAngle, defaultDuration);
-    }
-
-    public Effect rotateBy(double changeInAngle) {
-
-        return rotateBy(changeInAngle, defaultDuration);
+        this.defaultEffectStyle = newDefaultEffectStyle;
+        return this;
     }
 
     public Effect zoom(double newZoom) {
 
-        return zoom(newZoom, defaultDuration);
-    }
-
-    public Effect zoom(double newZoom, double duration) {
-
-        return scale(newZoom, newZoom, duration);
+        return scale(newZoom, newZoom);
     }
 
     public Effect scale(double newScale) {
@@ -47,36 +30,21 @@ public abstract class Effects {
         return scale(newScale, newScale);
     }
 
-    public Effect scale(double newScaleX, double newScaleY) {
+    public abstract Effect moveTo(double newX, double newY);
 
-        return scale(newScaleX, newScaleY, defaultDuration);
-    }
+    public abstract Effect moveBy(double changeInX, double changeInY);
 
-    public Effect alpha(double newAlpha) {
+    public abstract Effect rotateTo(double newAngle);
 
-        return alpha(newAlpha, defaultDuration);
-    }
+    public abstract Effect rotateBy(double changeInAngle);
 
-    public Effect colour(Colour newColour) {
+    public abstract Effect scale(double newScaleX, double newScaleY);
 
-        return colour(newColour, defaultDuration);
-    }
+    public abstract Effect alpha(double newAlpha);
 
-    public abstract Effect moveTo(double newX, double newY, double duration);
+    public abstract Effect colour(Colour newColour);
 
-    public abstract Effect moveBy(double changeInX, double changeInY, double duration);
+    public abstract EffectGroup combine(EffectBase... effectsToCombine);
 
-    public abstract Effect rotateTo(double newAngle, double duration);
-
-    public abstract Effect rotateBy(double changeInAngle, double duration);
-
-    public abstract Effect scale(double newScaleX, double newScaleY, double duration);
-
-    public abstract Effect alpha(double newAlpha, double duration);
-
-    public abstract Effect colour(Colour newColour, double duration);
-
-    public abstract Effect combine(Effect firstEffect, Effect secondEffect, Effect... otherEffects);
-
-    public abstract Effect sequence(Effect firstEffect, Effect secondEffect, Effect... otherEffects);
+    public abstract EffectGroup sequence(EffectBase... effectsToDoInSequence);
 }

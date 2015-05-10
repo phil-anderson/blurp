@@ -4,7 +4,6 @@ import java.io.*;
 import java.lang.reflect.*;
 import java.util.*;
 import javax.script.*;
-import com.bigcustard.blurp.bootstrap.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.constants.*;
@@ -27,7 +26,7 @@ public class ScriptEngineBlurpRunnable implements BlurpRunnable {
     }
 
     @Override
-    public void run(Blurp blurp, Screen screen, Camera camera, Keyboard keyboard, Utils utils, Effects effects) {
+    public void run(Blurp blurp, Screen screen, Camera camera, Effects effects, Keyboard keyboard, Utils utils) {
 
         Bindings bindings = scriptEngine.createBindings();
         bindings.put("blurp", blurp);
@@ -35,11 +34,13 @@ public class ScriptEngineBlurpRunnable implements BlurpRunnable {
         bindings.put("camera", camera);
         bindings.put("keyboard", keyboard);
         bindings.put("utils", utils);
+        bindings.put("effects", effects);
         scriptEnginePutConstants(Colours.class, bindings);
         scriptEnginePutEnums(Justification.values(), bindings);
         scriptEnginePutEnums(Handle.values(), bindings);
         scriptEnginePutEnums(Key.values(), bindings);
         scriptEnginePutEnums(CollisionShape.values(), bindings);
+        scriptEnginePutEnums(EffectStyle.values(), bindings);
 
         if (language.equals("jruby")) JRubyWrapperSpike.wrap(scriptEngine, bindings);
 

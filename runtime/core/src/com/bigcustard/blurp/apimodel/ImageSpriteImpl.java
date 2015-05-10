@@ -39,7 +39,7 @@ public class ImageSpriteImpl extends ImageSprite implements EffectContainer {
     }
 
     @Override
-    public ImageSprite runEffect(Effect effectToRun) {
+    public ImageSprite runEffect(EffectBase effectToRun) {
 
         BlurpStore.runtimeRepository.registerCommand(new RunEffectCommand(this, effectToRun));
         runningEffect = effectToRun != null;

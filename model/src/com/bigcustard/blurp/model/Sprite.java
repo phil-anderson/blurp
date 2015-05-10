@@ -230,7 +230,7 @@ public abstract class Sprite<T> {
      */
     public abstract boolean collidedWith(Sprite other);
 
-    public abstract T runEffect(Effect effectToRun);
+    public abstract T runEffect(EffectBase effectToRun);
 
     public abstract boolean isRunningEffect();
 
