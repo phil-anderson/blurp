@@ -4,7 +4,6 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
-* Console
 * More effect samples
 * RemoveAfterEffects
 * Add Sprite methods queueEffect? loopEffect?
