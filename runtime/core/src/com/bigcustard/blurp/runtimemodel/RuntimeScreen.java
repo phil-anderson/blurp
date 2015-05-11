@@ -1,14 +1,20 @@
-package com.bigcustard.blurp.core;
+package com.bigcustard.blurp.runtimemodel;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.*;
+import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
 
-public class RuntimeScreenRenderer {
+public class RuntimeScreen {
+
+    private Colour backgroundColour;
+
+    public void sync() {
+
+        this.backgroundColour = BlurpStore.modelScreen.backgroundColour;
+    }
 
     public void render() {
-
-        Colour backgroundColour = BlurpStore.modelScreen.backgroundColour;
 
         Gdx.gl.glClearColor((float) backgroundColour.red,
                             (float) backgroundColour.green,

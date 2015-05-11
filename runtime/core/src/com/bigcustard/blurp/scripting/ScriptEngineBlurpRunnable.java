@@ -6,6 +6,7 @@ import java.util.*;
 import javax.script.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.model.Console;
 import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.model.effects.*;
 import com.bigcustard.blurp.util.*;
@@ -26,7 +27,7 @@ public class ScriptEngineBlurpRunnable implements BlurpRunnable {
     }
 
     @Override
-    public void run(Blurp blurp, Screen screen, Camera camera, Effects effects, Keyboard keyboard, Utils utils) {
+    public void run(Blurp blurp, Screen screen, Console console, Camera camera, Effects effects, Keyboard keyboard, Utils utils) {
 
         Bindings bindings = scriptEngine.createBindings();
         bindings.put("blurp", blurp);

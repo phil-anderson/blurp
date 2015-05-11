@@ -6,7 +6,7 @@ import com.bigcustard.blurp.model.effects.*;
 public class HelloUnevenlyScalingWorld implements BlurpRunnable {
 
     @Override
-    public void run(Blurp blurp, Screen screen, Camera camera, Effects effects, Keyboard keyboard, Utils utils) {
+    public void run(Blurp blurp, Screen screen, Console console, Camera camera, Effects effects, Keyboard keyboard, Utils utils) {
 
         ImageSprite world = blurp.createImageSprite("hello-world.png");
 

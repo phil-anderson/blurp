@@ -1,6 +1,7 @@
 package com.bigcustard.blurp.core.commands;
 
 import java.util.*;
+import com.bigcustard.blurp.core.*;
 
 public class CommandExecutor implements CommandVisitor {
 
@@ -30,5 +31,17 @@ public class CommandExecutor implements CommandVisitor {
     public void visit(RunEffectCommand runEffectCommand) {
 
         runEffectExecutor.execute(runEffectCommand);
+    }
+
+    @Override
+    public void visit(ConsolePrintCommand consolePrintCommand) {
+
+        BlurpStore.runtimeConsole.print(consolePrintCommand.getTextToPrint(), consolePrintCommand.getColour());
+    }
+
+    @Override
+    public void visit(ConsoleClearCommand consoleClearCommand) {
+
+        BlurpStore.runtimeConsole.clear();
     }
 }

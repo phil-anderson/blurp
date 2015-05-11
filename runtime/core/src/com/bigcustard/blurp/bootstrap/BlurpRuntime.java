@@ -104,10 +104,10 @@ public class BlurpRuntime {
             try {
                 script.run(BlurpStore.blurp,
                            BlurpStore.modelScreen,
+                           BlurpStore.console,
                            BlurpStore.modelCamera,
                            BlurpStore.effects,
-                           new KeyboardImpl(),
-                           new Utils());
+                           new KeyboardImpl(), new Utils());
 
             } catch (RuntimeException e) {
                 if(exceptionHandler != null) {

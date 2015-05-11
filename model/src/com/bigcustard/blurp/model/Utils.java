@@ -4,9 +4,6 @@ import java.util.*;
 
 public class Utils {
 
-    // TODO: Actually... This shouldn't be here in the Model package.
-    public static final Utils ENGINE_INSTANCE = new Utils();
-
     private Random randomiser = new Random();
 
     /**
@@ -44,6 +41,25 @@ public class Utils {
         double range = high - low;
         return random(range) + low;
     }
+
+    public Colour randomColour() {
+
+        return new Colour(random(1), random(1), random(1));
+    }
+
+//    /**
+//     * Returns a random colour based on the baseColour. The greater the variation, the more different the colours could
+//     * be.
+//     * @param baseColour The colour to use as the basis for the random colours
+//     * @param variation A value between 0 and 1, where 1 is no variation (i.e. the base colour will always be returned),
+//     *                  and 1 is completely random colours.
+//     * @return The new random colour.
+//     */
+//    public Colour randomColour(Colour baseColour, double variation) {
+//
+//
+//        return new Colour(baseColour.red * random(1 - variation, 1 + variation))
+//    }
 
     /**
      * Returns a number between the specified low and high values. Repeatedly calling this will result in a sequence of
@@ -105,15 +121,18 @@ public class Utils {
     }
 
     /**
-     * Puts your blurp script to sleep for approximately the specified number of milliseconds, after which it'll carry
-     * on normally again.
+     * Makes your blurp script rest for the specified number of seconds, after which it'll carry on normally again.
      * <p>
-     * Note that although it puts your script to sleep, it doesn't put blurp to sleep, so it will continue to run in
-     * the background.
+     * Note that although it makes your script rest, it doesn't make blurp rest, so it will continue to run in the
+     * background.
+     * <p>
+     * WARNING - Effects won't be moving as there will be no blurpify calls, but on the first call to blurpify after
+     * the end of the rest, they'll jump to where they should be, given the amount of time that has passed. This may
+     * not be what you intended.
      *
-     * @param seconds The number of seconds to sleep for.
+     * @param seconds The number of seconds to rest for.
      */
-    public void sleep(double seconds) {
+    public void rest(double seconds) {
 
         try {
             Thread.sleep((long) (seconds * 1000));

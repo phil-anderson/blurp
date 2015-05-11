@@ -14,17 +14,15 @@ import static com.bigcustard.blurp.core.Blurpifier.*;
 public class BlurpScreen extends ScreenAdapter {
 
     private final Viewport viewport;
-    private final RuntimeScreenRenderer runtimeScreenRenderer;
 
     private Batch batch;
     private Stage stage;
     private RenderListener renderListener = RenderListener.NULL_IMPLEMENTATION;
     private boolean firstRender = true;
 
-    public BlurpScreen(RuntimeScreenRenderer runtimeScreenRenderer) {
+    public BlurpScreen() {
 
         this.viewport = BlurpStore.configuration.getViewport();
-        this.runtimeScreenRenderer = runtimeScreenRenderer;
     }
 
     public void addActor(Actor actor) {
@@ -66,13 +64,14 @@ public class BlurpScreen extends ScreenAdapter {
             // Pass it on so blurpify method can throw it
             BlurpStore.blurpifier.setException(exception);
         }
+        renderListener.handlePostRenderEvent(batch, delta);
+
         // TODO: I noticed that frames were being skipped in scripts that did virtually no processing between
         // frames. I put this sleep in to fix it although I'm not at all sure why it works. Render's just about to exit,
         // so I'd have thought teh script would get plenty of time between frames to do it's stuff.
         // Maybe libGdx isn't being particularly friendly outside of renders... Hmmmm...
         // I wonder if this will be an issue n Android?
-        renderListener.handlePostRenderEvent(batch, delta);
-        Utils.ENGINE_INSTANCE.sleep(0.001);
+        try { Thread.sleep(1); } catch(InterruptedException e) { e.printStackTrace(); }
     }
 
     private void updateCamera() {
@@ -114,10 +113,14 @@ public class BlurpScreen extends ScreenAdapter {
     private void doRender() {
 
         beginBatch(); // In case the RenderListener ended it.
-        runtimeScreenRenderer.render();
+        BlurpStore.runtimeScreen.render();
         endBatch();
 
         stage.draw();
+
+        beginBatch();
+        BlurpStore.runtimeConsole.render(batch);
+        endBatch();
     }
 
     private void beginBatch() {

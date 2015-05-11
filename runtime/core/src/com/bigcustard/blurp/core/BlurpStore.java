@@ -12,6 +12,7 @@ import com.bigcustard.blurp.model.Camera;
 import com.bigcustard.blurp.model.Screen;
 import com.bigcustard.blurp.model.Sprite;
 import com.bigcustard.blurp.model.effects.*;
+import com.bigcustard.blurp.runtimemodel.*;
 import com.bigcustard.blurp.ui.*;
 
 /**
@@ -28,10 +29,13 @@ public class BlurpStore {
     public static Blurpifier blurpifier;
     public static RuntimeRepository runtimeRepository;
     public static Blurp blurp;
+    public static RuntimeScreen runtimeScreen;
     public static BlurpScreen blurpScreen;
     public static FontHolder systemFont;
     public static OrthographicCamera gdxCamera;
     public static Effects effects;
+    public static Console console;
+    public static RuntimeConsole runtimeConsole;
 
     public static void initialise(BlurpConfiguration blurpConfiguration) {
 
@@ -44,6 +48,8 @@ public class BlurpStore {
 
         modelCamera = new CameraImpl(screenCenterX(), screenCenterY());
         modelScreen = new Screen();
+        console = new ConsoleImpl();
+        runtimeConsole = new RuntimeConsole();
         effects = new EffectsImpl();
 
         Tween.registerAccessor(Sprite.class, new SpriteAccessor());
@@ -51,7 +57,8 @@ public class BlurpStore {
         tweener = new TweenManager();
 
         blurpifier = new Blurpifier();
-        blurpScreen = new BlurpScreen(new RuntimeScreenRenderer());
+        runtimeScreen = new RuntimeScreen();
+        blurpScreen = new BlurpScreen();
         modelRepository = new ModelRepository();
         runtimeRepository = new RuntimeRepository();
         blurp = new BlurpImpl();
@@ -76,5 +83,10 @@ public class BlurpStore {
     public static double screenCenterY() {
 
         return configuration.getViewport().getWorldHeight() / 2;
+    }
+
+    public static void syncSingletons() {
+
+        runtimeScreen.sync();
     }
 }

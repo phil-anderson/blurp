@@ -8,7 +8,7 @@ public class HelloManyWorlds implements BlurpRunnable {
     private static final int NUM_WORLDS = 20;
 
     @Override
-    public void run(Blurp blurp, Screen screen, Camera camera, Effects effects, Keyboard keyboard, Utils utils) {
+    public void run(Blurp blurp, Screen screen, Console console, Camera camera, Effects effects, Keyboard keyboard, Utils utils) {
 
         Image worldImage = blurp.loadImage("hello-world.png");
         ImageSprite[] worlds = new ImageSprite[NUM_WORLDS];

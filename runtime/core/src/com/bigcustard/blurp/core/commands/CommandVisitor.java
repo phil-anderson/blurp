@@ -6,4 +6,8 @@ public interface CommandVisitor {
     void visit(SetDebugModeCommand setDebugModeCommand);
 
     void visit(RunEffectCommand runEffectCommand);
+
+    void visit(ConsolePrintCommand consolePrintCommand);
+
+    void visit(ConsoleClearCommand consoleClearCommand);
 }

@@ -37,6 +37,7 @@ public class RuntimeRepository {
         commandRequests.clear();
 
         // Then sync the various model object types
+        BlurpStore.syncSingletons();
         runtimeImages.syncAll(BlurpStore.modelRepository.getImages());
         runtimeImageSprites.syncAll(BlurpStore.modelRepository.getImageSprites());
         runtimeTextSprites.syncAll(BlurpStore.modelRepository.getTextSprites());
