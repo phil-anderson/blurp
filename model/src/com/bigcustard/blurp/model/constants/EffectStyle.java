@@ -3,9 +3,9 @@ package com.bigcustard.blurp.model.constants;
 public enum EffectStyle {
 
     Linear,
-    SmoothStart, SmoothStop, SmoothStartStop,
-    FastStart, FastStop, FastMiddle,
-    BackStart, BackStop, BackStartStop,
-    BounceStart, BounceStop, BounceStartStop,
-    ElasticStart, ElasticStop, ElasticStartStop
+    SmoothStop, SmoothStart, SmoothStartStop,
+    SlowStop, SlowStart, SlowStartStop,
+    BackStop, BackStart, BackStartStop,
+    BounceStop, BounceStart, BounceStartStop,
+    ElasticStop, ElasticStart, ElasticStartStop
 }
