@@ -1,6 +1,7 @@
 package com.bigcustard.blurp.ui;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.utils.viewport.*;
@@ -56,10 +57,9 @@ public class BlurpScreen extends ScreenAdapter {
             }
 
             renderListener.handlePreRenderEvent(delta);
-
             BlurpStore.systemFont.reset();
-
             doFrame(delta);
+
         } catch(RuntimeException exception) {
             // Pass it on so blurpify method can throw it
             BlurpStore.blurpifier.setException(exception);
@@ -72,17 +72,6 @@ public class BlurpScreen extends ScreenAdapter {
         // Maybe libGdx isn't being particularly friendly outside of renders... Hmmmm...
         // I wonder if this will be an issue n Android?
         try { Thread.sleep(1); } catch(InterruptedException e) { e.printStackTrace(); }
-    }
-
-    private void updateCamera() {
-
-        BlurpStore.gdxCamera.rotate((float) BlurpStore.modelCamera.rotation);
-        BlurpStore.gdxCamera.up.set(0, 1, 0);
-        BlurpStore.gdxCamera.direction.set(0, 0, -1);
-
-        BlurpStore.gdxCamera.position.set((float) BlurpStore.modelCamera.x, (float) BlurpStore.modelCamera.y,0);
-        BlurpStore.gdxCamera.rotate((float) BlurpStore.modelCamera.rotation);
-        BlurpStore.gdxCamera.zoom = (float) (1 / BlurpStore.modelCamera.zoom);
     }
 
     private void doFrame(float delta) {
@@ -118,9 +107,35 @@ public class BlurpScreen extends ScreenAdapter {
 
         stage.draw();
 
+        resetCamera();
         beginBatch();
         BlurpStore.runtimeConsole.render(batch);
         endBatch();
+    }
+
+    private void updateCamera() {
+
+        OrthographicCamera camera = BlurpStore.gdxCamera;
+        camera.rotate((float) BlurpStore.modelCamera.rotation);
+        camera.up.set(0, 1, 0);
+        camera.direction.set(0, 0, -1);
+
+        camera.position.set((float) BlurpStore.modelCamera.x, (float) BlurpStore.modelCamera.y, 0);
+        camera.rotate((float) BlurpStore.modelCamera.rotation);
+        camera.zoom = (float) (1 / BlurpStore.modelCamera.zoom);
+    }
+
+    private void resetCamera() {
+
+        OrthographicCamera camera = BlurpStore.gdxCamera;
+        camera.rotate((float) BlurpStore.modelCamera.rotation);
+        camera.up.set(0, 1, 0);
+        camera.direction.set(0, 0, -1);
+
+        camera.position.set((float) BlurpStore.screenCenterX(), (float) BlurpStore.screenCenterY(), 0);
+        camera.zoom = (float) (1);
+        camera.update();
+        batch.setProjectionMatrix(camera.combined);
     }
 
     private void beginBatch() {
