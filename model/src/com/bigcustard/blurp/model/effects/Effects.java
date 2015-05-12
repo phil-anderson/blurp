@@ -22,12 +22,17 @@ public abstract class Effects {
 
     public Effect zoom(double newZoom) {
 
-        return scale(newZoom, newZoom);
+        return scaleTo(newZoom, newZoom);
     }
 
-    public Effect scale(double newScale) {
+    public Effect scaleTo(double newScale) {
 
-        return scale(newScale, newScale);
+        return scaleTo(newScale, newScale);
+    }
+
+    public Effect scaleBy(double newScale) {
+
+        return scaleBy(newScale, newScale);
     }
 
     public abstract Effect moveTo(double newX, double newY);
@@ -38,7 +43,9 @@ public abstract class Effects {
 
     public abstract Effect rotateBy(double changeInAngle);
 
-    public abstract Effect scale(double newScaleX, double newScaleY);
+    public abstract Effect scaleTo(double newScaleX, double newScaleY);
+
+    public abstract Effect scaleBy(double newScaleX, double newScaleY);
 
     public abstract Effect alpha(double newAlpha);
 

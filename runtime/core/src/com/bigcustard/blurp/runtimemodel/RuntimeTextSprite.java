@@ -42,7 +42,7 @@ public class RuntimeTextSprite extends RuntimeSprite<TextSprite> {
         markupEnabled = modelSprite.colourTagsEnabled;
 
         // TODO: Add ability to change (and hence sync) fonts
-        if(newInstance) font = BlurpStore.systemFont.getFont();
+        if(newInstance) font = BlurpStore.defaultFont.getFont();
 
         if(newInstance) {
             BlurpStore.blurpScreen.addActor(this);

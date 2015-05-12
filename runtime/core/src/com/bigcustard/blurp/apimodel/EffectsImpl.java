@@ -38,9 +38,15 @@ public class EffectsImpl extends Effects {
     }
 
     @Override
-    public Effect scale(double newScaleX, double newScaleY) {
+    public Effect scaleTo(double newScaleX, double newScaleY) {
 
         return new TweenEffect(TweenTypes.SCALE, false, (float) newScaleX, (float) newScaleY);
+    }
+
+    @Override
+    public Effect scaleBy(double newScaleX, double newScaleY) {
+
+        return new TweenEffect(TweenTypes.SCALE, true, (float) newScaleX, (float) newScaleY);
     }
 
     @Override

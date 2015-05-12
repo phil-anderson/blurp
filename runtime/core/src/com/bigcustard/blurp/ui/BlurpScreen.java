@@ -46,18 +46,11 @@ public class BlurpScreen extends ScreenAdapter {
 
         try {
             if(firstRender) {
-                batch = new SpriteBatch();
-                stage = new Stage(viewport, batch);
-
-                Gdx.gl.glLineWidth(1.5f);
-
-                firstRender = false;
-
-                BlurpStore.onLibGdxInitialised();
+                initialise();
             }
 
             renderListener.handlePreRenderEvent(delta);
-            BlurpStore.systemFont.reset();
+            BlurpStore.defaultFont.reset();
             doFrame(delta);
 
         } catch(RuntimeException exception) {
@@ -77,7 +70,7 @@ public class BlurpScreen extends ScreenAdapter {
     private void doFrame(float delta) {
 
         // TODO: We don't currently need this - Remove unless needed.
-//        stage.act(delta);
+        stage.act(delta);
 
         synchronized(BlurpStore.blurpifier) {
             if(BlurpStore.blurpifier.getRequestState() == BlurpifyRequestState.Requested) {
@@ -111,6 +104,18 @@ public class BlurpScreen extends ScreenAdapter {
         beginBatch();
         BlurpStore.runtimeConsole.render(batch);
         endBatch();
+    }
+
+    private void initialise() {
+
+        batch = new SpriteBatch();
+        stage = new Stage(viewport, batch);
+
+        Gdx.gl.glLineWidth(1.5f);
+
+        firstRender = false;
+
+        BlurpStore.onLibGdxInitialised();
     }
 
     private void updateCamera() {

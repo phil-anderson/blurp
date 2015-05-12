@@ -232,6 +232,21 @@ public abstract class Sprite<T> {
 
     public abstract T runEffect(EffectBase effectToRun);
 
+    /**
+     * Removes the Sprite completely from Blurp. It will be destroyed, and no longer appear on screen.
+     * <p>
+     * Removing things from Blurp when you no longer need them is a really good thing to do, as any resources they use
+     * up is freed and available for the rest of your program to use.
+     */
+    public abstract void remove();
+
+    /**
+     * Runs the specified effect, then removes the sprite once it's complete.
+     * @param effectToRun
+     * @return
+     */
+    public abstract T removeWithEffect(EffectBase effectToRun);
+
     public abstract boolean isRunningEffect();
 
     public T stopEffect() {

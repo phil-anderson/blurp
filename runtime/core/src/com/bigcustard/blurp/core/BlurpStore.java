@@ -31,7 +31,7 @@ public class BlurpStore {
     public static Blurp blurp;
     public static RuntimeScreen runtimeScreen;
     public static BlurpScreen blurpScreen;
-    public static FontHolder systemFont;
+    public static FontHolder defaultFont;
     public static OrthographicCamera gdxCamera;
     public static Effects effects;
     public static Console console;
@@ -72,7 +72,7 @@ public class BlurpStore {
         systemFontTexture.setFilter(Texture.TextureFilter.MipMapLinearNearest, Texture.TextureFilter.Linear);
         BitmapFont font = new BitmapFont(Gdx.files.classpath("RobotoCondensed.fnt"),
                                          new TextureRegion(systemFontTexture), false);
-        systemFont = new FontHolder(font);
+        defaultFont = new FontHolder(font);
     }
 
     public static double screenCenterX() {

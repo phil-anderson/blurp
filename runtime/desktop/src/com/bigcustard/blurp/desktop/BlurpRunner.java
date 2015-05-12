@@ -29,7 +29,7 @@ public class BlurpRunner {
         config.samples = 1;
 
 		new LwjglApplication(new BlurpApp(options.language, options.scriptName,
-                             new FitViewport(config.width, config.height)),
+                             new FitViewport(options.width, options.height)),
                              config);
 	}
 

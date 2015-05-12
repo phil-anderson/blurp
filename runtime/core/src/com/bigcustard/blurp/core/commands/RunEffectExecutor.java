@@ -13,7 +13,7 @@ public class RunEffectExecutor {
         boolean runEffect = command.getEffect() != null;
         if(runEffect) {
             BaseTween tween = command.getEffect().getTween(command.getTarget());
-            tween.setCallback(new FlagComplete(command.getTarget()));
+            tween.setCallback(new FlagComplete(command.getTarget(), command.isRemoveOnComplete()));
             tween.setCallbackTriggers(TweenCallback.COMPLETE);
             tween.start(BlurpStore.tweener);
         }
@@ -21,17 +21,22 @@ public class RunEffectExecutor {
 
     private static class FlagComplete implements TweenCallback {
 
-        private EffectContainer target;
+        private final EffectContainer target;
+        private final boolean removeOnComplete;
 
-        private FlagComplete(Object target) {
+        private FlagComplete(Object target, boolean removeOnComplete) {
 
             this.target = (EffectContainer) target;
+            this.removeOnComplete = removeOnComplete;
         }
 
         @Override
         public void onEvent(int type, BaseTween<?> source) {
 
             target.setRunningEffect(false);
+            if(removeOnComplete) {
+                target.remove();
+            }
         }
     }
 }

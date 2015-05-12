@@ -5,4 +5,6 @@ public interface EffectContainer {
     public void setRunningEffect(boolean running);
 
     public boolean isRunningEffect();
+
+    public void remove();
 }

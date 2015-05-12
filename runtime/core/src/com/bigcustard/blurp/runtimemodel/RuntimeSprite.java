@@ -5,12 +5,14 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.glutils.*;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.scenes.scene2d.*;
-import com.bigcustard.blurp.apimodel.*;
+import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.Sprite;
 import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.util.*;
 
 public abstract class RuntimeSprite<T extends Sprite> extends Actor implements RuntimeObject<T> {
+
+    private final SpriteClickListener clickListener;
 
     private Matrix4 transformationStorage = new Matrix4();
     private Affine2 transform = new Affine2();
@@ -18,9 +20,12 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
     private Circle collisionCircle = new Circle();
     private Polygon collisionRectangle = new Polygon();
     private CollisionShape collisionShape;
-    private EffectImpl effect;
 
-    protected RuntimeSprite() { }
+    protected RuntimeSprite() {
+
+        clickListener = new SpriteClickListener();
+        addListener(clickListener);
+    }
 
     @Override
     public void sync(T modelSprite, boolean newInstance) {
@@ -53,6 +58,20 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
         } finally {
             batch.setTransformMatrix(transformationStorage);
             batch.setColor(originalColour);
+        }
+    }
+
+    @Override
+    public Actor hit(float x, float y, boolean touchable) {
+
+        if (touchable && this.getTouchable() != Touchable.enabled) return null;
+
+        if(collisionShape == CollisionShape.CenterCircle) {
+            double dx = getWidth() / 2 - x;
+            double dy = getHeight() / 2 - y;
+            return dx * dx + dy * dy < collisionCircle.radius * collisionCircle.radius ? this : null;
+        } else {
+            return x >= 0 && x < getWidth() && y >= 0 && y < getHeight() ? this : null;
         }
     }
 

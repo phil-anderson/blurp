@@ -4,6 +4,7 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
+* Don't like the Viewport being passed in. We should change it.
 * More effect samples
 * RemoveAfterEffects
 * Add Sprite methods queueEffect? loopEffect?

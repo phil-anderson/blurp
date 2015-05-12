@@ -23,7 +23,7 @@ public class CameraImpl extends Camera implements EffectContainer {
     @Override
     public Camera runEffect(EffectBase effectToRun) {
 
-        BlurpStore.runtimeRepository.registerCommand(new RunEffectCommand(this, effectToRun));
+        BlurpStore.runtimeRepository.registerCommand(new RunEffectCommand(this, effectToRun, false));
         runningEffect = effectToRun != null;
         return this;
     }
@@ -37,5 +37,11 @@ public class CameraImpl extends Camera implements EffectContainer {
     public boolean isRunningEffect() {
 
         return runningEffect;
+    }
+
+    @Override
+    public void remove() {
+
+        throw new UnsupportedOperationException("You can't remove the Camera");
     }
 }

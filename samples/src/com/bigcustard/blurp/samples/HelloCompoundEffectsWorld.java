@@ -11,12 +11,12 @@ public class HelloCompoundEffectsWorld implements BlurpRunnable {
 
         effects.defaultDuration(0.5);
 
-        EffectBase squish = effects.scale(1, 0.7);
+        EffectBase squish = effects.scaleTo(1, 0.7);
         EffectBase goRed = effects.colour(Colours.RED);
         EffectBase squishAndGoRed = effects.combine(squish, goRed);
 
         EffectBase spin = effects.rotateBy(720);
-        EffectBase normalise = effects.scale(1);
+        EffectBase normalise = effects.scaleTo(1);
         EffectBase spinAndNormalise = effects.combine(spin, normalise);
 
         EffectBase animation = effects.sequence(squishAndGoRed, spinAndNormalise);

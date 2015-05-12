@@ -18,6 +18,7 @@ public class RuntimeConsole {
     private final BitmapFont font;
     private final String[] contents;
 
+    private Colour lastColour;
     private int currentLine;
     private int currentColumn;
 
@@ -76,7 +77,11 @@ public class RuntimeConsole {
 
     private void printChunk(String text, Colour colour) {
 
-        contents[currentLine] += "[#" + Convert.toGdxColour(colour).toString() + "]" + text;
+        if(colour != lastColour) {
+            contents[currentLine] += "[#" + Convert.toGdxColour(colour).toString() + "]";
+            lastColour = colour;
+        }
+        contents[currentLine] += text;
         currentColumn += text.length();
     }
 

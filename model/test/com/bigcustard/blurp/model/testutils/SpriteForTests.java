@@ -24,6 +24,16 @@ public class SpriteForTests extends Sprite {
     }
 
     @Override
+    public void remove() {
+
+    }
+
+    @Override
+    public Object removeWithEffect(EffectBase effectToRun) {
+        return null;
+    }
+
+    @Override
     public boolean isRunningEffect() {
 
         return false;

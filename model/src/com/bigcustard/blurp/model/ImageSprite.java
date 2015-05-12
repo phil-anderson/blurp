@@ -22,13 +22,4 @@ public abstract class ImageSprite extends Sprite<ImageSprite> {
         image = newImage;
         return this;
     }
-
-    /**
-     * Removes the ImageSprite completely from Blurp. It will be destroyed, and no longer appear on screen. Other
-     * ImageSprites that use the same Image will (of course) be fine.
-     * <p>
-     * Removing things from Blurp when you no longer need them is a really good thing to do, as any resources they use
-     * up is freed and available for the rest of your program to use.
-     */
-    public abstract void remove();
 }

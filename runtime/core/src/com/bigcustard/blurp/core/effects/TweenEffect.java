@@ -7,6 +7,7 @@ import com.bigcustard.blurp.apimodel.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.model.effects.*;
+import com.bigcustard.blurp.util.*;
 
 public class TweenEffect extends EffectImpl<Effect> implements Effect {
 
@@ -68,7 +69,15 @@ public class TweenEffect extends EffectImpl<Effect> implements Effect {
 
         Tween tween = Tween.to(target, tweenType, duration);
         if(relative) {
-            tween.targetRelative(targetValues);
+
+            // Special case for scaleBy - e.g. scaleBy(2) should double in size, not add 2 to scale.
+            if(tweenType == TweenTypes.SCALE) {
+                float[] initialScaleValues = Tweens.getTweenAccessorValues(target, TweenTypes.SCALE);
+                tween.target(initialScaleValues[0] * targetValues[0],
+                             initialScaleValues[1] *= targetValues[1]);
+            } else {
+                tween.targetRelative(targetValues);
+            }
         } else {
             tween.target(targetValues);
         }

@@ -57,9 +57,19 @@ public class TextSpriteImpl extends TextSprite implements EffectContainer {
     @Override
     public TextSprite runEffect(EffectBase effectToRun) {
 
-        BlurpStore.runtimeRepository.registerCommand(new RunEffectCommand(this, effectToRun));
+        BlurpStore.runtimeRepository.registerCommand(new RunEffectCommand(this, effectToRun, false));
+        runningEffect = effectToRun != null;
         return this;
     }
+
+    @Override
+    public TextSprite removeWithEffect(EffectBase effectToRun) {
+
+        BlurpStore.runtimeRepository.registerCommand(new RunEffectCommand(this, effectToRun, true));
+        runningEffect = effectToRun != null;
+        return this;
+    }
+
 
     @Override
     public void setRunningEffect(boolean running) {
