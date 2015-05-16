@@ -30,11 +30,4 @@ public class RuntimeRepositoryTest extends LibGdxTest {
         assertThat(testCandidate.getCommandRequests().size(), is(1));
     }
 
-    @Test
-    public void syncExecutesCommands() throws Exception {
-
-        testCandidate.registerCommand(mockCommand);
-        testCandidate.syncWithModelRepository(1);
-        Mockito.verify(mockCommand).accept(testCandidate.getCommandExecutor(), 1);
-    }
 }
