@@ -4,11 +4,10 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
-import com.bigcustard.blurp.model.constants.Colours;
 
 public class RuntimeScreen {
 
-    private Colour backgroundColour = Colours.BLACK;
+    private Colour backgroundColour;
 
     public void sync() {
 

@@ -47,6 +47,8 @@ public class ScriptEngineBlurpRunnable implements BlurpRunnable {
 
         bindings.put(ScriptEngine.FILENAME, scriptName);
         try {
+            // Initial blurpify to flush any defaults set in the model.
+            blurp.blurpify();
             scriptEngine.eval(scriptReader, bindings);
         } catch(ScriptException e) {
             throw new BlurpException("Error running script", e);
