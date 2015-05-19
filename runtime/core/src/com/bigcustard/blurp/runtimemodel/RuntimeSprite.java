@@ -12,7 +12,7 @@ import com.bigcustard.blurp.util.*;
 
 public abstract class RuntimeSprite<T extends Sprite> extends Actor implements RuntimeObject<T> {
 
-    private final SpriteClickListener clickListener;
+    private final SpriteClickListener mouseListener;
 
     private Matrix4 transformationStorage = new Matrix4();
     private Affine2 transform = new Affine2();
@@ -23,8 +23,8 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
 
     protected RuntimeSprite() {
 
-        clickListener = new SpriteClickListener();
-        addListener(clickListener);
+        mouseListener = new SpriteClickListener();
+        addListener(mouseListener);
     }
 
     @Override
@@ -36,6 +36,9 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
         setColor(Convert.toGdxColour(modelSprite.colour, modelSprite.alpha));
         setVisible(!modelSprite.hidden);
         this.collisionShape = modelSprite.collisionShape;
+
+        // Sync mouse state from runtime to model
+        modelSprite.mouseState(mouseListener.buildState());
     }
 
     @Override
@@ -61,18 +64,17 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
         }
     }
 
+    // TODO: This is hacky at the moment as it ignores the transformed X and Y passed in. Blurp uses X and Y to mean
+    // center, not bottom-left, and I couldn't get it transforming correctly when rotated.
     @Override
     public Actor hit(float x, float y, boolean touchable) {
 
         if (touchable && this.getTouchable() != Touchable.enabled) return null;
 
-        if(collisionShape == CollisionShape.CenterCircle) {
-            double dx = getWidth() / 2 - x;
-            double dy = getHeight() / 2 - y;
-            return dx * dx + dy * dy < collisionCircle.radius * collisionCircle.radius ? this : null;
-        } else {
-            return x >= 0 && x < getWidth() && y >= 0 && y < getHeight() ? this : null;
-        }
+        Vector3 mouseXY = MouseState.getPosition();
+        boolean hit = collisionShape == CollisionShape.CenterCircle ? collisionCircle.contains(mouseXY.x, mouseXY.y)
+                                                                    : collisionRectangle.contains(mouseXY.x, mouseXY.y);
+        return hit ? this : null;
     }
 
     public void preRender() { }
@@ -117,6 +119,11 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
     public Polygon getCollisionRectangle() {
 
         return collisionRectangle;
+    }
+
+    public SpriteClickListener getMouseListener() {
+
+        return mouseListener;
     }
 
     @Override

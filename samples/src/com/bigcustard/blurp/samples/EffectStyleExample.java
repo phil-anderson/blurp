@@ -7,7 +7,7 @@ import com.bigcustard.blurp.model.effects.*;
 public class EffectStyleExample implements BlurpRunnable {
 
     @Override
-    public void run(Blurp blurp, Screen screen, Console console, Camera camera, Effects effects, Keyboard keyboard, Utils utils) {
+    public void run(Blurp blurp, Screen screen, Console console, Camera camera, Effects effects, Keyboard keyboard, Mouse mouse, Utils utils) {
 
         Image worldImage = blurp.loadImage("hello-world.png");
 

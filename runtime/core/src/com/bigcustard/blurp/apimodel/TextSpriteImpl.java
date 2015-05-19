@@ -70,7 +70,6 @@ public class TextSpriteImpl extends TextSprite implements EffectContainer {
         return this;
     }
 
-
     @Override
     public void setRunningEffect(boolean running) {
 

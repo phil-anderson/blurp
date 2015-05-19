@@ -7,7 +7,7 @@ import com.bigcustard.blurp.model.effects.*;
 public class ConsoleExample implements BlurpRunnable {
 
     @Override
-    public void run(Blurp blurp, Screen screen, Console console, Camera camera, Effects effects, Keyboard keyboard, Utils utils) {
+    public void run(Blurp blurp, Screen screen, Console console, Camera camera, Effects effects, Keyboard keyboard, Mouse mouse, Utils utils) {
 
         console.println("The quick, brown fox jumped over the lazy dog.");
         blurp.blurpify();

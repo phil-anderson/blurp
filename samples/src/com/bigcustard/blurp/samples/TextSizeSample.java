@@ -7,7 +7,7 @@ public class TextSizeSample implements BlurpRunnable {
 
 
     @Override
-    public void run(Blurp blurp, Screen screen, Console console, Camera camera, Effects effects, Keyboard keyboard, Utils utils) {
+    public void run(Blurp blurp, Screen screen, Console console, Camera camera, Effects effects, Keyboard keyboard, Mouse mouse, Utils utils) {
 
         double yPosition = 545;
         for(int i = 100; i > 0; i -= 10) {

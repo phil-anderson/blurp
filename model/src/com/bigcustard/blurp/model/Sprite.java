@@ -71,6 +71,8 @@ public abstract class Sprite<T> {
 
     public boolean hidden;
 
+    public SpriteMouseState mouseState = SpriteMouseState.NULL;
+
     public CollisionShape collisionShape;
 
     public T x(double newX) {
@@ -124,6 +126,12 @@ public abstract class Sprite<T> {
     public T collisionShape(CollisionShape newCollisionShape) {
 
         this.collisionShape = newCollisionShape;
+        return (T) this;
+    }
+
+    public T mouseState(SpriteMouseState newMouseState) {
+
+        this.mouseState = newMouseState;
         return (T) this;
     }
 

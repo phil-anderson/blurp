@@ -7,7 +7,7 @@ import com.bigcustard.blurp.model.effects.Effects;
 public class RemoveWithEffectExample implements BlurpRunnable {
 
     @Override
-    public void run(Blurp blurp, Screen screen, Console console, Camera camera, Effects effects, Keyboard keyboard, Utils utils) {
+    public void run(Blurp blurp, Screen screen, Console console, Camera camera, Effects effects, Keyboard keyboard, Mouse mouse, Utils utils) {
 
         EffectGroup destroyEffect = effects.combine(effects.scaleBy(4),
                                                   effects.alpha(0));

@@ -102,12 +102,15 @@ public class BlurpRuntime {
         public void run() {
 
             try {
+                BlurpStore.blurp.blurpify();
                 script.run(BlurpStore.blurp,
                            BlurpStore.modelScreen,
                            BlurpStore.console,
                            BlurpStore.modelCamera,
                            BlurpStore.effects,
-                           new KeyboardImpl(), new Utils());
+                           new KeyboardImpl(),
+                           BlurpStore.modelMouse,
+                           new Utils());
 
             } catch (RuntimeException e) {
                 if(exceptionHandler != null) {

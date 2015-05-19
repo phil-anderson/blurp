@@ -25,6 +25,7 @@ public class BlurpStore {
     public static ModelRepository modelRepository;
     public static Screen modelScreen;
     public static Camera modelCamera;
+    public static Mouse modelMouse;
     public static TweenManager tweener;
     public static Blurpifier blurpifier;
     public static RuntimeRepository runtimeRepository;
@@ -48,6 +49,7 @@ public class BlurpStore {
 
         modelCamera = new CameraImpl(screenCenterX(), screenCenterY());
         modelScreen = new Screen();
+        modelMouse = new MouseImpl();
         console = new ConsoleImpl();
         runtimeConsole = new RuntimeConsole();
         effects = new EffectsImpl();
@@ -88,5 +90,6 @@ public class BlurpStore {
     public static void syncSingletons() {
 
         runtimeScreen.sync();
+        ((MouseImpl) modelMouse).sync();
     }
 }

@@ -69,9 +69,6 @@ public class BlurpScreen extends ScreenAdapter {
 
     private void doFrame(float delta) {
 
-        // TODO: We don't currently need this - Remove unless needed.
-        stage.act(delta);
-
         synchronized(BlurpStore.blurpifier) {
             if(BlurpStore.blurpifier.getRequestState() == BlurpifyRequestState.Requested) {
                 BlurpStore.blurpifier.setRenderState(BlurpifyRenderState.RequestAcknowledged);
@@ -79,6 +76,7 @@ public class BlurpScreen extends ScreenAdapter {
                     updateCamera();
                     BlurpStore.runtimeRepository.syncWithModelRepository(delta);
                     BlurpStore.tweener.update(delta);
+                    stage.act(delta);
                 } finally {
                     BlurpStore.blurpifier.setRenderState(BlurpifyRenderState.RequestComplete);
                 }
@@ -110,6 +108,7 @@ public class BlurpScreen extends ScreenAdapter {
 
         batch = new SpriteBatch();
         stage = new Stage(viewport, batch);
+        Gdx.input.setInputProcessor(stage);
 
         Gdx.gl.glLineWidth(1.5f);
 

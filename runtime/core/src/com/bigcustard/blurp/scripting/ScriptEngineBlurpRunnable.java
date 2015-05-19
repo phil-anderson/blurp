@@ -27,7 +27,7 @@ public class ScriptEngineBlurpRunnable implements BlurpRunnable {
     }
 
     @Override
-    public void run(Blurp blurp, Screen screen, Console console, Camera camera, Effects effects, Keyboard keyboard, Utils utils) {
+    public void run(Blurp blurp, Screen screen, Console console, Camera camera, Effects effects, Keyboard keyboard, Mouse mouse, Utils utils) {
 
         Bindings bindings = scriptEngine.createBindings();
         bindings.put("blurp", blurp);
@@ -48,7 +48,6 @@ public class ScriptEngineBlurpRunnable implements BlurpRunnable {
         bindings.put(ScriptEngine.FILENAME, scriptName);
         try {
             // Initial blurpify to flush any defaults set in the model.
-            blurp.blurpify();
             scriptEngine.eval(scriptReader, bindings);
         } catch(ScriptException e) {
             throw new BlurpException("Error running script", e);
