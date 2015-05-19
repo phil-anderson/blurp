@@ -17,6 +17,26 @@ WORK IN PROGRESS - CHECK BACK LATER
 * Background drawing
 * Debug grid overlay
 * Look at gradle build
+* Ditch Android (for now)
+* Shape Sprites (line, square, rect, circle, triangle, n-agon)
+* Sprite copying (allows prototyping)
+* Add alpha to console
+* Layers - Background / Screen / HUD -> Operations can select which to work on?
+* Language Changes
+*   God class a-la gdx?
+*   createSprite -> Determines type from parameter. Means image file name one
+* Move Viewport out of configuration and into BlurpStore.
+* Have interfaces for properties like IPosition, IScale, IRotation. Then anything that has those can be used as a value in a setter. Mad idea?
+* Ditch Android (for now)
+* Shape Sprites (line, square, rect, circle, triangle, n-agon)
+* Sprite copying (allows prototyping)
+* Add alpha to console
+* Layers - Background / Screen / HUD -> Operations can select which to work on?  Score when using camera.
+* Language Changes?
+*   God class a-la gdx?
+*   createSprite -> Determines type from parameter. Means image file name one?
+* Move Viewport out of configuration and into BlurpStore.
+* Have interfaces for properties like IPosition, IScale, IRotation. Then anything that has those can be used as a value in a setter. Mad idea?
 * Documentation - Move Javadoc out and turn it into Markdown documentation.
 
 
