@@ -21,7 +21,7 @@ public class SpriteMouseExample implements BlurpRunnable {
             }
 
             if(world.mouseState.dragging) {
-                world.position(mouse.x(), mouse.y());
+                world.position(world.mouseState.dragX, world.mouseState.dragY);
             }
 
             if(world.mouseState.dragReleased) {

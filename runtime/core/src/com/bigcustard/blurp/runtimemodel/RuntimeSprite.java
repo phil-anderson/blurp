@@ -23,7 +23,7 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
 
     protected RuntimeSprite() {
 
-        mouseListener = new SpriteClickListener();
+        mouseListener = new SpriteClickListener(this);
         addListener(mouseListener);
     }
 

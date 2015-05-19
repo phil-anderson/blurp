@@ -4,7 +4,7 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
-* Implement dragX and dragY (offset pos by initial touchpoint)
+* Sprite copying / prototyping
 * Don't like the Viewport being passed in. We should change it.
 * Have two stages, one for HUD. Sprites can be drawn on HUD layer instead. Useful for things like score.
 * More effect samples
