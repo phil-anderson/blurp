@@ -11,6 +11,7 @@ public class ModelRepository {
     private List<Image> images;
     private List<ImageSprite> imageSprites;
     private List<TextSprite> textSprites;
+    private List<Sprite> sprites;
 
     public ModelRepository() {
 
@@ -76,5 +77,13 @@ public class ModelRepository {
 
         images.clear();
         imageSprites.clear();
+    }
+
+    public List<Sprite> getSprites() {
+
+        ArrayList<Sprite> sprites = new ArrayList<Sprite>();
+        sprites.addAll(imageSprites);
+        sprites.addAll(textSprites);
+        return sprites;
     }
 }

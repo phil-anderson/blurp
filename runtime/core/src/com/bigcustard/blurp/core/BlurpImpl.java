@@ -2,6 +2,7 @@ package com.bigcustard.blurp.core;
 
 import com.bigcustard.blurp.apimodel.*;
 import com.bigcustard.blurp.core.commands.*;
+import com.bigcustard.blurp.core.events.*;
 import com.bigcustard.blurp.model.*;
 
 /**
@@ -12,6 +13,7 @@ public class BlurpImpl extends Blurp {
     public Blurp blurpify() {
 
         BlurpStore.blurpifier.blurpify();
+        EventDispatcher.dispatchEvents();
         return this;
     }
 

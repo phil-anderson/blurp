@@ -12,7 +12,7 @@ WORK IN PROGRESS - CHECK BACK LATER
 * Allow control over zOrder (relative methods like Sprite.putBehind(otherSprite))
 * Provide a proper dispose() method which cleans everything out
 * Make script dispose() and then restart at end after a tap
-* Sprite mouse functions
+* Sprite mouse left and right clicks
 * World size?
 * Background drawing
 * Debug grid overlay

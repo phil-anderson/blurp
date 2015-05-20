@@ -11,6 +11,8 @@ public class SpriteClickListener extends ClickListener {
 
     private final RuntimeSprite sprite;
     private boolean dragging;
+    private boolean entered;
+    private boolean exited;
     private boolean clicked;
     private boolean dragReleased;
     private int clickCount;
@@ -19,6 +21,18 @@ public class SpriteClickListener extends ClickListener {
     public SpriteClickListener(RuntimeSprite sprite) {
 
         this.sprite = sprite;
+    }
+
+    @Override
+    public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+
+        entered = true;
+    }
+
+    @Override
+    public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+
+        exited = true;
     }
 
     @Override
@@ -55,8 +69,11 @@ public class SpriteClickListener extends ClickListener {
     public SpriteMouseState buildState() {
 
         Vector3 mouseXY = MouseState.getPosition().cpy();
-        SpriteMouseState result = new SpriteMouseState(isOver(), isPressed(), dragging, clicked, dragReleased, clickCount,
-                                                       mouseXY.x + dragOffsetX, mouseXY.y + dragOffsetY);
+        SpriteMouseState result = new SpriteMouseState(isOver(), isPressed(), dragging, entered, exited, mousePressed,
+                                                       mouseReleased, clicked, dragReleased,
+                                                       clickCount, mouseXY.x + dragOffsetX, mouseXY.y + dragOffsetY);
+        entered = false;
+        exited = false;
         clicked = false;
         dragReleased = false;
         clickCount = 0;

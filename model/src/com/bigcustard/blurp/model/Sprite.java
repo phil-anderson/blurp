@@ -71,6 +71,14 @@ public abstract class Sprite<T> {
 
     public boolean hidden;
 
+    public SpriteEventHandler whenMouseEnters;
+    public SpriteEventHandler whenMouseLeaves;
+    public SpriteEventHandler whenClicked;
+    public SpriteEventHandler whenBeingDragged;
+    public SpriteEventHandler whenDragReleased;
+    public SpriteEventHandler whenMousePressed;
+    public SpriteEventHandler whenMouseReleased;
+
     public SpriteMouseState mouseState = SpriteMouseState.NULL;
 
     public CollisionShape collisionShape;
