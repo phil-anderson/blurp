@@ -1,5 +1,6 @@
 package com.bigcustard.blurp.model;
 
+import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.model.effects.*;
 
 public abstract class Camera {
@@ -63,7 +64,12 @@ public abstract class Camera {
         return this;
     }
 
-    public abstract Camera runEffect(EffectBase effectToRun);
+    public Camera runEffect(EffectBase effectToRun) {
+
+        return runEffect(effectToRun, ExistingEffectStrategy.CombineWithExisting);
+    }
+
+    public abstract Camera runEffect(EffectBase effectToRun, ExistingEffectStrategy existingEffectStrategy);
 
     public abstract boolean isRunningEffect();
 

@@ -72,11 +72,17 @@ public abstract class Sprite<T> {
     public boolean hidden;
 
     public SpriteEventHandler whenMouseEnters;
+
     public SpriteEventHandler whenMouseLeaves;
+
     public SpriteEventHandler whenClicked;
+
     public SpriteEventHandler whenBeingDragged;
+
     public SpriteEventHandler whenDragReleased;
+
     public SpriteEventHandler whenMousePressed;
+
     public SpriteEventHandler whenMouseReleased;
 
     public SpriteMouseState mouseState = SpriteMouseState.NULL;
@@ -137,12 +143,95 @@ public abstract class Sprite<T> {
         return (T) this;
     }
 
+    public T whenMouseEnters(SpriteEventHandler eventHandler) {
+
+        this.whenMouseEnters = eventHandler;
+        return (T) this;
+    }
+
+    public T whenMouseEnters(Effect effectToRun) {
+
+        this.whenMouseEnters = new EffectSpriteEventHandler(effectToRun);
+        return (T) this;
+    }
+
+    public T whenMouseLeaves(SpriteEventHandler eventHandler) {
+
+        this.whenMouseLeaves = eventHandler;
+        return (T) this;
+    }
+
+    public T whenMouseLeaves(Effect effectToRun) {
+
+        this.whenMouseLeaves = new EffectSpriteEventHandler(effectToRun);
+        return (T) this;
+    }
+
+    public T whenClicked(SpriteEventHandler eventHandler) {
+
+        this.whenClicked = eventHandler;
+        return (T) this;
+    }
+
+    public T whenClicked(Effect effectToRun) {
+
+        this.whenClicked = new EffectSpriteEventHandler(effectToRun);
+        return (T) this;
+    }
+
+    public T whenBeingDragged(SpriteEventHandler eventHandler) {
+
+        this.whenBeingDragged = eventHandler;
+        return (T) this;
+    }
+
+    public T whenBeingDragged(Effect effectToRun) {
+
+        this.whenBeingDragged = new EffectSpriteEventHandler(effectToRun);
+        return (T) this;
+    }
+
+    public T whenDragReleased(SpriteEventHandler eventHandler) {
+
+        this.whenDragReleased = eventHandler;
+        return (T) this;
+    }
+
+    public T whenDragReleased(Effect effectToRun) {
+
+        this.whenDragReleased = new EffectSpriteEventHandler(effectToRun);
+        return (T) this;
+    }
+
+    public T whenMousePressed(SpriteEventHandler eventHandler) {
+
+        this.whenMousePressed = eventHandler;
+        return (T) this;
+    }
+
+    public T whenMousePressed(Effect effectToRun) {
+
+        this.whenMousePressed = new EffectSpriteEventHandler(effectToRun);
+        return (T) this;
+    }
+
+    public T whenMouseReleased(SpriteEventHandler eventHandler) {
+
+        this.whenMouseReleased = eventHandler;
+        return (T) this;
+    }
+
+    public T whenMouseReleased(Effect effectToRun) {
+
+        this.whenMouseReleased = new EffectSpriteEventHandler(effectToRun);
+        return (T) this;
+    }
+
     public T mouseState(SpriteMouseState newMouseState) {
 
         this.mouseState = newMouseState;
         return (T) this;
     }
-
 
     /**
      * This method provides a handy way to set both X and Y coordinates in one hit.
@@ -246,7 +335,12 @@ public abstract class Sprite<T> {
      */
     public abstract boolean collidedWith(Sprite other);
 
-    public abstract T runEffect(EffectBase effectToRun);
+    public T runEffect(EffectBase effectToRun) {
+
+        return runEffect(effectToRun, ExistingEffectStrategy.CombineWithExisting);
+    }
+
+    public abstract T runEffect(EffectBase effectToRun, ExistingEffectStrategy whatIfAlreadyRunningOne);
 
     /**
      * Removes the Sprite completely from Blurp. It will be destroyed, and no longer appear on screen.
@@ -261,12 +355,17 @@ public abstract class Sprite<T> {
      * @param effectToRun
      * @return
      */
-    public abstract T removeWithEffect(EffectBase effectToRun);
+    public T runEffectThenRemove(EffectBase effectToRun) {
+
+        return runEffectThenRemove(effectToRun, ExistingEffectStrategy.CombineWithExisting);
+    }
+
+    public abstract T runEffectThenRemove(EffectBase effectToRun, ExistingEffectStrategy whatIfAlreadyRunningOne);
 
     public abstract boolean isRunningEffect();
 
     public T stopEffect() {
 
-        return runEffect(null);
+        return runEffect(null, ExistingEffectStrategy.StopExisting);
     }
 }

@@ -51,7 +51,91 @@ public abstract class Effects {
 
     public abstract Effect colour(Colour newColour);
 
+    // For scripting languages that don't support varargs.
+    public EffectGroup combine(EffectBase effect1, EffectBase effect2) {
+
+        return combine(new EffectBase[] { effect1, effect2 });
+    }
+
+    // For scripting languages that don't support varargs.
+    public EffectGroup combine(EffectBase effect1, EffectBase effect2, EffectBase effect3) {
+
+        return combine(new EffectBase[] { effect1, effect2, effect3 });
+    }
+
+    // For scripting languages that don't support varargs.
+    public EffectGroup combine(EffectBase effect1, EffectBase effect2, EffectBase effect3, EffectBase effect4) {
+
+        return combine(new EffectBase[] { effect1, effect2, effect3, effect4 });
+    }
+
+    // For scripting languages that don't support varargs.
+    public EffectGroup combine(EffectBase effect1, EffectBase effect2, EffectBase effect3, EffectBase effect4, EffectBase effect5) {
+
+        return combine(new EffectBase[] { effect1, effect2, effect3, effect4, effect5 });
+    }
+
+    // For scripting languages that don't support varargs.
+    public EffectGroup combine(EffectBase effect1, EffectBase effect2, EffectBase effect3, EffectBase effect4, EffectBase effect5, EffectBase effect6) {
+
+        return combine(new EffectBase[] { effect1, effect2, effect3, effect4, effect5, effect6 });
+    }
+
+    // For scripting languages that don't support varargs.
+    public EffectGroup combine(EffectBase effect1, EffectBase effect2, EffectBase effect3, EffectBase effect4, EffectBase effect5, EffectBase effect6, EffectBase effect7) {
+
+        return combine(new EffectBase[] { effect1, effect2, effect3, effect4, effect5, effect6, effect7 });
+    }
+
+    // For scripting languages that don't support varargs.
+    public EffectGroup combine(EffectBase effect1, EffectBase effect2, EffectBase effect3, EffectBase effect4, EffectBase effect5, EffectBase effect6, EffectBase effect7, EffectBase effect8) {
+
+        return combine(new EffectBase[] { effect1, effect2, effect3, effect4, effect5, effect6, effect7, effect8 });
+    }
+
     public abstract EffectGroup combine(EffectBase... effectsToCombine);
+
+    // For scripting languages that don't support varargs.
+    public EffectGroup sequence(EffectBase effect1, EffectBase effect2) {
+
+        return sequence(new EffectBase[] { effect1, effect2 });
+    }
+
+    // For scripting languages that don't support varargs.
+    public EffectGroup sequence(EffectBase effect1, EffectBase effect2, EffectBase effect3) {
+
+        return sequence(new EffectBase[] { effect1, effect2, effect3 });
+    }
+
+    // For scripting languages that don't support varargs.
+    public EffectGroup sequence(EffectBase effect1, EffectBase effect2, EffectBase effect3, EffectBase effect4) {
+
+        return sequence(new EffectBase[] { effect1, effect2, effect3, effect4 });
+    }
+
+    // For scripting languages that don't support varargs.
+    public EffectGroup sequence(EffectBase effect1, EffectBase effect2, EffectBase effect3, EffectBase effect4, EffectBase effect5) {
+
+        return sequence(new EffectBase[] { effect1, effect2, effect3, effect4, effect5 });
+    }
+
+    // For scripting languages that don't support varargs.
+    public EffectGroup sequence(EffectBase effect1, EffectBase effect2, EffectBase effect3, EffectBase effect4, EffectBase effect5, EffectBase effect6) {
+
+        return sequence(new EffectBase[] { effect1, effect2, effect3, effect4, effect5, effect6 });
+    }
+
+    // For scripting languages that don't support varargs.
+    public EffectGroup sequence(EffectBase effect1, EffectBase effect2, EffectBase effect3, EffectBase effect4, EffectBase effect5, EffectBase effect6, EffectBase effect7) {
+
+        return sequence(new EffectBase[] { effect1, effect2, effect3, effect4, effect5, effect6, effect7 });
+    }
+
+    // For scripting languages that don't support varargs.
+    public EffectGroup sequence(EffectBase effect1, EffectBase effect2, EffectBase effect3, EffectBase effect4, EffectBase effect5, EffectBase effect6, EffectBase effect7, EffectBase effect8) {
+
+        return sequence(new EffectBase[] { effect1, effect2, effect3, effect4, effect5, effect6, effect7, effect8 });
+    }
 
     public abstract EffectGroup sequence(EffectBase... effectsToDoInSequence);
 }

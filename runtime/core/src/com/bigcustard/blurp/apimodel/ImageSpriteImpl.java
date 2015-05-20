@@ -4,6 +4,7 @@ import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.core.commands.*;
 import com.bigcustard.blurp.core.common.*;
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.model.effects.*;
 
 public class ImageSpriteImpl extends ImageSprite implements EffectContainer {
@@ -39,17 +40,25 @@ public class ImageSpriteImpl extends ImageSprite implements EffectContainer {
     }
 
     @Override
-    public ImageSprite runEffect(EffectBase effectToRun) {
+    public ImageSprite runEffect(EffectBase effectToRun, ExistingEffectStrategy existingEffectStrategy) {
 
-        BlurpStore.runtimeRepository.registerCommand(new RunEffectCommand(this, effectToRun, false));
+        if(runningEffect && existingEffectStrategy == ExistingEffectStrategy.DoNotRun) {
+            return this;
+        }
+
+        BlurpStore.runtimeRepository.registerCommand(new RunEffectCommand(this, effectToRun, existingEffectStrategy, false));
         runningEffect = effectToRun != null;
         return this;
     }
 
     @Override
-    public ImageSprite removeWithEffect(EffectBase effectToRun) {
+    public ImageSprite runEffectThenRemove(EffectBase effectToRun, ExistingEffectStrategy existingEffectStrategy) {
 
-        BlurpStore.runtimeRepository.registerCommand(new RunEffectCommand(this, effectToRun, true));
+        if(runningEffect && existingEffectStrategy == ExistingEffectStrategy.DoNotRun) {
+            return this;
+        }
+
+        BlurpStore.runtimeRepository.registerCommand(new RunEffectCommand(this, effectToRun, existingEffectStrategy, true));
         runningEffect = effectToRun != null;
         return this;
     }

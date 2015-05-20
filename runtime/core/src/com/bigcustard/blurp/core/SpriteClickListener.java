@@ -13,6 +13,8 @@ public class SpriteClickListener extends ClickListener {
     private boolean dragging;
     private boolean entered;
     private boolean exited;
+    private boolean pressed;
+    private boolean released;
     private boolean clicked;
     private boolean dragReleased;
     private int clickCount;
@@ -26,7 +28,8 @@ public class SpriteClickListener extends ClickListener {
     @Override
     public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
 
-        entered = true;
+        // Prevents enter being set on a touchDown.
+        entered = !MouseState.isLeftPressed() && !MouseState.isRightPressed();
     }
 
     @Override
@@ -45,6 +48,7 @@ public class SpriteClickListener extends ClickListener {
     @Override
     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 
+        pressed = true;
         Vector3 mouseXY = MouseState.getPosition().cpy();
         dragOffsetX = sprite.getX() - mouseXY.x;
         dragOffsetY = sprite.getY() - mouseXY.y;
@@ -54,6 +58,7 @@ public class SpriteClickListener extends ClickListener {
     @Override
     public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 
+        released = true;
         dragReleased = dragging;
         dragging = false;
         super.touchUp(event, x, y, pointer, button);
@@ -69,11 +74,13 @@ public class SpriteClickListener extends ClickListener {
     public SpriteMouseState buildState() {
 
         Vector3 mouseXY = MouseState.getPosition().cpy();
-        SpriteMouseState result = new SpriteMouseState(isOver(), isPressed(), dragging, entered, exited, mousePressed,
-                                                       mouseReleased, clicked, dragReleased,
+        SpriteMouseState result = new SpriteMouseState(isOver(), isPressed(), dragging, entered, exited, pressed,
+                                                       released, clicked, dragReleased,
                                                        clickCount, mouseXY.x + dragOffsetX, mouseXY.y + dragOffsetY);
         entered = false;
         exited = false;
+        pressed = false;
+        released = false;
         clicked = false;
         dragReleased = false;
         clickCount = 0;

@@ -32,8 +32,10 @@ public class ScriptEngineBlurpRunnable implements BlurpRunnable {
         Bindings bindings = scriptEngine.createBindings();
         bindings.put("blurp", blurp);
         bindings.put("screen", screen);
+        bindings.put("console", console);
         bindings.put("camera", camera);
         bindings.put("keyboard", keyboard);
+        bindings.put("mouse", mouse);
         bindings.put("utils", utils);
         bindings.put("effects", effects);
         scriptEnginePutConstants(Colours.class, bindings);
@@ -42,6 +44,7 @@ public class ScriptEngineBlurpRunnable implements BlurpRunnable {
         scriptEnginePutEnums(Key.values(), bindings);
         scriptEnginePutEnums(CollisionShape.values(), bindings);
         scriptEnginePutEnums(EffectStyle.values(), bindings);
+        scriptEnginePutEnums(ExistingEffectStrategy.values(), bindings);
 
         if (language.equals("jruby")) JRubyWrapperSpike.wrap(scriptEngine, bindings);
 

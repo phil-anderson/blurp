@@ -1,6 +1,7 @@
 package com.bigcustard.blurp.model.testutils;
 
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.model.effects.*;
 
 public class SpriteForTests extends Sprite {
@@ -18,7 +19,7 @@ public class SpriteForTests extends Sprite {
     }
 
     @Override
-    public Object runEffect(EffectBase effectToRun) {
+    public Object runEffect(EffectBase effectToRun, ExistingEffectStrategy existingEffectStrategy) {
 
         return null;
     }
@@ -29,7 +30,7 @@ public class SpriteForTests extends Sprite {
     }
 
     @Override
-    public Object removeWithEffect(EffectBase effectToRun) {
+    public Object runEffectThenRemove(EffectBase effectToRun, ExistingEffectStrategy existingEffectStrategy) {
         return null;
     }
 

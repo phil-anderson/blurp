@@ -19,7 +19,7 @@ public class RemoveWithEffectExample implements BlurpRunnable {
                     .scale(utils.random(0.1, 0.5));
 
             // And immediately destroy it. Harsh.
-            world.removeWithEffect(destroyEffect);
+            world.runEffectThenRemove(destroyEffect);
 
             blurp.blurpify();
         }

@@ -3,15 +3,17 @@ package com.bigcustard.blurp.core.commands;
 import aurelienribon.tweenengine.*;
 import com.bigcustard.blurp.apimodel.*;
 import com.bigcustard.blurp.core.*;
+import com.bigcustard.blurp.model.constants.*;
 
 public class RunEffectExecutor {
 
     public void execute(RunEffectCommand command) {
 
-        BlurpStore.tweener.killTarget(command.getTarget());
+        if(command.getExistingEffectStrategy() == ExistingEffectStrategy.StopExisting) {
+            BlurpStore.tweener.killTarget(command.getTarget());
+        }
 
-        boolean runEffect = command.getEffect() != null;
-        if(runEffect) {
+        if(command.getEffect() != null) {
             BaseTween tween = command.getEffect().getTween(command.getTarget());
             tween.setCallback(new FlagComplete(command.getTarget(), command.isRemoveOnComplete()));
             tween.setCallbackTriggers(TweenCallback.COMPLETE);
@@ -33,10 +35,21 @@ public class RunEffectExecutor {
         @Override
         public void onEvent(int type, BaseTween<?> source) {
 
-            target.setRunningEffect(false);
-            if(removeOnComplete) {
-                target.remove();
+            if(!otherTweensRunning(source)) {
+                target.setRunningEffect(false);
+                if(removeOnComplete) {
+                    target.remove();
+                }
             }
+        }
+
+        private boolean otherTweensRunning(BaseTween tweenToCheck) {
+
+            // More bulletproof than a reference-counting-style approach
+            for(BaseTween tween : BlurpStore.tweener.getObjects()) {
+                if(tween != tweenToCheck && !tween.isFinished()) return true;
+            }
+            return false;
         }
     }
 }

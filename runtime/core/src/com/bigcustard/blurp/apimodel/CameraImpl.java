@@ -21,9 +21,9 @@ public class CameraImpl extends Camera implements EffectContainer {
     }
 
     @Override
-    public Camera runEffect(EffectBase effectToRun) {
+    public Camera runEffect(EffectBase effectToRun, ExistingEffectStrategy existingEffectStrategy) {
 
-        BlurpStore.runtimeRepository.registerCommand(new RunEffectCommand(this, effectToRun, false));
+        BlurpStore.runtimeRepository.registerCommand(new RunEffectCommand(this, effectToRun, existingEffectStrategy, false));
         runningEffect = effectToRun != null;
         return this;
     }
