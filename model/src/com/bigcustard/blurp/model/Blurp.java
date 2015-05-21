@@ -66,11 +66,11 @@ public abstract class Blurp {
 
     public abstract Colour createColour(double red, double green, double blue);
 
-    public Blurp setDebugMode(boolean enable) {
+    public Blurp debugMode(boolean enable) {
 
-        setDebugMode(enable, Colours.LIME_GREEN);
+        debugMode(enable, Colours.LIME_GREEN);
         return this;
     }
 
-    public abstract Blurp setDebugMode(boolean enable, Colour debugColour);
+    public abstract Blurp debugMode(boolean enable, Colour debugColour);
 }

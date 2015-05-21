@@ -4,6 +4,7 @@ import aurelienribon.tweenengine.*;
 import com.bigcustard.blurp.apimodel.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.constants.*;
+import com.bigcustard.blurp.model.events.*;
 
 public class RunEffectExecutor {
 
@@ -15,7 +16,7 @@ public class RunEffectExecutor {
 
         if(command.getEffect() != null) {
             BaseTween tween = command.getEffect().getTween(command.getTarget());
-            tween.setCallback(new FlagComplete(command.getTarget(), command.isRemoveOnComplete()));
+            tween.setCallback(new FlagComplete(command.getTarget(), command.getCompletionHandler()));
             tween.setCallbackTriggers(TweenCallback.COMPLETE);
             tween.start(BlurpStore.tweener);
         }
@@ -24,12 +25,12 @@ public class RunEffectExecutor {
     private static class FlagComplete implements TweenCallback {
 
         private final EffectContainer target;
-        private final boolean removeOnComplete;
+        private final SimpleEventHandler onCompletion;
 
-        private FlagComplete(Object target, boolean removeOnComplete) {
+        private FlagComplete(Object target, SimpleEventHandler onCompletion) {
 
             this.target = (EffectContainer) target;
-            this.removeOnComplete = removeOnComplete;
+            this.onCompletion = onCompletion;
         }
 
         @Override
@@ -37,8 +38,8 @@ public class RunEffectExecutor {
 
             if(!otherTweensRunning(source)) {
                 target.setRunningEffect(false);
-                if(removeOnComplete) {
-                    target.remove();
+                if(onCompletion != null) {
+                    onCompletion.handle(target);
                 }
             }
         }

@@ -2,6 +2,7 @@ package com.bigcustard.blurp.model;
 
 import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.model.effects.*;
+import com.bigcustard.blurp.model.events.*;
 
 /**
  * A sprite is an object that can be put on the screen, moved around, rotated, and generally mucked about with in
@@ -149,7 +150,7 @@ public abstract class Sprite<T> {
         return (T) this;
     }
 
-    public T whenMouseEnters(Effect effectToRun) {
+    public T whenMouseEnters(EffectBase effectToRun) {
 
         this.whenMouseEnters = new EffectSpriteEventHandler(effectToRun);
         return (T) this;
@@ -161,7 +162,7 @@ public abstract class Sprite<T> {
         return (T) this;
     }
 
-    public T whenMouseLeaves(Effect effectToRun) {
+    public T whenMouseLeaves(EffectBase effectToRun) {
 
         this.whenMouseLeaves = new EffectSpriteEventHandler(effectToRun);
         return (T) this;
@@ -173,7 +174,7 @@ public abstract class Sprite<T> {
         return (T) this;
     }
 
-    public T whenClicked(Effect effectToRun) {
+    public T whenClicked(EffectBase effectToRun) {
 
         this.whenClicked = new EffectSpriteEventHandler(effectToRun);
         return (T) this;
@@ -185,7 +186,7 @@ public abstract class Sprite<T> {
         return (T) this;
     }
 
-    public T whenBeingDragged(Effect effectToRun) {
+    public T whenBeingDragged(EffectBase effectToRun) {
 
         this.whenBeingDragged = new EffectSpriteEventHandler(effectToRun);
         return (T) this;
@@ -197,7 +198,7 @@ public abstract class Sprite<T> {
         return (T) this;
     }
 
-    public T whenDragReleased(Effect effectToRun) {
+    public T whenDragReleased(EffectBase effectToRun) {
 
         this.whenDragReleased = new EffectSpriteEventHandler(effectToRun);
         return (T) this;
@@ -209,7 +210,7 @@ public abstract class Sprite<T> {
         return (T) this;
     }
 
-    public T whenMousePressed(Effect effectToRun) {
+    public T whenMousePressed(EffectBase effectToRun) {
 
         this.whenMousePressed = new EffectSpriteEventHandler(effectToRun);
         return (T) this;
@@ -221,7 +222,7 @@ public abstract class Sprite<T> {
         return (T) this;
     }
 
-    public T whenMouseReleased(Effect effectToRun) {
+    public T whenMouseReleased(EffectBase effectToRun) {
 
         this.whenMouseReleased = new EffectSpriteEventHandler(effectToRun);
         return (T) this;
@@ -337,10 +338,15 @@ public abstract class Sprite<T> {
 
     public T runEffect(EffectBase effectToRun) {
 
-        return runEffect(effectToRun, ExistingEffectStrategy.CombineWithExisting);
+        return runEffect(effectToRun, SpriteEventHandler.NULL);
     }
 
-    public abstract T runEffect(EffectBase effectToRun, ExistingEffectStrategy whatIfAlreadyRunningOne);
+    public T runEffect(EffectBase effectToRun, SpriteEventHandler whatToDoAtEnd) {
+
+        return runEffect(effectToRun, whatToDoAtEnd, ExistingEffectStrategy.CombineWithExisting);
+    }
+
+    public abstract T runEffect(EffectBase effectToRun, SpriteEventHandler whatToDoAtEnd, ExistingEffectStrategy whatIfAlreadyRunningOne);
 
     /**
      * Removes the Sprite completely from Blurp. It will be destroyed, and no longer appear on screen.
@@ -350,22 +356,10 @@ public abstract class Sprite<T> {
      */
     public abstract void remove();
 
-    /**
-     * Runs the specified effect, then removes the sprite once it's complete.
-     * @param effectToRun
-     * @return
-     */
-    public T runEffectThenRemove(EffectBase effectToRun) {
-
-        return runEffectThenRemove(effectToRun, ExistingEffectStrategy.CombineWithExisting);
-    }
-
-    public abstract T runEffectThenRemove(EffectBase effectToRun, ExistingEffectStrategy whatIfAlreadyRunningOne);
-
     public abstract boolean isRunningEffect();
 
     public T stopEffect() {
 
-        return runEffect(null, ExistingEffectStrategy.StopExisting);
+        return runEffect(null, SpriteEventHandler.NULL, ExistingEffectStrategy.StopExisting);
     }
 }

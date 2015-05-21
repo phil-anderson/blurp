@@ -9,7 +9,7 @@ public class CollisionDetectionSample implements BlurpRunnable {
     @Override
     public void run(Blurp blurp, Screen screen, Console console, Camera camera, Effects effects, Keyboard keyboard, Mouse mouse, Utils utils) {
 
-        blurp.setDebugMode(true);
+        blurp.debugMode(true);
         Image worldImage = blurp.loadImage("hello-world.png");
 
         ImageSprite worldWithCircle1 = blurp.createImageSprite(worldImage)

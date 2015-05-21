@@ -5,6 +5,7 @@ import com.bigcustard.blurp.core.commands.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.model.effects.*;
+import com.bigcustard.blurp.model.events.*;
 
 public class CameraImpl extends Camera implements EffectContainer {
 
@@ -21,9 +22,9 @@ public class CameraImpl extends Camera implements EffectContainer {
     }
 
     @Override
-    public Camera runEffect(EffectBase effectToRun, ExistingEffectStrategy existingEffectStrategy) {
+    public Camera runEffect(EffectBase effectToRun, CameraEventHandler completionHandler, ExistingEffectStrategy existingEffectStrategy) {
 
-        BlurpStore.runtimeRepository.registerCommand(new RunEffectCommand(this, effectToRun, existingEffectStrategy, false));
+        BlurpStore.runtimeRepository.registerCommand(new RunEffectCommand<Camera>(this, effectToRun, completionHandler, existingEffectStrategy, false));
         runningEffect = effectToRun != null;
         return this;
     }

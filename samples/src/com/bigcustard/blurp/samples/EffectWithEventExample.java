@@ -3,8 +3,9 @@ package com.bigcustard.blurp.samples;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.effects.EffectGroup;
 import com.bigcustard.blurp.model.effects.Effects;
+import com.bigcustard.blurp.model.events.*;
 
-public class RemoveWithEffectExample implements BlurpRunnable {
+public class EffectWithEventExample implements BlurpRunnable {
 
     @Override
     public void run(Blurp blurp, Screen screen, Console console, Camera camera, Effects effects, Keyboard keyboard, Mouse mouse, Utils utils) {
@@ -19,7 +20,7 @@ public class RemoveWithEffectExample implements BlurpRunnable {
                     .scale(utils.random(0.1, 0.5));
 
             // And immediately destroy it. Harsh.
-            world.runEffectThenRemove(destroyEffect);
+            world.runEffect(destroyEffect, SpriteEventHandler.AT_END_REMOVE_SPRITE);
 
             blurp.blurpify();
         }

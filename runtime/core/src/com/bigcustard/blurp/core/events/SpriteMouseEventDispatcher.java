@@ -2,6 +2,7 @@ package com.bigcustard.blurp.core.events;
 
 import java.util.*;
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.model.events.*;
 
 public class SpriteMouseEventDispatcher {
 

@@ -65,7 +65,7 @@ public class BlurpImpl extends Blurp {
     }
 
     @Override
-    public Blurp setDebugMode(boolean enable, Colour debugColour) {
+    public Blurp debugMode(boolean enable, Colour debugColour) {
 
         BlurpStore.runtimeRepository.registerCommand(new SetDebugModeCommand(enable, debugColour));
         return this;

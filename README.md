@@ -4,19 +4,21 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
+* IMPORTANT - Check that collisions and mouse detection work with textSprites that have different handles.
 * Sprite copying / prototyping
-* Don't like the Viewport being passed in. We should change it.
 * Have two stages, one for HUD. Sprites can be drawn on HUD layer instead. Useful for things like score.
-* More effect samples
-* Add Sprite methods queueEffect? loopEffect?
 * Allow control over zOrder (relative methods like Sprite.putBehind(otherSprite))
-* Provide a proper dispose() method which cleans everything out
-* Make script dispose() and then restart at end after a tap
-* Sprite mouse left and right clicks
+* Provide a proper dispose() method which cleans everything out + Make script restart at end after a tap
 * World size?
-* Background drawing
+
+* Don't like the Viewport being passed in. We should change it.
+
+* [DV] Sprite mouse left and right clicks
+* [DV] Background drawing
+
 * Debug grid overlay
 * Look at gradle build
+
 * Ditch Android (for now)
 * Shape Sprites (line, square, rect, circle, triangle, n-agon)
 * Sprite copying (allows prototyping)
@@ -37,6 +39,8 @@ WORK IN PROGRESS - CHECK BACK LATER
 *   createSprite -> Determines type from parameter. Means image file name one?
 * Move Viewport out of configuration and into BlurpStore.
 * Have interfaces for properties like IPosition, IScale, IRotation. Then anything that has those can be used as a value in a setter. Mad idea?
+* Renaming
+*   blurp, blurpify, collisionShape, many others
 * Documentation - Move Javadoc out and turn it into Markdown documentation.
 
 

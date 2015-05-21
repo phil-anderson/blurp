@@ -9,6 +9,7 @@ import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.Console;
 import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.model.effects.*;
+import com.bigcustard.blurp.model.events.*;
 import com.bigcustard.blurp.util.*;
 
 public class ScriptEngineBlurpRunnable implements BlurpRunnable {
@@ -38,6 +39,7 @@ public class ScriptEngineBlurpRunnable implements BlurpRunnable {
         bindings.put("mouse", mouse);
         bindings.put("utils", utils);
         bindings.put("effects", effects);
+        bindings.put("AtEndRemoveSprite", SpriteEventHandler.AT_END_REMOVE_SPRITE);
         scriptEnginePutConstants(Colours.class, bindings);
         scriptEnginePutEnums(Justification.values(), bindings);
         scriptEnginePutEnums(Handle.values(), bindings);

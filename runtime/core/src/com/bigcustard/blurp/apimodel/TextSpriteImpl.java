@@ -6,6 +6,7 @@ import com.bigcustard.blurp.core.common.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.model.effects.*;
+import com.bigcustard.blurp.model.events.*;
 
 public class TextSpriteImpl extends TextSprite implements EffectContainer {
 
@@ -55,25 +56,13 @@ public class TextSpriteImpl extends TextSprite implements EffectContainer {
     }
 
     @Override
-    public TextSprite runEffect(EffectBase effectToRun, ExistingEffectStrategy existingEffectStrategy) {
+    public TextSprite runEffect(EffectBase effectToRun, SpriteEventHandler completionHandler, ExistingEffectStrategy existingEffectStrategy) {
 
         if(runningEffect && existingEffectStrategy == ExistingEffectStrategy.DoNotRun) {
             return this;
         }
 
-        BlurpStore.runtimeRepository.registerCommand(new RunEffectCommand(this, effectToRun, existingEffectStrategy, false));
-        runningEffect = effectToRun != null;
-        return this;
-    }
-
-    @Override
-    public TextSprite runEffectThenRemove(EffectBase effectToRun, ExistingEffectStrategy existingEffectStrategy) {
-
-        if(runningEffect && existingEffectStrategy == ExistingEffectStrategy.DoNotRun) {
-            return this;
-        }
-
-        BlurpStore.runtimeRepository.registerCommand(new RunEffectCommand(this, effectToRun, existingEffectStrategy, true));
+        BlurpStore.runtimeRepository.registerCommand(new RunEffectCommand<Sprite>(this, effectToRun, completionHandler, existingEffectStrategy, false));
         runningEffect = effectToRun != null;
         return this;
     }

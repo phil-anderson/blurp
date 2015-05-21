@@ -23,5 +23,5 @@ function makeWorld(x, y) {
 
 function remove(sprite) {
 
-    sprite.runEffectThenRemove(shrinkAndFade);
+    sprite.runEffect(shrinkAndFade, AtEndRemoveSprite);
 }

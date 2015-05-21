@@ -1,12 +1,13 @@
 package com.bigcustard.blurp.model.effects;
 
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.model.events.*;
 
 public class EffectSpriteEventHandler implements SpriteEventHandler {
 
-    private Effect effectToRun;
+    private EffectBase effectToRun;
 
-    public EffectSpriteEventHandler(Effect effectToRun) {
+    public EffectSpriteEventHandler(EffectBase effectToRun) {
 
         this.effectToRun = effectToRun;
     }

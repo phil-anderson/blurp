@@ -12,7 +12,7 @@ public class TextSample implements BlurpRunnable {
     @Override
     public void run(Blurp blurp, Screen screen, Console console, Camera camera, Effects effects, Keyboard keyboard, Mouse mouse, Utils utils) {
 
-//        blurp.setDebugMode(true);
+//        blurp.debugMode(true);
 
         blurp.createTextSprite("LEFT-JUSTIFIED\n" + MESSAGE)
              .position(150, 500)
