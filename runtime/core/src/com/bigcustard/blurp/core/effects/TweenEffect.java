@@ -17,9 +17,9 @@ public class TweenEffect extends EffectImpl<Effect> implements Effect {
         EASING_FUNCTIONS.put(EffectStyle.SmoothStart, Quad.IN);
         EASING_FUNCTIONS.put(EffectStyle.SmoothStop, Quad.OUT);
         EASING_FUNCTIONS.put(EffectStyle.SmoothStartStop, Quad.INOUT);
-        EASING_FUNCTIONS.put(EffectStyle.SlowStop, Quart.OUT);
-        EASING_FUNCTIONS.put(EffectStyle.SlowStart,  Quart.IN);
-        EASING_FUNCTIONS.put(EffectStyle.SlowStartStop, Quart.INOUT);
+        EASING_FUNCTIONS.put(EffectStyle.FastThenSlow, Quart.OUT);
+        EASING_FUNCTIONS.put(EffectStyle.SlowThenFast,  Quart.IN);
+        EASING_FUNCTIONS.put(EffectStyle.SlowFastSlow, Quart.INOUT);
         EASING_FUNCTIONS.put(EffectStyle.BackStart, Back.IN);
         EASING_FUNCTIONS.put(EffectStyle.BackStop, Back.OUT);
         EASING_FUNCTIONS.put(EffectStyle.BackStartStop, Back.INOUT);

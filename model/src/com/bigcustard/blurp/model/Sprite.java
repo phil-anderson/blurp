@@ -88,7 +88,7 @@ public abstract class Sprite<T> {
 
     public SpriteMouseState mouseState = SpriteMouseState.NULL;
 
-    public CollisionShape collisionShape;
+    public CollisionShape collisionShape = CollisionShape.BoundaryRectangle;
 
     public T x(double newX) {
 

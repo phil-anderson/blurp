@@ -4,7 +4,7 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
-* IMPORTANT - Check that collisions and mouse detection work with textSprites that have different handles.
+* Refactor to get rid of the syncing maps and just use commands for Sprite creation, plus a normal map.
 * Rename EffectBase to Effect, and Effect to something like Atomic Effect (or maybe even merge with TweenEffect)
 * Sprite copying / prototyping
 * Have two stages, one for HUD. Sprites can be drawn on HUD layer instead. Useful for things like score.
@@ -15,7 +15,7 @@ WORK IN PROGRESS - CHECK BACK LATER
 * Layers - Background / Screen / HUD -> Operations can select which to work on?
 
 * Don't like the Viewport being passed in. We should change it.
-
+* Almost all examples need redoing / refactoring
 * [DV] Sprite mouse left and right clicks
 * [DV] Background drawing
 

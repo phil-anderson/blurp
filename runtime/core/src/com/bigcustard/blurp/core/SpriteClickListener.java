@@ -30,12 +30,14 @@ public class SpriteClickListener extends ClickListener {
 
         // Prevents enter being set on a touchDown.
         entered = !MouseState.isLeftPressed() && !MouseState.isRightPressed();
+        super.enter(event, x, y, pointer, fromActor);
     }
 
     @Override
     public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
 
         exited = true;
+        super.exit(event, x, y, pointer, toActor);
     }
 
     @Override

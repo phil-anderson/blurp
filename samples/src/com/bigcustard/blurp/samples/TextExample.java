@@ -2,15 +2,14 @@ package com.bigcustard.blurp.samples;
 
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.constants.*;
-import com.bigcustard.blurp.model.effects.*;
 
-public class TextSample implements BlurpRunnable {
+public class TextExample extends BlurpJavaProgram {
 
     private static final String MESSAGE = "The quick, brown fox jumped over the lazy dog.";
     private static final String COLOURFUL_MESSAGE = "All colours can be specified as [RED]red[], [GREEN]green[] and [BLUE]blue[] components";
 
     @Override
-    public void run(Blurp blurp, Screen screen, Console console, Camera camera, Effects effects, Keyboard keyboard, Mouse mouse, Utils utils) {
+    public void run() {
 
 //        blurp.debugMode(true);
 
