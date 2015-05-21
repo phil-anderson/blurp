@@ -3,10 +3,10 @@ package com.bigcustard.blurp.samples;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.effects.*;
 
-public class CameraExample implements BlurpRunnable {
+public class CameraExample extends BlurpJavaProgram {
 
     @Override
-    public void run(Blurp blurp, Screen screen, Console console, Camera camera, Effects effects, Keyboard keyboard, Mouse mouse, Utils utils) {
+    public void run() {
 
         Image worldImage = blurp.loadImage("hello-world.png");
 
@@ -21,15 +21,20 @@ public class CameraExample implements BlurpRunnable {
         int spriteIndex = 0;
         while(true) {
             if(!camera.isRunningEffect()) {
-                EffectBase alignWithSprite = effects.combine(
-                    effects.rotateTo(sprites[spriteIndex].rotation),
-                    effects.moveTo(sprites[spriteIndex].x, sprites[spriteIndex].y),
-                    effects.zoom(1 / sprites[spriteIndex].scaleX));
+                EffectBase alignWithSprite = buildCameraZoomInEffect(sprites[spriteIndex]);
 
                 camera.runEffect(alignWithSprite.delayBeforeStart(0.5));
                 spriteIndex = (spriteIndex + 1) % 8;
             }
             blurp.blurpify();
         }
+    }
+
+    private EffectGroup buildCameraZoomInEffect(Sprite sprite) {
+
+        return effects.combine(
+            effects.rotateTo(sprite.rotation),
+            effects.moveTo(sprite.x, sprite.y),
+            effects.zoom(1 / sprite.scaleX));
     }
 }
