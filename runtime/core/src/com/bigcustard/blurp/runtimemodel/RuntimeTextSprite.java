@@ -43,10 +43,6 @@ public class RuntimeTextSprite extends RuntimeSprite<TextSprite> {
 
         // TODO: Add ability to change (and hence sync) fonts
         if(newInstance) font = BlurpStore.defaultFont.getFont();
-
-        if(newInstance) {
-            BlurpStore.blurpScreen.addActor(this);
-        }
     }
 
     @Override

@@ -41,6 +41,10 @@ public class RuntimeRepository {
         runtimeImages.syncAll(BlurpStore.modelRepository.getImages());
         runtimeImageSprites.syncAll(BlurpStore.modelRepository.getImageSprites());
         runtimeTextSprites.syncAll(BlurpStore.modelRepository.getTextSprites());
+
+        for(Sprite modelSprite : BlurpStore.modelRepository.pullCreatedSprites()) {
+            BlurpStore.blurpScreen.addActor(getSprite(modelSprite));
+        }
     }
 
     public RuntimeImage getImage(Image modelImage) {

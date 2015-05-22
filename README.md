@@ -4,7 +4,7 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
-* Refactor to get rid of the syncing maps and just use commands for Sprite creation, plus a normal map.
+* Refactor to get rid of the syncing maps and just use commands for Sprite creation, plus a normal map?
 * Rename EffectBase to Effect, and Effect to something like Atomic Effect (or maybe even merge with TweenEffect)
 * Sprite copying / prototyping
 * Have two stages, one for HUD. Sprites can be drawn on HUD layer instead. Useful for things like score.

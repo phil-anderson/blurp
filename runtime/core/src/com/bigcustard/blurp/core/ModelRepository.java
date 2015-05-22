@@ -12,12 +12,14 @@ public class ModelRepository {
     private List<ImageSprite> imageSprites;
     private List<TextSprite> textSprites;
     private List<Sprite> sprites;
+    private List<Sprite> createdSprites;
 
     public ModelRepository() {
 
         images = new ArrayList<Image>();
         imageSprites = new ArrayList<ImageSprite>();
         textSprites = new ArrayList<TextSprite>();
+        createdSprites = new ArrayList<Sprite>();
     }
 
     public void addImage(Image image) {
@@ -33,6 +35,7 @@ public class ModelRepository {
     public void addImageSprite(ImageSprite imageSprite) {
 
         imageSprites.add(imageSprite);
+        createdSprites.add(imageSprite);
     }
 
     public void removeImageSprite(ImageSprite imageSprite) {
@@ -43,21 +46,12 @@ public class ModelRepository {
     public void addTextSprite(TextSprite textSprite) {
 
         textSprites.add(textSprite);
+        createdSprites.add(textSprite);
     }
 
     public void removeTextSprite(TextSprite textSprite) {
 
         textSprites.remove(textSprite);
-    }
-
-    List<Image> getImages() {
-
-        return images;
-    }
-
-    List<ImageSprite> getImageSprites() {
-
-        return imageSprites;
     }
 
     public List<TextSprite> getTextSprites() {
@@ -85,5 +79,22 @@ public class ModelRepository {
         sprites.addAll(imageSprites);
         sprites.addAll(textSprites);
         return sprites;
+    }
+
+    public List<Sprite> pullCreatedSprites() {
+
+        ArrayList<Sprite> result = new ArrayList<Sprite>(createdSprites);
+        createdSprites.clear();
+        return result;
+    }
+
+    List<Image> getImages() {
+
+        return images;
+    }
+
+    List<ImageSprite> getImageSprites() {
+
+        return imageSprites;
     }
 }

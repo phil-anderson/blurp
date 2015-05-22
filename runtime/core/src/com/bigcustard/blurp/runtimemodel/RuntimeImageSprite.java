@@ -20,11 +20,6 @@ public class RuntimeImageSprite extends RuntimeSprite<ImageSprite> {
         setSize(width, height);
 
         setOrigin(width / 2, height / 2);
-
-        if(newInstance) {
-            BlurpStore.blurpScreen.addActor(this);
-        }
-
         updateCollisionShapes();
     }
 
