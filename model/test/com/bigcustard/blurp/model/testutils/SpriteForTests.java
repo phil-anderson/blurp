@@ -41,4 +41,28 @@ public class SpriteForTests extends Sprite {
 
         return null;
     }
+
+    @Override
+    public Object pushToBack() {
+
+        return null;
+    }
+
+    @Override
+    public Object pullToFront() {
+
+        return null;
+    }
+
+    @Override
+    public Object pushBehind(Sprite otherSprite) {
+
+        return null;
+    }
+
+    @Override
+    public Object pullInFrontOf(Sprite otherSprite) {
+
+        return null;
+    }
 }

@@ -362,4 +362,12 @@ public abstract class Sprite<T> {
 
         return runEffect(null, SpriteEventHandler.NULL, ExistingEffectStrategy.StopExisting);
     }
+
+    public abstract T pushToBack();
+
+    public abstract T pullToFront();
+
+    public abstract T pushBehind(Sprite otherSprite);
+
+    public abstract T pullInFrontOf(Sprite otherSprite);
 }

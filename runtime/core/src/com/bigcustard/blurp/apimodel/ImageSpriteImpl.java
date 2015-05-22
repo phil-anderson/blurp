@@ -63,4 +63,32 @@ public class ImageSpriteImpl extends ImageSprite implements EffectContainer {
 
         return this.runningEffect;
     }
+
+    @Override
+    public ImageSprite pushToBack() {
+
+        BlurpStore.runtimeRepository.registerCommand(new SetZOrderCommand(this, 0));
+        return this;
+    }
+
+    @Override
+    public ImageSprite pullToFront() {
+
+        BlurpStore.runtimeRepository.registerCommand(new SetZOrderCommand(this, Integer.MAX_VALUE));
+        return this;
+    }
+
+    @Override
+    public ImageSprite pushBehind(Sprite otherSprite) {
+
+        BlurpStore.runtimeRepository.registerCommand(new ChangeZOrderCommand(this, otherSprite, -1));
+        return this;
+    }
+
+    @Override
+    public ImageSprite pullInFrontOf(Sprite otherSprite) {
+
+        BlurpStore.runtimeRepository.registerCommand(new ChangeZOrderCommand(this, otherSprite, 1));
+        return this;
+    }
 }

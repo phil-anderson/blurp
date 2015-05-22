@@ -22,7 +22,7 @@ public class CommandExecutorTest {
         CommandExecutor commandExecutor = new CommandExecutor();
         List<CommandVisitable> commands = Arrays.asList(mockCommand1, mockCommand2);
 
-        commandExecutor.executeAll(commands, 0.1f);
+        commandExecutor.executeCommands(commands, 0.1f);
         Mockito.verify(mockCommand1).accept(commandExecutor, 0.1f);
         Mockito.verify(mockCommand2).accept(commandExecutor, 0.1f);
     }

@@ -7,17 +7,35 @@ public class CommandExecutor implements CommandVisitor {
 
     private final SetDebugModeExecutor setDebugModeExecutor;
     private final RunEffectExecutor runEffectExecutor;
+    private final ZOrderExecutor zOrderExecutor;
+    private final List<CommandVisitable> deferredCommands;
+
+    private boolean runningDeferred;
 
     public CommandExecutor() {
 
+
         setDebugModeExecutor = new SetDebugModeExecutor();
         runEffectExecutor = new RunEffectExecutor();
+        zOrderExecutor = new ZOrderExecutor(this);
+        deferredCommands = new ArrayList<CommandVisitable>();
     }
 
-    public void executeAll(List<CommandVisitable> commandRequests, float deltaTime) {
+    public void executeCommands(List<CommandVisitable> commandRequests, float deltaTime) {
 
         for(CommandVisitable request : commandRequests) {
             request.accept(this, deltaTime);
+        }
+    }
+
+    public void executeDeferredCommands(float deltaTime) {
+
+        runningDeferred = true;
+        try {
+            executeCommands(deferredCommands, deltaTime);
+            deferredCommands.clear();
+        } finally {
+            runningDeferred = false;
         }
     }
 
@@ -43,5 +61,23 @@ public class CommandExecutor implements CommandVisitor {
     public void visit(ConsoleClearCommand consoleClearCommand) {
 
         BlurpStore.runtimeConsole.clear();
+    }
+
+    @Override
+    public void visit(SetZOrderCommand setZOrderCommand) {
+
+        zOrderExecutor.execute(setZOrderCommand);
+    }
+
+    @Override
+    public void visit(ChangeZOrderCommand changeZOrderCommand) {
+
+        zOrderExecutor.execute(changeZOrderCommand);
+    }
+
+    // Defer commands that need to process AFTER the syncing process
+    public void deferCommand(CommandVisitable command) {
+
+        if(!runningDeferred) deferredCommands.add(command);
     }
 }

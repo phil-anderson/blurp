@@ -78,4 +78,32 @@ public class TextSpriteImpl extends TextSprite implements EffectContainer {
 
         return this.runningEffect;
     }
+
+    @Override
+    public TextSprite pushToBack() {
+
+        BlurpStore.runtimeRepository.registerCommand(new SetZOrderCommand(this, 0));
+        return this;
+    }
+
+    @Override
+    public TextSprite pullToFront() {
+
+        BlurpStore.runtimeRepository.registerCommand(new SetZOrderCommand(this, Integer.MAX_VALUE));
+        return this;
+    }
+
+    @Override
+    public TextSprite pushBehind(Sprite otherSprite) {
+
+        BlurpStore.runtimeRepository.registerCommand(new ChangeZOrderCommand(this, otherSprite, 0));
+        return this;
+    }
+
+    @Override
+    public TextSprite pullInFrontOf(Sprite otherSprite) {
+
+        BlurpStore.runtimeRepository.registerCommand(new ChangeZOrderCommand(this, otherSprite, 1));
+        return this;
+    }
 }

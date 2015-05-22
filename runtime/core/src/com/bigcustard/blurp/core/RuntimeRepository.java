@@ -33,7 +33,7 @@ public class RuntimeRepository {
     public void syncWithModelRepository(float deltaTime) {
 
         // First run any commands that the model has registered requests for.
-        commandExecutor.executeAll(commandRequests, deltaTime);
+        commandExecutor.executeCommands(commandRequests, deltaTime);
         commandRequests.clear();
 
         // Then sync the various model object types
@@ -45,6 +45,9 @@ public class RuntimeRepository {
         for(Sprite modelSprite : BlurpStore.modelRepository.pullCreatedSprites()) {
             BlurpStore.blurpScreen.addActor(getSprite(modelSprite));
         }
+
+        // Finally, run any commands that were deferred
+        commandExecutor.executeDeferredCommands(deltaTime);
     }
 
     public RuntimeImage getImage(Image modelImage) {

@@ -10,4 +10,8 @@ public interface CommandVisitor {
     void visit(ConsolePrintCommand consolePrintCommand);
 
     void visit(ConsoleClearCommand consoleClearCommand);
+
+    void visit(SetZOrderCommand setZOrderCommand);
+
+    void visit(ChangeZOrderCommand changeZOrderCommand);
 }
