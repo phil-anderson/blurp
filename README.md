@@ -4,7 +4,8 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
-* Rename EffectBase to Effect, and Effect to something like Atomic Effect (or maybe even merge with TweenEffect)
+* Rename EffectBase to Effect, and Effect to something like AtomicEffect (or maybe even merge with TweenEffect)
+* Need a programmatic zOrder example
 * Sprite copying / prototyping
 * Have two stages, one for HUD. Sprites can be drawn on HUD layer instead. Useful for things like score.
 * Provide a proper dispose() method which cleans everything out + Make script restart at end after a tap
@@ -22,6 +23,7 @@ WORK IN PROGRESS - CHECK BACK LATER
 
 * [DV] Shape Sprites (line, square, rect, circle, triangle, n-agon)
 
+* Consider a SpriteList object that is a Sprite but changes propagate (D3 selector style)
 * Language Changes
 *   createSprite -> Determines type from parameter. Means image file name one
 * Move Viewport out of configuration and into BlurpStore.

@@ -106,4 +106,13 @@ public class TextSpriteImpl extends TextSprite implements EffectContainer {
         BlurpStore.runtimeRepository.registerCommand(new ChangeZOrderCommand(this, otherSprite, 1));
         return this;
     }
+
+    @Override
+    public TextSprite copy() {
+
+        TextSprite copy = BlurpStore.blurp.createTextSprite(this.text);
+        SpriteCopier.copy(this, copy);
+        return copy;
+    }
+
 }

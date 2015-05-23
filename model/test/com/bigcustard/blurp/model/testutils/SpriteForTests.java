@@ -65,4 +65,10 @@ public class SpriteForTests extends Sprite {
 
         return null;
     }
+
+    @Override
+    public Object copy() {
+
+        return null;
+    }
 }

@@ -12,7 +12,7 @@ public class HelloScalingWorld implements BlurpRunnable {
 
         while(true) {
             // Earthquake!
-            world.scale(utils.random(0.95, 1.05));
+            world.scale(utils.randomInRange(0.95, 1.05));
             blurp.blurpify();
         }
     }

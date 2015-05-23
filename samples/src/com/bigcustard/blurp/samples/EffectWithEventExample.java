@@ -16,8 +16,8 @@ public class EffectWithEventExample implements BlurpRunnable {
         while(true) {
             // Create a world...
             ImageSprite world = blurp.createImageSprite("hello-world.png")
-                    .position(utils.random(50, 750), utils.random(50, 550))
-                    .scale(utils.random(0.1, 0.5));
+                    .position(utils.randomInRange(50, 750), utils.randomInRange(50, 550))
+                    .scale(utils.randomInRange(0.1, 0.5));
 
             // And immediately destroy it. Harsh.
             world.runEffect(destroyEffect, SpriteEventHandler.AT_END_REMOVE_SPRITE);

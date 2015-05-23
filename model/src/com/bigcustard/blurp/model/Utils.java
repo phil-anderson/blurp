@@ -25,7 +25,7 @@ public class Utils {
      * @param limit The limit that the returned random numbers must be smaller than.
      * @return A random number that is greater than or equal zero, but less than limit.
      */
-    public double random(double limit) {
+    public double randomUpTo(double limit) {
 
         return randomiser.nextDouble() * limit;
     }
@@ -36,15 +36,15 @@ public class Utils {
      * @return A random number that is greater than or equal the specified low value, but less than the specified high
      * value.
      */
-    public double random(double low, double high) {
+    public double randomInRange(double low, double high) {
 
         double range = high - low;
-        return random(range) + low;
+        return randomUpTo(range) + low;
     }
 
     public Colour randomColour() {
 
-        return new Colour(random(1), random(1), random(1));
+        return new Colour(randomUpTo(1), randomUpTo(1), randomUpTo(1));
     }
 
 //    /**

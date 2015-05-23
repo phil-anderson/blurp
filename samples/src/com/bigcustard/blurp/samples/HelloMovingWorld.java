@@ -19,8 +19,8 @@ public class HelloMovingWorld implements BlurpRunnable {
             blurp.blurpify();
 
             if(world.x == targetX && world.y == targetY) {
-                targetX = utils.random(150, 650);
-                targetY = utils.random(150, 450);
+                targetX = utils.randomInRange(150, 650);
+                targetY = utils.randomInRange(150, 450);
             }
         }
     }

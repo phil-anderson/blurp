@@ -1,5 +1,6 @@
 package com.bigcustard.blurp.model;
 
+import java.lang.reflect.*;
 import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.model.effects.*;
 import com.bigcustard.blurp.model.events.*;
@@ -307,6 +308,32 @@ public abstract class Sprite<T> {
         return (T) this;
     }
 
+    public T runEffect(EffectBase effectToRun) {
+
+        return runEffect(effectToRun, SpriteEventHandler.NULL);
+    }
+
+    public T runEffect(EffectBase effectToRun, SpriteEventHandler whatToDoAtEnd) {
+
+        return runEffect(effectToRun, whatToDoAtEnd, ExistingEffectStrategy.CombineWithExisting);
+    }
+
+    public T stopEffect() {
+
+        return runEffect(null, SpriteEventHandler.NULL, ExistingEffectStrategy.StopExisting);
+    }
+
+    public T[] multiplyBy(int numberOfTimes) {
+
+        T[] sprites = (T[]) Array.newInstance(getClass(), numberOfTimes);
+
+        sprites[0] = (T) this;
+        for(int i = 1; i < numberOfTimes; i++) {
+            sprites[i] = copy();
+        }
+        return sprites;
+    }
+
     /**
      * Moves the Sprite towards the specified target coordinates <u>the next time blurpify is called</u>. If you  keep
      * calling this method then eventually it'll reach the target. The speed parameter specified how fast the Sprite
@@ -336,16 +363,6 @@ public abstract class Sprite<T> {
      */
     public abstract boolean collidedWith(Sprite other);
 
-    public T runEffect(EffectBase effectToRun) {
-
-        return runEffect(effectToRun, SpriteEventHandler.NULL);
-    }
-
-    public T runEffect(EffectBase effectToRun, SpriteEventHandler whatToDoAtEnd) {
-
-        return runEffect(effectToRun, whatToDoAtEnd, ExistingEffectStrategy.CombineWithExisting);
-    }
-
     public abstract T runEffect(EffectBase effectToRun, SpriteEventHandler whatToDoAtEnd, ExistingEffectStrategy whatIfAlreadyRunningOne);
 
     /**
@@ -358,11 +375,6 @@ public abstract class Sprite<T> {
 
     public abstract boolean isRunningEffect();
 
-    public T stopEffect() {
-
-        return runEffect(null, SpriteEventHandler.NULL, ExistingEffectStrategy.StopExisting);
-    }
-
     public abstract T pushToBack();
 
     public abstract T pullToFront();
@@ -370,4 +382,6 @@ public abstract class Sprite<T> {
     public abstract T pushBehind(Sprite otherSprite);
 
     public abstract T pullInFrontOf(Sprite otherSprite);
+
+    public abstract T copy();
 }

@@ -131,7 +131,5 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
     }
 
     @Override
-    public void dispose() {
-
-    }
+    public void dispose() { }
 }

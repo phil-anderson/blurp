@@ -91,4 +91,12 @@ public class ImageSpriteImpl extends ImageSprite implements EffectContainer {
         BlurpStore.runtimeRepository.registerCommand(new ChangeZOrderCommand(this, otherSprite, 1));
         return this;
     }
+
+    @Override
+    public ImageSprite copy() {
+
+        ImageSprite copy = BlurpStore.blurp.createImageSprite(this.image);
+        SpriteCopier.copy(this, copy);
+        return copy;
+    }
 }
