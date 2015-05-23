@@ -18,6 +18,13 @@ public class BlurpImpl extends Blurp {
     }
 
     @Override
+    public boolean updateScreen() {
+
+        blurpify();
+        return true;
+    }
+
+    @Override
     public Image loadImage(String filename) {
 
         if(filename == null) throw new RuntimeException("Image file name can't be null");

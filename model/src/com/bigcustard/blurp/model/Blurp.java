@@ -42,6 +42,8 @@ public abstract class Blurp {
      */
     public abstract Blurp blurpify();
 
+    public abstract boolean updateScreen();
+
     // TODO: Javadoc for factory methods
 
     public abstract Image loadImage(String filename);
