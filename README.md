@@ -6,7 +6,6 @@ WORK IN PROGRESS - CHECK BACK LATER
 *TODO*
 * Rename EffectBase to Effect, and Effect to something like AtomicEffect (or maybe even merge with TweenEffect)
 * Need a programmatic zOrder example
-* Sprite copying / prototyping
 * Have two stages, one for HUD. Sprites can be drawn on HUD layer instead. Useful for things like score.
 * Provide a proper dispose() method which cleans everything out + Make script restart at end after a tap
 * World size?

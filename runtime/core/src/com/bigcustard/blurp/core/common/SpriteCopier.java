@@ -13,7 +13,7 @@ public class SpriteCopier {
         target.rotation = source.rotation;
         target.scaleX = source.scaleX;
         target.scaleY = source.scaleY;
-        target.whenBeingDragged = source.whenBeingDragged;
+        target.whenMouseEnters = source.whenMouseEnters;
         target.whenMouseLeaves = source.whenMouseLeaves;
         target.whenClicked = source.whenClicked;
         target.whenBeingDragged = source.whenBeingDragged;
