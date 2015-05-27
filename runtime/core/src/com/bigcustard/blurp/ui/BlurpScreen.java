@@ -22,8 +22,8 @@ public class BlurpScreen extends ScreenAdapter {
     private Batch batch;
 
     private Stage backgroundStage;
-    private Stage mainStage;
-    private Stage overlayStage;
+    private LayerStage mainStage;
+    private LayerStage overlayStage;
 
     private RenderListener renderListener = RenderListener.NULL_IMPLEMENTATION;
     private boolean firstRender = true;
@@ -85,8 +85,12 @@ public class BlurpScreen extends ScreenAdapter {
                     BlurpStore.runtimeRepository.syncWithModelRepository(delta);
                     BlurpStore.tweener.update(delta);
                     overlayStage.act(delta);
-                    mainStage.act(delta);
-                    backgroundStage.act(delta);
+                    if(!overlayStage.mouseHandled()) {
+                        mainStage.act(delta);
+                        if(!mainStage.mouseHandled()) {
+                            backgroundStage.act(delta);
+                        }
+                    }
                 } finally {
                     BlurpStore.blurpifier.setRenderState(BlurpifyRenderState.RequestComplete);
                 }
@@ -121,8 +125,8 @@ public class BlurpScreen extends ScreenAdapter {
         batch = new SpriteBatch();
 
         backgroundStage = new Stage(staticViewport, batch);
-        mainStage = new Stage(viewport, batch);
-        overlayStage = new Stage(staticViewport, batch);
+        mainStage = new LayerStage(viewport, batch);
+        overlayStage = new LayerStage(staticViewport, batch);
 
         Gdx.input.setInputProcessor(new InputMultiplexer(overlayStage, mainStage, backgroundStage));
         Gdx.gl.glLineWidth(1.5f);
