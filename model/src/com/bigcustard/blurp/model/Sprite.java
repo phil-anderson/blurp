@@ -89,7 +89,9 @@ public abstract class Sprite<T> {
 
     public SpriteMouseState mouseState = SpriteMouseState.NULL;
 
-    public CollisionShape collisionShape = CollisionShape.BoundaryRectangle;
+    public CollisionShape collisionShape = CollisionShape.CenterCircle;
+
+    public SpriteLayer layer;
 
     public T x(double newX) {
 
@@ -226,6 +228,12 @@ public abstract class Sprite<T> {
     public T whenMouseReleased(EffectBase effectToRun) {
 
         this.whenMouseReleased = new EffectSpriteEventHandler(effectToRun);
+        return (T) this;
+    }
+
+    public T layer(SpriteLayer layerToAppearOn) {
+
+        this.layer = layerToAppearOn;
         return (T) this;
     }
 

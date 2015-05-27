@@ -4,11 +4,11 @@ import com.badlogic.gdx.utils.viewport.*;
 
 public class BlurpConfiguration {
 
-    private Viewport viewport;
+    private ScalingViewport viewport;
     private String contentRoot = "";
     private boolean debugEnabled;
 
-    public BlurpConfiguration(Viewport viewport) {
+    public BlurpConfiguration(ScalingViewport viewport) {
 
         this.viewport = viewport;
     }
@@ -31,7 +31,7 @@ public class BlurpConfiguration {
         return debugEnabled;
     }
 
-    public Viewport getViewport() {
+    public ScalingViewport getViewport() {
 
         return viewport;
     }

@@ -14,4 +14,6 @@ public interface CommandVisitor {
     void visit(SetZOrderCommand setZOrderCommand);
 
     void visit(ChangeZOrderCommand changeZOrderCommand);
+
+    void visit(HandleLayerCommand handleLayerCommand);
 }

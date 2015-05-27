@@ -29,7 +29,7 @@ public class BlurpImplTest {
         BlurpStore.modelRepository = mockModelRepository;
         BlurpStore.modelScreen = mockScreen;
         BlurpStore.blurpifier = mockBlurpifier;
-        BlurpStore.configuration = new BlurpConfiguration(new ScreenViewport());
+        BlurpStore.configuration = new BlurpConfiguration(new FillViewport(100, 100));
         testCandidate = new BlurpImpl();
     }
 

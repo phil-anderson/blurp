@@ -12,9 +12,9 @@ import com.bigcustard.blurp.scripting.*;
 public class BlurpApp extends Game {
 
     private BlurpRunnable scriptRunnable;
-    private Viewport viewport;
+    private ScalingViewport viewport;
 
-    public BlurpApp(String language, String scriptName, Viewport viewport) {
+    public BlurpApp(String language, String scriptName, ScalingViewport viewport) {
 
         scriptRunnable = getRunnable(language, scriptName);
         this.viewport = viewport;

@@ -78,6 +78,11 @@ public class RuntimeRepository {
         commandRequests.add(command);
     }
 
+    public void deferCommand(CommandVisitable command) {
+
+        commandExecutor.deferCommand(command);
+    }
+
     public List<CommandVisitable> getCommandRequests() {
 
         return commandRequests;

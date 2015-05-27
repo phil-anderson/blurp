@@ -47,6 +47,7 @@ public class ScriptEngineBlurpRunnable implements BlurpRunnable {
         scriptEnginePutEnums(CollisionShape.values(), bindings);
         scriptEnginePutEnums(EffectStyle.values(), bindings);
         scriptEnginePutEnums(ExistingEffectStrategy.values(), bindings);
+        scriptEnginePutEnums(SpriteLayer.values(), bindings);
 
         if (language.equals("jruby")) JRubyWrapperSpike.wrap(scriptEngine, bindings);
 

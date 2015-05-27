@@ -19,6 +19,7 @@ public class RuntimeConsole {
     private final String[] contents;
 
     private Colour lastColour;
+    private double lastAlpha;
     private int currentLine;
     private int currentColumn;
 
@@ -47,39 +48,41 @@ public class RuntimeConsole {
         currentColumn = 0;
     }
 
-    public void print(String text, Colour colour) {
+    public void print(String text, Colour colour, double alpha) {
 
         text = text.replaceAll("\\[", "[[");
 
         if(text.contains("\n")) {
             int newLinePos = text.indexOf('\n');
-            printWrapped(text.substring(0, newLinePos), colour);
+            printWrapped(text.substring(0, newLinePos), colour, alpha);
             newLine();
-            print(text.substring(newLinePos + 1), colour);
+            print(text.substring(newLinePos + 1), colour, alpha);
         } else {
-            printWrapped(text, colour);
+            printWrapped(text, colour, alpha);
         }
     }
 
-    private void printWrapped(String text, Colour colour) {
+    private void printWrapped(String text, Colour colour, double alpha) {
 
         int charsRemaining = columns - currentColumn;
 
         if(text.length() > charsRemaining) {
             String textToAdd = text.substring(0, charsRemaining);
-            printChunk(textToAdd, colour);
+            printChunk(textToAdd, colour, alpha);
             newLine();
-            printWrapped(text.substring(charsRemaining), colour);
+            printWrapped(text.substring(charsRemaining), colour, alpha);
         } else {
-            printChunk(text, colour);
+            printChunk(text, colour, alpha);
         }
     }
 
-    private void printChunk(String text, Colour colour) {
+    private void printChunk(String text, Colour colour, double alpha) {
 
-        if(colour != lastColour) {
-            contents[currentLine] += "[#" + Convert.toGdxColour(colour).toString() + "]";
+        System.out.println(alpha);
+        if(colour != lastColour || alpha != lastAlpha) {
+            contents[currentLine] += "[#" + Convert.toGdxColour(colour, alpha).toString() + "]";
             lastColour = colour;
+            lastAlpha = alpha;
         }
         contents[currentLine] += text;
         currentColumn += text.length();
@@ -104,7 +107,6 @@ public class RuntimeConsole {
             float y = pixelHeight - i * lineSpacing;
             if(!contents[i].isEmpty()) {
                 font.draw(batch, contents[i], 0, y);
-//                System.out.println(contents[i]);
             }
         }
     }

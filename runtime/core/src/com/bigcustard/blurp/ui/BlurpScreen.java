@@ -7,6 +7,8 @@ import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.utils.viewport.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.model.constants.*;
+import com.bigcustard.blurp.runtimemodel.*;
 import com.bigcustard.blurp.util.*;
 
 import static com.bigcustard.blurp.core.Blurpifier.*;
@@ -14,21 +16,27 @@ import static com.bigcustard.blurp.core.Blurpifier.*;
 // TODO: Add an abstract immutable parent that can be exposed through BlurpRuntime.
 public class BlurpScreen extends ScreenAdapter {
 
-    private final Viewport viewport;
+    private final ScalingViewport viewport;
+    private final ScalingViewport staticViewport;
 
     private Batch batch;
-    private Stage stage;
+
+    private Stage backgroundStage;
+    private Stage mainStage;
+    private Stage overlayStage;
+
     private RenderListener renderListener = RenderListener.NULL_IMPLEMENTATION;
     private boolean firstRender = true;
 
     public BlurpScreen() {
 
         this.viewport = BlurpStore.configuration.getViewport();
+        this.staticViewport = new ScalingViewport(viewport.getScaling(), viewport.getWorldWidth(), viewport.getWorldHeight(), BlurpStore.staticCamera);
     }
 
     public void addActor(Actor actor) {
 
-        stage.addActor(actor);
+        mainStage.addActor(actor);
     }
 
     public RenderListener getRenderListener() {
@@ -76,7 +84,9 @@ public class BlurpScreen extends ScreenAdapter {
                     updateCamera();
                     BlurpStore.runtimeRepository.syncWithModelRepository(delta);
                     BlurpStore.tweener.update(delta);
-                    stage.act(delta);
+                    overlayStage.act(delta);
+                    mainStage.act(delta);
+                    backgroundStage.act(delta);
                 } finally {
                     BlurpStore.blurpifier.setRenderState(BlurpifyRenderState.RequestComplete);
                 }
@@ -96,9 +106,11 @@ public class BlurpScreen extends ScreenAdapter {
         BlurpStore.runtimeScreen.render();
         endBatch();
 
-        stage.draw();
+        backgroundStage.draw();
+        mainStage.draw();
+        overlayStage.draw();
 
-        resetCamera();
+        batch.setProjectionMatrix(BlurpStore.staticCamera.combined);
         beginBatch();
         BlurpStore.runtimeConsole.render(batch);
         endBatch();
@@ -107,13 +119,14 @@ public class BlurpScreen extends ScreenAdapter {
     private void initialise() {
 
         batch = new SpriteBatch();
-        stage = new Stage(viewport, batch);
-        Gdx.input.setInputProcessor(stage);
 
+        backgroundStage = new Stage(staticViewport, batch);
+        mainStage = new Stage(viewport, batch);
+        overlayStage = new Stage(staticViewport, batch);
+
+        Gdx.input.setInputProcessor(new InputMultiplexer(overlayStage, mainStage, backgroundStage));
         Gdx.gl.glLineWidth(1.5f);
-
         firstRender = false;
-
         BlurpStore.onLibGdxInitialised();
     }
 
@@ -127,19 +140,6 @@ public class BlurpScreen extends ScreenAdapter {
         camera.position.set((float) BlurpStore.modelCamera.x, (float) BlurpStore.modelCamera.y, 0);
         camera.rotate((float) BlurpStore.modelCamera.rotation);
         camera.zoom = (float) (1 / BlurpStore.modelCamera.zoom);
-    }
-
-    private void resetCamera() {
-
-        OrthographicCamera camera = BlurpStore.gdxCamera;
-        camera.rotate((float) BlurpStore.modelCamera.rotation);
-        camera.up.set(0, 1, 0);
-        camera.direction.set(0, 0, -1);
-
-        camera.position.set((float) BlurpStore.screenCenterX(), (float) BlurpStore.screenCenterY(), 0);
-        camera.zoom = (float) (1);
-        camera.update();
-        batch.setProjectionMatrix(camera.combined);
     }
 
     private void beginBatch() {
@@ -159,9 +159,17 @@ public class BlurpScreen extends ScreenAdapter {
 
     public void enableDebug(boolean debugEnabled, Colour debugColour) {
 
-        stage.setDebugAll(debugEnabled);
-        stage.setDebugInvisible(debugEnabled);
-        stage.getDebugColor().set(Convert.toGdxColour(debugColour));
+        backgroundStage.setDebugAll(debugEnabled);
+        backgroundStage.setDebugInvisible(debugEnabled);
+        backgroundStage.getDebugColor().set(Convert.toGdxColour(debugColour));
+
+        mainStage.setDebugAll(debugEnabled);
+        mainStage.setDebugInvisible(debugEnabled);
+        mainStage.getDebugColor().set(Convert.toGdxColour(debugColour));
+
+        overlayStage.setDebugAll(debugEnabled);
+        overlayStage.setDebugInvisible(debugEnabled);
+        overlayStage.getDebugColor().set(Convert.toGdxColour(debugColour));
     }
 
     @Override
@@ -171,8 +179,26 @@ public class BlurpScreen extends ScreenAdapter {
             batch.dispose();
         }
 
-        if(stage != null) {
-            stage.dispose();
+        if(backgroundStage != null) {
+            backgroundStage.dispose();
+        }
+        if(mainStage != null) {
+            mainStage.dispose();
+        }
+        if(overlayStage != null) {
+            overlayStage.dispose();
+        }
+    }
+
+    public void handleSpriteLayer(RuntimeSprite sprite) {
+
+        sprite.remove();
+        if(sprite.getLayer() == SpriteLayer.Background) {
+            backgroundStage.addActor(sprite);
+        } else if(sprite.getLayer() == SpriteLayer.Overlay) {
+            overlayStage.addActor(sprite);
+        } else {
+            mainStage.addActor(sprite);
         }
     }
 }

@@ -54,7 +54,7 @@ public class CommandExecutor implements CommandVisitor {
     @Override
     public void visit(ConsolePrintCommand consolePrintCommand) {
 
-        BlurpStore.runtimeConsole.print(consolePrintCommand.getTextToPrint(), consolePrintCommand.getColour());
+        BlurpStore.runtimeConsole.print(consolePrintCommand.getTextToPrint(), consolePrintCommand.getColour(), consolePrintCommand.getAlpha());
     }
 
     @Override
@@ -73,6 +73,12 @@ public class CommandExecutor implements CommandVisitor {
     public void visit(ChangeZOrderCommand changeZOrderCommand) {
 
         zOrderExecutor.execute(changeZOrderCommand);
+    }
+
+    @Override
+    public void visit(HandleLayerCommand handleLayerCommand) {
+
+        BlurpStore.blurpScreen.handleSpriteLayer(handleLayerCommand.getSprite());
     }
 
     // Defer commands that need to process AFTER the syncing process

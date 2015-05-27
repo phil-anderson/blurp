@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.glutils.*;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.bigcustard.blurp.core.*;
+import com.bigcustard.blurp.core.commands.*;
 import com.bigcustard.blurp.model.Sprite;
 import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.util.*;
@@ -20,6 +21,7 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
     private Circle collisionCircle = new Circle();
     private Polygon collisionRectangle = new Polygon();
     private CollisionShape collisionShape;
+    private SpriteLayer layer;
 
     protected RuntimeSprite() {
 
@@ -36,6 +38,11 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
         setColor(Convert.toGdxColour(modelSprite.colour, modelSprite.alpha));
         setVisible(!modelSprite.hidden);
         this.collisionShape = modelSprite.collisionShape;
+
+        if(modelSprite.layer != this.layer) {
+            this.layer = modelSprite.layer;
+            BlurpStore.runtimeRepository.deferCommand(new HandleLayerCommand(this));
+        }
 
         // Sync mouse state from runtime to model
         modelSprite.mouseState(mouseListener.buildState());
@@ -71,7 +78,7 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
 
         if (touchable && this.getTouchable() != Touchable.enabled) return null;
 
-        Vector3 mouseXY = MouseState.getPosition();
+        Vector3 mouseXY = MouseState.getPosition(layer);
         boolean hit = collisionShape == CollisionShape.CenterCircle ? collisionCircle.contains(mouseXY.x, mouseXY.y)
                                                                     : collisionRectangle.contains(mouseXY.x, mouseXY.y);
         return hit ? this : null;
@@ -128,6 +135,11 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
     public SpriteClickListener getMouseListener() {
 
         return mouseListener;
+    }
+
+    public SpriteLayer getLayer() {
+
+        return layer;
     }
 
     @Override

@@ -4,9 +4,10 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
+
+* ISSUE WITH LAYERS - hit test shouldn't even occur if there's an actor in a higher layer covering the mouse.
+* Effect finaliser thing - NORMALISE_ROTATION
 * Rename EffectBase to Effect, and Effect to something like AtomicEffect (or maybe even merge with TweenEffect)
-* Need a programmatic zOrder example
-* Have two stages, one for HUD. Sprites can be drawn on HUD layer instead. Useful for things like score.
 * Provide a proper dispose() method which cleans everything out + Make script restart at end after a tap
 * World size?
 * Add alpha to console - Do it as a single HUD visibility thing.

@@ -4,6 +4,7 @@ import aurelienribon.tweenengine.*;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.utils.viewport.*;
 import com.bigcustard.blurp.apimodel.*;
 import com.bigcustard.blurp.bootstrap.*;
 import com.bigcustard.blurp.core.effects.*;
@@ -34,6 +35,7 @@ public class BlurpStore {
     public static BlurpScreen blurpScreen;
     public static FontHolder defaultFont;
     public static OrthographicCamera gdxCamera;
+    public static OrthographicCamera staticCamera;
     public static Effects effects;
     public static Console console;
     public static RuntimeConsole runtimeConsole;
@@ -41,11 +43,15 @@ public class BlurpStore {
     public static void initialise(BlurpConfiguration blurpConfiguration) {
 
         configuration = blurpConfiguration;
+        ScalingViewport viewport = blurpConfiguration.getViewport();
 
-        if(!(blurpConfiguration.getViewport().getCamera() instanceof OrthographicCamera)) {
+        if(!(viewport.getCamera() instanceof OrthographicCamera)) {
             throw new IllegalArgumentException("Viewport must have an OrthographicCamera");
         }
-        gdxCamera = (OrthographicCamera) blurpConfiguration.getViewport().getCamera();
+        gdxCamera = (OrthographicCamera) viewport.getCamera();
+
+        staticCamera = new OrthographicCamera();
+        staticCamera.setToOrtho(false, viewport.getWorldWidth(), viewport.getWorldHeight());
 
         modelCamera = new CameraImpl(screenCenterX(), screenCenterY());
         modelScreen = new Screen();

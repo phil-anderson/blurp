@@ -17,7 +17,6 @@ public class RunEffectExecutor {
         if(command.getEffect() != null) {
             BaseTween tween = command.getEffect().getTween(command.getTarget());
             tween.setCallback(new FlagComplete(command.getTarget(), command.getCompletionHandler()));
-            tween.setCallbackTriggers(TweenCallback.COMPLETE);
             tween.start(BlurpStore.tweener);
         }
     }
@@ -48,7 +47,7 @@ public class RunEffectExecutor {
 
             // More bulletproof than a reference-counting-style approach
             for(BaseTween tween : BlurpStore.tweener.getObjects()) {
-                if(tween != tweenToCheck && !tween.isFinished()) return true;
+                if(tween != tweenToCheck && !tween.isFinished() && TweenHack.containsTarget(tween, target)) return true;
             }
             return false;
         }

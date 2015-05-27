@@ -4,13 +4,15 @@ import com.bigcustard.blurp.model.*;
 
 public class ConsolePrintCommand implements CommandVisitable {
 
-    private String textToPrint;
-    private Colour colour;
+    private final String textToPrint;
+    private final Colour colour;
+    private final double alpha;
 
-    public ConsolePrintCommand(String text, Colour colour) {
+    public ConsolePrintCommand(String text, Colour colour, double alpha) {
 
         this.textToPrint = text;
         this.colour = colour;
+        this.alpha = alpha;
     }
 
     @Override
@@ -27,5 +29,9 @@ public class ConsolePrintCommand implements CommandVisitable {
     public Colour getColour() {
 
         return colour;
+    }
+
+    public double getAlpha() {
+        return alpha;
     }
 }

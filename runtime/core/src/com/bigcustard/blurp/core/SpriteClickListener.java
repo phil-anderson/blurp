@@ -31,6 +31,7 @@ public class SpriteClickListener extends ClickListener {
         // Prevents enter being set on a touchDown.
         entered = !MouseState.isLeftPressed() && !MouseState.isRightPressed();
         super.enter(event, x, y, pointer, fromActor);
+        event.handle();
     }
 
     @Override
@@ -38,6 +39,7 @@ public class SpriteClickListener extends ClickListener {
 
         exited = true;
         super.exit(event, x, y, pointer, toActor);
+        event.handle();
     }
 
     @Override
@@ -45,13 +47,14 @@ public class SpriteClickListener extends ClickListener {
 
         dragging = true;
         super.touchDragged(event, x, y, pointer);
+        event.handle();
     }
 
     @Override
     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 
         pressed = true;
-        Vector3 mouseXY = MouseState.getPosition().cpy();
+        Vector3 mouseXY = MouseState.getPosition(sprite.getLayer()).cpy();
         dragOffsetX = sprite.getX() - mouseXY.x;
         dragOffsetY = sprite.getY() - mouseXY.y;
         return super.touchDown(event, x, y, pointer, button);
@@ -64,6 +67,7 @@ public class SpriteClickListener extends ClickListener {
         dragReleased = dragging;
         dragging = false;
         super.touchUp(event, x, y, pointer, button);
+        event.handle();
     }
 
     @Override
@@ -71,11 +75,12 @@ public class SpriteClickListener extends ClickListener {
 
         clicked = !dragReleased;
         clickCount = getTapCount();
+        event.handle();
     }
 
     public SpriteMouseState buildState() {
 
-        Vector3 mouseXY = MouseState.getPosition().cpy();
+        Vector3 mouseXY = MouseState.getPosition(sprite.getLayer()).cpy();
         SpriteMouseState result = new SpriteMouseState(isOver(), isPressed(), dragging, entered, exited, pressed,
                                                        released, clicked, dragReleased,
                                                        clickCount, mouseXY.x + dragOffsetX, mouseXY.y + dragOffsetY);
