@@ -5,8 +5,7 @@ WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
 
-* ISSUE WITH LAYERS - hit test shouldn't even occur if there's an actor in a higher layer covering the mouse.
-* Effect finaliser thing - NORMALISE_ROTATION
+* Effect finaliser thing - NORMALISE_ROTATION? Do through a public Sprite method.
 * Rename EffectBase to Effect, and Effect to something like AtomicEffect (or maybe even merge with TweenEffect)
 * Provide a proper dispose() method which cleans everything out + Make script restart at end after a tap
 * World size?
