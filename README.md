@@ -9,8 +9,6 @@ WORK IN PROGRESS - CHECK BACK LATER
 * Rename EffectBase to Effect, and Effect to something like AtomicEffect (or maybe even merge with TweenEffect)
 * Provide a proper dispose() method which cleans everything out + Make script restart at end after a tap
 * World size?
-* Add alpha to console - Do it as a single HUD visibility thing.
-* Layers - Background / Screen / HUD -> Operations can select which to work on?
 
 * Don't like the Viewport being passed in. We should change it.
 * Almost all examples need redoing / refactoring

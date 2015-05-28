@@ -91,12 +91,8 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
     @Override
     protected void drawDebugBounds (ShapeRenderer shapes) {
 
-        // TODO: Highlight on mouseover instead.
-        long millis = System.currentTimeMillis();
-        if(millis % 1400 < 600) {
-            if(millis % 200 < 100) {
-                shapes.setColor(1, 1, 1, 1);
-            }
+        if(mouseListener.isOver()) {
+            shapes.setColor(1, 1, 1, 1);
         }
 
         shapes.set(ShapeRenderer.ShapeType.Line);
