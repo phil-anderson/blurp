@@ -25,9 +25,9 @@ public class RuntimeRepositoryTest extends LibGdxTest {
     @Test
     public void canRegisterCommand() throws Exception {
 
-        assertThat(testCandidate.getCommandRequests().size(), is(0));
+        assertThat(testCandidate.getCommands().size(), is(0));
         testCandidate.registerCommand(mockCommand);
-        assertThat(testCandidate.getCommandRequests().size(), is(1));
+        assertThat(testCandidate.getCommands().size(), is(1));
     }
 
 }

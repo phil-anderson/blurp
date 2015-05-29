@@ -5,13 +5,6 @@ import com.bigcustard.blurp.runtimemodel.*;
 
 public class ZOrderExecutor {
 
-    private CommandExecutor commandExecutor;
-
-    public ZOrderExecutor(CommandExecutor commandExecutor) {
-
-        this.commandExecutor = commandExecutor;
-    }
-
     public void execute(SetZOrderCommand setZOrderCommand) {
 
         RuntimeSprite runtimeSprite = BlurpStore.runtimeRepository.getSprite(setZOrderCommand.getTarget());
@@ -20,7 +13,7 @@ public class ZOrderExecutor {
             runtimeSprite.setZIndex(setZOrderCommand.getzOrder());
         } else {
             // Probably got called on a sprite that hasn't been synced yet. Try deferring until after sync.
-            commandExecutor.deferCommand(setZOrderCommand);
+            BlurpStore.runtimeRepository.deferCommand(setZOrderCommand);
         }
     }
 
@@ -39,7 +32,7 @@ public class ZOrderExecutor {
 
         } else {
             // Probably got called on a sprite that hasn't been synced yet. Try deferring until after sync.
-            commandExecutor.deferCommand(changeZOrderCommand);
+            BlurpStore.runtimeRepository.deferCommand(changeZOrderCommand);
         }
     }
 }

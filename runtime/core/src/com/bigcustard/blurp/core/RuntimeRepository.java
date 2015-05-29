@@ -17,7 +17,8 @@ public class RuntimeRepository {
     private final ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite> runtimeImageSprites;
     private final ModelToRuntimeObjectMap<TextSprite, RuntimeTextSprite> runtimeTextSprites;
 
-    private final List<CommandVisitable> commandRequests;
+    private final List<CommandVisitable> commands;
+    private final List<CommandVisitable> deferredCommands;
     private final CommandExecutor commandExecutor;
 
     public RuntimeRepository() {
@@ -26,15 +27,16 @@ public class RuntimeRepository {
         runtimeImageSprites = new ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite>(RuntimeImageSprite.class);
         runtimeTextSprites = new ModelToRuntimeObjectMap<TextSprite, RuntimeTextSprite>(RuntimeTextSprite.class);
 
-        commandRequests = new ArrayList<CommandVisitable>();
+        commands = new ArrayList<CommandVisitable>();
+        deferredCommands = new ArrayList<CommandVisitable>();
         commandExecutor = new CommandExecutor();
     }
 
     public void syncWithModelRepository(float deltaTime) {
 
         // First run any commands that the model has registered requests for.
-        commandExecutor.executeCommands(commandRequests, deltaTime);
-        commandRequests.clear();
+        commandExecutor.executeCommands(commands, deltaTime);
+        commands.clear();
 
         // Then sync the various model object types
         BlurpStore.syncSingletons();
@@ -47,7 +49,8 @@ public class RuntimeRepository {
         }
 
         // Finally, run any commands that were deferred
-        commandExecutor.executeDeferredCommands(deltaTime);
+        commandExecutor.executeCommands(deferredCommands, deltaTime);
+        commands.clear();
     }
 
     public RuntimeImage getImage(Image modelImage) {
@@ -75,17 +78,17 @@ public class RuntimeRepository {
 
     public void registerCommand(CommandVisitable command) {
 
-        commandRequests.add(command);
+        commands.add(command);
     }
 
     public void deferCommand(CommandVisitable command) {
 
-        commandExecutor.deferCommand(command);
+        deferredCommands.add(command);
     }
 
-    public List<CommandVisitable> getCommandRequests() {
+    public List<CommandVisitable> getCommands() {
 
-        return commandRequests;
+        return commands;
     }
 
     public void dispose() {
@@ -96,7 +99,7 @@ public class RuntimeRepository {
         runtimeImages.clear();
         runtimeImageSprites.clear();
         runtimeTextSprites.clear();
-        commandRequests.clear();
+        commands.clear();
     }
 
 
