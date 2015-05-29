@@ -34,11 +34,14 @@ public class BlurpStore {
     public static RuntimeScreen runtimeScreen;
     public static BlurpScreen blurpScreen;
     public static FontHolder defaultFont;
-    public static OrthographicCamera gdxCamera;
+    public static BitmapFont systemFont;
+    public static OrthographicCamera mainCamera;
     public static OrthographicCamera staticCamera;
     public static Effects effects;
     public static Console console;
     public static RuntimeConsole runtimeConsole;
+    public static boolean debugMode;
+    public static Color debugColour;
 
     public static void initialise(BlurpConfiguration blurpConfiguration) {
 
@@ -48,7 +51,7 @@ public class BlurpStore {
         if(!(viewport.getCamera() instanceof OrthographicCamera)) {
             throw new IllegalArgumentException("Viewport must have an OrthographicCamera");
         }
-        gdxCamera = (OrthographicCamera) viewport.getCamera();
+        mainCamera = (OrthographicCamera) viewport.getCamera();
 
         staticCamera = new OrthographicCamera();
         staticCamera.setToOrtho(false, viewport.getWorldWidth(), viewport.getWorldHeight());
@@ -56,10 +59,14 @@ public class BlurpStore {
         modelCamera = new CameraImpl(screenCenterX(), screenCenterY());
         modelScreen = new Screen();
         modelMouse = new MouseImpl();
-        console = new ConsoleImpl();
-        runtimeConsole = new RuntimeConsole();
-        effects = new EffectsImpl();
 
+        console = new ConsoleImpl();
+        systemFont = new BitmapFont(Gdx.files.internal("small-rabbit.fnt"));
+        systemFont.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        systemFont.setMarkupEnabled(true);
+        runtimeConsole = new RuntimeConsole();
+
+        effects = new EffectsImpl();
         Tween.registerAccessor(Sprite.class, new SpriteAccessor());
         Tween.registerAccessor(Camera.class, new CameraAccessor());
         tweener = new TweenManager();

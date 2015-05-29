@@ -8,14 +8,11 @@ import com.bigcustard.blurp.model.constants.*;
 
 public class MouseState {
 
-    // Flyweight
-    private static Vector3 mouseXY = new Vector3();
-
     public static Vector3 getPosition(SpriteLayer layer) {
 
-        OrthographicCamera camera = layer == null || layer == SpriteLayer.Main ? BlurpStore.gdxCamera : BlurpStore.staticCamera;
+        OrthographicCamera camera = layer == null || layer == SpriteLayer.Main ? BlurpStore.mainCamera : BlurpStore.staticCamera;
 
-        mouseXY.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+        Vector3 mouseXY = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
         return camera.unproject(mouseXY);
     }
 

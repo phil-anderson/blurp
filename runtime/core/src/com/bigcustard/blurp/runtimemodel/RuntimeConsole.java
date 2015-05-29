@@ -1,8 +1,6 @@
 package com.bigcustard.blurp.runtimemodel;
 
 import java.util.*;
-import com.badlogic.gdx.*;
-import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
@@ -15,7 +13,6 @@ public class RuntimeConsole {
 
     private final float pixelHeight;
     private final float lineSpacing;
-    private final BitmapFont font;
     private final String[] contents;
 
     private Colour lastColour;
@@ -28,13 +25,8 @@ public class RuntimeConsole {
         // This is probably going to be wrong when we start mixing Camera zoom etc in.
         this.pixelHeight = BlurpStore.configuration.getViewport().getWorldHeight();
 
-        // Font must be non-proportional
-        font = new BitmapFont(Gdx.files.internal("small-rabbit.fnt"));
-        font.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        font.setMarkupEnabled(true);
-
-        columns = (int) (BlurpStore.configuration.getViewport().getWorldWidth() / font.getSpaceWidth());
-        lines = (int) (pixelHeight / font.getLineHeight());
+        columns = (int) (BlurpStore.configuration.getViewport().getWorldWidth() / BlurpStore.systemFont.getSpaceWidth());
+        lines = (int) (pixelHeight / BlurpStore.systemFont.getLineHeight());
         lineSpacing = pixelHeight / lines;
 
         contents = new String[lines];
@@ -78,7 +70,6 @@ public class RuntimeConsole {
 
     private void printChunk(String text, Colour colour, double alpha) {
 
-        System.out.println(alpha);
         if(colour != lastColour || alpha != lastAlpha) {
             contents[currentLine] += "[#" + Convert.toGdxColour(colour, alpha).toString() + "]";
             lastColour = colour;
@@ -106,7 +97,7 @@ public class RuntimeConsole {
         for(int i = 0; i < lines; i++) {
             float y = pixelHeight - i * lineSpacing;
             if(!contents[i].isEmpty()) {
-                font.draw(batch, contents[i], 0, y);
+                BlurpStore.systemFont.draw(batch, contents[i], 0, y);
             }
         }
     }

@@ -3,6 +3,7 @@ package com.bigcustard.blurp.ui;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.graphics.glutils.*;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.utils.viewport.*;
 import com.bigcustard.blurp.core.*;
@@ -20,6 +21,8 @@ public class BlurpScreen extends ScreenAdapter {
     private final ScalingViewport staticViewport;
 
     private Batch batch;
+    private ShapeRenderer shapes;
+    private DebugHudRenderer debugHudRenderer;
 
     private Stage backgroundStage;
     private LayerStage mainStage;
@@ -118,11 +121,15 @@ public class BlurpScreen extends ScreenAdapter {
         beginBatch();
         BlurpStore.runtimeConsole.render(batch);
         endBatch();
+
+        if(BlurpStore.debugMode) debugHudRenderer.render();
     }
 
     private void initialise() {
 
         batch = new SpriteBatch();
+        shapes = new ShapeRenderer();
+        debugHudRenderer = new DebugHudRenderer(batch, shapes);
 
         backgroundStage = new Stage(staticViewport, batch);
         mainStage = new LayerStage(viewport, batch);
@@ -136,7 +143,7 @@ public class BlurpScreen extends ScreenAdapter {
 
     private void updateCamera() {
 
-        OrthographicCamera camera = BlurpStore.gdxCamera;
+        OrthographicCamera camera = BlurpStore.mainCamera;
         camera.rotate((float) BlurpStore.modelCamera.rotation);
         camera.up.set(0, 1, 0);
         camera.direction.set(0, 0, -1);
