@@ -1,10 +1,12 @@
 package com.bigcustard.blurp.core.commands;
 
-public class ConsoleClearCommand implements CommandVisitable {
+import com.bigcustard.blurp.core.*;
+
+public class ConsoleClearCommand implements Command {
 
     @Override
-    public void accept(CommandVisitor visitor, float deltaTime) {
+    public void execute(float deltaTime) {
 
-        visitor.visit(this);
+        BlurpStore.runtimeConsole.clear();
     }
 }

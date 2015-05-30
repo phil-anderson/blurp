@@ -12,7 +12,7 @@ public class RuntimeRepositoryTest extends LibGdxTest {
 
     RuntimeRepository testCandidate;
 
-    @Mock private CommandVisitable mockCommand;
+    @Mock private Command mockCommand;
 
     @Before
     public void setUp() throws Exception {

@@ -17,9 +17,8 @@ public class RuntimeRepository {
     private final ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite> runtimeImageSprites;
     private final ModelToRuntimeObjectMap<TextSprite, RuntimeTextSprite> runtimeTextSprites;
 
-    private final List<CommandVisitable> commands;
-    private final List<CommandVisitable> deferredCommands;
-    private final CommandExecutor commandExecutor;
+    private final List<Command> commands;
+    private final List<Command> deferredCommands;
 
     public RuntimeRepository() {
 
@@ -27,15 +26,14 @@ public class RuntimeRepository {
         runtimeImageSprites = new ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite>(RuntimeImageSprite.class);
         runtimeTextSprites = new ModelToRuntimeObjectMap<TextSprite, RuntimeTextSprite>(RuntimeTextSprite.class);
 
-        commands = new ArrayList<CommandVisitable>();
-        deferredCommands = new ArrayList<CommandVisitable>();
-        commandExecutor = new CommandExecutor();
+        commands = new ArrayList<Command>();
+        deferredCommands = new ArrayList<Command>();
     }
 
     public void syncWithModelRepository(float deltaTime) {
 
         // First run any commands that the model has registered requests for.
-        commandExecutor.executeCommands(commands, deltaTime);
+        executeCommands(commands, deltaTime);
         commands.clear();
 
         // Then sync the various model object types
@@ -49,7 +47,7 @@ public class RuntimeRepository {
         }
 
         // Finally, run any commands that were deferred
-        commandExecutor.executeCommands(deferredCommands, deltaTime);
+        executeCommands(deferredCommands, deltaTime);
         commands.clear();
     }
 
@@ -76,17 +74,17 @@ public class RuntimeRepository {
         return null;
     }
 
-    public void registerCommand(CommandVisitable command) {
+    public void registerCommand(Command command) {
 
         commands.add(command);
     }
 
-    public void deferCommand(CommandVisitable command) {
+    public void deferCommand(Command command) {
 
         deferredCommands.add(command);
     }
 
-    public List<CommandVisitable> getCommands() {
+    public List<Command> getCommands() {
 
         return commands;
     }
@@ -102,14 +100,11 @@ public class RuntimeRepository {
         commands.clear();
     }
 
+    public void executeCommands(List<Command> commands, float delta) {
 
-    /**
-     * Deprecated as test purposes only
-     */
-    @Deprecated
-    CommandExecutor getCommandExecutor() {
-
-        return commandExecutor;
+        for(Command command : commands) {
+            command.execute(delta);
+        }
     }
 }
 

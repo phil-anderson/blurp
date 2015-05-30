@@ -1,8 +1,9 @@
 package com.bigcustard.blurp.core.commands;
 
+import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
 
-public class ConsolePrintCommand implements CommandVisitable {
+public class ConsolePrintCommand implements Command {
 
     private final String textToPrint;
     private final Colour colour;
@@ -16,22 +17,8 @@ public class ConsolePrintCommand implements CommandVisitable {
     }
 
     @Override
-    public void accept(CommandVisitor visitor, float deltaTime) {
+    public void execute(float deltaTime) {
 
-        visitor.visit(this);
-    }
-
-    public String getTextToPrint() {
-
-        return textToPrint;
-    }
-
-    public Colour getColour() {
-
-        return colour;
-    }
-
-    public double getAlpha() {
-        return alpha;
+        BlurpStore.runtimeConsole.print(textToPrint, colour, alpha);
     }
 }

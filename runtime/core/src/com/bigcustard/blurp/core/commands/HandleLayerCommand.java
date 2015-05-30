@@ -1,8 +1,9 @@
 package com.bigcustard.blurp.core.commands;
 
+import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.runtimemodel.*;
 
-public class HandleLayerCommand implements CommandVisitable {
+public class HandleLayerCommand implements Command {
 
     private RuntimeSprite sprite;
 
@@ -11,14 +12,9 @@ public class HandleLayerCommand implements CommandVisitable {
         this.sprite = sprite;
     }
 
-    public RuntimeSprite getSprite() {
-
-        return sprite;
-    }
-
     @Override
-    public void accept(CommandVisitor visitor, float deltaTime) {
+    public void execute(float deltaTime) {
 
-        visitor.visit(this);
+        BlurpStore.blurpScreen.handleSpriteLayer(sprite);
     }
 }

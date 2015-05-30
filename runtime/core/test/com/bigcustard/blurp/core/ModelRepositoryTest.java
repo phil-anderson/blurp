@@ -15,7 +15,7 @@ public class ModelRepositoryTest {
 
     @Mock private Image mockImage;
     @Mock private ImageSprite mockImageSprite;
-    @Mock private CommandVisitable mockCommand;
+    @Mock private Command mockCommand;
 
     @Before
     public void setUp() throws Exception {

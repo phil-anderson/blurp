@@ -1,8 +1,10 @@
 package com.bigcustard.blurp.core.commands;
 
+import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.util.*;
 
-public class SetDebugModeCommand implements CommandVisitable {
+public class SetDebugModeCommand implements Command {
 
     private final boolean debugEnabled;
     private final Colour debugColour;
@@ -14,18 +16,10 @@ public class SetDebugModeCommand implements CommandVisitable {
     }
 
     @Override
-    public void accept(CommandVisitor visitor, float deltaTime) {
+    public void execute(float deltaTime) {
 
-        visitor.visit(this);
-    }
-
-    public boolean isDebugEnabled() {
-
-        return debugEnabled;
-    }
-
-    public Colour getDebugColour() {
-
-        return debugColour;
+        BlurpStore.blurpScreen.enableDebug(debugEnabled, debugColour);
+        BlurpStore.debugMode = debugEnabled;
+        BlurpStore.debugColour = Convert.toGdxColour(debugColour);
     }
 }

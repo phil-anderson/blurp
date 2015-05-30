@@ -1,12 +1,14 @@
 package com.bigcustard.blurp.core.commands;
 
+import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.runtimemodel.*;
 
-public class ChangeZOrderCommand implements CommandVisitable {
+public class ChangeZOrderCommand implements Command {
 
     private final Sprite target;
     private final Sprite otherSprite;
-    private final int delta;
+    private int delta;
 
     public ChangeZOrderCommand(Sprite target, Sprite otherSprite, int delta) {
 
@@ -16,24 +18,23 @@ public class ChangeZOrderCommand implements CommandVisitable {
         this.delta = delta;
     }
 
-    public Sprite getTarget() {
-
-        return target;
-    }
-
-    public Sprite getOtherSprite() {
-
-        return otherSprite;
-    }
-
-    public int getDelta() {
-
-        return delta;
-    }
-
     @Override
-    public void accept(CommandVisitor visitor, float deltaTime) {
+    public void execute(float deltaTime) {
 
-        visitor.visit(this);
+        RuntimeSprite runtimeSprite = BlurpStore.runtimeRepository.getSprite(target);
+        RuntimeSprite otherRuntimeSprite = BlurpStore.runtimeRepository.getSprite(otherSprite);
+
+        if(runtimeSprite != null && otherRuntimeSprite != null) {
+            if(runtimeSprite.getZIndex() < otherRuntimeSprite.getZIndex()) {
+                // Hack to get around the remove/insert issue in libdgx's clunky setZIndex code
+                delta--;
+            }
+            runtimeSprite.setZIndex(otherRuntimeSprite.getZIndex() + delta);
+
+        } else {
+            // Probably got called on a sprite that hasn't been synced yet. Try deferring until after sync.
+            BlurpStore.runtimeRepository.deferCommand(this);
+        }
+
     }
 }

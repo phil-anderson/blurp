@@ -1,8 +1,10 @@
 package com.bigcustard.blurp.core.commands;
 
+import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.runtimemodel.*;
 
-public class SetZOrderCommand implements CommandVisitable {
+public class SetZOrderCommand implements Command {
 
     private final Sprite target;
     private final int zOrder;
@@ -24,8 +26,15 @@ public class SetZOrderCommand implements CommandVisitable {
     }
 
     @Override
-    public void accept(CommandVisitor visitor, float deltaTime) {
+    public void execute(float deltaTime) {
 
-        visitor.visit(this);
+        RuntimeSprite runtimeSprite = BlurpStore.runtimeRepository.getSprite(target);
+
+        if(runtimeSprite != null) {
+            runtimeSprite.setZIndex(zOrder);
+        } else {
+            // Probably got called on a sprite that hasn't been synced yet. Try deferring until after sync.
+            BlurpStore.runtimeRepository.deferCommand(this);
+        }
     }
 }
