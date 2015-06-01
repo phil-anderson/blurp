@@ -1,14 +1,14 @@
 package com.bigcustard.blurp.samples;
 
 import com.bigcustard.blurp.model.*;
-import com.bigcustard.blurp.model.effects.EffectGroup;
-import com.bigcustard.blurp.model.effects.Effects;
+import com.bigcustard.blurp.model.effects.*;
 import com.bigcustard.blurp.model.events.*;
+import com.bigcustard.blurp.model.java.*;
 
-public class EffectWithEventExample implements BlurpRunnable {
+public class EffectWithEventExample extends BlurpJavaProgram {
 
     @Override
-    public void run(Blurp blurp, Screen screen, Console console, Camera camera, Effects effects, Keyboard keyboard, Mouse mouse, Utils utils) {
+    public void run() {
 
         EffectGroup destroyEffect = effects.combine(effects.scaleBy(4),
                                                   effects.alpha(0));

@@ -1,6 +1,7 @@
 package com.bigcustard.blurp.samples;
 
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.model.java.*;
 
 public class HelloRotatingWorld extends BlurpJavaProgram {
 

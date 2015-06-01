@@ -1,7 +1,7 @@
 package com.bigcustard.blurp.samples;
 
-import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.constants.*;
+import com.bigcustard.blurp.model.java.*;
 
 public class CreationZOrderExample extends BlurpJavaProgram {
 

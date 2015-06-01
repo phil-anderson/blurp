@@ -5,14 +5,11 @@ import java.lang.reflect.*;
 import java.util.*;
 import javax.script.*;
 import com.bigcustard.blurp.core.*;
-import com.bigcustard.blurp.model.*;
-import com.bigcustard.blurp.model.Console;
 import com.bigcustard.blurp.model.constants.*;
-import com.bigcustard.blurp.model.effects.*;
 import com.bigcustard.blurp.model.events.*;
 import com.bigcustard.blurp.util.*;
 
-public class ScriptEngineBlurpRunnable implements BlurpRunnable {
+public class ScriptEngineBlurpRunnable implements Runnable {
 
     private final String language;
     private final Reader scriptReader;
@@ -28,18 +25,21 @@ public class ScriptEngineBlurpRunnable implements BlurpRunnable {
     }
 
     @Override
-    public void run(Blurp blurp, Screen screen, Console console, Camera camera, Effects effects, Keyboard keyboard, Mouse mouse, Utils utils) {
+    public void run() {
 
         Bindings bindings = scriptEngine.createBindings();
-        bindings.put("blurp", blurp);
-        bindings.put("screen", screen);
-        bindings.put("console", console);
-        bindings.put("camera", camera);
-        bindings.put("keyboard", keyboard);
-        bindings.put("mouse", mouse);
-        bindings.put("utils", utils);
-        bindings.put("effects", effects);
+
+        bindings.put("blurp", BlurpStore.blurp);
+        bindings.put("screen", BlurpStore.modelScreen);
+        bindings.put("console", BlurpStore.console);
+        bindings.put("camera", BlurpStore.modelCamera);
+        bindings.put("effects", BlurpStore.effects);
+        bindings.put("keyboard", BlurpStore.keyboard);
+        bindings.put("mouse", BlurpStore.modelMouse);
+        bindings.put("utils", BlurpStore.utils);
+
         bindings.put("AtEndRemoveSprite", SpriteEventHandler.AT_END_REMOVE_SPRITE);
+        bindings.put("AtEndRemoveSprite", SpriteEventHandler.AT_END_NORMALISE_ROTATION);
         scriptEnginePutConstants(Colours.class, bindings);
         scriptEnginePutEnums(Justification.values(), bindings);
         scriptEnginePutEnums(Handle.values(), bindings);

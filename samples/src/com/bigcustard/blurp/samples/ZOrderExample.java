@@ -3,6 +3,7 @@ package com.bigcustard.blurp.samples;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.model.events.*;
+import com.bigcustard.blurp.model.java.*;
 
 public class ZOrderExample extends BlurpJavaProgram {
 

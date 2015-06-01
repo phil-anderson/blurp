@@ -1,12 +1,12 @@
 package com.bigcustard.blurp.samples;
 
 import com.bigcustard.blurp.model.*;
-import com.bigcustard.blurp.model.effects.*;
+import com.bigcustard.blurp.model.java.*;
 
-public class HelloRotatingWorldWithDebug implements BlurpRunnable {
+public class HelloRotatingWorldWithDebug extends BlurpJavaProgram {
 
     @Override
-    public void run(Blurp blurp, Screen screen, Console console, Camera camera, Effects effects, Keyboard keyboard, Mouse mouse, Utils utils) {
+    public void run() {
 
         blurp.debugMode(true);
         ImageSprite world = blurp.createImageSprite("hello-world.png");

@@ -1,12 +1,12 @@
 package com.bigcustard.blurp.samples;
 
 import com.bigcustard.blurp.model.*;
-import com.bigcustard.blurp.model.effects.*;
+import com.bigcustard.blurp.model.java.*;
 
-public class HelloUnevenlyScalingWorld implements BlurpRunnable {
+public class HelloUnevenlyScalingWorld extends BlurpJavaProgram {
 
     @Override
-    public void run(Blurp blurp, Screen screen, Console console, Camera camera, Effects effects, Keyboard keyboard, Mouse mouse, Utils utils) {
+    public void run() {
 
         ImageSprite world = blurp.createImageSprite("hello-world.png");
 

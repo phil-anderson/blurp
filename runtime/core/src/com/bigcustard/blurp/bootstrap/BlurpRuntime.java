@@ -8,6 +8,8 @@ import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.core.commands.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.constants.*;
+import com.bigcustard.blurp.model.java.*;
+import com.bigcustard.blurp.model.java.bootstrap.*;
 import com.bigcustard.blurp.scripting.*;
 import com.bigcustard.blurp.ui.*;
 import com.bigcustard.blurp.util.*;
@@ -49,15 +51,21 @@ public class BlurpRuntime {
         start(language, new StringReader(script), scriptName);
     }
 
-    // TODO: DANGER! - Pretty sure this won't work on Android.
     public void start(String language, Reader scriptReader, String scriptName) {
 
-        start(new ScriptEngineBlurpRunnable(language, scriptReader, scriptName));
+        scriptThread = new Thread(new RunnableWrapper(new ScriptEngineBlurpRunnable(language, scriptReader, scriptName)));
+        scriptThread.start();
     }
 
-    public void start(BlurpRunnable blurpRunnable) {
+    public void start(Class<? extends BlurpJavaProgram> javaClass) {
 
-        scriptThread = new Thread(new RunnableWrapper(blurpRunnable));
+        try {
+            BlurpBootstrapHolder.initialise(new BlurpBootstrapImpl());
+            BlurpJavaProgram blurpJavaProgram = javaClass.newInstance();
+            scriptThread = new Thread(new RunnableWrapper(blurpJavaProgram));
+        } catch(Exception e) {
+            throw new BlurpException("Error instantiating BlurpJavaProgram " + javaClass.getName(), e);
+        }
         scriptThread.start();
     }
 
@@ -91,9 +99,9 @@ public class BlurpRuntime {
     //              (e.g. to resume) get picked up.
     private class RunnableWrapper implements Runnable {
 
-        private BlurpRunnable script;
+        private Runnable script;
 
-        private RunnableWrapper(BlurpRunnable script) {
+        private RunnableWrapper(Runnable script) {
 
             this.script = script;
         }
@@ -103,14 +111,7 @@ public class BlurpRuntime {
 
             try {
                 BlurpStore.blurp.blurpify();
-                script.run(BlurpStore.blurp,
-                           BlurpStore.modelScreen,
-                           BlurpStore.console,
-                           BlurpStore.modelCamera,
-                           BlurpStore.effects,
-                           new KeyboardImpl(),
-                           BlurpStore.modelMouse,
-                           new Utils());
+                script.run();
 
             } catch (RuntimeException e) {
                 if(exceptionHandler != null) {

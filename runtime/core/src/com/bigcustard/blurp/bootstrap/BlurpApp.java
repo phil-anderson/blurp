@@ -4,19 +4,28 @@ import java.io.*;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.utils.viewport.*;
 import com.bigcustard.blurp.core.*;
-import com.bigcustard.blurp.model.*;
-import com.bigcustard.blurp.scripting.*;
+import com.bigcustard.blurp.model.java.*;
 
-// TODO: Test
-// TODO: Move script / class instantiation to BlurpRuntime?
+// TODO: Tidy this up a bit. Don't like having Scripts AND Classes  - feels like it should be split in two.
 public class BlurpApp extends Game {
 
-    private BlurpRunnable scriptRunnable;
     private ScalingViewport viewport;
+    private String scriptName;
+    private String language;
+    private Class<? extends BlurpJavaProgram> javaClass;
 
     public BlurpApp(String language, String scriptName, ScalingViewport viewport) {
 
-        scriptRunnable = getRunnable(language, scriptName);
+        this.language = language;
+        if(language.equalsIgnoreCase("java")) {
+            try {
+                this.javaClass = (Class<? extends BlurpJavaProgram>) Class.forName(scriptName);
+            } catch(Exception e) {
+                throw new BlurpException("Error finding BlurpJavaProgram subclass " + scriptName, e);
+            }
+        } else {
+            this.scriptName = scriptName;
+        }
         this.viewport = viewport;
     }
 
@@ -34,35 +43,16 @@ public class BlurpApp extends Game {
                 System.exit(1);
             }
         });
-        blurpRuntime.start(scriptRunnable);
-        setScreen(BlurpStore.blurpScreen);
-    }
-
-    private BlurpRunnable getRunnable(String language, String scriptName) {
-
-        if(language.equalsIgnoreCase("java")) {
-            return instantiateJavaClass(scriptName);
+        if(javaClass != null) {
+            blurpRuntime.start(javaClass);
         } else {
-            return createScriptRunnable(language, scriptName);
+            // TODO: Think about this.
+            try {
+                blurpRuntime.start(language, new FileReader(scriptName), scriptName);
+            } catch(FileNotFoundException e) {
+                throw new BlurpException("Error finding script file " + scriptName, e);
+            }
         }
-    }
-
-    private BlurpRunnable instantiateJavaClass(String className) {
-        try {
-            Class<BlurpRunnable> scriptClass = (Class<BlurpRunnable>) Class.forName(className);
-            return scriptClass.newInstance();
-        } catch(Exception e) {
-            throw new BlurpException("Error instantiating " + className + " as an instance of BlurpRunnable");
-        }
-    }
-
-    private BlurpRunnable createScriptRunnable(String language, String scriptName) {
-
-        // TODO: DANGER! Pretty sure this won't work on Android
-        try {
-            return new ScriptEngineBlurpRunnable(language, new FileReader(scriptName), scriptName);
-        } catch(FileNotFoundException e) {
-            throw new BlurpException("Error loading script file " + scriptName);
-        }
+        setScreen(BlurpStore.blurpScreen);
     }
 }

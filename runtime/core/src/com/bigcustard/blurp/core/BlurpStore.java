@@ -42,6 +42,8 @@ public class BlurpStore {
     public static RuntimeConsole runtimeConsole;
     public static boolean debugMode;
     public static Color debugColour;
+    public static Keyboard keyboard;
+    public static Utils utils;
 
     public static void initialise(BlurpConfiguration blurpConfiguration) {
 
@@ -58,7 +60,10 @@ public class BlurpStore {
 
         modelCamera = new CameraImpl(screenCenterX(), screenCenterY());
         modelScreen = new Screen(viewport.getWorldWidth(), viewport.getWorldHeight());
+        keyboard = new KeyboardImpl();
         modelMouse = new MouseImpl();
+        utils = new Utils();
+
 
         console = new ConsoleImpl();
         systemFont = new BitmapFont(Gdx.files.internal("small-rabbit.fnt"));
