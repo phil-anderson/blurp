@@ -57,7 +57,7 @@ public class BlurpStore {
         staticCamera.setToOrtho(false, viewport.getWorldWidth(), viewport.getWorldHeight());
 
         modelCamera = new CameraImpl(screenCenterX(), screenCenterY());
-        modelScreen = new Screen();
+        modelScreen = new Screen(viewport.getWorldWidth(), viewport.getWorldHeight());
         modelMouse = new MouseImpl();
 
         console = new ConsoleImpl();

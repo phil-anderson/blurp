@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.glutils.*;
 import com.badlogic.gdx.scenes.scene2d.*;
+import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.utils.viewport.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
@@ -211,5 +212,18 @@ public class BlurpScreen extends ScreenAdapter {
         } else {
             mainStage.addActor(sprite);
         }
+    }
+
+    public void changeViewport(double width, double height, boolean stretch) {
+
+        changeViewport(viewport, width, height, stretch);
+        changeViewport(staticViewport, width, height, stretch);
+    }
+
+    private void changeViewport(ScalingViewport viewport, double width, double height, boolean stretch) {
+
+        viewport.setWorldSize((float) width, (float) height);
+        viewport.setScaling(stretch ? Scaling.stretch : Scaling.fit);
+        viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 }
