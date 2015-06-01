@@ -392,4 +392,12 @@ public abstract class Sprite<T> {
     public abstract T pullInFrontOf(Sprite otherSprite);
 
     public abstract T copy();
+
+    public void normaliseRotation() {
+
+        rotation = rotation % 360;
+        if(rotation > 180) {
+            rotation = -360 + rotation;
+        }
+    }
 }

@@ -18,5 +18,12 @@ public interface SpriteEventHandler extends SimpleEventHandler<Sprite>{
         }
     };
 
+    public static SpriteEventHandler AT_END_NORMALISE_ROTATION = new SpriteEventHandler() {
+        @Override
+        public void handle(Sprite sprite) {
+            sprite.normaliseRotation();
+        }
+    };
+
     public void handle(Sprite sprite);
 }

@@ -6,10 +6,8 @@ WORK IN PROGRESS - CHECK BACK LATER
 *TODO*
 
 * BlurpJavaProgram - Make everything final, initialise in no-args ctor as per BlurpRuntime? Problem is it would depend on runtime.
-* Effect finaliser thing - NORMALISE_ROTATION? Do through a public Sprite method.
 * Rename EffectBase to Effect, and Effect to something like AtomicEffect (or maybe even merge with TweenEffect)
 * Provide a proper dispose() method which cleans everything out + Make script restart at end after a tap
-* World size?
 
 * Don't like the Viewport being passed in. We should change it.
 * Almost all examples need redoing / refactoring
