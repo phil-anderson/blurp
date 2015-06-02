@@ -20,9 +20,9 @@ public class BlurpRuntime {
     private BlurpExceptionHandler exceptionHandler;
     private Thread scriptThread;
 
-    private BlurpRuntime(BlurpConfiguration config) {
+    private BlurpRuntime(BlurpConfiguration config, MouseWindowChecker mouseWindowChecker) {
 
-        BlurpStore.initialise(config);
+        BlurpStore.initialise(config, mouseWindowChecker);
 
         if(config.isDebugEnabled()) {
             SetDebugModeCommand debugCommand = new SetDebugModeCommand(config.isDebugEnabled(), Colours.LIME_GREEN);
@@ -30,10 +30,10 @@ public class BlurpRuntime {
         }
     }
 
-    public static BlurpRuntime begin(BlurpConfiguration config) {
+    public static BlurpRuntime begin(BlurpConfiguration config, MouseWindowChecker mouseWindowChecker) {
 
         initLibGdxColors();
-        return new BlurpRuntime(config);
+        return new BlurpRuntime(config, mouseWindowChecker);
     }
 
     public void onException(BlurpExceptionHandler exceptionHandler) {

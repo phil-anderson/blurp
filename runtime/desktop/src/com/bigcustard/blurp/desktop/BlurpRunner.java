@@ -28,9 +28,8 @@ public class BlurpRunner {
         config.height = options.height;
         config.samples = 1;
 
-		new LwjglApplication(new BlurpApp(options.language, options.scriptName,
-                             new FitViewport(options.width, options.height)),
-                             config);
+        BlurpApp blurpApp = new BlurpApp(options.language, options.scriptName, new FitViewport(options.width, options.height), new LwjglMouseWindowChecker());
+        new LwjglApplication(blurpApp, config);
 	}
 
     private static class CommandLineOptions {

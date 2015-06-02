@@ -4,7 +4,7 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
-
+* IMPORTANT: Need to inject MouseWindowChecker when hosted.
 * Change everything to milliseconds. Seconds are driving me nuts!
 * Mouseover on Sprites working with mouse off-screen.
 * BlurpJavaProgram - Make everything final, initialise in no-args ctor as per BlurpRuntime? Problem is it would depend on runtime.

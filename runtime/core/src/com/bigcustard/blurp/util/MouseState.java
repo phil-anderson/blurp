@@ -25,4 +25,9 @@ public class MouseState {
 
         return Gdx.input.isButtonPressed(Input.Buttons.RIGHT);
     }
+
+    public static boolean isInsideWindow() {
+
+        return BlurpStore.mouseWindowChecker.isInsideWindow();
+    }
 }

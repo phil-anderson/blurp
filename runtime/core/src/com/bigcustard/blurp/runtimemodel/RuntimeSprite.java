@@ -78,6 +78,8 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
 
         if (touchable && this.getTouchable() != Touchable.enabled) return null;
 
+        if (!MouseState.isInsideWindow()) return null;
+
         Vector3 mouseXY = MouseState.getPosition(layer);
         boolean hit = collisionShape == CollisionShape.CenterCircle ? collisionCircle.contains(mouseXY.x, mouseXY.y)
                                                                     : collisionRectangle.contains(mouseXY.x, mouseXY.y);

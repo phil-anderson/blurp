@@ -10,6 +10,7 @@ public class MouseImpl implements Mouse {
     private double x, y;
     private double absoluteX, absoluteY;
     private boolean leftPressed, rightPressed;
+    private boolean insideWindow;
 
     public void sync() {
 
@@ -23,6 +24,7 @@ public class MouseImpl implements Mouse {
 
         this.leftPressed = MouseState.isLeftPressed();
         this.rightPressed = MouseState.isRightPressed();
+        this.insideWindow = MouseState.isInsideWindow();
     }
 
     @Override
@@ -57,5 +59,11 @@ public class MouseImpl implements Mouse {
     public boolean isRightButtonPressed() {
 
         return rightPressed;
+    }
+
+    @Override
+    public boolean isInsideWindow() {
+
+        return insideWindow;
     }
 }

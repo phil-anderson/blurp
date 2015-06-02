@@ -22,6 +22,7 @@ import com.bigcustard.blurp.ui.*;
  */
 public class BlurpStore {
 
+    public static MouseWindowChecker mouseWindowChecker;
     public static BlurpConfiguration configuration;
     public static ModelRepository modelRepository;
     public static Screen modelScreen;
@@ -45,8 +46,9 @@ public class BlurpStore {
     public static Keyboard keyboard;
     public static Utils utils;
 
-    public static void initialise(BlurpConfiguration blurpConfiguration) {
+    public static void initialise(BlurpConfiguration blurpConfiguration, MouseWindowChecker mouseWindowChecker) {
 
+        BlurpStore.mouseWindowChecker = mouseWindowChecker;
         configuration = blurpConfiguration;
         ScalingViewport viewport = blurpConfiguration.getViewport();
 
@@ -63,7 +65,6 @@ public class BlurpStore {
         keyboard = new KeyboardImpl();
         modelMouse = new MouseImpl();
         utils = new Utils();
-
 
         console = new ConsoleImpl();
         systemFont = new BitmapFont(Gdx.files.internal("small-rabbit.fnt"));

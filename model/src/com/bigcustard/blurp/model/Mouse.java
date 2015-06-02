@@ -9,4 +9,6 @@ public interface Mouse {
     public boolean isLeftButtonPressed();
 
     public boolean isRightButtonPressed();
+
+    public boolean isInsideWindow();
 }

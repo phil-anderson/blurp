@@ -22,11 +22,9 @@ public class DebugHudRenderer {
 
     public void render() {
 
-        Vector3 mousePosStatic = MouseState.getPosition(SpriteLayer.Overlay);
-        if(mousePosStatic.x < 0 || mousePosStatic.x >= BlurpStore.mainCamera.viewportWidth || mousePosStatic.y < 0 || mousePosStatic.y >= BlurpStore.mainCamera.viewportHeight) {
-            return;
-        }
+        if(!MouseState.isInsideWindow()) return;
 
+        Vector3 mousePosStatic = MouseState.getPosition(SpriteLayer.Overlay);
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 
@@ -60,7 +58,7 @@ public class DebugHudRenderer {
     private void renderCameraReticule(float reticuleSize) {
 
         float zoom = (float) BlurpStore.modelCamera.zoom;
-        Vector3 center = Convert.screenToMainLayer(BlurpStore.mainCamera.viewportWidth / 2, BlurpStore.mainCamera.viewportHeight / 2);
+        Vector3 center = Convert.screenToMainLayer(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
 
         shapes.setProjectionMatrix(BlurpStore.mainCamera.combined);
         shapes.setColor(BlurpStore.debugColour);
