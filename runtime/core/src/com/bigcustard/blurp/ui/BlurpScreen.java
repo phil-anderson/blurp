@@ -76,7 +76,7 @@ public class BlurpScreen extends ScreenAdapter {
         // so I'd have thought teh script would get plenty of time between frames to do it's stuff.
         // Maybe libGdx isn't being particularly friendly outside of renders... Hmmmm...
         // I wonder if this will be an issue n Android?
-        try { Thread.sleep(1); } catch(InterruptedException e) { e.printStackTrace(); }
+        BlurpStore.utils.sleep(1);
     }
 
     private void doFrame(float delta) {

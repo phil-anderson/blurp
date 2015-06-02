@@ -10,19 +10,19 @@ public class ConsoleExample extends BlurpJavaProgram {
 
         console.println("The quick, brown fox jumped over the lazy dog.");
         blurp.blurpify();
-        utils.rest(1);
+        utils.sleep(1000);
 
         console.println("Pack my box with five dozen liquor jugs");
         blurp.blurpify();
-        utils.rest(1);
+        utils.sleep(1000);
 
         console.println("Amazingly few discotheques provide jukeboxes.");
         blurp.blurpify();
-        utils.rest(1);
+        utils.sleep(1000);
 
         console.println("The five boxing wizards jump quickly.");
         blurp.blurpify();
-        utils.rest(1);
+        utils.sleep(1000);
 
         while(true) {
             console.colour(utils.randomColour());

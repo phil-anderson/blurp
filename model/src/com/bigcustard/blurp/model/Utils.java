@@ -121,21 +121,17 @@ public class Utils {
     }
 
     /**
-     * Makes your blurp script rest for the specified number of seconds, after which it'll carry on normally again.
+     * Makes your blurp script sleep for the specified number of seconds, after which it'll carry on normally again.
      * <p>
-     * Note that although it makes your script rest, it doesn't make blurp rest, so it will continue to run in the
-     * background.
-     * <p>
-     * WARNING - Effects won't be moving as there will be no blurpify calls, but on the first call to blurpify after
-     * the end of the rest, they'll jump to where they should be, given the amount of time that has passed. This may
-     * not be what you intended.
+     * WARNING - Effects won't be moving as there will be no blurpify calls, they'll effectively be on pause until the
+     * end of the sleep.
      *
-     * @param seconds The number of seconds to rest for.
+     * @param milliseconds The number of milliseconds to sleep for.
      */
-    public void rest(double seconds) {
+    public void sleep(int milliseconds) {
 
         try {
-            Thread.sleep((long) (seconds * 1000));
+            Thread.sleep(milliseconds);
         } catch(InterruptedException e) {
             e.printStackTrace();
         }
