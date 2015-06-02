@@ -4,14 +4,13 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
-* IMPORTANT: Need to inject MouseWindowChecker when hosted.
+* IMPORTANT: Need to inject MouseWindowChecker when hosted. TELL SPENCE!
 * Change everything to milliseconds. Seconds are driving me nuts!
-* Mouseover on Sprites working with mouse off-screen.
-* BlurpJavaProgram - Make everything final, initialise in no-args ctor as per BlurpRuntime? Problem is it would depend on runtime.
+*       Effects, Utils.Rest
 * Rename EffectBase to Effect, and Effect to something like AtomicEffect (or maybe even merge with TweenEffect)
 * Provide a proper dispose() method which cleans everything out + Make script restart at end after a tap
 
-* Don't like the Viewport being passed in. We should change it.
+* [DV?] Don't like the Viewport being passed in. We should change it.
 * Almost all examples need redoing / refactoring
 * [DV] Sprite mouse left and right clicks
 * [DV] Background drawing

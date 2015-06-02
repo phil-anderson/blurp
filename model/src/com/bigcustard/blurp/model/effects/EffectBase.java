@@ -6,7 +6,7 @@ public interface EffectBase<T extends EffectBase> {
 
     public T yoyoMode(boolean yoyoMode);
 
-    public T delayBeforeStart(double delayBeforeStart);
+    public T delayBeforeStart(int delayBeforeStart);
 
-    public T delayBetweenRuns(double delayBetweenRuns);
+    public T delayBetweenRuns(int delayBetweenRuns);
 }

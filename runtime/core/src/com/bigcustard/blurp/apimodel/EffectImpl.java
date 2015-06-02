@@ -8,9 +8,10 @@ public abstract class EffectImpl<T extends EffectBase> implements EffectBase<T> 
 
     protected int timesToRun = 1;
     protected boolean yoyoMode = false;
-    protected double delayBeforeStart = 0;
-    protected double delayBetweenRuns = 0;
+    protected int delayBeforeStart = 0;
+    protected int delayBetweenRuns = 0;
 
+    @Override
     public T timesToRun(int timesToRun) {
 
         if(timesToRun <= 0) throw new IllegalArgumentException("Effects must run at least once");
@@ -28,14 +29,16 @@ public abstract class EffectImpl<T extends EffectBase> implements EffectBase<T> 
         return (T) copy;
     }
 
-    public T delayBeforeStart(double delayBeforeStart) {
+    @Override
+    public T delayBeforeStart(int delayBeforeStart) {
 
         EffectImpl<T> copy = (EffectImpl<T>) copy((T) this);
         copy.delayBeforeStart = delayBeforeStart;
         return (T) copy;
     }
 
-    public T delayBetweenRuns(double delayBetweenRuns) {
+    @Override
+    public T delayBetweenRuns(int  delayBetweenRuns) {
 
         EffectImpl<T> copy = (EffectImpl<T>) copy((T) this);
         copy.delayBetweenRuns = delayBetweenRuns;
@@ -55,13 +58,13 @@ public abstract class EffectImpl<T extends EffectBase> implements EffectBase<T> 
     protected void populateTween(BaseTween tween) {
 
         if(delayBeforeStart != 0) {
-            tween.delay((float) delayBeforeStart);
+            tween.delay((float) delayBeforeStart / 1000f);
         }
         if(timesToRun != 1) {
             if(yoyoMode) {
-                tween.repeatYoyo(timesToRun - 1, (float) delayBetweenRuns);
+                tween.repeatYoyo(timesToRun - 1, (float) delayBetweenRuns / 1000f);
             } else {
-                tween.repeat(timesToRun - 1, (float) delayBetweenRuns);
+                tween.repeat(timesToRun - 1, (float) delayBetweenRuns / 1000f);
             }
         }
     }

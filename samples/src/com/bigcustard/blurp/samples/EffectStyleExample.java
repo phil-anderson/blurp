@@ -12,8 +12,6 @@ public class EffectStyleExample extends BlurpJavaProgram {
 
         Image worldImage = blurp.loadImage("hello-world.png");
 
-        effects.defaultDuration(1);
-
         blurp.createTextSprite("Press Space to Change Page").position(400, 575);
 
         for(int x = 0; x < 3; x++) {
@@ -52,7 +50,7 @@ public class EffectStyleExample extends BlurpJavaProgram {
 
             if(keyboard.isKeyJustPressed(Key.Key_Space)) {
                 currentPage = (currentPage + 1) % 3;
-                Effect moveCamera = effects.moveTo(currentPage * 800 + 400, 300).duration(0.5);
+                Effect moveCamera = effects.moveTo(currentPage * 800 + 400, 300).duration(500);
                 camera.runEffect(moveCamera);
             }
 
@@ -67,8 +65,8 @@ public class EffectStyleExample extends BlurpJavaProgram {
                                .effectStyle(effectStyle)
                                .timesToRun(1000000)
                                .yoyoMode(true)
-                               .delayBeforeStart(0.5)
-                               .delayBetweenRuns(0.5);
+                               .delayBeforeStart(500)
+                               .delayBetweenRuns(500);
         sprite.runEffect(effect);
 
     }

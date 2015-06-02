@@ -1,4 +1,4 @@
-var spin = effects.rotateBy(4 * 360).effectStyle(SmoothStop).duration(2);
+var spin = effects.rotateBy(4 * 360).effectStyle(SmoothStop).duration(2000);
 var shrinkAndFade = effects.combine(effects.scaleTo(0), effects.alpha(0));
 
 for(var x = 0; x < 8; x++) {

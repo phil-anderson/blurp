@@ -4,7 +4,7 @@ import com.bigcustard.blurp.model.constants.*;
 
 public interface Effect extends EffectBase<Effect> {
 
-    public Effect duration(double duration);
+    public Effect duration(int durationInMilliseconds);
 
     public Effect effectStyle(EffectStyle effectStyle);
 }

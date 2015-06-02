@@ -9,7 +9,7 @@ public class EffectsImpl extends Effects {
 
     public EffectsImpl() {
 
-        defaultDuration = 1;
+        defaultDuration = 1000;
         defaultEffectStyle = EffectStyle.SmoothStartStop;
     }
 

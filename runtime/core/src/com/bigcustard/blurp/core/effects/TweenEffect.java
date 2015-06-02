@@ -35,7 +35,7 @@ public class TweenEffect extends EffectImpl<Effect> implements Effect {
     private final boolean relative;
     private final float[] targetValues;
 
-    private float duration;
+    private int duration;
     private EffectStyle effectStyle;
 
     public TweenEffect(int tweenType, boolean relative, float... targetValue) {
@@ -43,15 +43,15 @@ public class TweenEffect extends EffectImpl<Effect> implements Effect {
         this.tweenType = tweenType;
         this.relative = relative;
         this.targetValues = targetValue;
-        this.duration = (float) BlurpStore.effects.defaultDuration;
+        this.duration = BlurpStore.effects.defaultDuration;
         this.effectStyle = BlurpStore.effects.defaultEffectStyle;
     }
 
     @Override
-    public Effect duration(double duration) {
+    public Effect duration(int durationMillis) {
 
         TweenEffect copy = (TweenEffect) copy(this);
-        copy.duration = (float) duration;
+        copy.duration = durationMillis;
         return copy;
     }
 
@@ -67,7 +67,7 @@ public class TweenEffect extends EffectImpl<Effect> implements Effect {
     @Override
     public BaseTween getTween(Object target) {
 
-        Tween tween = Tween.to(target, tweenType, duration);
+        Tween tween = Tween.to(target, tweenType, duration / 1000f);
         if(relative) {
 
             // Special case for scaleBy - e.g. scaleBy(2) should double in size, not add 2 to scale.
