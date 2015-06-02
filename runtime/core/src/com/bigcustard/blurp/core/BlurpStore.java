@@ -41,10 +41,11 @@ public class BlurpStore {
     public static Effects effects;
     public static Console console;
     public static RuntimeConsole runtimeConsole;
-    public static boolean debugMode;
-    public static Color debugColour;
     public static Keyboard keyboard;
     public static Utils utils;
+
+    public static boolean debugMode;
+    public static Color debugColour;
 
     public static void initialise(BlurpConfiguration blurpConfiguration, MouseWindowChecker mouseWindowChecker) {
 
@@ -110,5 +111,14 @@ public class BlurpStore {
 
         runtimeScreen.sync();
         ((MouseImpl) modelMouse).sync();
+    }
+
+    public static void dispose() {
+
+        tweener.killAll();
+        blurpScreen.dispose();
+        runtimeRepository.dispose();
+        defaultFont.getFont().dispose();
+        systemFont.dispose();
     }
 }

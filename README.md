@@ -5,6 +5,7 @@ WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
 * IMPORTANT: Need to inject MouseWindowChecker when hosted. TELL SPENCE!
+* Sort out antialiasing
 * Change everything to milliseconds. Seconds are driving me nuts!
 *       Effects, Utils.Rest
 * Rename EffectBase to Effect, and Effect to something like AtomicEffect (or maybe even merge with TweenEffect)

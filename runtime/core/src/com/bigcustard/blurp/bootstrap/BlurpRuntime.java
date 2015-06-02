@@ -69,12 +69,13 @@ public class BlurpRuntime {
         scriptThread.start();
     }
 
-    // TODO: Implement this properly
     public void end() {
 
-
-        // TODO: Add explanation comment
+        // TODO: Deprecated stop method is inherently unsafe, however we really do want a hard stop and are going to
+        // clear down the runtime so there risk of damaged objects remaining is negligible. As we don;t have control
+        // over the code that is running in the thread, this is about the only way to stop it.
         scriptThread.stop();
+        BlurpStore.dispose();
     }
 
     private static void initLibGdxColors() {

@@ -30,7 +30,7 @@ public class BlurpScreen extends ScreenAdapter {
     private LayerStage overlayStage;
 
     private RenderListener renderListener = RenderListener.NULL_IMPLEMENTATION;
-    private boolean firstRender = true;
+    private boolean initialised = false;
 
     public BlurpScreen() {
 
@@ -57,7 +57,7 @@ public class BlurpScreen extends ScreenAdapter {
     public void render(float delta) {
 
         try {
-            if(firstRender) {
+            if(!initialised) {
                 initialise();
             }
 
@@ -138,8 +138,9 @@ public class BlurpScreen extends ScreenAdapter {
 
         Gdx.input.setInputProcessor(new InputMultiplexer(overlayStage, mainStage, backgroundStage));
         Gdx.gl.glLineWidth(1.5f);
-        firstRender = false;
+//        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT | (Gdx.graphics.getBufferFormat().coverageSampling?GL20.GL_COVERAGE_BUFFER_BIT_NV:0));
         BlurpStore.onLibGdxInitialised();
+        initialised = true;
     }
 
     private void updateCamera() {
@@ -184,24 +185,6 @@ public class BlurpScreen extends ScreenAdapter {
         overlayStage.getDebugColor().set(Convert.toGdxColour(debugColour));
     }
 
-    @Override
-    public void dispose() {
-
-        if(batch != null) {
-            batch.dispose();
-        }
-
-        if(backgroundStage != null) {
-            backgroundStage.dispose();
-        }
-        if(mainStage != null) {
-            mainStage.dispose();
-        }
-        if(overlayStage != null) {
-            overlayStage.dispose();
-        }
-    }
-
     public void handleSpriteLayer(RuntimeSprite sprite) {
 
         sprite.remove();
@@ -225,5 +208,17 @@ public class BlurpScreen extends ScreenAdapter {
         viewport.setWorldSize((float) width, (float) height);
         viewport.setScaling(stretch ? Scaling.stretch : Scaling.fit);
         viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    }
+
+    @Override
+    public void dispose() {
+
+        if(initialised) {
+            batch.dispose();
+            backgroundStage.dispose();
+            mainStage.dispose();
+            overlayStage.dispose();
+            Gdx.input.setInputProcessor(null);
+        }
     }
 }

@@ -94,10 +94,13 @@ public class RuntimeRepository {
         for(RuntimeImage image : runtimeImages) {
             image.dispose();
         }
+
         runtimeImages.clear();
         runtimeImageSprites.clear();
         runtimeTextSprites.clear();
+
         commands.clear();
+        deferredCommands.clear();
     }
 
     public void executeCommands(List<Command> commands, float delta) {

@@ -26,7 +26,7 @@ public class BlurpRunner {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.width = options.width;
         config.height = options.height;
-        config.samples = 1;
+        config.samples = 16;
 
         BlurpApp blurpApp = new BlurpApp(options.language, options.scriptName, new FitViewport(options.width, options.height), new LwjglMouseWindowChecker());
         new LwjglApplication(blurpApp, config);

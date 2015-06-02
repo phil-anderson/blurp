@@ -11,7 +11,6 @@ public class ModelRepository {
     private List<Image> images;
     private List<ImageSprite> imageSprites;
     private List<TextSprite> textSprites;
-    private List<Sprite> sprites;
     private List<Sprite> createdSprites;
 
     public ModelRepository() {
