@@ -24,15 +24,14 @@ public class DebugHudRenderer {
 
         if(!MouseState.isInsideWindow()) return;
 
-        Vector3 mousePosStatic = MouseState.getPosition(SpriteLayer.Overlay);
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 
-        float reticuleSize = BlurpStore.mainCamera.viewportWidth / 8;
-
         shapes.setProjectionMatrix(BlurpStore.staticCamera.combined);
         renderBlackOut();
-        renderMouseLines(mousePosStatic);
+        renderMouseLines(MouseState.getPosition(SpriteLayer.Overlay));
+
+        float reticuleSize = BlurpStore.mainCamera.viewportWidth / 8;
         renderCameraReticule(reticuleSize);
         renderText(reticuleSize);
     }
