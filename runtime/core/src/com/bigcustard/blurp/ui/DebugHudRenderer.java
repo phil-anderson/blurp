@@ -40,7 +40,7 @@ public class DebugHudRenderer {
 
         shapes.setColor(0, 0, 0, 0.5f);
         shapes.begin(ShapeRenderer.ShapeType.Filled);
-        shapes.rect(0, 0, 800, 600);
+        shapes.rect(0, 0, BlurpStore.staticCamera.viewportWidth, BlurpStore.staticCamera.viewportHeight);
         shapes.end();
     }
 

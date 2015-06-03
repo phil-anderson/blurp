@@ -95,6 +95,8 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
 
         if(mouseListener.isOver()) {
             shapes.setColor(1, 1, 1, 1);
+        } else {
+            shapes.setColor(BlurpStore.debugColour);
         }
 
         shapes.set(ShapeRenderer.ShapeType.Line);
