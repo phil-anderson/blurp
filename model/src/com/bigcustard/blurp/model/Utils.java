@@ -69,9 +69,8 @@ public class Utils {
      * @param high The highest value that could be returned
      * @return A number between the specified low and high values.
      */
-    public double wave(double low, double high, double wavelength) {
+    public double wave(double low, double high, int wavelength) {
 
-        wavelength = wavelength * 1000;
         double angle = (System.currentTimeMillis() % wavelength) * 360 / (wavelength - 1);
 
         double range = high - low;
@@ -106,18 +105,14 @@ public class Utils {
         return Math.tan(Math.toRadians(angle));
     }
 
-    public boolean timedToggle(double timeBetweenToggles) {
+    public boolean timedToggle(int millisecondsBetweenToggles) {
 
-        long millis = (long) (timeBetweenToggles * 1000);
-        return (System.currentTimeMillis() % millis * 2) > millis;
+        return (System.currentTimeMillis() % millisecondsBetweenToggles * 2) > millisecondsBetweenToggles;
     }
 
-    public boolean timedToggle(double timeTrue, double timeFalse) {
+    public boolean timedToggle(int trueMilliseconds, int falseMilliseconds) {
 
-        long trueMillis = (long) (timeTrue * 1000);
-        long falseMillis = (long) (timeFalse * 1000);
-
-        return (System.currentTimeMillis() % trueMillis + falseMillis) > trueMillis;
+        return (System.currentTimeMillis() % trueMilliseconds + falseMilliseconds) > trueMilliseconds;
     }
 
     /**

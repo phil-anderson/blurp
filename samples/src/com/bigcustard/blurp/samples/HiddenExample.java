@@ -11,7 +11,7 @@ public class HiddenExample extends BlurpJavaProgram {
         ImageSprite world = blurp.createImageSprite("hello-world.png");
 
         while(true) {
-            world.hidden = utils.timedToggle(1, 0.25);
+            world.hidden = utils.timedToggle(1, 250);
             blurp.blurpify();
         }
     }
