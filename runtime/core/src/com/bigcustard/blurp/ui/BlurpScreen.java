@@ -123,7 +123,7 @@ public class BlurpScreen extends ScreenAdapter {
         BlurpStore.runtimeConsole.render(batch);
         endBatch();
 
-        if(BlurpStore.debugMode) debugHudRenderer.render();
+        if(BlurpState.debugMode) debugHudRenderer.render();
     }
 
     private void initialise() {
@@ -137,10 +137,15 @@ public class BlurpScreen extends ScreenAdapter {
         overlayStage = new LayerStage(staticViewport, batch);
 
         Gdx.input.setInputProcessor(new InputMultiplexer(overlayStage, mainStage, backgroundStage));
-        Gdx.gl.glLineWidth(1.5f);
 
-        BlurpStore.onLibGdxInitialised();
+        if(Gdx.graphics.getBufferFormat().samples > 0) {
+            Gdx.gl.glLineWidth(1.5f);
+        } else  {
+            Gdx.gl.glLineWidth(1f);
+        }
+
         initialised = true;
+        BlurpStore.onLibGdxInitialised();
     }
 
     private void updateCamera() {
@@ -183,6 +188,9 @@ public class BlurpScreen extends ScreenAdapter {
         overlayStage.setDebugAll(debugEnabled);
         overlayStage.setDebugInvisible(debugEnabled);
         overlayStage.getDebugColor().set(Convert.toGdxColour(debugColour));
+
+        BlurpState.debugMode = debugEnabled;
+        BlurpState.debugColour = Convert.toGdxColour(debugColour);
     }
 
     public void handleSpriteLayer(RuntimeSprite sprite) {
@@ -219,6 +227,7 @@ public class BlurpScreen extends ScreenAdapter {
             mainStage.dispose();
             overlayStage.dispose();
             Gdx.input.setInputProcessor(null);
+            initialised = false;
         }
     }
 }

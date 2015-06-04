@@ -4,10 +4,11 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
+* Exception handling when rendering, but not in sync part
 * IMPORTANT: Need to inject MouseWindowChecker when hosted. TELL SPENCE!
+* Create an executable jar and provide basic lifecycle (Stop, Restart, Pause?)
+* Event for end of script
 * Sort out antialiasing
-* Change everything to milliseconds. Seconds are driving me nuts!
-*       Effects, Utils.Rest
 * Rename EffectBase to Effect, and Effect to something like AtomicEffect (or maybe even merge with TweenEffect)
 * Provide a proper dispose() method which cleans everything out + Make script restart at end after a tap
 

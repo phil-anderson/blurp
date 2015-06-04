@@ -2,6 +2,7 @@ package com.bigcustard.blurp.bootstrap;
 
 import java.io.*;
 import java.lang.reflect.*;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.utils.*;
 import com.bigcustard.blurp.core.*;
@@ -113,12 +114,12 @@ public class BlurpRuntime {
             try {
                 BlurpStore.blurp.blurpify();
                 script.run();
-
             } catch (RuntimeException e) {
                 if(exceptionHandler != null) {
                     exceptionHandler.handleException(e);
                 }
             }
+            BlurpState.scriptComplete = true;
         }
     }
 }

@@ -46,7 +46,7 @@ public class DebugHudRenderer {
 
     private void renderMouseLines(Vector3 mousePosStatic) {
 
-        shapes.setColor(BlurpStore.debugColour);
+        shapes.setColor(BlurpState.debugColour);
         shapes.getColor().a = 0.5f;
         shapes.begin(ShapeRenderer.ShapeType.Line);
         shapes.line(mousePosStatic.x, 0, mousePosStatic.x, BlurpStore.staticCamera.viewportHeight);
@@ -60,7 +60,7 @@ public class DebugHudRenderer {
         Vector3 center = Convert.screenToMainLayer(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
 
         shapes.setProjectionMatrix(BlurpStore.mainCamera.combined);
-        shapes.setColor(BlurpStore.debugColour);
+        shapes.setColor(BlurpState.debugColour);
         shapes.begin(ShapeRenderer.ShapeType.Line);
         for(int angle = 0; angle < 360; angle += 5) {
             float sinZoomed = MathUtils.sinDeg(angle) / zoom;
@@ -87,7 +87,7 @@ public class DebugHudRenderer {
         batch.begin(); // Assumes batch was left in "static camera" mode
         BitmapFont font = BlurpStore.defaultFont.getFont();
         font.setScale(reticuleSize * 0.003f);
-        font.setColor(BlurpStore.debugColour);
+        font.setColor(BlurpState.debugColour);
 
         Vector3 mousePosMain = MouseState.getPosition(SpriteLayer.Main);
 
