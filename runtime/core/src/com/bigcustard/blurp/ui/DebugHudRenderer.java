@@ -24,16 +24,18 @@ public class DebugHudRenderer {
 
         if(!MouseState.isInsideWindow()) return;
 
+        Vector3 mousePosStatic = MouseState.getPosition(SpriteLayer.Overlay);
+
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 
         shapes.setProjectionMatrix(BlurpStore.staticCamera.combined);
         renderBlackOut();
-        renderMouseLines();
+        renderMouseLines(mousePosStatic);
 
         float reticuleSize = BlurpStore.mainCamera.viewportWidth / 8;
         renderCameraReticule(reticuleSize);
-        renderText(reticuleSize);
+        renderText(reticuleSize, mousePosStatic);
     }
 
     private void renderBlackOut() {
@@ -44,9 +46,8 @@ public class DebugHudRenderer {
         shapes.end();
     }
 
-    private void renderMouseLines() {
+    private void renderMouseLines(Vector3 mousePosStatic) {
 
-        Vector3 mousePosStatic = MouseState.getPosition(SpriteLayer.Overlay);
         shapes.setColor(BlurpState.debugGdxColour());
         shapes.getColor().a = 0.5f;
         shapes.begin(ShapeRenderer.ShapeType.Line);
@@ -83,9 +84,8 @@ public class DebugHudRenderer {
 
     }
 
-    private void renderText(float reticuleSize) {
+    private void renderText(float reticuleSize, Vector3 mousePosStatic) {
 
-        batch.begin(); // Assumes batch was left in "static camera" mode
         BitmapFont font = BlurpStore.defaultFont.getFont();
         font.setScale(reticuleSize * 0.003f);
         font.setColor(BlurpState.debugGdxColour());
@@ -94,7 +94,9 @@ public class DebugHudRenderer {
 
         String zoomString = String.format("%.2f", (float) BlurpStore.modelCamera.zoom);
         String angleString = String.format("%.1f", 360 - BlurpStore.modelCamera.rotation % 360) + (char) 127;
-        String mouseString = String.format("x:%.1f  y:%.1f", mousePosMain.x, mousePosMain.y);
+        String staticMouseString = String.format("x:%.1f  y:%.1f", mousePosStatic.x, mousePosStatic.y);
+
+        batch.begin(); // Assumes batch was left in "static camera" mode
 
         font.drawMultiLine(batch, angleString, BlurpStore.mainCamera.viewportWidth / 2 - 100,
                            BlurpStore.mainCamera.viewportHeight / 2 + font.getCapHeight(),
@@ -102,9 +104,17 @@ public class DebugHudRenderer {
         font.drawMultiLine(batch, "x" + zoomString, BlurpStore.mainCamera.viewportWidth / 2 - 100,
                            BlurpStore.mainCamera.viewportHeight / 2,
                            200, BitmapFont.HAlignment.CENTER);
-        font.drawMultiLine(batch, mouseString, BlurpStore.mainCamera.viewportWidth / 2 - 100,
+        font.drawMultiLine(batch, staticMouseString, BlurpStore.mainCamera.viewportWidth / 2 - 100,
                            BlurpStore.mainCamera.viewportHeight / 2 - reticuleSize * 1.25f,
                            200, BitmapFont.HAlignment.CENTER);
+
+        if(!mousePosMain.equals(mousePosStatic)) {
+            String mainMouseString = String.format("(x:%.1f  y:%.1f)", mousePosMain.x, mousePosMain.y);
+            font.drawMultiLine(batch, mainMouseString, BlurpStore.mainCamera.viewportWidth / 2 - 100,
+                               BlurpStore.mainCamera.viewportHeight / 2 - reticuleSize * 1.6f,
+                               200, BitmapFont.HAlignment.CENTER);
+        }
+
         batch.end();
     }
 }

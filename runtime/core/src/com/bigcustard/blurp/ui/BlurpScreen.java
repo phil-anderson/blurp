@@ -18,9 +18,6 @@ import static com.bigcustard.blurp.core.Blurpifier.*;
 // TODO: Add an abstract immutable parent that can be exposed through BlurpRuntime.
 public class BlurpScreen extends ScreenAdapter {
 
-    private final ScalingViewport viewport;
-    private final ScalingViewport staticViewport;
-
     private Batch batch;
     private ShapeRenderer shapes;
     private DebugHudRenderer debugHudRenderer;
@@ -32,12 +29,6 @@ public class BlurpScreen extends ScreenAdapter {
     private RenderListener renderListener = RenderListener.NULL_IMPLEMENTATION;
 
     private boolean initialised = false;
-
-    public BlurpScreen() {
-
-        this.viewport = BlurpStore.configuration.getViewport();
-        this.staticViewport = new ScalingViewport(viewport.getScaling(), viewport.getWorldWidth(), viewport.getWorldHeight(), BlurpStore.staticCamera);
-    }
 
     public void addActor(Actor actor) {
 
@@ -192,9 +183,9 @@ public class BlurpScreen extends ScreenAdapter {
         shapes = new ShapeRenderer();
         debugHudRenderer = new DebugHudRenderer(batch, shapes);
 
-        backgroundStage = new Stage(staticViewport, batch);
-        mainStage = new LayerStage(viewport, batch);
-        overlayStage = new LayerStage(staticViewport, batch);
+        backgroundStage = new Stage(BlurpStore.staticViewport, batch);
+        mainStage = new LayerStage(BlurpStore.mainViewport, batch);
+        overlayStage = new LayerStage(BlurpStore.staticViewport, batch);
 
         Gdx.input.setInputProcessor(new InputMultiplexer(overlayStage, mainStage, backgroundStage));
 
@@ -267,8 +258,8 @@ public class BlurpScreen extends ScreenAdapter {
 
     public void changeViewport(double width, double height, boolean stretch) {
 
-        changeViewport(viewport, width, height, stretch);
-        changeViewport(staticViewport, width, height, stretch);
+        changeViewport(BlurpStore.mainViewport, width, height, stretch);
+        changeViewport(BlurpStore.staticViewport, width, height, stretch);
     }
 
     private void changeViewport(ScalingViewport viewport, double width, double height, boolean stretch) {

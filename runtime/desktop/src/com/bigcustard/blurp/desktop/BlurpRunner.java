@@ -1,7 +1,6 @@
 package com.bigcustard.blurp.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.*;
-import com.badlogic.gdx.utils.viewport.*;
 import com.bigcustard.blurp.bootstrap.*;
 import org.kohsuke.args4j.*;
 
@@ -28,7 +27,7 @@ public class BlurpRunner {
         config.height = options.height;
         config.samples= 1;
 
-        BlurpApp blurpApp = new BlurpApp(options.language, options.scriptName, new FitViewport(options.width, options.height), new LwjglMouseWindowChecker());
+        BlurpApp blurpApp = new BlurpApp(options.language, options.scriptName, options.width, options.height, new LwjglMouseWindowChecker());
         new LwjglApplication(blurpApp, config);
 	}
 

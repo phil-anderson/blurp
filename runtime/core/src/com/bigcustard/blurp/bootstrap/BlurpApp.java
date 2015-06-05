@@ -2,7 +2,6 @@ package com.bigcustard.blurp.bootstrap;
 
 import java.io.*;
 import com.badlogic.gdx.*;
-import com.badlogic.gdx.utils.viewport.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.java.*;
 import com.bigcustard.blurp.ui.*;
@@ -10,15 +9,17 @@ import com.bigcustard.blurp.ui.*;
 // TODO: Tidy this up a bit. Don't like having Scripts AND Classes  - feels like it should be split in two.
 public class BlurpApp extends Game {
 
-    private final ScalingViewport viewport;
+    private final double viewportWidth, viewportHeight;
     private final MouseWindowChecker mouseWindowChecker;
     private String scriptName;
     private String language;
     private Class<? extends BlurpJavaProgram> javaClass;
 
-    public BlurpApp(String language, String scriptName, ScalingViewport viewport, MouseWindowChecker mouseWindowChecker) {
+    public BlurpApp(String language, String scriptName, double viewportWidth, double viewportHeight, MouseWindowChecker mouseWindowChecker) {
 
         this.language = language;
+        this.viewportWidth = viewportWidth;
+        this.viewportHeight = viewportHeight;
         if(language.equalsIgnoreCase("java")) {
             try {
                 this.javaClass = (Class<? extends BlurpJavaProgram>) Class.forName(scriptName);
@@ -28,7 +29,6 @@ public class BlurpApp extends Game {
         } else {
             this.scriptName = scriptName;
         }
-        this.viewport = viewport;
         this.mouseWindowChecker = mouseWindowChecker;
     }
 
@@ -36,7 +36,7 @@ public class BlurpApp extends Game {
     @Override
     public void create() {
 
-        BlurpConfiguration config = new BlurpConfiguration(viewport);
+        BlurpConfiguration config = new BlurpConfiguration(viewportWidth, viewportHeight);
         BlurpRuntime blurpRuntime = BlurpRuntime.begin(config, mouseWindowChecker);
 
         blurpRuntime.onException(new BlurpExceptionHandler() {

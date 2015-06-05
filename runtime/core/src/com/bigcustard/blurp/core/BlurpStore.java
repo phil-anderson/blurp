@@ -39,29 +39,33 @@ public class BlurpStore {
     public static BitmapFont systemFont;
     public static OrthographicCamera mainCamera;
     public static OrthographicCamera staticCamera;
+    public static ScalingViewport mainViewport;
+    public static ScalingViewport staticViewport;
     public static Effects effects;
     public static Console console;
     public static RuntimeConsole runtimeConsole;
     public static Keyboard keyboard;
     public static Utils utils;
 
-    public static void initialise(BlurpConfiguration blurpConfiguration, MouseWindowChecker mouseWindowChecker, BlurpRuntime runtime) {
+    public static void initialise(BlurpConfiguration configuration, MouseWindowChecker mouseWindowChecker, BlurpRuntime runtime) {
+
+        float worldWidth = (float) configuration.getInitialViewportWidth();
+        float worldHeight = (float) configuration.getInitialViewportHeight();
 
         BlurpStore.mouseWindowChecker = mouseWindowChecker;
         BlurpStore.runtime = runtime;
-        configuration = blurpConfiguration;
-        ScalingViewport viewport = blurpConfiguration.getViewport();
+        BlurpStore.configuration = configuration;
 
-        if(!(viewport.getCamera() instanceof OrthographicCamera)) {
-            throw new IllegalArgumentException("Viewport must have an OrthographicCamera");
-        }
-        mainCamera = (OrthographicCamera) viewport.getCamera();
+        mainCamera = new OrthographicCamera();
+        mainCamera.setToOrtho(false, worldWidth, worldHeight);
+        mainViewport = new FitViewport(worldWidth, worldHeight, mainCamera);
 
         staticCamera = new OrthographicCamera();
-        staticCamera.setToOrtho(false, viewport.getWorldWidth(), viewport.getWorldHeight());
+        staticCamera.setToOrtho(false, worldWidth, worldHeight);
+        staticViewport = new FitViewport(worldWidth, worldHeight, staticCamera);
 
-        modelCamera = new CameraImpl(screenCenterX(), screenCenterY());
-        modelScreen = new Screen(viewport.getWorldWidth(), viewport.getWorldHeight());
+        modelCamera = new CameraImpl(worldWidth / 2, worldHeight / 2);
+        modelScreen = new Screen(worldWidth, worldHeight);
         keyboard = new KeyboardImpl();
         modelMouse = new MouseImpl();
         utils = new Utils();
@@ -94,16 +98,6 @@ public class BlurpStore {
         BitmapFont font = new BitmapFont(Gdx.files.classpath("RobotoCondensed.fnt"),
                                          new TextureRegion(systemFontTexture), false);
         defaultFont = new FontHolder(font);
-    }
-
-    public static double screenCenterX() {
-
-        return configuration.getViewport().getWorldWidth() / 2;
-    }
-
-    public static double screenCenterY() {
-
-        return configuration.getViewport().getWorldHeight() / 2;
     }
 
     public static void syncSingletons() {

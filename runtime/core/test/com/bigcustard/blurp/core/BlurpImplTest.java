@@ -1,6 +1,5 @@
 package com.bigcustard.blurp.core;
 
-import com.badlogic.gdx.utils.viewport.*;
 import com.bigcustard.blurp.bootstrap.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.constants.*;
@@ -29,7 +28,7 @@ public class BlurpImplTest {
         BlurpStore.modelRepository = mockModelRepository;
         BlurpStore.modelScreen = mockScreen;
         BlurpStore.blurpifier = mockBlurpifier;
-        BlurpStore.configuration = new BlurpConfiguration(new FillViewport(100, 100));
+        BlurpStore.configuration = new BlurpConfiguration(100, 100);
         testCandidate = new BlurpImpl();
     }
 

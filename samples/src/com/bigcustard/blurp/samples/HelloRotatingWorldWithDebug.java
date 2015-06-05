@@ -9,6 +9,7 @@ public class HelloRotatingWorldWithDebug extends BlurpJavaProgram {
     public void run() {
 
         blurp.debugMode(true);
+
         ImageSprite world = blurp.createImageSprite("hello-world.png");
 
         while(true) {

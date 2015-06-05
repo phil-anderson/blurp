@@ -8,8 +8,7 @@ import com.bigcustard.blurp.util.*;
 public class BlurpState {
 
     public static boolean debugMode;
-
-    public static Colour debugColour;
+    public static Colour debugColour = Colours.LIME_GREEN;
 
     public static boolean scriptComplete;
 

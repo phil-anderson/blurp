@@ -1,17 +1,16 @@
 package com.bigcustard.blurp.bootstrap;
 
-import com.badlogic.gdx.utils.viewport.*;
-
 public class BlurpConfiguration {
 
-    private ScalingViewport viewport;
+    private double initialViewportWidth, initialViewportHeight;
     private String contentRoot = "";
     private boolean debugEnabled;
     private ScriptCompletionHandler scriptCompletionHandler;
 
-    public BlurpConfiguration(ScalingViewport viewport) {
+    public BlurpConfiguration(double initialViewportWidth, double initialViewportHeight) {
 
-        this.viewport = viewport;
+        this.initialViewportWidth = initialViewportWidth;
+        this.initialViewportHeight = initialViewportHeight;
         scriptCompletionHandler = new ScriptCompletionHandler();
     }
 
@@ -38,11 +37,6 @@ public class BlurpConfiguration {
         return debugEnabled;
     }
 
-    public ScalingViewport getViewport() {
-
-        return viewport;
-    }
-
     public String getContentRoot() {
 
         return contentRoot;
@@ -51,5 +45,15 @@ public class BlurpConfiguration {
     public ScriptCompletionHandler getScriptCompletionHandler() {
 
         return scriptCompletionHandler;
+    }
+
+    public double getInitialViewportWidth() {
+
+        return initialViewportWidth;
+    }
+
+    public double getInitialViewportHeight() {
+
+        return initialViewportHeight;
     }
 }

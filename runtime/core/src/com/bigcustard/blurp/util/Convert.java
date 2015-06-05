@@ -40,7 +40,7 @@ public class Convert {
     public static Vector3 screenToMainLayer(float x, float y) {
 
         Vector3 coords = new Vector3(x, y, 0);
-        BlurpStore.mainCamera.unproject(coords);
+        BlurpStore.mainViewport.unproject(coords);
         return coords;
     }
 }
