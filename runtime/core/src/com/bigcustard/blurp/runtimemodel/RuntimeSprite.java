@@ -93,10 +93,12 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
     @Override
     protected void drawDebugBounds (ShapeRenderer shapes) {
 
+        if(!BlurpState.debugMode) return;
+
         if(mouseListener.isOver()) {
             shapes.setColor(1, 1, 1, 1);
         } else {
-            shapes.setColor(BlurpState.debugColour);
+            shapes.setColor(BlurpState.debugGdxColour());
         }
 
         shapes.set(ShapeRenderer.ShapeType.Line);

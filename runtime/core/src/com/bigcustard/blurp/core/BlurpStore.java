@@ -45,9 +45,6 @@ public class BlurpStore {
     public static Keyboard keyboard;
     public static Utils utils;
 
-    public static boolean debugMode;
-    public static Color debugColour;
-
     public static void initialise(BlurpConfiguration blurpConfiguration, MouseWindowChecker mouseWindowChecker, BlurpRuntime runtime) {
 
         BlurpStore.mouseWindowChecker = mouseWindowChecker;

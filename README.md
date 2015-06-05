@@ -4,6 +4,8 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
+* BUG when unprojecting with an irregular FitViewport. Viewport.unproject istead of Camera.unproject may fix it.
+* Key combinations for various control functions (e.g. debug on).
 * Add display of exceptions to the script complete code
 * Add Stop, pause and resume methods to runtime.
 * Blurp runtime should be a singleton.

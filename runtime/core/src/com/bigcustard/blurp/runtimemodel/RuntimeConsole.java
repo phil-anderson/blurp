@@ -22,8 +22,8 @@ public class RuntimeConsole {
 
     public RuntimeConsole() {
 
-        // This is probably going to be wrong when we start mixing Camera zoom etc in.
-        this.pixelHeight = BlurpStore.configuration.getViewport().getWorldHeight();
+        // TODO: This is probably going to be wrong when we start mixing Camera zoom etc in.
+        this.pixelHeight = BlurpStore.mainCamera.viewportHeight;
 
         columns = (int) (BlurpStore.configuration.getViewport().getWorldWidth() / BlurpStore.systemFont.getSpaceWidth());
         lines = (int) (pixelHeight / BlurpStore.systemFont.getLineHeight());

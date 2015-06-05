@@ -30,6 +30,7 @@ public class BlurpScreen extends ScreenAdapter {
     private LayerStage overlayStage;
 
     private RenderListener renderListener = RenderListener.NULL_IMPLEMENTATION;
+
     private boolean initialised = false;
 
     public BlurpScreen() {
@@ -89,7 +90,9 @@ public class BlurpScreen extends ScreenAdapter {
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         float textHeight = BlurpStore.staticCamera.viewportHeight / 20;
 
-        shapes.setColor(0, 0, 0, 0.75f);
+        shapes.setProjectionMatrix(BlurpStore.staticCamera.combined);
+
+        shapes.setColor(0, 0, 0.15f, 0.9f);
         shapes.begin(ShapeRenderer.ShapeType.Filled);
         shapes.rect(0, 0, BlurpStore.staticCamera.viewportWidth, textHeight * 1.2f);
         shapes.end();
@@ -99,8 +102,16 @@ public class BlurpScreen extends ScreenAdapter {
         shapes.line(0, textHeight * 1.2f, BlurpStore.staticCamera.viewportWidth, textHeight * 1.2f);
         shapes.end();
 
+
         BlurpStore.defaultFont.reset();
         BitmapFont font = BlurpStore.defaultFont.getFont();
+
+
+//        TODO: System font not scaling right - Makes me concerned whether Ive got the scaling code right.
+//        BitmapFont font = BlurpStore.systemFont;
+//        font.setScale(1);
+
+
         font.setScale(textHeight / font.getLineHeight());
         font.setColor(Color.LIGHT_GRAY);
 
@@ -121,6 +132,9 @@ public class BlurpScreen extends ScreenAdapter {
     private void doFrame(float delta) {
 
         synchronized(BlurpStore.blurpifier) {
+
+            handleSystemShortcuts();
+
             if(BlurpStore.blurpifier.getRequestState() == BlurpifyRequestState.Requested) {
                 BlurpStore.blurpifier.setRenderState(BlurpifyRenderState.RequestAcknowledged);
                 try {
@@ -143,6 +157,15 @@ public class BlurpScreen extends ScreenAdapter {
         }
 
         doRender();
+    }
+
+    private void handleSystemShortcuts() {
+
+        if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_RIGHT)) {
+            if(Gdx.input.isKeyJustPressed(Input.Keys.D)) {
+                enableDebug(!BlurpState.debugMode, BlurpState.debugColour);
+            }
+        }
     }
 
     private void doRender() {
@@ -227,7 +250,7 @@ public class BlurpScreen extends ScreenAdapter {
         overlayStage.getDebugColor().set(Convert.toGdxColour(debugColour));
 
         BlurpState.debugMode = debugEnabled;
-        BlurpState.debugColour = Convert.toGdxColour(debugColour);
+        BlurpState.debugColour = debugColour;
     }
 
     public void handleSpriteLayer(RuntimeSprite sprite) {
