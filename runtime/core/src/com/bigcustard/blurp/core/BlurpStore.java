@@ -22,6 +22,7 @@ import com.bigcustard.blurp.ui.*;
  */
 public class BlurpStore {
 
+    public static BlurpRuntime runtime;
     public static MouseWindowChecker mouseWindowChecker;
     public static BlurpConfiguration configuration;
     public static ModelRepository modelRepository;
@@ -47,9 +48,10 @@ public class BlurpStore {
     public static boolean debugMode;
     public static Color debugColour;
 
-    public static void initialise(BlurpConfiguration blurpConfiguration, MouseWindowChecker mouseWindowChecker) {
+    public static void initialise(BlurpConfiguration blurpConfiguration, MouseWindowChecker mouseWindowChecker, BlurpRuntime runtime) {
 
         BlurpStore.mouseWindowChecker = mouseWindowChecker;
+        BlurpStore.runtime = runtime;
         configuration = blurpConfiguration;
         ScalingViewport viewport = blurpConfiguration.getViewport();
 
@@ -113,12 +115,24 @@ public class BlurpStore {
         ((MouseImpl) modelMouse).sync();
     }
 
+    // TODO: Check this and dispose have everything.
+    public static void reset() {
+
+        tweener.killAll();
+        blurpScreen.reset();
+        modelRepository.dispose();
+        runtimeRepository.dispose();
+        runtimeConsole.clear();
+        BlurpState.reset();
+    }
+
     public static void dispose() {
 
         tweener.killAll();
         blurpScreen.dispose();
+        modelRepository.dispose();
         runtimeRepository.dispose();
-        defaultFont.getFont().dispose();
+        defaultFont.dispose();
         systemFont.dispose();
     }
 }

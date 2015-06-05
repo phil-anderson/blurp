@@ -3,7 +3,7 @@ package com.bigcustard.blurp.model.java.bootstrap;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.effects.*;
 
-public interface BlurpBootstrap {
+public interface JavaBootstrap {
 
     public Blurp getBlurp();
     public Screen getScreen();

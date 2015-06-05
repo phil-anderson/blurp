@@ -65,6 +65,9 @@ public class BlurpScreen extends ScreenAdapter {
             BlurpStore.defaultFont.reset();
             doFrame(delta);
 
+            if(BlurpState.scriptComplete) {
+                scriptComplete();
+            }
         } catch(RuntimeException exception) {
             // Pass it on so blurpify method can throw it
             BlurpStore.blurpifier.setException(exception);
@@ -77,6 +80,42 @@ public class BlurpScreen extends ScreenAdapter {
         // Maybe libGdx isn't being particularly friendly outside of renders... Hmmmm...
         // I wonder if this will be an issue n Android?
         BlurpStore.utils.sleep(1);
+    }
+
+    // TODO: Temporary (and a bit hacky) keyboard-based controls. Need to build something mouse-based.
+    private void scriptComplete() {
+
+        Gdx.gl.glEnable(GL20.GL_BLEND);
+        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+        float textHeight = BlurpStore.staticCamera.viewportHeight / 20;
+
+        shapes.setColor(0, 0, 0, 0.75f);
+        shapes.begin(ShapeRenderer.ShapeType.Filled);
+        shapes.rect(0, 0, BlurpStore.staticCamera.viewportWidth, textHeight * 1.2f);
+        shapes.end();
+
+        shapes.setColor(Color.GRAY);
+        shapes.begin(ShapeRenderer.ShapeType.Line);
+        shapes.line(0, textHeight * 1.2f, BlurpStore.staticCamera.viewportWidth, textHeight * 1.2f);
+        shapes.end();
+
+        BlurpStore.defaultFont.reset();
+        BitmapFont font = BlurpStore.defaultFont.getFont();
+        font.setScale(textHeight / font.getLineHeight());
+        font.setColor(Color.LIGHT_GRAY);
+
+        batch.setProjectionMatrix(BlurpStore.staticCamera.combined);
+        batch.begin();
+        font.drawWrapped(batch, "Program Complete - Press SPACE to restart, ESC to exit", 0, textHeight, BlurpStore.staticCamera.viewportWidth, BitmapFont.HAlignment.CENTER);
+        batch.end();
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            BlurpStore.reset();
+            BlurpStore.configuration.getScriptCompletionHandler().onRestart();
+        } else if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            BlurpStore.reset();
+            BlurpStore.configuration.getScriptCompletionHandler().onTerminate();
+        }
     }
 
     private void doFrame(float delta) {
@@ -100,8 +139,6 @@ public class BlurpScreen extends ScreenAdapter {
                 }
             } else {
                 BlurpStore.blurpifier.setRenderState(BlurpifyRenderState.NoRequest);
-                // TODO: Remove when happy
-//                System.out.println("SKIP!");
             }
         }
 
@@ -216,6 +253,13 @@ public class BlurpScreen extends ScreenAdapter {
         viewport.setWorldSize((float) width, (float) height);
         viewport.setScaling(stretch ? Scaling.stretch : Scaling.fit);
         viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    }
+
+    public void reset() {
+
+        backgroundStage.clear();
+        mainStage.clear();
+        overlayStage.clear();
     }
 
     @Override

@@ -48,7 +48,6 @@ public class RuntimeTextSprite extends RuntimeSprite<TextSprite> {
     @Override
     public void preRender() {
 
-        // TODO: Fix rounding issue with frequent scaling
         font.setScale(fontSize / (font.getLineHeight() / font.getScaleX()));
 
         font.setMarkupEnabled(markupEnabled);

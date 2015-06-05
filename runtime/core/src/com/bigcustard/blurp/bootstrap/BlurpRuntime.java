@@ -2,7 +2,6 @@ package com.bigcustard.blurp.bootstrap;
 
 import java.io.*;
 import java.lang.reflect.*;
-import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.utils.*;
 import com.bigcustard.blurp.core.*;
@@ -19,11 +18,12 @@ import com.bigcustard.blurp.util.*;
 public class BlurpRuntime {
 
     private BlurpExceptionHandler exceptionHandler;
+    private Runnable scriptRunnable;
     private Thread scriptThread;
 
     private BlurpRuntime(BlurpConfiguration config, MouseWindowChecker mouseWindowChecker) {
 
-        BlurpStore.initialise(config, mouseWindowChecker);
+        BlurpStore.initialise(config, mouseWindowChecker, this);
 
         if(config.isDebugEnabled()) {
             SetDebugModeCommand debugCommand = new SetDebugModeCommand(config.isDebugEnabled(), Colours.LIME_GREEN);
@@ -47,36 +47,46 @@ public class BlurpRuntime {
         BlurpStore.blurpScreen.onRenderEvent(listener);
     }
 
-    public void start(String language, String script, String scriptName) {
+    public void startScript(String language, String script, String scriptName) {
 
-        start(language, new StringReader(script), scriptName);
+        checkScriptRunning("start script");
+        startScript(language, new StringReader(script), scriptName);
     }
 
-    public void start(String language, Reader scriptReader, String scriptName) {
+    public void startScript(String language, Reader scriptReader, String scriptName) {
 
-        scriptThread = new Thread(new RunnableWrapper(new ScriptEngineBlurpRunnable(language, scriptReader, scriptName)));
-        scriptThread.start();
+        checkScriptRunning("start script");
+        scriptRunnable = new RunnableWrapper(new ScriptEngineBlurpRunnable(language, scriptReader, scriptName));
+        startThread();
     }
 
-    public void start(Class<? extends BlurpJavaProgram> javaClass) {
+    public void startClass(Class<? extends BlurpJavaProgram> javaClass) {
 
+        checkScriptRunning("start class");
         try {
-            BlurpBootstrapHolder.initialise(new BlurpBootstrapImpl());
+            JavaBootstrapHolder.initialise(new JavaBootstrapImpl());
             BlurpJavaProgram blurpJavaProgram = javaClass.newInstance();
-            scriptThread = new Thread(new RunnableWrapper(blurpJavaProgram));
+            scriptRunnable = new RunnableWrapper(blurpJavaProgram);
         } catch(Exception e) {
             throw new BlurpException("Error instantiating BlurpJavaProgram " + javaClass.getName(), e);
         }
-        scriptThread.start();
+        startThread();
     }
 
     public void end() {
 
-        // TODO: Deprecated stop method is inherently unsafe, however we really do want a hard stop and are going to
-        // clear down the runtime so there risk of damaged objects remaining is negligible. As we don;t have control
+        // Note: Use of deprecated stop method is inherently unsafe, however we really do want a hard stop and are going
+        // to clear down the runtime so there risk of damaged objects remaining is negligible. As we don;t have control
         // over the code that is running in the thread, this is about the only way to stop it.
         scriptThread.stop();
         BlurpStore.dispose();
+    }
+
+    public void startThread() {
+
+        checkScriptRunning("start script thread");
+        scriptThread = new Thread(scriptRunnable);
+        scriptThread.start();
     }
 
     private static void initLibGdxColors() {
@@ -95,6 +105,15 @@ public class BlurpRuntime {
             throw new IllegalStateException("Colours class contains inaccessible, or non-constant fields");
         }
     }
+
+    private void checkScriptRunning(String action) {
+
+        if (BlurpState.scriptComplete) {
+
+            throw new BlurpException("Can't " + action + " while a script thread is still running");
+        }
+    }
+
 
     // TODO: Need a way to pause / resume / restart / stop the script. Communicate via flags in Repository? Blurpifier states?
     //       Note - When paused, the Blurpifier will still have to allow renders to continue so that input gestures

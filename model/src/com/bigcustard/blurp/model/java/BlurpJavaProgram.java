@@ -6,7 +6,7 @@ import com.bigcustard.blurp.model.java.bootstrap.*;
 
 public abstract class BlurpJavaProgram implements Runnable {
 
-    public static BlurpBootstrap blurpBootstrap;
+    public static JavaBootstrap javaBootstrap;
 
     protected final Blurp blurp;
     protected final Screen screen;
@@ -19,15 +19,15 @@ public abstract class BlurpJavaProgram implements Runnable {
 
     protected BlurpJavaProgram() {
 
-        BlurpBootstrap blurpBootstrap = BlurpBootstrapHolder.getInstance();
+        JavaBootstrap javaBootstrap = JavaBootstrapHolder.getInstance();
 
-        blurp = blurpBootstrap.getBlurp();
-        screen = blurpBootstrap.getScreen();
-        console = blurpBootstrap.getConsole();
-        camera = blurpBootstrap.getCamera();
-        effects = blurpBootstrap.getEffects();
-        keyboard = blurpBootstrap.getKeyboard();
-        mouse = blurpBootstrap.getMouse();
-        utils = blurpBootstrap.getUtils();
+        blurp = javaBootstrap.getBlurp();
+        screen = javaBootstrap.getScreen();
+        console = javaBootstrap.getConsole();
+        camera = javaBootstrap.getCamera();
+        effects = javaBootstrap.getEffects();
+        keyboard = javaBootstrap.getKeyboard();
+        mouse = javaBootstrap.getMouse();
+        utils = javaBootstrap.getUtils();
     }
 }

@@ -50,4 +50,10 @@ public class FontHolder {
 
         return font;
     }
+
+    public void dispose() {
+
+        font.getRegion().getTexture().dispose();
+        font.dispose();
+    }
 }

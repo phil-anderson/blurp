@@ -47,11 +47,11 @@ public class BlurpApp extends Game {
             }
         });
         if(javaClass != null) {
-            blurpRuntime.start(javaClass);
+            blurpRuntime.startClass(javaClass);
         } else {
             // TODO: Think about this.
             try {
-                blurpRuntime.start(language, new FileReader(scriptName), scriptName);
+                blurpRuntime.startScript(language, new FileReader(scriptName), scriptName);
             } catch(FileNotFoundException e) {
                 throw new BlurpException("Error finding script file " + scriptName, e);
             }

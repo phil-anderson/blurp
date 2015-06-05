@@ -7,10 +7,12 @@ public class BlurpConfiguration {
     private ScalingViewport viewport;
     private String contentRoot = "";
     private boolean debugEnabled;
+    private ScriptCompletionHandler scriptCompletionHandler;
 
     public BlurpConfiguration(ScalingViewport viewport) {
 
         this.viewport = viewport;
+        scriptCompletionHandler = new ScriptCompletionHandler();
     }
 
     public BlurpConfiguration setContentRoot(String contentRoot) {
@@ -26,6 +28,11 @@ public class BlurpConfiguration {
         return this;
     }
 
+    public void setScriptCompletionHandler(ScriptCompletionHandler scriptCompletionHandler) {
+
+        this.scriptCompletionHandler = scriptCompletionHandler;
+    }
+
     public boolean isDebugEnabled() {
 
         return debugEnabled;
@@ -39,5 +46,10 @@ public class BlurpConfiguration {
     public String getContentRoot() {
 
         return contentRoot;
+    }
+
+    public ScriptCompletionHandler getScriptCompletionHandler() {
+
+        return scriptCompletionHandler;
     }
 }

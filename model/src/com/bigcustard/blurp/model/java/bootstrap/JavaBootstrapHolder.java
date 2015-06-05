@@ -6,33 +6,33 @@ import com.bigcustard.blurp.model.effects.*;
 // This over-complicated class is for Blurp internal use only. It allows BlurpJavaProgram instances to be created with
 // a no-args constructor, without having a dependency on the Blurp runtime. It's not good practise by normal standards,
 // but is expedient for this specific case. It's base on the initialise-on-demand holder idiom.
-public class BlurpBootstrapHolder implements BlurpBootstrap {
+public class JavaBootstrapHolder implements JavaBootstrap {
 
     private static class SingletonHolder {
 
-        private static final BlurpBootstrapHolder INSTANCE = new BlurpBootstrapHolder();
+        private static final JavaBootstrapHolder INSTANCE = new JavaBootstrapHolder();
     }
 
-    public static BlurpBootstrapHolder initialise(BlurpBootstrap blurpBootstrap) {
+    public static JavaBootstrapHolder initialise(JavaBootstrap javaBootstrap) {
 
         if(SingletonHolder.INSTANCE.delegate != null) {
-            throw new IllegalStateException("BlurpBootstrapHolder already initialised");
+            throw new IllegalStateException("JavaBootstrapHolder already initialised");
         }
-        SingletonHolder.INSTANCE.delegate = blurpBootstrap;
+        SingletonHolder.INSTANCE.delegate = javaBootstrap;
         return SingletonHolder.INSTANCE;
     }
 
-    public static BlurpBootstrapHolder getInstance() {
+    public static JavaBootstrapHolder getInstance() {
 
         if(SingletonHolder.INSTANCE.delegate == null) {
-            throw new IllegalStateException("BlurpBootstrapHolder must be initialised before use");
+            throw new IllegalStateException("JavaBootstrapHolder must be initialised before use");
         }
         return SingletonHolder.INSTANCE;
     }
 
-    private BlurpBootstrap delegate;
+    private JavaBootstrap delegate;
 
-    private BlurpBootstrapHolder() { }
+    private JavaBootstrapHolder() { }
 
     @Override
     public Blurp getBlurp() {

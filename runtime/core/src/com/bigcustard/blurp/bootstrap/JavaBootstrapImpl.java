@@ -5,7 +5,7 @@ import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.effects.*;
 import com.bigcustard.blurp.model.java.bootstrap.*;
 
-public class BlurpBootstrapImpl implements BlurpBootstrap {
+public class JavaBootstrapImpl implements JavaBootstrap {
 
     @Override
     public Blurp getBlurp() {

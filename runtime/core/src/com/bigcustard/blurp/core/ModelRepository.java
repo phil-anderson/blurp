@@ -70,6 +70,8 @@ public class ModelRepository {
 
         images.clear();
         imageSprites.clear();
+        textSprites.clear();
+        createdSprites.clear();
     }
 
     public List<Sprite> getSprites() {
