@@ -84,4 +84,16 @@ public abstract class Camera {
         return runEffect(null);
     }
 
+    @Override
+    public String toString() {
+
+        return "Camera {" +
+                   " x=" + x +
+                   ", y=" + y +
+                   ", zoom=" + zoom +
+                   ", rotation=" + rotation +
+                   ", colour=" + colour +
+                   ", alpha=" + alpha +
+                   '}';
+    }
 }

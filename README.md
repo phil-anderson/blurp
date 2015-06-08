@@ -4,8 +4,11 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
-* BUG Quite serious issues when trying to restart more complex scripts. Think I need to be more drastic with my clearout.
-* Key combinations for various control functions (e.g. debug on).
+* BUG Tall, narrow viewport causes completion message to be truncated.
+* Handle Ctrl+C terminate better.
+* Add toString() methods to model objects
+*     Colour constants should know their name for the toString method (NamedColour extends Colour)
+* Key combinations for various control functions (e.g. debug on, quit, restart).
 * Add display of exceptions to the script complete code
 * Add Stop, pause and resume methods to runtime.
 * Blurp runtime should be a singleton.
@@ -15,7 +18,6 @@ WORK IN PROGRESS - CHECK BACK LATER
 * Almost all examples need redoing / refactoring
 * Documentation
 
-* [DV?] Don't like the Viewport being passed in. We should change it.
 * [DV] Sprite mouse left and right clicks
 * [DV] Background drawing
 * [DV] Shape Sprites (line, square, rect, circle, triangle, n-agon)

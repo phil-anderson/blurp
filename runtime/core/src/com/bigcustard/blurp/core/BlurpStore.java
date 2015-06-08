@@ -70,10 +70,9 @@ public class BlurpStore {
         modelMouse = new MouseImpl();
         utils = new Utils();
 
+        initialiseFonts();
+
         console = new ConsoleImpl();
-        systemFont = new BitmapFont(Gdx.files.internal("small-rabbit.fnt"));
-        systemFont.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        systemFont.setMarkupEnabled(true);
         runtimeConsole = new RuntimeConsole();
 
         effects = new EffectsImpl();
@@ -91,12 +90,15 @@ public class BlurpStore {
 
     // Stuff that would normally go in the application.create() method, but can;t because we may be hosted in a
     // pre-existing libGdx app (i.e. PlanetBlurp).
-    public static void onLibGdxInitialised() {
+    public static void initialiseFonts() {
+
+        systemFont = new BitmapFont(Gdx.files.internal("small-rabbit.fnt"));
+        systemFont.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        systemFont.setMarkupEnabled(true);
 
         Texture systemFontTexture = new Texture(Gdx.files.classpath("RobotoCondensed.png"), true);
         systemFontTexture.setFilter(Texture.TextureFilter.MipMapLinearNearest, Texture.TextureFilter.Linear);
-        BitmapFont font = new BitmapFont(Gdx.files.classpath("RobotoCondensed.fnt"),
-                                         new TextureRegion(systemFontTexture), false);
+        BitmapFont font = new BitmapFont(Gdx.files.classpath("RobotoCondensed.fnt"), new TextureRegion(systemFontTexture), false);
         defaultFont = new FontHolder(font);
     }
 
@@ -109,17 +111,32 @@ public class BlurpStore {
     // TODO: Check this and dispose have everything.
     public static void reset() {
 
-        tweener.killAll();
-        blurpScreen.reset();
-        modelRepository.dispose();
-        runtimeRepository.dispose();
-        runtimeConsole.clear();
+        dispose();
+
+        mainCamera = new OrthographicCamera();
+        mainCamera.setToOrtho(false, (float) configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight());
+        mainViewport = new FitViewport((float) configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight(), mainCamera);
+
+        staticCamera = new OrthographicCamera();
+        staticCamera.setToOrtho(false, (float) configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight());
+        staticViewport = new FitViewport((float) configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight(), staticCamera);
+
+        runtimeScreen = new RuntimeScreen();
+        runtimeConsole = new RuntimeConsole();
+
+        initialiseFonts();
+
+        console.clear();
+        ((CameraImpl) modelCamera).reset();
+        ((EffectsImpl) effects).reset();
+        modelScreen.reset(configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight());
         BlurpState.reset();
     }
 
     public static void dispose() {
 
         tweener.killAll();
+        tweener.update(9999);
         blurpScreen.dispose();
         modelRepository.dispose();
         runtimeRepository.dispose();

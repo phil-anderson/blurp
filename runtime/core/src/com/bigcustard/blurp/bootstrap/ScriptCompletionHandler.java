@@ -13,6 +13,7 @@ public class ScriptCompletionHandler {
 
     public void onRestart() {
 
+        BlurpStore.reset();
         BlurpStore.runtime.startThread();
     }
 }

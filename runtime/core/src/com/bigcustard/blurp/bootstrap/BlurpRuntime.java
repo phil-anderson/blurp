@@ -73,12 +73,16 @@ public class BlurpRuntime {
         startThread();
     }
 
+    public void stop() {
+
+        throw new BlurpException("Terminated by user");
+    }
+
     public void end() {
 
         // Note: Use of deprecated stop method is inherently unsafe, however we really do want a hard stop and are going
         // to clear down the runtime so there risk of damaged objects remaining is negligible. As we don;t have control
         // over the code that is running in the thread, this is about the only way to stop it.
-        scriptThread.stop();
         BlurpStore.dispose();
     }
 

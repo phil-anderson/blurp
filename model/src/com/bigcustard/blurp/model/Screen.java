@@ -12,7 +12,6 @@ import com.bigcustard.blurp.model.constants.*;
  * Either way, it's the surface that your Blurp program will work its magic on.
  */
 
-// TODO: Make this abstract and implement in Runtime
 public class Screen {
 
     public Screen(double viewportWidth, double viewportHeight) {
@@ -62,6 +61,12 @@ public class Screen {
         viewportHeight = newViewportHeight;
         viewportStretch = newViewportStretch;
         return this;
+    }
+
+    public void reset(double viewportWidth, double viewportHeight) {
+
+        viewport(viewportWidth, viewportHeight, false);
+        backgroundColour = Colours.BLACK;
     }
 }
 

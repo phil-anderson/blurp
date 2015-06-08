@@ -60,6 +60,8 @@ public class BlurpScreen extends ScreenAdapter {
             if(BlurpState.scriptComplete) {
                 scriptComplete();
             }
+            handleSystemShortcuts();
+
         } catch(RuntimeException exception) {
             // Pass it on so blurpify method can throw it
             BlurpStore.blurpifier.setException(exception);
@@ -112,10 +114,8 @@ public class BlurpScreen extends ScreenAdapter {
         batch.end();
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            BlurpStore.reset();
             BlurpStore.configuration.getScriptCompletionHandler().onRestart();
         } else if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            BlurpStore.reset();
             BlurpStore.configuration.getScriptCompletionHandler().onTerminate();
         }
     }
@@ -123,8 +123,6 @@ public class BlurpScreen extends ScreenAdapter {
     private void doFrame(float delta) {
 
         synchronized(BlurpStore.blurpifier) {
-
-            handleSystemShortcuts();
 
             if(BlurpStore.blurpifier.getRequestState() == BlurpifyRequestState.Requested) {
                 BlurpStore.blurpifier.setRenderState(BlurpifyRenderState.RequestAcknowledged);
@@ -152,9 +150,12 @@ public class BlurpScreen extends ScreenAdapter {
 
     private void handleSystemShortcuts() {
 
-        if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_RIGHT)) {
+        if(Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) || Gdx.input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
             if(Gdx.input.isKeyJustPressed(Input.Keys.D)) {
                 enableDebug(!BlurpState.debugMode, BlurpState.debugColour);
+            } else if(Gdx.input.isKeyJustPressed(Input.Keys.C) && !BlurpState.scriptComplete) {
+                BlurpStore.runtime.stop();
+                BlurpStore.configuration.getScriptCompletionHandler().onTerminate();
             }
         }
     }
@@ -196,7 +197,6 @@ public class BlurpScreen extends ScreenAdapter {
         }
 
         initialised = true;
-        BlurpStore.onLibGdxInitialised();
     }
 
     private void updateCamera() {
@@ -267,13 +267,6 @@ public class BlurpScreen extends ScreenAdapter {
         viewport.setWorldSize((float) width, (float) height);
         viewport.setScaling(stretch ? Scaling.stretch : Scaling.fit);
         viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-    }
-
-    public void reset() {
-
-        backgroundStage.clear();
-        mainStage.clear();
-        overlayStage.clear();
     }
 
     @Override

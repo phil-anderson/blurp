@@ -72,4 +72,10 @@ public class EffectsImpl extends Effects {
 
         return new SequentialEffectGroup(effectsToDoInSequence);
     }
+
+    public void reset() {
+
+        defaultDuration = 1000;
+        defaultEffectStyle = EffectStyle.SmoothStartStop;
+    }
 }
