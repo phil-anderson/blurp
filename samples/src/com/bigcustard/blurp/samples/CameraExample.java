@@ -2,6 +2,7 @@ package com.bigcustard.blurp.samples;
 
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.effects.*;
+import com.bigcustard.blurp.model.java.*;
 
 public class CameraExample extends BlurpJavaProgram {
 
@@ -23,7 +24,7 @@ public class CameraExample extends BlurpJavaProgram {
             if(!camera.isRunningEffect()) {
                 EffectBase alignWithSprite = buildCameraZoomInEffect(sprites[spriteIndex]);
 
-                camera.runEffect(alignWithSprite.delayBeforeStart(0.5));
+                camera.runEffect(alignWithSprite.delayBeforeStart(500));
                 spriteIndex = (spriteIndex + 1) % 8;
             }
             blurp.blurpify();

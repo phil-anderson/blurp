@@ -8,6 +8,7 @@ WORK IN PROGRESS - CHECK BACK LATER
 * Handle Ctrl+C terminate better.
 * Add toString() methods to model objects
 *     Colour constants should know their name for the toString method (NamedColour extends Colour)
+* Console should be able to take non-strings
 * Key combinations for various control functions (e.g. debug on, quit, restart).
 * Add display of exceptions to the script complete code
 * Add Stop, pause and resume methods to runtime.
