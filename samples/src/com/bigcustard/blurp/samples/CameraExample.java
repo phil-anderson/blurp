@@ -27,6 +27,7 @@ public class CameraExample extends BlurpJavaProgram {
                 camera.runEffect(alignWithSprite.delayBeforeStart(500));
                 spriteIndex = (spriteIndex + 1) % 8;
             }
+
             blurp.blurpify();
         }
     }

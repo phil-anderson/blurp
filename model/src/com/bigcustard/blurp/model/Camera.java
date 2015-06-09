@@ -87,13 +87,6 @@ public abstract class Camera {
     @Override
     public String toString() {
 
-        return "Camera {" +
-                   " x=" + x +
-                   ", y=" + y +
-                   ", zoom=" + zoom +
-                   ", rotation=" + rotation +
-                   ", colour=" + colour +
-                   ", alpha=" + alpha +
-                   '}';
+        return String.format("Camera x=%.2f y=%.2f zoom=%.2f rot=%.2f color=%s alpha=%.2f", x, y, zoom, rotation, colour, alpha);
     }
 }
