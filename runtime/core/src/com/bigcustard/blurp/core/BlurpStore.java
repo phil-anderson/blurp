@@ -108,7 +108,6 @@ public class BlurpStore {
         ((MouseImpl) modelMouse).sync();
     }
 
-    // TODO: Check this and dispose have everything.
     public static void reset() {
 
         dispose();
@@ -126,7 +125,8 @@ public class BlurpStore {
 
         initialiseFonts();
 
-        console.clear();
+        blurpifier.reset();
+        ((ConsoleImpl) console).reset();
         ((CameraImpl) modelCamera).reset();
         ((EffectsImpl) effects).reset();
         modelScreen.reset(configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight());

@@ -75,7 +75,7 @@ public class BlurpRuntime {
 
     public void stop() {
 
-        throw new BlurpException("Terminated by user");
+        throw new BlurpTerminatedException();
     }
 
     public void end() {
@@ -138,7 +138,7 @@ public class BlurpRuntime {
                 BlurpStore.blurp.blurpify();
                 script.run();
             } catch (RuntimeException e) {
-                if(exceptionHandler != null) {
+                if(exceptionHandler != null && !(e instanceof BlurpTerminatedException)) {
                     exceptionHandler.handleException(e);
                 }
             }

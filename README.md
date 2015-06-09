@@ -5,6 +5,7 @@ WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
 * BUG Tall, narrow viewport causes completion message to be truncated.
+* Model Screen shouldn;treally have reset - Should be in ScreenImpl
 * Handle Ctrl+C terminate better.
 * Add toString() methods to model objects
 *     Colour constants should know their name for the toString method (NamedColour extends Colour)

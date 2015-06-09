@@ -81,6 +81,7 @@ public class BlurpScreen extends ScreenAdapter {
 
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+
         float textHeight = BlurpStore.staticCamera.viewportHeight / 20;
 
         shapes.setProjectionMatrix(BlurpStore.staticCamera.combined);
@@ -155,7 +156,6 @@ public class BlurpScreen extends ScreenAdapter {
                 enableDebug(!BlurpState.debugMode, BlurpState.debugColour);
             } else if(Gdx.input.isKeyJustPressed(Input.Keys.C) && !BlurpState.scriptComplete) {
                 BlurpStore.runtime.stop();
-                BlurpStore.configuration.getScriptCompletionHandler().onTerminate();
             }
         }
     }

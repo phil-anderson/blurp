@@ -43,7 +43,6 @@ public class BlurpApp extends Game {
             @Override
             public void handleException(RuntimeException e) {
                 e.printStackTrace();
-                System.exit(1);
             }
         });
         if(javaClass != null) {

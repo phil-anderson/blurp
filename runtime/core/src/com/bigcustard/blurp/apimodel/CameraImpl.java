@@ -53,5 +53,6 @@ public class CameraImpl extends Camera implements EffectContainer {
         this.rotation = 0;
         this.colour = Colours.WHITE;
         this.alpha = 1;
+        this.runningEffect = false;
     }
 }

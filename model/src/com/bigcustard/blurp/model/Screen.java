@@ -14,15 +14,14 @@ import com.bigcustard.blurp.model.constants.*;
 
 public class Screen {
 
+    public double viewportWidth, viewportHeight;
+    public boolean viewportStretch;
+
     public Screen(double viewportWidth, double viewportHeight) {
 
         this.viewportWidth = viewportWidth;
         this.viewportHeight = viewportHeight;
     }
-
-    public double viewportWidth, viewportHeight;
-
-    public boolean viewportStretch;
 
     /**
      * The background colour of the Screen. Blurp will completely fill the Screen with this colour before it does

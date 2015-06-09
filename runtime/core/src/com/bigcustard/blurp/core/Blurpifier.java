@@ -13,7 +13,7 @@ public class Blurpifier {
     private volatile BlurpifyRequestState requestState = Dormant;
     private volatile BlurpifyRenderState renderState = BlurpifyRenderState.NoRequest;
 
-    private volatile Exception exception;
+    private volatile RuntimeException exception;
 
     public synchronized void blurpify() {
 
@@ -22,11 +22,14 @@ public class Blurpifier {
         requestState = Requested;
         waitForRequestAcknowledge();
         waitForRequestCompleteState();
-        renderState = BlurpifyRenderState.NoRequest;
-        requestState = Dormant;
 
-        if(exception != null) {
-            throw new BlurpException("Error blurpifying", exception);
+        try {
+            if(exception != null) {
+                throw exception;
+            }
+        } finally {
+            renderState = BlurpifyRenderState.NoRequest;
+            requestState = Dormant;
         }
     }
 
@@ -60,8 +63,15 @@ public class Blurpifier {
         notifyAll();
     }
 
-    public synchronized void setException(Exception exception) {
+    public synchronized void setException(RuntimeException exception) {
 
         this.exception = exception;
+    }
+
+    public void reset() {
+
+        this.requestState = Dormant;
+        this.renderState = BlurpifyRenderState.NoRequest;
+        this.exception = null;
     }
 }
