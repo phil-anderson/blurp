@@ -19,12 +19,12 @@ public abstract class Console {
         return this;
     }
 
-    public Console println(String textToPrint) {
+    public Console println(Object objectToPrint) {
 
-        return print(textToPrint + "\n");
+        return print(objectToPrint + "\n");
     }
 
     public abstract Console clear();
 
-    public abstract Console print(String textToPrint);
+    public abstract Console print(Object objectToPrint);
 }

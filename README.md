@@ -6,7 +6,6 @@ WORK IN PROGRESS - CHECK BACK LATER
 *TODO*
 * BUG Tall, narrow viewport causes completion message to be truncated.
 * Add toString() methods to model objects
-* Console should be able to take non-strings
 * Key combinations for various control functions (e.g. debug on, quit, restart).
 * Add display of exceptions to the script complete code
 * Add Stop, pause and resume methods to runtime.

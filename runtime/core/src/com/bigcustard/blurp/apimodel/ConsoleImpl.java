@@ -15,9 +15,9 @@ public class ConsoleImpl extends Console {
     }
 
     @Override
-    public Console print(String textToPrint) {
+    public Console print(Object textToPrint) {
 
-        BlurpStore.runtimeRepository.registerCommand(new ConsolePrintCommand(textToPrint, colour, alpha));
+        BlurpStore.runtimeRepository.registerCommand(new ConsolePrintCommand("" + textToPrint, colour, alpha));
         return null;
     }
 
