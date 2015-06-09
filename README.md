@@ -5,8 +5,6 @@ WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
 * BUG Tall, narrow viewport causes completion message to be truncated.
-* Model Screen shouldn't really have reset - Should be in ScreenImpl
-* Handle Ctrl+C terminate better.
 * Add toString() methods to model objects
 * Console should be able to take non-strings
 * Key combinations for various control functions (e.g. debug on, quit, restart).

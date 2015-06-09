@@ -65,7 +65,7 @@ public class BlurpStore {
         staticViewport = new FitViewport(worldWidth, worldHeight, staticCamera);
 
         modelCamera = new CameraImpl(worldWidth / 2, worldHeight / 2);
-        modelScreen = new Screen(worldWidth, worldHeight);
+        modelScreen = new ScreenImpl(worldWidth, worldHeight);
         keyboard = new KeyboardImpl();
         modelMouse = new MouseImpl();
         utils = new Utils();
@@ -129,7 +129,7 @@ public class BlurpStore {
         ((ConsoleImpl) console).reset();
         ((CameraImpl) modelCamera).reset();
         ((EffectsImpl) effects).reset();
-        modelScreen.reset(configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight());
+        ((ScreenImpl) modelScreen).reset(configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight());
         BlurpState.reset();
     }
 

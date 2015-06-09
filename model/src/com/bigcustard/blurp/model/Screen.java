@@ -12,16 +12,10 @@ import com.bigcustard.blurp.model.constants.*;
  * Either way, it's the surface that your Blurp program will work its magic on.
  */
 
-public class Screen {
+public abstract class Screen {
 
     public double viewportWidth, viewportHeight;
     public boolean viewportStretch;
-
-    public Screen(double viewportWidth, double viewportHeight) {
-
-        this.viewportWidth = viewportWidth;
-        this.viewportHeight = viewportHeight;
-    }
 
     /**
      * The background colour of the Screen. Blurp will completely fill the Screen with this colour before it does
@@ -60,12 +54,6 @@ public class Screen {
         viewportHeight = newViewportHeight;
         viewportStretch = newViewportStretch;
         return this;
-    }
-
-    public void reset(double viewportWidth, double viewportHeight) {
-
-        viewport(viewportWidth, viewportHeight, false);
-        backgroundColour = Colours.BLACK;
     }
 }
 
