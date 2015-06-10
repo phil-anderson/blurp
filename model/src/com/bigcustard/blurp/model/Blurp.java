@@ -75,4 +75,6 @@ public abstract class Blurp {
     }
 
     public abstract Blurp debugMode(boolean enable, Colour debugColour);
+
+    public abstract int getFps();
 }

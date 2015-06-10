@@ -29,6 +29,10 @@ public class BlurpScreen extends ScreenAdapter {
     private RenderListener renderListener = RenderListener.NULL_IMPLEMENTATION;
     private boolean initialised = false;
 
+    private int fps;
+    private int fpsFrameCounter;
+    private long lastFpsReading;
+
     public void addActor(Actor actor) {
 
         mainStage.addActor(actor);
@@ -125,6 +129,7 @@ public class BlurpScreen extends ScreenAdapter {
             if(BlurpStore.blurpifier.getRequestState() == BlurpifyRequestState.Requested) {
                 BlurpStore.blurpifier.setRenderState(BlurpifyRenderState.RequestAcknowledged);
                 try {
+                    updateFps();
                     updateCamera();
                     BlurpStore.runtimeRepository.syncWithModelRepository(delta);
                     BlurpStore.tweener.update(delta);
@@ -144,6 +149,17 @@ public class BlurpScreen extends ScreenAdapter {
         }
 
         doRender();
+    }
+
+    private void updateFps() {
+
+        long time = System.nanoTime();
+        if(time - lastFpsReading > 1000000000) {
+            fps = fpsFrameCounter;
+            fpsFrameCounter = 0;
+            lastFpsReading = time;
+        }
+        fpsFrameCounter++;
     }
 
     private void handleSystemShortcuts() {
@@ -264,6 +280,11 @@ public class BlurpScreen extends ScreenAdapter {
         viewport.setWorldSize((float) width, (float) height);
         viewport.setScaling(stretch ? Scaling.stretch : Scaling.fit);
         viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    }
+
+    public int getFps() {
+
+        return fps;
     }
 
     @Override

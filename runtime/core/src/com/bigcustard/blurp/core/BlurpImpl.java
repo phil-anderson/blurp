@@ -84,4 +84,10 @@ public class BlurpImpl extends Blurp {
         BlurpStore.runtimeRepository.registerCommand(new SetDebugModeCommand(enable, debugColour));
         return this;
     }
+
+    @Override
+    public int getFps() {
+
+        return BlurpStore.blurpScreen.getFps();
+    }
 }
