@@ -8,11 +8,9 @@ import com.badlogic.gdx.utils.viewport.*;
 import com.bigcustard.blurp.apimodel.*;
 import com.bigcustard.blurp.bootstrap.*;
 import com.bigcustard.blurp.core.effects.*;
-import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.Camera;
-import com.bigcustard.blurp.model.Screen;
+import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.Sprite;
-import com.bigcustard.blurp.model.effects.*;
 import com.bigcustard.blurp.runtimemodel.*;
 import com.bigcustard.blurp.ui.*;
 
@@ -26,13 +24,13 @@ public class BlurpStore {
     public static MouseWindowChecker mouseWindowChecker;
     public static BlurpConfiguration configuration;
     public static ModelRepository modelRepository;
-    public static Screen modelScreen;
-    public static Camera modelCamera;
-    public static Mouse modelMouse;
+    public static ScreenImpl modelScreen;
+    public static CameraImpl modelCamera;
+    public static MouseImpl modelMouse;
     public static TweenManager tweener;
     public static Blurpifier blurpifier;
     public static RuntimeRepository runtimeRepository;
-    public static Blurp blurp;
+    public static BlurpImpl blurp;
     public static RuntimeScreen runtimeScreen;
     public static BlurpScreen blurpScreen;
     public static FontHolder defaultFont;
@@ -41,11 +39,11 @@ public class BlurpStore {
     public static OrthographicCamera staticCamera;
     public static ScalingViewport mainViewport;
     public static ScalingViewport staticViewport;
-    public static Effects effects;
-    public static Console console;
+    public static EffectsImpl effects;
+    public static ConsoleImpl console;
     public static RuntimeConsole runtimeConsole;
-    public static Keyboard keyboard;
-    public static Timer timer;
+    public static KeyboardImpl keyboard;
+    public static TimerImpl timer;
     public static Utils utils;
 
     public static void initialise(BlurpConfiguration configuration, MouseWindowChecker mouseWindowChecker, BlurpRuntime runtime) {
@@ -107,7 +105,7 @@ public class BlurpStore {
     public static void syncSingletons() {
 
         runtimeScreen.sync();
-        ((MouseImpl) modelMouse).sync();
+        modelMouse.sync();
     }
 
     public static void reset() {
@@ -128,11 +126,11 @@ public class BlurpStore {
         initialiseFonts();
 
         blurpifier.reset();
-        ((ConsoleImpl) console).reset();
-        ((CameraImpl) modelCamera).reset();
-        ((EffectsImpl) effects).reset();
-        ((ScreenImpl) modelScreen).reset(configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight());
-        ((TimerImpl) timer).reset();
+        console.reset();
+        modelCamera.reset();
+        effects.reset();
+        modelScreen.reset(configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight());
+        timer.reset();
         BlurpState.reset();
     }
 

@@ -6,6 +6,6 @@ public class TimerEventDispatcher {
 
     public void dispatchEvents() {
 
-        ((TimerImpl) BlurpStore.timer).dispatchEvents();
+        BlurpStore.timer.dispatchEvents();
     }
 }

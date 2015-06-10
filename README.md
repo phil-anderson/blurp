@@ -4,7 +4,6 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
-* BlurpStore - type as Impl and cast to interface in SEBR - Does this even work!?!!
 * BUG Tall, narrow viewport causes completion message to be truncated.
 * Add toString() methods to model objects
 * Add display of exceptions to the script complete code

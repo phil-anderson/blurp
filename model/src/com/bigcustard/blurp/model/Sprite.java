@@ -12,6 +12,8 @@ import com.bigcustard.blurp.model.events.*;
 @SuppressWarnings("unchecked")
 public abstract class Sprite<T> {
 
+    private static final SpriteMouseState NULL_MOUSE_STATE = new SpriteMouseState(false, false, false, false, false,
+                                                                                  false, false, false, false, 0, 0, 0);
     /**
      * The position of the sprite, or to be more precise, the position of the <i>center</i> of the sprite.
      * <p>
@@ -87,7 +89,7 @@ public abstract class Sprite<T> {
 
     public SpriteEventHandler whenMouseReleased;
 
-    public SpriteMouseState mouseState = SpriteMouseState.NULL;
+    public SpriteMouseState mouseState = NULL_MOUSE_STATE;
 
     public CollisionShape collisionShape;
 
