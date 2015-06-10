@@ -19,6 +19,7 @@ public abstract class TextSprite extends Sprite<TextSprite> {
     public TextSprite text(String newText) {
 
         text = newText;
+        collisionShape = CollisionShape.BoundaryRectangle;
         return this;
     }
 

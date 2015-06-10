@@ -89,7 +89,7 @@ public abstract class Sprite<T> {
 
     public SpriteMouseState mouseState = SpriteMouseState.NULL;
 
-    public CollisionShape collisionShape = CollisionShape.CenterCircle;
+    public CollisionShape collisionShape;
 
     public SpriteLayer layer;
 

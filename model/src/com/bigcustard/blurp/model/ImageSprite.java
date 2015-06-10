@@ -1,5 +1,7 @@
 package com.bigcustard.blurp.model;
 
+import com.bigcustard.blurp.model.constants.*;
+
 /**
  * ImageSprites are the most commonly used type of {@link Sprite}. They (sort of) turn {@link Image Images} into
  * objects that can move around the screen and that the user can interact with.
@@ -20,6 +22,7 @@ public abstract class ImageSprite extends Sprite<ImageSprite> {
     public ImageSprite image(Image newImage) {
 
         image = newImage;
+        collisionShape = CollisionShape.CenterCircle;
         return this;
     }
 }
