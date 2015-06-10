@@ -50,6 +50,12 @@ public class JavaBootstrapImpl implements JavaBootstrap {
     }
 
     @Override
+    public Timer getTimer() {
+
+        return BlurpStore.timer;
+    }
+
+    @Override
     public Utils getUtils() {
 
         return BlurpStore.utils;

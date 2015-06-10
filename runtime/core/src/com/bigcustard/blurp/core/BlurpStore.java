@@ -45,6 +45,7 @@ public class BlurpStore {
     public static Console console;
     public static RuntimeConsole runtimeConsole;
     public static Keyboard keyboard;
+    public static Timer timer;
     public static Utils utils;
 
     public static void initialise(BlurpConfiguration configuration, MouseWindowChecker mouseWindowChecker, BlurpRuntime runtime) {
@@ -68,6 +69,7 @@ public class BlurpStore {
         modelScreen = new ScreenImpl(worldWidth, worldHeight);
         keyboard = new KeyboardImpl();
         modelMouse = new MouseImpl();
+        timer = new TimerImpl();
         utils = new Utils();
 
         initialiseFonts();
@@ -130,6 +132,7 @@ public class BlurpStore {
         ((CameraImpl) modelCamera).reset();
         ((EffectsImpl) effects).reset();
         ((ScreenImpl) modelScreen).reset(configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight());
+        ((TimerImpl) timer).reset();
         BlurpState.reset();
     }
 

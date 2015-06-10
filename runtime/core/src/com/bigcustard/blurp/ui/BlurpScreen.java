@@ -27,7 +27,6 @@ public class BlurpScreen extends ScreenAdapter {
     private LayerStage overlayStage;
 
     private RenderListener renderListener = RenderListener.NULL_IMPLEMENTATION;
-
     private boolean initialised = false;
 
     public void addActor(Actor actor) {
@@ -48,6 +47,7 @@ public class BlurpScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
 
+        BlurpState.frameStartTime = System.currentTimeMillis();
         try {
             if(!initialised) {
                 initialise();
@@ -96,22 +96,19 @@ public class BlurpScreen extends ScreenAdapter {
         shapes.line(0, textHeight * 1.2f, BlurpStore.staticCamera.viewportWidth, textHeight * 1.2f);
         shapes.end();
 
-
         BlurpStore.defaultFont.reset();
         BitmapFont font = BlurpStore.defaultFont.getFont();
-
-
-//        TODO: System font not scaling right - Makes me concerned whether Ive got the scaling code right.
-//        BitmapFont font = BlurpStore.systemFont;
-//        font.setScale(1);
-
-
         font.setScale(textHeight / font.getLineHeight());
         font.setColor(Color.LIGHT_GRAY);
 
         batch.setProjectionMatrix(BlurpStore.staticCamera.combined);
         batch.begin();
-        font.drawWrapped(batch, "Program Complete - Press SPACE to restart, ESC to exit", 0, textHeight, BlurpStore.staticCamera.viewportWidth, BitmapFont.HAlignment.CENTER);
+        font.setMarkupEnabled(true);
+        if(BlurpState.exception != null) {
+            font.drawWrapped(batch, "[RED]An Error Occurred[] - Press SPACE to restart, ESC to exit", 0, textHeight, BlurpStore.staticCamera.viewportWidth, BitmapFont.HAlignment.CENTER);
+        } else {
+            font.drawWrapped(batch, "Program Complete - Press SPACE to restart, ESC to exit", 0, textHeight, BlurpStore.staticCamera.viewportWidth, BitmapFont.HAlignment.CENTER);
+        }
         batch.end();
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {

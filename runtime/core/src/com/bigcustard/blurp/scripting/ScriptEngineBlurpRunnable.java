@@ -36,6 +36,7 @@ public class ScriptEngineBlurpRunnable implements Runnable {
         bindings.put("effects", BlurpStore.effects);
         bindings.put("keyboard", BlurpStore.keyboard);
         bindings.put("mouse", BlurpStore.modelMouse);
+        bindings.put("timer", BlurpStore.timer);
         bindings.put("utils", BlurpStore.utils);
 
         bindings.put("AtEndRemoveSprite", SpriteEventHandler.AT_END_REMOVE_SPRITE);

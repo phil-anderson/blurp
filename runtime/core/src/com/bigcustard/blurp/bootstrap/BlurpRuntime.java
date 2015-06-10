@@ -118,8 +118,7 @@ public class BlurpRuntime {
         }
     }
 
-
-    // TODO: Need a way to pause / resume / restart / stop the script. Communicate via flags in Repository? Blurpifier states?
+    // TODO: Need a way to pause / resume the script
     //       Note - When paused, the Blurpifier will still have to allow renders to continue so that input gestures
     //              (e.g. to resume) get picked up.
     private class RunnableWrapper implements Runnable {
@@ -139,6 +138,7 @@ public class BlurpRuntime {
                 script.run();
             } catch (RuntimeException e) {
                 if(exceptionHandler != null && !(e instanceof BlurpTerminatedException)) {
+                    BlurpState.exception = e;
                     exceptionHandler.handleException(e);
                 }
             }

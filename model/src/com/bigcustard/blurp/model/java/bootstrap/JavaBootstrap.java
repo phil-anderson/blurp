@@ -13,4 +13,5 @@ public interface JavaBootstrap {
     public Keyboard getKeyboard();
     public Mouse getMouse();
     public Utils getUtils();
+    public Timer getTimer();
 }

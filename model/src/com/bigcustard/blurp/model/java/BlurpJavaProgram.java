@@ -15,6 +15,7 @@ public abstract class BlurpJavaProgram implements Runnable {
     protected final Effects effects;
     protected final Keyboard keyboard;
     protected final Mouse mouse;
+    protected final Timer timer;
     protected final Utils utils;
 
     protected BlurpJavaProgram() {
@@ -28,6 +29,7 @@ public abstract class BlurpJavaProgram implements Runnable {
         effects = javaBootstrap.getEffects();
         keyboard = javaBootstrap.getKeyboard();
         mouse = javaBootstrap.getMouse();
+        timer = javaBootstrap.getTimer();
         utils = javaBootstrap.getUtils();
     }
 }

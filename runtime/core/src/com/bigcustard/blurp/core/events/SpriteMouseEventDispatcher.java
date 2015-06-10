@@ -1,15 +1,14 @@
 package com.bigcustard.blurp.core.events;
 
-import java.util.*;
+import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.events.*;
 
 public class SpriteMouseEventDispatcher {
 
-    public static void dispatchEvents(List<Sprite> sprites) {
+    public void dispatchEvents() {
 
-        for(Sprite sprite : sprites) {
-
+        for(Sprite sprite : BlurpStore.modelRepository.getSprites()) {
             dispatchEvent(sprite.mouseState.mouseEntered, sprite.whenMouseEnters, sprite);
             dispatchEvent(sprite.mouseState.mouseLeft, sprite.whenMouseLeaves, sprite);
             dispatchEvent(sprite.mouseState.clicked, sprite.whenClicked, sprite);
@@ -20,7 +19,7 @@ public class SpriteMouseEventDispatcher {
         }
     }
 
-    private static void dispatchEvent(boolean condition, SpriteEventHandler handler, Sprite sprite) {
+    private void dispatchEvent(boolean condition, SpriteEventHandler handler, Sprite sprite) {
 
         if(condition && handler != null) {
             handler.handle(sprite);

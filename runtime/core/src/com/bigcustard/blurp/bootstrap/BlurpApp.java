@@ -42,13 +42,13 @@ public class BlurpApp extends Game {
         blurpRuntime.onException(new BlurpExceptionHandler() {
             @Override
             public void handleException(RuntimeException e) {
+
                 e.printStackTrace();
             }
         });
         if(javaClass != null) {
             blurpRuntime.startClass(javaClass);
         } else {
-            // TODO: Think about this.
             try {
                 blurpRuntime.startScript(language, new FileReader(scriptName), scriptName);
             } catch(FileNotFoundException e) {

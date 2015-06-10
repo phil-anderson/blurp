@@ -10,10 +10,17 @@ import com.bigcustard.blurp.model.*;
  */
 public class BlurpImpl extends Blurp {
 
+    private final EventDispatcher eventDispatcher;
+
+    public BlurpImpl() {
+
+        this.eventDispatcher = new EventDispatcher();
+    }
+
     public Blurp blurpify() {
 
         BlurpStore.blurpifier.blurpify();
-        EventDispatcher.dispatchEvents();
+        eventDispatcher.dispatchEvents();
         return this;
     }
 

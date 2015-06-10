@@ -77,6 +77,12 @@ public class JavaBootstrapHolder implements JavaBootstrap {
     }
 
     @Override
+    public Timer getTimer() {
+
+        return delegate.getTimer();
+    }
+
+    @Override
     public Utils getUtils() {
 
         return delegate.getUtils();

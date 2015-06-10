@@ -1,5 +1,6 @@
 package com.bigcustard.blurp.util;
 
+import java.io.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.math.*;
 import com.bigcustard.blurp.core.*;
@@ -42,5 +43,12 @@ public class Convert {
         Vector3 coords = new Vector3(x, y, 0);
         BlurpStore.mainViewport.unproject(coords);
         return coords;
+    }
+
+    public static String exceptionToString(Exception e) {
+
+        StringWriter stringWriter = new StringWriter();
+        e.printStackTrace(new PrintWriter(stringWriter));
+        return stringWriter.toString();
     }
 }

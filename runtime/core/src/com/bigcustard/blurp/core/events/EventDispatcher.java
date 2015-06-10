@@ -1,12 +1,19 @@
 package com.bigcustard.blurp.core.events;
 
-import com.bigcustard.blurp.core.*;
-
 public class EventDispatcher {
 
-    public static void dispatchEvents() {
+    private final SpriteMouseEventDispatcher spriteMouseEventDispatcher;
+    private final TimerEventDispatcher timerEventDispatcher;
 
-        SpriteMouseEventDispatcher.dispatchEvents(BlurpStore.modelRepository.getSprites());
+    public EventDispatcher() {
+
+        spriteMouseEventDispatcher = new SpriteMouseEventDispatcher();
+        timerEventDispatcher = new TimerEventDispatcher();
     }
 
+    public void dispatchEvents() {
+
+        spriteMouseEventDispatcher.dispatchEvents();
+        timerEventDispatcher.dispatchEvents();
+    }
 }

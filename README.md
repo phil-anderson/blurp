@@ -4,11 +4,11 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
+* BlurpStore - type as Impl and cast to interface in SEBR - Does this even work!?!!
 * BUG Tall, narrow viewport causes completion message to be truncated.
 * Add toString() methods to model objects
-* Key combinations for various control functions (e.g. debug on, quit, restart).
 * Add display of exceptions to the script complete code
-* Add Stop, pause and resume methods to runtime.
+* Add pause and resume methods to runtime.
 * Blurp runtime should be a singleton.
 * IMPORTANT: Need to inject MouseWindowChecker when hosted. TELL SPENCE!
 * Look at gradle build, and add a task to create an executable jar
