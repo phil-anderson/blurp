@@ -10,18 +10,10 @@ public class HelloMovingWorld extends BlurpJavaProgram {
 
         ImageSprite world = blurp.createImageSprite("hello-world.png");
 
-        double targetX = 400;
-        double targetY = 300;
-
         while(true) {
 
-            world.moveTowards(targetX, targetY, 7.5);
+            world.moveTowards(mouse.x(), mouse.y(), 7.5);
             blurp.blurpify();
-
-            if(world.x == targetX && world.y == targetY) {
-                targetX = utils.randomInRange(150, 650);
-                targetY = utils.randomInRange(150, 450);
-            }
         }
     }
 }

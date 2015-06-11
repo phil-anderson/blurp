@@ -4,6 +4,7 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
+* BlurpJavaProgram... Static imports for enums and constants! Of course!
 * BUG Tall, narrow viewport causes completion message to be truncated.
 * Add toString() methods to model objects
 * Add display of exceptions to the script complete code

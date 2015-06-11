@@ -22,14 +22,14 @@ public class TimerImpl extends Timer {
     }
 
     @Override
-    public Timer after(long milliseconds, Runnable action) {
+    public Timer after(int milliseconds, Runnable action) {
 
         scheduledTasks.add(new ScheduledTask(action, BlurpState.frameStartTime + milliseconds, -1));
         return this;
     }
 
     @Override
-    public Timer every(long milliseconds, Runnable action) {
+    public Timer every(int milliseconds, Runnable action) {
 
         scheduledTasks.add(new ScheduledTask(action, BlurpState.frameStartTime + milliseconds, milliseconds));
         return this;

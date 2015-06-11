@@ -17,15 +17,9 @@ public class MoveTowardsHandler {
             return true;
         }
 
-        // Now break the movement down into X and Y components.
-        double sine = yDistance / distanceToTarget;
-        double cosine = xDistance / distanceToTarget;
-
-        double xDelta = distanceToMove * cosine;
-        double yDelta = distanceToMove * sine;
-
-        sprite.x += xDelta;
-        sprite.y += yDelta;
+        double ratio = distanceToMove / distanceToTarget;
+        sprite.x += xDistance * ratio;
+        sprite.y += yDistance * ratio;
 
         return false;
     }

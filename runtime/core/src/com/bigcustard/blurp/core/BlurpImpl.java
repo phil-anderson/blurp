@@ -5,6 +5,8 @@ import com.bigcustard.blurp.core.commands.*;
 import com.bigcustard.blurp.core.events.*;
 import com.bigcustard.blurp.model.*;
 
+import static com.bigcustard.blurp.core.BlurpTerminatedException.CompletionAction.*;
+
 /**
  * Allows the user to call methods that specific to the Blurp engine.
  */
@@ -89,5 +91,23 @@ public class BlurpImpl extends Blurp {
     public int getFps() {
 
         return BlurpStore.blurpScreen.getFps();
+    }
+
+    @Override
+    public void stop() {
+
+        throw new BlurpTerminatedException(Normal);
+    }
+
+    @Override
+    public void restart() {
+
+        throw new BlurpTerminatedException(Restart);
+    }
+
+    @Override
+    public void terminate() {
+
+        throw new BlurpTerminatedException(Terminate);
     }
 }

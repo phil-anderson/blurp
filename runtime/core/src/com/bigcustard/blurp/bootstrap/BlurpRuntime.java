@@ -14,6 +14,8 @@ import com.bigcustard.blurp.scripting.*;
 import com.bigcustard.blurp.ui.*;
 import com.bigcustard.blurp.util.*;
 
+import static com.bigcustard.blurp.core.BlurpTerminatedException.CompletionAction.*;
+
 // TODO: Test
 public class BlurpRuntime {
 
@@ -75,7 +77,17 @@ public class BlurpRuntime {
 
     public void stop() {
 
-        throw new BlurpTerminatedException();
+        throw new BlurpTerminatedException(Normal);
+    }
+
+    public void terminate() {
+
+        throw new BlurpTerminatedException(Terminate);
+    }
+
+    public void restart() {
+
+        throw new BlurpTerminatedException(Restart);
     }
 
     public void end() {
@@ -137,8 +149,9 @@ public class BlurpRuntime {
                 BlurpStore.blurp.blurpify();
                 script.run();
             } catch (RuntimeException e) {
+                BlurpState.exception = e;
                 if(exceptionHandler != null && !(e instanceof BlurpTerminatedException)) {
-                    BlurpState.exception = e;
+                    BlurpState.error = true;
                     exceptionHandler.handleException(e);
                 }
             }

@@ -9,9 +9,9 @@ public abstract class Timer {
         stopwatch = new Stopwatch();
     }
 
-    public abstract Timer after(long milliseconds, Runnable action);
+    public abstract Timer after(int milliseconds, Runnable action);
 
-    public abstract Timer every(long milliseconds, Runnable action);
+    public abstract Timer every(int milliseconds, Runnable action);
 
     public abstract Timer remove(Runnable action);
 

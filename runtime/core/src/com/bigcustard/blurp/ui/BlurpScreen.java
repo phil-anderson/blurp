@@ -13,6 +13,8 @@ import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.runtimemodel.*;
 import com.bigcustard.blurp.util.*;
 
+import static com.bigcustard.blurp.core.BlurpTerminatedException.CompletionAction.Terminate;
+import static com.bigcustard.blurp.core.BlurpTerminatedException.CompletionAction.Restart;
 import static com.bigcustard.blurp.core.Blurpifier.*;
 
 // TODO: Add an abstract immutable parent that can be exposed through BlurpRuntime.
@@ -51,12 +53,13 @@ public class BlurpScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
 
+        // Don't move this to show()... Restart will die a horrible death.
+        if(!initialised) {
+            initialise();
+        }
+
         BlurpState.frameStartTime = System.currentTimeMillis();
         try {
-            if(!initialised) {
-                initialise();
-            }
-
             renderListener.handlePreRenderEvent(delta);
             BlurpStore.defaultFont.reset();
             doFrame(delta);
@@ -86,6 +89,18 @@ public class BlurpScreen extends ScreenAdapter {
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 
+        // Was it stopped with an action?
+        if(BlurpState.exception instanceof BlurpTerminatedException) {
+            BlurpTerminatedException exception = (BlurpTerminatedException) BlurpState.exception;
+            if(exception.getAction() == Restart) {
+                BlurpStore.configuration.getScriptCompletionHandler().onRestart();
+                return;
+            } else if(exception.getAction() == Terminate) {
+                BlurpStore.configuration.getScriptCompletionHandler().onTerminate();
+                return;
+            }
+        }
+
         float textHeight = BlurpStore.staticCamera.viewportHeight / 20;
 
         shapes.setProjectionMatrix(BlurpStore.staticCamera.combined);
@@ -108,7 +123,7 @@ public class BlurpScreen extends ScreenAdapter {
         batch.setProjectionMatrix(BlurpStore.staticCamera.combined);
         batch.begin();
         font.setMarkupEnabled(true);
-        if(BlurpState.exception != null) {
+        if(BlurpState.error) {
             font.drawWrapped(batch, "[RED]An Error Occurred[] - Press SPACE to restart, ESC to exit", 0, textHeight, BlurpStore.staticCamera.viewportWidth, BitmapFont.HAlignment.CENTER);
         } else {
             font.drawWrapped(batch, "Program Complete - Press SPACE to restart, ESC to exit", 0, textHeight, BlurpStore.staticCamera.viewportWidth, BitmapFont.HAlignment.CENTER);
@@ -169,6 +184,10 @@ public class BlurpScreen extends ScreenAdapter {
                 enableDebug(!BlurpState.debugMode, BlurpState.debugColour);
             } else if(Gdx.input.isKeyJustPressed(Input.Keys.C) && !BlurpState.scriptComplete) {
                 BlurpStore.runtime.stop();
+            } else if(Gdx.input.isKeyJustPressed(Input.Keys.R) && !BlurpState.scriptComplete) {
+                BlurpStore.runtime.restart();
+            } else if(Gdx.input.isKeyJustPressed(Input.Keys.X) && !BlurpState.scriptComplete) {
+                BlurpStore.runtime.terminate();
             }
         }
     }
