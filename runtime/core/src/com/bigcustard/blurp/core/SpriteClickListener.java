@@ -37,8 +37,11 @@ public class SpriteClickListener extends ClickListener {
     @Override
     public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
 
-        exited = true;
-        super.exit(event, x, y, pointer, toActor);
+        // TODO: Hacky workaround for LibGdx bug where clicking frequently fires an exit event - see Stage.act() method.
+        if(event.getTarget() != event.getRelatedActor()) {
+            exited = true;
+            super.exit(event, x, y, pointer, toActor);
+        }
         event.handle();
     }
 

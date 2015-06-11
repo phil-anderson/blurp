@@ -402,4 +402,20 @@ public abstract class Sprite<T> {
             rotation = -360 + rotation;
         }
     }
+
+    private static class EffectSpriteEventHandler implements SpriteEventHandler {
+
+        private final EffectBase effectToRun;
+
+        public EffectSpriteEventHandler(EffectBase effectToRun) {
+
+            this.effectToRun = effectToRun;
+        }
+
+        @Override
+        public void handle(Sprite sprite) {
+
+            sprite.runEffect(effectToRun);
+        }
+    }
 }

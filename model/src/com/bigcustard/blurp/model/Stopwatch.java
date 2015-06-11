@@ -30,6 +30,18 @@ public class Stopwatch {
         return (int) (nanos / 1000000);
     }
 
+    @Override
+    public String toString() {
+
+        int time = elapsedTime();
+        int hours = time / 3600000;
+        int minutes = (time % 3600000) / 60000;
+        int seconds = (time % 60000) / 1000;
+        int millis = time % 1000;
+
+        return String.format("%02d:%02d:%02d.%03d", hours, minutes, seconds, millis);
+    }
+
     public void reset() {
 
         startTime = 0;

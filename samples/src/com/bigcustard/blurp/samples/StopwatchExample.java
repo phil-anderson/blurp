@@ -2,6 +2,7 @@ package com.bigcustard.blurp.samples;
 
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.constants.*;
+import com.bigcustard.blurp.model.effects.*;
 import com.bigcustard.blurp.model.events.*;
 import com.bigcustard.blurp.model.java.*;
 
@@ -10,23 +11,35 @@ public class StopwatchExample extends BlurpJavaProgram {
     @Override
     public void run() {
 
-        blurp.createTextSprite("Click to START")
+        effects.defaultDuration = 150;
+
+        EffectGroup highlight = effects.combine(effects.scaleTo(1.5), effects.colour(Colours.WHITE));
+        EffectGroup normal = effects.combine(effects.scaleTo(1), effects.colour(Colours.DARK_GREY));
+
+        TextSprite startButton = blurp.createTextSprite("Click to START")
             .position(200, 100)
+            .colour(Colours.DARK_GREY)
+            .whenMouseEnters(highlight)
+            .whenMouseLeaves(normal)
             .whenClicked(new SpriteEventHandler() {
                 @Override
                 public void handle(Sprite sprite) {
                     timer.stopwatch.start();
                 }
             });
-        blurp.createTextSprite("Click to STOP")
+
+        startButton.copy()
+            .text("Click to STOP")
             .position(400, 100)
             .whenClicked(new SpriteEventHandler() {
-                @Override
-                public void handle(Sprite sprite) {
-                    timer.stopwatch.stop();
-                }
+            @Override
+            public void handle(Sprite sprite) {
+            timer.stopwatch.stop();
+            }
             });
-        blurp.createTextSprite("Click to RESET")
+
+        startButton.copy()
+            .text("Click to RESET")
             .position(600, 100)
             .whenClicked(new SpriteEventHandler() {
                 @Override
@@ -35,9 +48,12 @@ public class StopwatchExample extends BlurpJavaProgram {
                 }
             });
 
-        TextSprite elapsedTime = blurp.createTextSprite("").fontSize(100).colour(Colours.LIME_GREEN);
+        TextSprite elapsedTime = blurp.createTextSprite("")
+                                     .fontSize(150)
+                                     .scaleY(1.5)
+                                     .colour(Colours.LIME_GREEN);
         while(blurp.updateScreen()) {
-            elapsedTime.text = "" + timer.stopwatch.elapsedTime();
+            elapsedTime.text = timer.stopwatch.toString();
         }
     }
 }

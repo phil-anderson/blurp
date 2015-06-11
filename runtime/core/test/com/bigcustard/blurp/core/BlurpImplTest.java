@@ -1,5 +1,6 @@
 package com.bigcustard.blurp.core;
 
+import com.bigcustard.blurp.apimodel.*;
 import com.bigcustard.blurp.bootstrap.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.constants.*;
@@ -13,7 +14,7 @@ public class BlurpImplTest {
 
     @Mock private RuntimeRepository mockRuntimeRepository;
     @Mock private ModelRepository mockModelRepository;
-    @Mock private Screen mockScreen;
+    @Mock private ScreenImpl mockScreen;
     @Mock private Blurpifier mockBlurpifier;
 
     @Mock private Image mockImage;
