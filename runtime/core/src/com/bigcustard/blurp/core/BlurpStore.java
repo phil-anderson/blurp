@@ -9,8 +9,9 @@ import com.bigcustard.blurp.apimodel.*;
 import com.bigcustard.blurp.bootstrap.*;
 import com.bigcustard.blurp.core.effects.*;
 import com.bigcustard.blurp.model.Camera;
-import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.Sprite;
+import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.model.Viewport;
 import com.bigcustard.blurp.runtimemodel.*;
 import com.bigcustard.blurp.ui.*;
 
@@ -24,13 +25,14 @@ public class BlurpStore {
     public static MouseWindowChecker mouseWindowChecker;
     public static BlurpConfiguration configuration;
     public static ModelRepository modelRepository;
+    public static Viewport modelViewport;
     public static ScreenImpl modelScreen;
     public static CameraImpl modelCamera;
     public static MouseImpl modelMouse;
     public static TweenManager tweener;
     public static Blurpifier blurpifier;
     public static RuntimeRepository runtimeRepository;
-    public static BlurpImpl blurp;
+    public static SystemImpl system;
     public static RuntimeScreen runtimeScreen;
     public static BlurpScreen blurpScreen;
     public static FontHolder defaultFont;
@@ -64,7 +66,8 @@ public class BlurpStore {
         staticViewport = new FitViewport(worldWidth, worldHeight, staticCamera);
 
         modelCamera = new CameraImpl(worldWidth / 2, worldHeight / 2);
-        modelScreen = new ScreenImpl(worldWidth, worldHeight);
+        modelViewport = new Viewport().size(worldWidth, worldHeight);
+        modelScreen = new ScreenImpl();
         keyboard = new KeyboardImpl();
         modelMouse = new MouseImpl();
         timer = new TimerImpl();
@@ -85,7 +88,7 @@ public class BlurpStore {
         blurpScreen = new BlurpScreen();
         modelRepository = new ModelRepository();
         runtimeRepository = new RuntimeRepository();
-        blurp = new BlurpImpl();
+        system = new SystemImpl();
     }
 
     // Stuff that would normally go in the application.create() method, but can;t because we may be hosted in a

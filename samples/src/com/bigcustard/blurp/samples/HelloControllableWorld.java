@@ -9,7 +9,7 @@ public class HelloControllableWorld extends BlurpJavaProgram {
     @Override
     public void run() {
 
-        ImageSprite world = blurp.createImageSprite("hello-world.png");
+        ImageSprite world = system.createImageSprite("hello-world.png");
 
         while(true) {
 
@@ -18,7 +18,7 @@ public class HelloControllableWorld extends BlurpJavaProgram {
             if(keyboard.isKeyPressed(Key.Key_Up)) world.y += 2;
             if(keyboard.isKeyPressed(Key.Key_Down)) world.y -= 2;
 
-            blurp.blurpify();
+            screen.update();
         }
     }
 }

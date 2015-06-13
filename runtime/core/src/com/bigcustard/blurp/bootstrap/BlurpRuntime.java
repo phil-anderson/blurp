@@ -146,7 +146,7 @@ public class BlurpRuntime {
         public void run() {
 
             try {
-                BlurpStore.blurp.blurpify();
+                BlurpStore.blurpifier.blurpify();
                 script.run();
             } catch (RuntimeException e) {
                 BlurpState.exception = e;

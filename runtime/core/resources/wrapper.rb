@@ -1,4 +1,4 @@
-java_import com.bigcustard.blurp.model.Blurp
+java_import com.bigcustard.blurp.model.System
 java_import com.bigcustard.blurp.model.ImageSprite
 java_import com.bigcustard.blurp.model.Image
 java_import com.bigcustard.blurp.model.Camera
@@ -10,13 +10,13 @@ java_import com.bigcustard.blurp.model.Utils
 
 class Wrapper
   def self.wraps
-    [Blurp, ImageSprite, Image, Camera, Colour, Keyboard, Screen, TextSprite, Utils]
+    [System, ImageSprite, Image, Camera, Colour, Keyboard, Screen, TextSprite, Utils]
   end
-  
+
   def initialize subject
     @subject = subject
   end
-  
+
   def method_missing m, *args
     if is_setter? m
       call_setter m, *args
@@ -26,19 +26,19 @@ class Wrapper
       wrap_if_wrappable call_method m, *args
     end
   end
-  
+
   def is_getter? name, *args
     args.length == 0 and has_field(name) and !name.to_s.end_with?('=')
   end
-    
+
   def is_setter? name
     has_field(name) and name.to_s.end_with?('=')
   end
-    
+
   def call_getter name
     field(name).get @subject
   end
-  
+
   def call_setter name, *args
     field(name).set @subject, args[0]
   end
@@ -52,7 +52,7 @@ class Wrapper
     name = name.to_s.chomp '='
     @subject.getClass.getField name
   end
-  
+
   def call_method name, *args
     @subject.send name, *args
   end
@@ -60,11 +60,11 @@ class Wrapper
   def wrap_if_wrappable value
     wrappable?(value) ? Wrapper.new(value) : value
   end
-    
-  def wrappable? obj                                                                                                                                                      
+
+  def wrappable? obj
     Wrapper.wraps.any? {|wrappable| obj.is_a? wrappable}
   end
-end 
+end
 
 {
   'blurp' => Wrapper.new($bindings.get "blurp"),

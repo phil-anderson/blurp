@@ -20,7 +20,7 @@ public class RuntimeImage implements RuntimeObject<Image> {
     public void sync(Image modelImage, boolean newInstance) {
 
 
-        String filename = BlurpStore.configuration.getContentRoot() + modelImage.filename;
+        String filename = BlurpStore.configuration.getContentRoot() + modelImage.name;
         // Images are immutable so only need syncing when new.
         if(newInstance) {
             FileHandle localFile = Gdx.files.local(filename);

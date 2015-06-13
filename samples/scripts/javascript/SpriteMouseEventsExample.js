@@ -8,7 +8,7 @@ for(var x = 0; x < 8; x++) {
 }
 
 while(true) {
-    blurp.blurpify();
+    screen.update();
 }
 
 function makeWorld(x, y) {

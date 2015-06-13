@@ -352,7 +352,7 @@ public abstract class Sprite<T> {
      * target.
      * <p>
      * How much the Sprite will move towards the target depends on the speed parameter, and how much time has passed
-     * since the last call to {@link Blurp#blurpify() Blurp.blurpify()}
+     * since the last call to {@link Screen#update() Screen.update()}
      *
      * @param targetX The target X coordinate
      * @param targetY The target Y coordinate
@@ -365,7 +365,7 @@ public abstract class Sprite<T> {
      * Checks whether this Sprite has collided with the specified Sprite, or to be more precise, it checks whether this
      * Sprite's {@link #collisionShape} overlaps the other Sprite's {@link #collisionShape}
      * <p>
-     * Note that collision shapes are initialised on the first call to {@link com.bigcustard.blurp.model.Blurp#blurpify()} after they're created.
+     * Note that collision shapes are initialised on the first call to {@link Screen#update()} after they're created.
      * If either of the Sprites hasn't hasn't been initialised, this will return false.
      *
      * @param other The Sprite to check whether we've collided with

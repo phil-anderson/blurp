@@ -61,7 +61,7 @@ public class ModelRepository {
     public Image getImage(String imageFilename) {
 
         for(Image image : images) {
-            if(image.filename.equals(imageFilename)) return image;
+            if(image.name.equals(imageFilename)) return image;
         }
         return null;
     }

@@ -15,14 +15,14 @@ public abstract class Image {
     /**
      * The name of the image file that this image was created with. This property is read-only.
      */
-    public final String filename;
+    public final String name;
 
     /**
-     * This constructor is protected - Use {@link Blurp#loadImage} instead.
+     * This constructor is protected - Use {@link System#loadImage} instead.
      */
-    protected Image(String filename) {
+    protected Image(String name) {
 
-        this.filename = filename;
+        this.name = name;
     }
 
     /**

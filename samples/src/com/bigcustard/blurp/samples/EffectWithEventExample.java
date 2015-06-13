@@ -15,14 +15,14 @@ public class EffectWithEventExample extends BlurpJavaProgram {
 
         while(true) {
             // Create a world...
-            ImageSprite world = blurp.createImageSprite("hello-world.png")
+            ImageSprite world = system.createImageSprite("hello-world.png")
                     .position(utils.randomInRange(50, 750), utils.randomInRange(50, 550))
                     .scale(utils.randomInRange(0.1, 0.5));
 
             // And immediately destroy it. Harsh.
             world.runEffect(destroyEffect, SpriteEventHandler.AT_END_REMOVE_SPRITE);
 
-            blurp.blurpify();
+            screen.update();
         }
     }
 }

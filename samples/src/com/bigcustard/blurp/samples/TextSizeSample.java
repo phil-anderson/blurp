@@ -10,10 +10,10 @@ public class TextSizeSample extends BlurpJavaProgram {
 
         double yPosition = 545;
         for(int i = 100; i > 0; i -= 10) {
-            blurp.createTextSprite("Text with line height " + i + "px")
+            system.createTextSprite("Text with line height " + i + "px")
                  .fontSize(i)
                  .position(400, yPosition);
-            blurp.blurpify();
+            screen.update();
             utils.sleep(250);
 
             yPosition -= i;

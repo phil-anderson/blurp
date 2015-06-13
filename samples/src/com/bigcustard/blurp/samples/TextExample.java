@@ -12,32 +12,32 @@ public class TextExample extends BlurpJavaProgram {
     @Override
     public void run() {
 
-//        blurp.debugMode(true);
+//        system.debugMode(true);
 
-        blurp.createTextSprite("LEFT-JUSTIFIED\n" + MESSAGE)
+        system.createTextSprite("LEFT-JUSTIFIED\n" + MESSAGE)
              .position(150, 500)
              .wrap(220, Justification.AlignLeft);
 
-        blurp.createTextSprite("CENTER-JUSTIFIED\n" + MESSAGE)
+        system.createTextSprite("CENTER-JUSTIFIED\n" + MESSAGE)
              .position(400, 500)
              .wrap(220, Justification.AlignCenter);
 
-        blurp.createTextSprite("RIGHT-JUSTIFIED\n" + MESSAGE)
+        system.createTextSprite("RIGHT-JUSTIFIED\n" + MESSAGE)
             .position(650, 500)
             .wrap(220, Justification.AlignRight);
 
-        blurp.createTextSprite(COLOURFUL_MESSAGE)
+        system.createTextSprite(COLOURFUL_MESSAGE)
                                        .position(400, 400)
                                        .colourTagsEnabled(true);
 
-        blurp.createImageSprite("hello-world.png")
+        system.createImageSprite("hello-world.png")
              .position(250, 200)
              .alpha(0.3);
 
-        TextSprite anchorText = blurp.createTextSprite("")
+        TextSprite anchorText = system.createTextSprite("")
                                      .position(250, 200);
 
-        TextSprite rotateAndScaleText = blurp.createTextSprite("Rotate and Scale!").position(600, 200);
+        TextSprite rotateAndScaleText = system.createTextSprite("Rotate and Scale!").position(600, 200);
         rotateAndScaleText.colour = Colours.DODGER_BLUE;
 
         int frameCount = 0;
@@ -74,7 +74,7 @@ public class TextExample extends BlurpJavaProgram {
             rotateAndScaleText.rotateBy(2);
             rotateAndScaleText.scale(utils.wave(0.5, 2, 2500));
             frameCount = (frameCount + 1) % 450;
-            blurp.blurpify();
+            screen.update();
         }
     }
 }

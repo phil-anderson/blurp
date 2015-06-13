@@ -19,12 +19,12 @@ public class ImageImpl extends Image {
     @Override
     public boolean equals(Object other) {
 
-        return this == other || (other instanceof ImageImpl && filename.equals(((ImageImpl) other).filename));
+        return this == other || (other instanceof ImageImpl && name.equals(((ImageImpl) other).name));
     }
 
     @Override
     public int hashCode() {
 
-        return filename.hashCode();
+        return name.hashCode();
     }
 }

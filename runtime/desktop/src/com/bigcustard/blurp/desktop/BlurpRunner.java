@@ -6,10 +6,14 @@ import org.kohsuke.args4j.*;
 
 public class BlurpRunner {
 
+    private static final int VIEWPORT_WIDTH = 800;
+    private static final int VIEWPORT_HEIGHT = 600;
+
     public static void main (String[] args) {
         // TODO - PHIL, see https://github.com/jruby/jruby/wiki/Embedding-with-JSR-223 as to why this is here
         // To discuss.
         System.setProperty("org.jruby.embed.localvariable.behavior", "transient");
+        System.setProperty("org.lwjgl.opengl.Display.enableOSXFullscreenModeAPI", "true");
 
         CommandLineOptions options = new CommandLineOptions();
         CmdLineParser parser = new CmdLineParser(options, ParserProperties.defaults().withUsageWidth(120).withOptionSorter(null));
@@ -27,7 +31,7 @@ public class BlurpRunner {
         config.height = options.height;
         config.samples= 1;
 
-        BlurpApp blurpApp = new BlurpApp(options.language, options.scriptName, options.width, options.height, new LwjglMouseWindowChecker());
+        BlurpApp blurpApp = new BlurpApp(options.language, options.scriptName, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, new LwjglMouseWindowChecker());
         new LwjglApplication(blurpApp, config);
 	}
 
@@ -37,10 +41,10 @@ public class BlurpRunner {
         private String language = "Java";
 
         @Option(name="-width", aliases="-w", metaVar="width", usage="The width in pixels of the window that Blurp will run your script in", depends="-height")
-        private int width = 800;
+        private int width = VIEWPORT_WIDTH;
 
         @Option(name="-height", aliases="-h", metaVar="height", usage="The height in pixels of the window that Blurp will run your script in", depends="-width")
-        private int height = 600;
+        private int height = VIEWPORT_HEIGHT;
 
         @Argument(index=0, required=true, metaVar="script-name", usage="The filename of the script to run, or in the case of Java, the fully qualified name of the class to run, which must implement BlurpRunnable")
         private String scriptName;

@@ -1,6 +1,7 @@
 package com.bigcustard.blurp.model.java.bootstrap;
 
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.model.System;
 import com.bigcustard.blurp.model.effects.*;
 
 // This over-complicated class is for Blurp internal use only. It allows BlurpJavaProgram instances to be created with
@@ -35,9 +36,9 @@ public class JavaBootstrapHolder implements JavaBootstrap {
     private JavaBootstrapHolder() { }
 
     @Override
-    public Blurp getBlurp() {
+    public System getSystem() {
 
-        return delegate.getBlurp();
+        return delegate.getSystem();
     }
 
     @Override

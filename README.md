@@ -4,11 +4,19 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
-* BlurpJavaProgram... Static imports for enums and constants! Of course!
+
+
+
+* GO FULLSCREEN ALL THE WAY!
+
+
+
+* NamedColour = Add to colourTag map on create, then user can create named colours too
+* Reference counting for images?
 * BUG Tall, narrow viewport causes completion message to be truncated.
 * Add toString() methods to model objects
 * Add display of exceptions to the script complete code
-* Add pause and resume methods to runtime.
+* Add pause and resume methods to runtime - Use a flag in blurpifier (NOT BlurpScreen).
 * Blurp runtime should be a singleton.
 * IMPORTANT: Need to inject MouseWindowChecker when hosted. TELL SPENCE!
 * Look at gradle build, and add a task to create an executable jar
@@ -16,6 +24,7 @@ WORK IN PROGRESS - CHECK BACK LATER
 * Almost all examples need redoing / refactoring
 * Documentation
 
+* [DV] Provide a way to disable system shortcuts maybe?
 * [DV] Sprite mouse left and right clicks
 * [DV] Background drawing
 * [DV] Shape Sprites (line, square, rect, circle, triangle, n-agon)

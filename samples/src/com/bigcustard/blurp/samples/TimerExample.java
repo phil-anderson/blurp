@@ -9,7 +9,7 @@ public class TimerExample extends BlurpJavaProgram {
     @Override
     public void run() {
 
-        final ImageSprite world = blurp.createImageSprite("hello-world.png");
+        final ImageSprite world = system.createImageSprite("hello-world.png");
         timer.every(1000, new Runnable() {
             @Override
             public void run() {
@@ -18,7 +18,7 @@ public class TimerExample extends BlurpJavaProgram {
             }
         });
 
-        while(blurp.updateScreen()) {
+        while(screen.update()) {
 
         }
     }

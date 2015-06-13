@@ -1,19 +1,32 @@
 package com.bigcustard.blurp.apimodel;
 
+import com.bigcustard.blurp.core.*;
+import com.bigcustard.blurp.core.events.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.constants.*;
 
 public class ScreenImpl extends Screen {
 
-    public ScreenImpl(double viewportWidth, double viewportHeight) {
+    private final EventDispatcher eventDispatcher;
 
-        this.viewportWidth = viewportWidth;
-        this.viewportHeight = viewportHeight;
+    public ScreenImpl() {
+
+        super(BlurpStore.modelViewport);
+        this.eventDispatcher = new EventDispatcher();
     }
 
     public void reset(double viewportWidth, double viewportHeight) {
 
-        viewport(viewportWidth, viewportHeight, false);
+        viewport.size(viewportWidth, viewportHeight).stretchToFit(false);
         backgroundColour = Colours.BLACK;
     }
+
+    @Override
+    public boolean update() {
+
+        BlurpStore.blurpifier.blurpify();
+        eventDispatcher.dispatchEvents();
+        return true;
+    }
+
 }

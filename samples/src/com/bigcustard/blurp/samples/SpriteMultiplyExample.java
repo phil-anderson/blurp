@@ -10,7 +10,7 @@ public class SpriteMultiplyExample extends BlurpJavaProgram {
     @Override
     public void run() {
 
-        ImageSprite[] worlds = blurp.createImageSprite("hello-world.png")
+        ImageSprite[] worlds = system.createImageSprite("hello-world.png")
                                     .multiplyBy(NUM_WORLDS);
 
         for(ImageSprite world : worlds) {
@@ -23,7 +23,7 @@ public class SpriteMultiplyExample extends BlurpJavaProgram {
                  .rotateBy(utils.randomUpTo(360));
         }
 
-        while(blurp.updateScreen()) {
+        while(screen.update()) {
 
             for(ImageSprite world : worlds) {
                 world.rotateBy(world.x % 1 > 0.5 ? 3 : -3);

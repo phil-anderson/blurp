@@ -9,7 +9,7 @@ public class SpriteMouseExample extends BlurpJavaProgram {
     @Override
     public void run() {
 
-        ImageSprite world = blurp.createImageSprite("hello-world.png");
+        ImageSprite world = system.createImageSprite("hello-world.png");
         while(true) {
 
             if(world.mouseState.holding) {
@@ -32,7 +32,7 @@ public class SpriteMouseExample extends BlurpJavaProgram {
                 world.runEffect(effects.rotateBy(360).duration(750));
             }
 
-            blurp.blurpify();
+            screen.update();
         }
     }
 }

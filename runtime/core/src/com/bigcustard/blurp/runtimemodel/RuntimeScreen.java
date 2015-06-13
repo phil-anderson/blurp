@@ -18,10 +18,11 @@ public class RuntimeScreen {
 
         this.backgroundColour = modelScreen.backgroundColour;
 
-        if(viewportWidth != modelScreen.viewportWidth || viewportHeight != modelScreen.viewportHeight || viewportStretch != modelScreen.viewportStretch) {
-            viewportWidth = modelScreen.viewportWidth;
-            viewportHeight = modelScreen.viewportHeight;
-            viewportStretch = modelScreen.viewportStretch;
+        // TODO: Should move this to a RuntimeViewport class
+        if(viewportWidth != modelScreen.viewport.width || viewportHeight != modelScreen.viewport.height || viewportStretch != modelScreen.viewport.stretchToFit) {
+            viewportWidth = modelScreen.viewport.width;
+            viewportHeight = modelScreen.viewport.height;
+            viewportStretch = modelScreen.viewport.stretchToFit;
             BlurpStore.blurpScreen.changeViewport(viewportWidth, viewportHeight, viewportStretch);
         }
     }

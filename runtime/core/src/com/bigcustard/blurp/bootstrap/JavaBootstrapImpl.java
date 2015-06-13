@@ -2,15 +2,16 @@ package com.bigcustard.blurp.bootstrap;
 
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.model.System;
 import com.bigcustard.blurp.model.effects.*;
 import com.bigcustard.blurp.model.java.bootstrap.*;
 
 public class JavaBootstrapImpl implements JavaBootstrap {
 
     @Override
-    public Blurp getBlurp() {
+    public System getSystem() {
 
-        return BlurpStore.blurp;
+        return BlurpStore.system;
     }
 
     @Override

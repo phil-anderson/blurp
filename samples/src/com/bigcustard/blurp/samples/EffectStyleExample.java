@@ -10,19 +10,19 @@ public class EffectStyleExample extends BlurpJavaProgram {
     @Override
     public void run() {
 
-        Image worldImage = blurp.loadImage("hello-world.png");
+        Image worldImage = system.loadImage("hello-world.png");
 
-        blurp.createTextSprite("Press Space to Change Page").position(400, 575);
+        system.createTextSprite("Press Space to Change Page").position(400, 575);
 
         for(int x = 0; x < 3; x++) {
 
             int pageX = x * 800;
-            blurp.createTextSprite("Linear")
+            system.createTextSprite("Linear")
                 .position(250 + pageX, 500)
                 .handle(Handle.Right)
                 .colour(Colours.RED);
 
-            Sprite linearWorld = blurp.createImageSprite(worldImage)
+            Sprite linearWorld = system.createImageSprite(worldImage)
                                      .position(350 + pageX, 500)
                                      .scale(0.25)
                                      .colour(Colours.RED);
@@ -34,11 +34,11 @@ public class EffectStyleExample extends BlurpJavaProgram {
                 EffectStyle style = EffectStyle.values()[(y * 3 + x + 1)];
 
                 int yPos = 400 - y * 90;
-                blurp.createTextSprite(style.name())
+                system.createTextSprite(style.name())
                     .position(pageX + 250, yPos)
                     .handle(Handle.Right);
 
-                Sprite effectWorld = blurp.createImageSprite(worldImage)
+                Sprite effectWorld = system.createImageSprite(worldImage)
                                          .position(pageX + 350, yPos)
                                          .scale(0.25);
                 runEffect(effectWorld, style, effects);
@@ -54,7 +54,7 @@ public class EffectStyleExample extends BlurpJavaProgram {
                 camera.runEffect(moveCamera);
             }
 
-            blurp.blurpify();
+            screen.update();
         }
     }
 

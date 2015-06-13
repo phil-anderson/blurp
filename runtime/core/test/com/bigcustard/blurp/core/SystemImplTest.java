@@ -10,7 +10,7 @@ import org.mockito.*;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.core.Is.*;
 
-public class BlurpImplTest {
+public class SystemImplTest {
 
     @Mock private RuntimeRepository mockRuntimeRepository;
     @Mock private ModelRepository mockModelRepository;
@@ -19,7 +19,7 @@ public class BlurpImplTest {
 
     @Mock private Image mockImage;
 
-    private BlurpImpl testCandidate;
+    private SystemImpl testCandidate;
 
     @Before
     public void setUp() throws Exception {
@@ -30,14 +30,7 @@ public class BlurpImplTest {
         BlurpStore.modelScreen = mockScreen;
         BlurpStore.blurpifier = mockBlurpifier;
         BlurpStore.configuration = new BlurpConfiguration(100, 100);
-        testCandidate = new BlurpImpl();
-    }
-
-    @Test
-    public void blurpifyCallsBlurpifier() {
-
-        testCandidate.blurpify();
-        Mockito.verify(mockBlurpifier).blurpify();
+        testCandidate = new SystemImpl();
     }
 
     @Test

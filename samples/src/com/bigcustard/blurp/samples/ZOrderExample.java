@@ -10,7 +10,7 @@ public class ZOrderExample extends BlurpJavaProgram {
     @Override
     public void run() {
 
-        ImageSprite world = blurp.createImageSprite("hello-world.png")
+        ImageSprite world = system.createImageSprite("hello-world.png")
                                   .colour(Colours.RED)
                                   .position(300, 200)
                                   .collisionShape(CollisionShape.CenterCircle)
@@ -25,7 +25,7 @@ public class ZOrderExample extends BlurpJavaProgram {
         world.copy().colour(Colours.GREEN).position(500, 200);
         world.copy().colour(Colours.BLUE).position(400, 400);
 
-        while(blurp.updateScreen()) { }
+        while(screen.update()) { }
     }
 
 

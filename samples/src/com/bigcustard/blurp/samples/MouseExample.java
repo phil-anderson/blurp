@@ -8,7 +8,7 @@ public class MouseExample extends BlurpJavaProgram {
     @Override
     public void run() {
 
-        ImageSprite world = blurp.createImageSprite("hello-world.png");
+        ImageSprite world = system.createImageSprite("hello-world.png");
 
         while(true) {
 
@@ -22,7 +22,7 @@ public class MouseExample extends BlurpJavaProgram {
                 world.rotation = 0;
             }
 
-            blurp.blurpify();
+            screen.update();
         }
     }
 }

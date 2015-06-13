@@ -29,7 +29,7 @@ public class ScriptEngineBlurpRunnable implements Runnable {
 
         Bindings bindings = scriptEngine.createBindings();
 
-        bindings.put("blurp", BlurpStore.blurp);
+        bindings.put("system", BlurpStore.system);
         bindings.put("screen", BlurpStore.modelScreen);
         bindings.put("console", BlurpStore.console);
         bindings.put("camera", BlurpStore.modelCamera);

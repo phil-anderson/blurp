@@ -1,6 +1,7 @@
 package com.bigcustard.blurp.model.java;
 
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.model.System;
 import com.bigcustard.blurp.model.effects.*;
 import com.bigcustard.blurp.model.java.bootstrap.*;
 
@@ -8,7 +9,7 @@ public abstract class BlurpJavaProgram implements Runnable {
 
     public static JavaBootstrap javaBootstrap;
 
-    protected final Blurp blurp;
+    protected final System system;
     protected final Screen screen;
     protected final Console console;
     protected final Camera camera;
@@ -22,7 +23,7 @@ public abstract class BlurpJavaProgram implements Runnable {
 
         JavaBootstrap javaBootstrap = JavaBootstrapHolder.getInstance();
 
-        blurp = javaBootstrap.getBlurp();
+        system = javaBootstrap.getSystem();
         screen = javaBootstrap.getScreen();
         console = javaBootstrap.getConsole();
         camera = javaBootstrap.getCamera();

@@ -1,5 +1,6 @@
 package com.bigcustard.blurp.ui;
 
+import java.lang.System;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
@@ -13,8 +14,7 @@ import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.runtimemodel.*;
 import com.bigcustard.blurp.util.*;
 
-import static com.bigcustard.blurp.core.BlurpTerminatedException.CompletionAction.Terminate;
-import static com.bigcustard.blurp.core.BlurpTerminatedException.CompletionAction.Restart;
+import static com.bigcustard.blurp.core.BlurpTerminatedException.CompletionAction.*;
 import static com.bigcustard.blurp.core.Blurpifier.*;
 
 // TODO: Add an abstract immutable parent that can be exposed through BlurpRuntime.
@@ -51,6 +51,13 @@ public class BlurpScreen extends ScreenAdapter {
     }
 
     @Override
+    public void resize(int width, int height) {
+
+        BlurpStore.mainViewport.update(width, height);
+        BlurpStore.staticViewport.update(width, height);
+    }
+
+    @Override
     public void render(float delta) {
 
         // Don't move this to show()... Restart will die a horrible death.
@@ -60,6 +67,7 @@ public class BlurpScreen extends ScreenAdapter {
 
         BlurpState.frameStartTime = System.currentTimeMillis();
         try {
+            handleSystemShortcuts();
             renderListener.handlePreRenderEvent(delta);
             BlurpStore.defaultFont.reset();
             doFrame(delta);
@@ -67,7 +75,6 @@ public class BlurpScreen extends ScreenAdapter {
             if(BlurpState.scriptComplete) {
                 scriptComplete();
             }
-            handleSystemShortcuts();
 
         } catch(RuntimeException exception) {
             // Pass it on so blurpify method can throw it
