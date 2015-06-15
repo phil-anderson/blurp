@@ -34,8 +34,8 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
 
         setPosition((float) modelSprite.x, (float) modelSprite.y);
         setScale((float) modelSprite.scaleX, (float) modelSprite.scaleY);
-        setRotation((float) -modelSprite.rotation);
-        setColor(Convert.toGdxColour(modelSprite.colour, modelSprite.alpha));
+        setRotation((float) -modelSprite.angle);
+        setColor(Convert.toGdxColour(modelSprite.colour, modelSprite.transparency));
         setVisible(!modelSprite.hidden);
         this.collisionShape = modelSprite.collisionShape;
 

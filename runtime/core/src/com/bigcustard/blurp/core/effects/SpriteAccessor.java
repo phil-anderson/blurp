@@ -20,11 +20,11 @@ public class SpriteAccessor implements TweenAccessor<Sprite>, TweenTypes {
                 return 2;
             }
             case ROTATE : {
-                returnValues[0] = (float) sprite.rotation;
+                returnValues[0] = (float) sprite.angle;
                 return 1;
             }
             case ALPHA : {
-                returnValues[0] = (float) sprite.alpha;
+                returnValues[0] = (float) sprite.transparency;
                 return 1;
             }
             case COLOUR : {
@@ -51,11 +51,11 @@ public class SpriteAccessor implements TweenAccessor<Sprite>, TweenTypes {
                 break;
             }
             case ROTATE : {
-                sprite.rotation(newValues[0]);
+                sprite.angle(newValues[0]);
                 break;
             }
             case ALPHA : {
-                sprite.alpha(newValues[0]);
+                sprite.transparency(newValues[0]);
                 break;
             }
             case COLOUR : {

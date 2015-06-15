@@ -12,9 +12,9 @@ public class SpriteTest {
     public void rotateIsAdditive() throws Exception {
 
         Sprite testCandidate = new SpriteForTests();
-        testCandidate.rotation = 45;
+        testCandidate.angle = 45;
         testCandidate.rotateBy(45);
-        assertThat(testCandidate.rotation, is(90.0));
+        assertThat(testCandidate.angle, is(90.0));
     }
 
     @Test

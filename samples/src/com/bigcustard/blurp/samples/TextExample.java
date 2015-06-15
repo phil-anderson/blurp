@@ -32,7 +32,7 @@ public class TextExample extends BlurpJavaProgram {
 
         resources.createImageSprite("hello-world.png")
              .position(250, 200)
-             .alpha(0.3);
+             .transparency(0.3);
 
         TextSprite anchorText = resources.createTextSprite("")
                                      .position(250, 200);

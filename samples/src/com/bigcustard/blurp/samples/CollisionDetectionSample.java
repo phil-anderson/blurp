@@ -29,19 +29,19 @@ public class CollisionDetectionSample extends BlurpJavaProgram {
 
         ImageSprite worldWithRectangle1 = resources.createImageSprite(worldImage)
                                               .scale(0.5)
-                                              .rotation(45)
+                                              .angle(45)
                                               .position(600, 300)
                                               .collisionShape(CollisionShape.BoundaryRectangle);
 
         ImageSprite worldWithRectangle2 = resources.createImageSprite(worldImage)
                                               .scale(0.5)
-                                              .rotation(45)
+                                              .angle(45)
                                               .position(200, 100)
                                               .collisionShape(CollisionShape.BoundaryRectangle);
 
         ImageSprite worldWithRectangle3 = resources.createImageSprite(worldImage)
                                               .scale(0.5)
-                                              .rotation(70)
+                                              .angle(70)
                                               .position(600, 100)
                                               .collisionShape(CollisionShape.BoundaryRectangle);
 

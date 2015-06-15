@@ -21,5 +21,5 @@ public interface Keyboard {
      * @param key The {@link com.bigcustard.blurp.model.constants.Key key} to check.
      * @return True if the key has just been pressed by a user
      */
-    public boolean isKeyJustPressed(Key key);
+    public boolean wasKeyJustPressed(Key key);
 }

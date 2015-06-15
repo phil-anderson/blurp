@@ -15,11 +15,11 @@ public class MouseExample extends BlurpJavaProgram {
             world.position(mouse.x(), mouse.y());
 
             if(mouse.isLeftButtonPressed()) {
-                world.rotation = -30;
+                world.angle = -30;
             } else if(mouse.isRightButtonPressed()) {
-                world.rotation = 30;
+                world.angle = 30;
             } else {
-                world.rotation = 0;
+                world.angle = 0;
             }
 
             screen.update();

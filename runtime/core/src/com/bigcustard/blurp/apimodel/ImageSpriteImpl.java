@@ -18,7 +18,7 @@ public class ImageSpriteImpl extends ImageSprite implements EffectContainer {
         this.position(x, y);
         this.scaleX = 1;
         this.scaleY = 1;
-        this.alpha = 1;
+        this.transparency = 1;
     }
 
     @Override

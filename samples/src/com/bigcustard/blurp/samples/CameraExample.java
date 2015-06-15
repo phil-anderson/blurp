@@ -16,7 +16,7 @@ public class CameraExample extends BlurpJavaProgram {
             sprites[i] = resources.createImageSprite(worldImage)
                               .x(50 + i * 100)
                               .scale(utils.randomInRange(0.1, 0.5))
-                              .rotation(utils.randomUpTo(360));
+                              .angle(utils.randomUpTo(360));
         }
 
         int spriteIndex = 0;
@@ -35,7 +35,7 @@ public class CameraExample extends BlurpJavaProgram {
     private EffectGroup buildCameraZoomInEffect(Sprite sprite) {
 
         return effects.combine(
-            effects.rotateTo(sprite.rotation),
+            effects.rotateTo(sprite.angle),
             effects.moveTo(sprite.x, sprite.y),
             effects.zoom(1 / sprite.scaleX));
     }

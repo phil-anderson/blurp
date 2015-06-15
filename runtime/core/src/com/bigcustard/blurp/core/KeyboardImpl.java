@@ -13,7 +13,7 @@ public class KeyboardImpl implements Keyboard {
     }
 
     @Override
-    public boolean isKeyJustPressed(Key key) {
+    public boolean wasKeyJustPressed(Key key) {
 
         return Gdx.input.isKeyJustPressed(key.keyCode);
     }

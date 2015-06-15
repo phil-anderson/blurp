@@ -6,11 +6,11 @@ public class SpriteCopier {
 
     public static void copy(Sprite source, Sprite target) {
 
-        target.alpha = source.alpha;
+        target.transparency = source.transparency;
         target.collisionShape = source.collisionShape;
         target.colour = source.colour;
         target.hidden = source.hidden;
-        target.rotation = source.rotation;
+        target.angle = source.angle;
         target.scaleX = source.scaleX;
         target.scaleY = source.scaleY;
         target.whenMouseEnters = source.whenMouseEnters;

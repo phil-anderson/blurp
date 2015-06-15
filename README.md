@@ -4,13 +4,8 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
-
-
-
-* GO FULLSCREEN ALL THE WAY!
-
-
-
+* Keyboard - lastKeyTyped(), onKeyDown(), onKeyUp()
+* Mouse - onMouseMoved, onLeftButtonPressed, onRightButtonPressed, onLeftButtonReleased, onRightButtonReleased
 * NamedColour = Add to colourTag map on create, then user can create named colours too
 * Reference counting for images?
 * BUG Tall, narrow viewport causes completion message to be truncated.

@@ -51,7 +51,7 @@ public abstract class Sprite<T> {
      * <p>
      * There are 360 degrees in a circle, so setting this to 360 is the same as setting it to 0.
      */
-    public double rotation;
+    public double angle;
 
     /**
      * The colour of the Sprite. This will be used in different ways depending on the type of Sprite. For example
@@ -71,7 +71,7 @@ public abstract class Sprite<T> {
      * <p>
      * Try it out... You'll soon see what it does.
      */
-    public double alpha;
+    public double transparency;
 
     public boolean hidden;
 
@@ -119,9 +119,9 @@ public abstract class Sprite<T> {
         return (T) this;
     }
 
-    public T rotation(double newRotation) {
+    public T angle(double newRotation) {
 
-        this.rotation = newRotation;
+        this.angle = newRotation;
         return (T) this;
     }
 
@@ -131,9 +131,9 @@ public abstract class Sprite<T> {
         return (T) this;
     }
 
-    public T alpha(double newAlpha) {
+    public T transparency(double newAlpha) {
 
-        this.alpha = newAlpha;
+        this.transparency = newAlpha;
         return (T) this;
     }
 
@@ -263,12 +263,12 @@ public abstract class Sprite<T> {
      * Rotates the sprite around its center by the specified amount. This is cumulative, which means that if I call it
      * 10 times with a value of 5 (for example) then it'll end up rotated by 50 degrees.
      *
-     * @param degrees Degrees to rotate by. See {@link #rotation} for more details.
+     * @param degrees Degrees to rotate by. See {@link #angle} for more details.
      * @return The Sprite.
      */
     public T rotateBy(double degrees) {
 
-        rotation += degrees;
+        angle += degrees;
         return (T) this;
     }
 
@@ -397,9 +397,9 @@ public abstract class Sprite<T> {
 
     public void normaliseRotation() {
 
-        rotation = rotation % 360;
-        if(rotation > 180) {
-            rotation = -360 + rotation;
+        angle = angle % 360;
+        if(angle > 180) {
+            angle = -360 + angle;
         }
     }
 
