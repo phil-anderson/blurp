@@ -19,6 +19,11 @@ public abstract class Log {
         return this;
     }
 
+    public Log printLine(Object objectToPrint) {
+
+        return println(objectToPrint);
+    }
+
     public Log println(Object objectToPrint) {
 
         return print(objectToPrint + "\n");
