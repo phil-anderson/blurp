@@ -1,6 +1,5 @@
 package com.bigcustard.blurp.core;
 
-import com.bigcustard.blurp.apimodel.*;
 import com.bigcustard.blurp.core.commands.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.System;
@@ -11,6 +10,11 @@ import static com.bigcustard.blurp.core.BlurpTerminatedException.CompletionActio
  * Allows the user to call methods that specific to the Blurp engine.
  */
 public class SystemImpl extends System {
+
+    public SystemImpl() {
+
+        super(BlurpStore.log);
+    }
 
     @Override
     public System debugMode(boolean enable, Colour debugColour) {

@@ -5,25 +5,25 @@ import com.bigcustard.blurp.core.commands.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.constants.*;
 
-public class ConsoleImpl extends Console {
+public class LogImpl extends Log {
 
     @Override
-    public Console clear() {
+    public Log clear() {
 
-        BlurpStore.runtimeRepository.registerCommand(new ConsoleClearCommand());
+        BlurpStore.runtimeRepository.registerCommand(new LogClearCommand());
         return this;
     }
 
     @Override
-    public Console print(Object textToPrint) {
+    public Log print(Object textToPrint) {
 
-        BlurpStore.runtimeRepository.registerCommand(new ConsolePrintCommand("" + textToPrint, colour, alpha));
+        BlurpStore.runtimeRepository.registerCommand(new LogPrintCommand("" + textToPrint, colour, transparency));
         return null;
     }
 
     public void reset() {
 
         colour = Colours.LIGHT_GREY;
-        alpha = 1;
+        transparency = 1;
     }
 }

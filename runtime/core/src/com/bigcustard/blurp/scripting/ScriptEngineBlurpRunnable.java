@@ -31,7 +31,6 @@ public class ScriptEngineBlurpRunnable implements Runnable {
 
         bindings.put("system", BlurpStore.system);
         bindings.put("screen", BlurpStore.modelScreen);
-        bindings.put("console", BlurpStore.console);
         bindings.put("camera", BlurpStore.modelCamera);
         bindings.put("resources", BlurpStore.resources);
         bindings.put("effects", BlurpStore.effects);

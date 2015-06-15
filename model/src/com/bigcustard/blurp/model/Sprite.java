@@ -383,7 +383,7 @@ public abstract class Sprite<T> {
      */
     public abstract void remove();
 
-    public abstract boolean isRunningEffect();
+    public abstract boolean isRunningAnEffect();
 
     public abstract T pushToBack();
 

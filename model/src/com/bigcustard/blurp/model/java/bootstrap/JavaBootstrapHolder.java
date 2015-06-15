@@ -48,12 +48,6 @@ public class JavaBootstrapHolder implements JavaBootstrap {
     }
 
     @Override
-    public Console getConsole() {
-
-        return delegate.getConsole();
-    }
-
-    @Override
     public Camera getCamera() {
 
         return delegate.getCamera();

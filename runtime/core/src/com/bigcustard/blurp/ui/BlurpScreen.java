@@ -211,7 +211,7 @@ public class BlurpScreen extends ScreenAdapter {
 
         batch.setProjectionMatrix(BlurpStore.staticCamera.combined);
         beginBatch();
-        BlurpStore.runtimeConsole.render(batch);
+        BlurpStore.runtimeLog.render(batch);
         endBatch();
 
         if(BlurpState.debugMode) debugHudRenderer.render();
@@ -241,12 +241,12 @@ public class BlurpScreen extends ScreenAdapter {
     private void updateCamera() {
 
         OrthographicCamera camera = BlurpStore.mainCamera;
-        camera.rotate((float) BlurpStore.modelCamera.rotation);
+        camera.rotate((float) BlurpStore.modelCamera.angle);
         camera.up.set(0, 1, 0);
         camera.direction.set(0, 0, -1);
 
         camera.position.set((float) BlurpStore.modelCamera.x, (float) BlurpStore.modelCamera.y, 0);
-        camera.rotate((float) BlurpStore.modelCamera.rotation);
+        camera.rotate((float) BlurpStore.modelCamera.angle);
         camera.zoom = (float) (1 / BlurpStore.modelCamera.zoom);
     }
 
@@ -255,7 +255,7 @@ public class BlurpScreen extends ScreenAdapter {
         if(!batch.isDrawing()) {
             batch.begin();
         }
-        batch.setColor(Convert.toGdxColour(BlurpStore.modelCamera.colour, BlurpStore.modelCamera.alpha));
+        batch.setColor(Convert.toGdxColour(BlurpStore.modelCamera.colour, BlurpStore.modelCamera.transparency));
     }
 
     private void endBatch() {

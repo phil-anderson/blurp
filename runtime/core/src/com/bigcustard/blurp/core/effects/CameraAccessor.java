@@ -20,11 +20,11 @@ public class CameraAccessor implements TweenAccessor<Camera>, TweenTypes {
                 return 2;
             }
             case ROTATE : {
-                returnValues[0] = (float) camera.rotation;
+                returnValues[0] = (float) camera.angle;
                 return 1;
             }
             case ALPHA : {
-                returnValues[0] = (float) camera.alpha;
+                returnValues[0] = (float) camera.transparency;
                 return 1;
             }
             case COLOUR : {

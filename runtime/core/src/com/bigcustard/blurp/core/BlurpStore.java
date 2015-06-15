@@ -32,6 +32,7 @@ public class BlurpStore {
     public static TweenManager tweener;
     public static Blurpifier blurpifier;
     public static RuntimeRepository runtimeRepository;
+    public static LogImpl log;
     public static SystemImpl system;
     public static RuntimeScreen runtimeScreen;
     public static BlurpScreen blurpScreen;
@@ -43,8 +44,7 @@ public class BlurpStore {
     public static ScalingViewport staticViewport;
     public static ResourcesImpl resources;
     public static EffectsImpl effects;
-    public static ConsoleImpl console;
-    public static RuntimeConsole runtimeConsole;
+    public static RuntimeLog runtimeLog;
     public static KeyboardImpl keyboard;
     public static TimerImpl timer;
     public static Utils utils;
@@ -76,9 +76,6 @@ public class BlurpStore {
 
         initialiseFonts();
 
-        console = new ConsoleImpl();
-        runtimeConsole = new RuntimeConsole();
-
         resources = new ResourcesImpl();
         effects = new EffectsImpl();
         Tween.registerAccessor(Sprite.class, new SpriteAccessor());
@@ -90,6 +87,8 @@ public class BlurpStore {
         blurpScreen = new BlurpScreen();
         modelRepository = new ModelRepository();
         runtimeRepository = new RuntimeRepository();
+        log = new LogImpl();
+        runtimeLog = new RuntimeLog();
         system = new SystemImpl();
     }
 
@@ -126,12 +125,12 @@ public class BlurpStore {
         staticViewport = new FitViewport((float) configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight(), staticCamera);
 
         runtimeScreen = new RuntimeScreen();
-        runtimeConsole = new RuntimeConsole();
+        runtimeLog = new RuntimeLog();
 
         initialiseFonts();
 
         blurpifier.reset();
-        console.reset();
+        log.reset();
         modelCamera.reset();
         effects.reset();
         modelScreen.reset(configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight());

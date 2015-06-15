@@ -4,7 +4,7 @@ public interface EffectContainer {
 
     public void setRunningEffect(boolean running);
 
-    public boolean isRunningEffect();
+    public boolean isRunningAnEffect();
 
     public void remove();
 }

@@ -10,11 +10,11 @@ public abstract class Camera {
 
     public double zoom;
 
-    public double rotation;
+    public double angle;
 
     public Colour colour;
 
-    public double alpha;
+    public double transparency;
 
     public Camera x(double newX) {
 
@@ -36,13 +36,13 @@ public abstract class Camera {
 
     public Camera rotation(double newRotation) {
 
-        this.rotation = newRotation;
+        this.angle = newRotation;
         return this;
     }
 
     public Camera alpha(double newAlpha) {
 
-        this.alpha = newAlpha;
+        this.transparency = newAlpha;
         return this;
     }
 
@@ -61,7 +61,7 @@ public abstract class Camera {
 
     public Camera rotateBy(double degrees) {
 
-        this.rotation += degrees;
+        this.angle += degrees;
         return this;
     }
 
@@ -77,9 +77,9 @@ public abstract class Camera {
 
     public abstract Camera runEffect(EffectBase effectToRun, CameraEventHandler whatToDoAtEnd, ExistingEffectStrategy existingEffectStrategy);
 
-    public abstract boolean isRunningEffect();
+    public abstract boolean isRunningAnEffect();
 
-    public Camera stopEffect() {
+    public Camera stopEffects() {
 
         return runEffect(null);
     }
@@ -87,6 +87,7 @@ public abstract class Camera {
     @Override
     public String toString() {
 
-        return String.format("Camera x=%.2f y=%.2f zoom=%.2f rot=%.2f color=%s alpha=%.2f", x, y, zoom, rotation, colour, alpha);
+        return String.format("Camera x=%.2f y=%.2f zoom=%.2f angle=%.2f colour=%s transparency=%.2f", x, y, zoom, angle, colour,
+                             transparency);
     }
 }

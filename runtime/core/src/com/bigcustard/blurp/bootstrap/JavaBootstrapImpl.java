@@ -21,12 +21,6 @@ public class JavaBootstrapImpl implements JavaBootstrap {
     }
 
     @Override
-    public Console getConsole() {
-
-        return BlurpStore.console;
-    }
-
-    @Override
     public Camera getCamera() {
 
         return BlurpStore.modelCamera;

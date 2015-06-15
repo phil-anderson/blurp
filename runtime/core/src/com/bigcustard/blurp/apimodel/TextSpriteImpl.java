@@ -74,7 +74,7 @@ public class TextSpriteImpl extends TextSprite implements EffectContainer {
     }
 
     @Override
-    public boolean isRunningEffect() {
+    public boolean isRunningAnEffect() {
 
         return this.runningEffect;
     }

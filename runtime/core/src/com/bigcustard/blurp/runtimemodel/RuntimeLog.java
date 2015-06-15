@@ -6,8 +6,8 @@ import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.util.*;
 
-// A quick, hacky console
-public class RuntimeConsole {
+// A quick, hacky log
+public class RuntimeLog {
 
     private final int lines, columns; // In characters
 
@@ -20,7 +20,7 @@ public class RuntimeConsole {
     private int currentLine;
     private int currentColumn;
 
-    public RuntimeConsole() {
+    public RuntimeLog() {
 
         // TODO: This is probably going to be wrong when we start mixing Camera zoom etc in.
         this.pixelHeight = BlurpStore.mainCamera.viewportHeight;

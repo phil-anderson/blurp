@@ -31,7 +31,7 @@ public class SpriteForTests extends Sprite {
     }
 
     @Override
-    public boolean isRunningEffect() {
+    public boolean isRunningAnEffect() {
 
         return false;
     }

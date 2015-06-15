@@ -8,7 +8,6 @@ public interface JavaBootstrap {
 
     public System getSystem();
     public Screen getScreen();
-    public Console getConsole();
     public Camera getCamera();
     public Resources getResources();
     public Effects getEffects();

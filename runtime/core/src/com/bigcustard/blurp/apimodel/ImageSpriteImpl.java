@@ -59,7 +59,7 @@ public class ImageSpriteImpl extends ImageSprite implements EffectContainer {
     }
 
     @Override
-    public boolean isRunningEffect() {
+    public boolean isRunningAnEffect() {
 
         return this.runningEffect;
     }

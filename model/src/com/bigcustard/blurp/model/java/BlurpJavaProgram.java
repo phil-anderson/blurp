@@ -11,7 +11,6 @@ public abstract class BlurpJavaProgram implements Runnable {
 
     protected final System system;
     protected final Screen screen;
-    protected final Console console;
     protected final Camera camera;
     protected final Resources resources;
     protected final Effects effects;
@@ -26,7 +25,6 @@ public abstract class BlurpJavaProgram implements Runnable {
 
         system = javaBootstrap.getSystem();
         screen = javaBootstrap.getScreen();
-        console = javaBootstrap.getConsole();
         camera = javaBootstrap.getCamera();
         resources = javaBootstrap.getResources();
         effects = javaBootstrap.getEffects();
