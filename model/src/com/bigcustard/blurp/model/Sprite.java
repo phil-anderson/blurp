@@ -75,25 +75,25 @@ public abstract class Sprite<T> {
 
     public boolean hidden;
 
-    public SpriteEventHandler whenMouseEnters;
+    public SpriteEventHandler onMouseEnter;
 
-    public SpriteEventHandler whenMouseLeaves;
+    public SpriteEventHandler onMouseExit;
 
-    public SpriteEventHandler whenClicked;
+    public SpriteEventHandler onClick;
 
-    public SpriteEventHandler whenBeingDragged;
+    public SpriteEventHandler onDrag;
 
-    public SpriteEventHandler whenDragReleased;
+    public SpriteEventHandler onDragRelease;
 
-    public SpriteEventHandler whenMousePressed;
+    public SpriteEventHandler onMousePress;
 
-    public SpriteEventHandler whenMouseReleased;
+    public SpriteEventHandler onMouseRelease;
 
-    public SpriteMouseState mouseState = NULL_MOUSE_STATE;
+    public SpriteMouseState mouse = NULL_MOUSE_STATE;
 
-    public CollisionShape collisionShape;
+    public TargetStyle targetStyle;
 
-    public SpriteLayer layer;
+    public ScreenLayer layer;
 
     public T x(double newX) {
 
@@ -143,105 +143,105 @@ public abstract class Sprite<T> {
         return (T) this;
     }
 
-    public T collisionShape(CollisionShape newCollisionShape) {
+    public T targetStyle(TargetStyle newTargetStyle) {
 
-        this.collisionShape = newCollisionShape;
+        this.targetStyle = newTargetStyle;
         return (T) this;
     }
 
-    public T whenMouseEnters(SpriteEventHandler eventHandler) {
+    public T onMouseEnter(SpriteEventHandler eventHandler) {
 
-        this.whenMouseEnters = eventHandler;
+        this.onMouseEnter = eventHandler;
         return (T) this;
     }
 
-    public T whenMouseEnters(EffectBase effectToRun) {
+    public T onMouseEnter(EffectBase effectToRun) {
 
-        this.whenMouseEnters = new EffectSpriteEventHandler(effectToRun);
+        this.onMouseEnter = new EffectSpriteEventHandler(effectToRun);
         return (T) this;
     }
 
-    public T whenMouseLeaves(SpriteEventHandler eventHandler) {
+    public T onMouseExit(SpriteEventHandler eventHandler) {
 
-        this.whenMouseLeaves = eventHandler;
+        this.onMouseExit = eventHandler;
         return (T) this;
     }
 
-    public T whenMouseLeaves(EffectBase effectToRun) {
+    public T onMouseExit(EffectBase effectToRun) {
 
-        this.whenMouseLeaves = new EffectSpriteEventHandler(effectToRun);
+        this.onMouseExit = new EffectSpriteEventHandler(effectToRun);
         return (T) this;
     }
 
-    public T whenClicked(SpriteEventHandler eventHandler) {
+    public T onClick(SpriteEventHandler eventHandler) {
 
-        this.whenClicked = eventHandler;
+        this.onClick = eventHandler;
         return (T) this;
     }
 
-    public T whenClicked(EffectBase effectToRun) {
+    public T onClick(EffectBase effectToRun) {
 
-        this.whenClicked = new EffectSpriteEventHandler(effectToRun);
+        this.onClick = new EffectSpriteEventHandler(effectToRun);
         return (T) this;
     }
 
-    public T whenBeingDragged(SpriteEventHandler eventHandler) {
+    public T onDrag(SpriteEventHandler eventHandler) {
 
-        this.whenBeingDragged = eventHandler;
+        this.onDrag = eventHandler;
         return (T) this;
     }
 
-    public T whenBeingDragged(EffectBase effectToRun) {
+    public T onDrag(EffectBase effectToRun) {
 
-        this.whenBeingDragged = new EffectSpriteEventHandler(effectToRun);
+        this.onDrag = new EffectSpriteEventHandler(effectToRun);
         return (T) this;
     }
 
-    public T whenDragReleased(SpriteEventHandler eventHandler) {
+    public T onDragRelease(SpriteEventHandler eventHandler) {
 
-        this.whenDragReleased = eventHandler;
+        this.onDragRelease = eventHandler;
         return (T) this;
     }
 
-    public T whenDragReleased(EffectBase effectToRun) {
+    public T onDragRelease(EffectBase effectToRun) {
 
-        this.whenDragReleased = new EffectSpriteEventHandler(effectToRun);
+        this.onDragRelease = new EffectSpriteEventHandler(effectToRun);
         return (T) this;
     }
 
-    public T whenMousePressed(SpriteEventHandler eventHandler) {
+    public T onMousePress(SpriteEventHandler eventHandler) {
 
-        this.whenMousePressed = eventHandler;
+        this.onMousePress = eventHandler;
         return (T) this;
     }
 
-    public T whenMousePressed(EffectBase effectToRun) {
+    public T onMousePress(EffectBase effectToRun) {
 
-        this.whenMousePressed = new EffectSpriteEventHandler(effectToRun);
+        this.onMousePress = new EffectSpriteEventHandler(effectToRun);
         return (T) this;
     }
 
-    public T whenMouseReleased(SpriteEventHandler eventHandler) {
+    public T onMouseRelease(SpriteEventHandler eventHandler) {
 
-        this.whenMouseReleased = eventHandler;
+        this.onMouseRelease = eventHandler;
         return (T) this;
     }
 
-    public T whenMouseReleased(EffectBase effectToRun) {
+    public T onMouseRelease(EffectBase effectToRun) {
 
-        this.whenMouseReleased = new EffectSpriteEventHandler(effectToRun);
+        this.onMouseRelease = new EffectSpriteEventHandler(effectToRun);
         return (T) this;
     }
 
-    public T layer(SpriteLayer layerToAppearOn) {
+    public T layer(ScreenLayer layerToAppearOn) {
 
         this.layer = layerToAppearOn;
         return (T) this;
     }
 
-    public T mouseState(SpriteMouseState newMouseState) {
+    public T mouse(SpriteMouseState newMouseState) {
 
-        this.mouseState = newMouseState;
+        this.mouse = newMouseState;
         return (T) this;
     }
 
@@ -325,12 +325,12 @@ public abstract class Sprite<T> {
 
     public T runEffect(EffectBase effectToRun, SpriteEventHandler whatToDoAtEnd) {
 
-        return runEffect(effectToRun, whatToDoAtEnd, ExistingEffectStrategy.CombineWithExisting);
+        return runEffect(effectToRun, whatToDoAtEnd, ExistingEffectStrategy.CombineWithExistingEffect);
     }
 
-    public T stopEffect() {
+    public T stopEffects() {
 
-        return runEffect(null, SpriteEventHandler.NULL, ExistingEffectStrategy.StopExisting);
+        return runEffect(null, SpriteEventHandler.NULL, ExistingEffectStrategy.StopExistingEffect);
     }
 
     public T[] multiplyBy(int numberOfTimes) {
@@ -363,7 +363,7 @@ public abstract class Sprite<T> {
 
     /**
      * Checks whether this Sprite has collided with the specified Sprite, or to be more precise, it checks whether this
-     * Sprite's {@link #collisionShape} overlaps the other Sprite's {@link #collisionShape}
+     * Sprite's {@link #targetStyle} overlaps the other Sprite's {@link #targetStyle}
      * <p>
      * Note that collision shapes are initialised on the first call to {@link Screen#update()} after they're created.
      * If either of the Sprites hasn't hasn't been initialised, this will return false.
@@ -371,7 +371,7 @@ public abstract class Sprite<T> {
      * @param other The Sprite to check whether we've collided with
      * @return true If both Sprites have been initialised and are in collision (i.e. their collisionShapes overlap).
      */
-    public abstract boolean collidedWith(Sprite other);
+    public abstract boolean overlaps(Sprite other);
 
     public abstract T runEffect(EffectBase effectToRun, SpriteEventHandler whatToDoAtEnd, ExistingEffectStrategy whatIfAlreadyRunningOne);
 
@@ -395,7 +395,7 @@ public abstract class Sprite<T> {
 
     public abstract T copy();
 
-    public void normaliseRotation() {
+    public void normaliseAngle() {
 
         angle = angle % 360;
         if(angle > 180) {

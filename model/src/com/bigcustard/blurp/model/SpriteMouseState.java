@@ -2,29 +2,29 @@ package com.bigcustard.blurp.model;
 
 public class SpriteMouseState {
 
-    public final boolean over;
-    public final boolean holding;
-    public final boolean dragging;
-    public final boolean mouseEntered;
-    public final boolean mouseLeft;
-    public final boolean mousePressed;
-    public final boolean mouseReleased;
-    public final boolean clicked;
+    public final boolean isOver;
+    public final boolean isHolding;
+    public final boolean isDragging;
+    public final boolean entered;
+    public final boolean exited;
+    public final boolean wasPressed;
+    public final boolean wasReleased;
+    public final boolean wasClicked;
     public final int clickCount;
-    public final boolean dragReleased;
+    public final boolean wasDragReleased;
     public final double dragX, dragY;
 
-    public SpriteMouseState(boolean over, boolean held, boolean dragging, boolean mouseEntered, boolean mouseLeft, boolean mousePressed, boolean mouseReleased, boolean clicked, boolean dragReleased, int clickCount, double dragX, double dragY) {
+    public SpriteMouseState(boolean isOver, boolean isHolding, boolean isDragging, boolean entered, boolean exited, boolean wasPressed, boolean wasReleased, boolean wasClicked, boolean wasDragReleased, int clickCount, double dragX, double dragY) {
 
-        this.over = over;
-        this.holding = held;
-        this.dragging = dragging;
-        this.mouseEntered = mouseEntered;
-        this.mouseLeft = mouseLeft;
-        this.mousePressed = mousePressed;
-        this.mouseReleased = mouseReleased;
-        this.clicked = clicked;
-        this.dragReleased = dragReleased;
+        this.isOver = isOver;
+        this.isHolding = isHolding;
+        this.isDragging = isDragging;
+        this.entered = entered;
+        this.exited = exited;
+        this.wasPressed = wasPressed;
+        this.wasReleased = wasReleased;
+        this.wasClicked = wasClicked;
+        this.wasDragReleased = wasDragReleased;
         this.clickCount = clickCount;
         this.dragX = dragX;
         this.dragY = dragY;

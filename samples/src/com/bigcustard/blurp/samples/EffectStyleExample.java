@@ -62,7 +62,7 @@ public class EffectStyleExample extends BlurpJavaProgram {
     private void runEffect(Sprite sprite, EffectStyle effectStyle, Effects effects) {
 
         Effect effect = effects.moveBy(300, 0)
-                               .effectStyle(effectStyle)
+                               .style(effectStyle)
                                .timesToRun(1000000)
                                .yoyoMode(true)
                                .delayBeforeStart(500)

@@ -15,35 +15,35 @@ public class CollisionDetectionSample extends BlurpJavaProgram {
         ImageSprite worldWithCircle1 = resources.createImageSprite(worldImage)
                                            .scale(0.5)
                                            .position(200, 500)
-                                           .collisionShape(CollisionShape.CenterCircle);
+                                           .targetStyle(TargetStyle.Circle);
 
         ImageSprite worldWithCircle2 = resources.createImageSprite(worldImage)
                                            .scale(0.5)
                                            .position(600, 500)
-                                           .collisionShape(CollisionShape.CenterCircle);
+                                           .targetStyle(TargetStyle.Circle);
 
         ImageSprite worldWithCircle3 = resources.createImageSprite(worldImage)
                                            .scale(0.5)
                                            .position(200, 300)
-                                           .collisionShape(CollisionShape.CenterCircle);
+                                           .targetStyle(TargetStyle.Circle);
 
         ImageSprite worldWithRectangle1 = resources.createImageSprite(worldImage)
                                               .scale(0.5)
                                               .angle(45)
                                               .position(600, 300)
-                                              .collisionShape(CollisionShape.BoundaryRectangle);
+                                              .targetStyle(TargetStyle.Rectangle);
 
         ImageSprite worldWithRectangle2 = resources.createImageSprite(worldImage)
                                               .scale(0.5)
                                               .angle(45)
                                               .position(200, 100)
-                                              .collisionShape(CollisionShape.BoundaryRectangle);
+                                              .targetStyle(TargetStyle.Rectangle);
 
         ImageSprite worldWithRectangle3 = resources.createImageSprite(worldImage)
                                               .scale(0.5)
                                               .angle(70)
                                               .position(600, 100)
-                                              .collisionShape(CollisionShape.BoundaryRectangle);
+                                              .targetStyle(TargetStyle.Rectangle);
 
         while(true) {
 
@@ -56,7 +56,7 @@ public class CollisionDetectionSample extends BlurpJavaProgram {
 
     private void handleSpritePair(Sprite leftSprite, Sprite rightSprite) {
 
-        if(!leftSprite.collidedWith(rightSprite)) {
+        if(!leftSprite.overlaps(rightSprite)) {
             leftSprite.rotateBy(1);
             rightSprite.rotateBy(-2);
             leftSprite.x += 2;

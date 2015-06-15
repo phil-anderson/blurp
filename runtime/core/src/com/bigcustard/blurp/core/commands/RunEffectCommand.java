@@ -27,7 +27,7 @@ public class RunEffectCommand<T> implements Command {
     @Override
     public void execute(float deltaTime) {
 
-        if(existingEffectStrategy == ExistingEffectStrategy.StopExisting) {
+        if(existingEffectStrategy == ExistingEffectStrategy.StopExistingEffect) {
             BlurpStore.tweener.killTarget(target);
         }
 

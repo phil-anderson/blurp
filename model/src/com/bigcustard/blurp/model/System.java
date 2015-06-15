@@ -21,6 +21,16 @@ public abstract class System {
 
     public abstract int getFps();
 
+    /**
+     * Makes your blurp script pause for the specified number of seconds, after which it'll carry on normally again.
+     * <p>
+     * WARNING - Effects won't be moving as there will be no blurpify calls, they'll effectively be on pause until the
+     * end of the pause.
+     *
+     * @param milliseconds The number of milliseconds to pause for.
+     */
+    public abstract void pause(int milliseconds);
+
     public abstract void stop();
 
     public abstract void restart();

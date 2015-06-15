@@ -56,10 +56,10 @@ public class TweenEffect extends EffectImpl<Effect> implements Effect {
     }
 
     @Override
-    public Effect effectStyle(EffectStyle effectStyle) {
+    public Effect style(EffectStyle style) {
 
         TweenEffect copy = (TweenEffect) copy(this);
-        copy.effectStyle = effectStyle;
+        copy.effectStyle = style;
         return copy;
     }
 

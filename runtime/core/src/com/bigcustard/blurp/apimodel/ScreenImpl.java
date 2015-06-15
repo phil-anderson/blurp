@@ -1,8 +1,9 @@
 package com.bigcustard.blurp.apimodel;
 
+import com.badlogic.gdx.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.core.events.*;
-import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.model.Screen;
 import com.bigcustard.blurp.model.constants.*;
 
 public class ScreenImpl extends Screen {
@@ -29,4 +30,10 @@ public class ScreenImpl extends Screen {
         return true;
     }
 
+    @Override
+    public Screen setTitle(String title) {
+
+        Gdx.graphics.setTitle(title);
+        return this;
+    }
 }

@@ -30,6 +30,16 @@ public class SystemImpl extends System {
     }
 
     @Override
+    public void pause(int milliseconds) {
+
+        try {
+            Thread.sleep(milliseconds);
+        } catch(InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void stop() {
 
         throw new BlurpTerminatedException(Normal);

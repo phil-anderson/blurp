@@ -6,5 +6,5 @@ public interface Effect extends EffectBase<Effect> {
 
     public Effect duration(int durationInMilliseconds);
 
-    public Effect effectStyle(EffectStyle effectStyle);
+    public Effect style(EffectStyle style);
 }

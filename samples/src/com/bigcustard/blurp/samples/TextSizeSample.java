@@ -14,7 +14,7 @@ public class TextSizeSample extends BlurpJavaProgram {
                  .fontSize(i)
                  .position(400, yPosition);
             screen.update();
-            utils.sleep(250);
+            system.pause(250);
 
             yPosition -= i;
         }

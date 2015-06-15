@@ -87,7 +87,7 @@ public class BlurpScreen extends ScreenAdapter {
         // so I'd have thought teh script would get plenty of time between frames to do it's stuff.
         // Maybe libGdx isn't being particularly friendly outside of renders... Hmmmm...
         // I wonder if this will be an issue n Android?
-        BlurpStore.utils.sleep(1);
+        try { Thread.sleep(1); } catch(InterruptedException e) { }
     }
 
     // TODO: Temporary (and a bit hacky) keyboard-based controls. Need to build something mouse-based.
@@ -286,9 +286,9 @@ public class BlurpScreen extends ScreenAdapter {
     public void handleSpriteLayer(RuntimeSprite sprite) {
 
         sprite.remove();
-        if(sprite.getLayer() == SpriteLayer.Background) {
+        if(sprite.getLayer() == ScreenLayer.Background) {
             backgroundStage.addActor(sprite);
-        } else if(sprite.getLayer() == SpriteLayer.Overlay) {
+        } else if(sprite.getLayer() == ScreenLayer.Overlay) {
             overlayStage.addActor(sprite);
         } else {
             mainStage.addActor(sprite);

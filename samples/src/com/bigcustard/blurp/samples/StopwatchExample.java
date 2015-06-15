@@ -19,11 +19,12 @@ public class StopwatchExample extends BlurpJavaProgram {
         TextSprite startButton = resources.createTextSprite("Click to START")
             .position(200, 100)
             .colour(Colours.DARK_GREY)
-            .whenMouseEnters(highlight)
-            .whenMouseLeaves(normal)
-            .whenClicked(new SpriteEventHandler() {
+            .onMouseEnter(highlight)
+            .onMouseExit(normal)
+            .onClick(new SpriteEventHandler() {
                 @Override
                 public void handle(Sprite sprite) {
+
                     timer.stopwatch.start();
                 }
             });
@@ -31,19 +32,21 @@ public class StopwatchExample extends BlurpJavaProgram {
         startButton.copy()
             .text("Click to STOP")
             .position(400, 100)
-            .whenClicked(new SpriteEventHandler() {
-            @Override
-            public void handle(Sprite sprite) {
-            timer.stopwatch.stop();
-            }
+            .onClick(new SpriteEventHandler() {
+                @Override
+                public void handle(Sprite sprite) {
+
+                    timer.stopwatch.stop();
+                }
             });
 
         startButton.copy()
             .text("Click to RESET")
             .position(600, 100)
-            .whenClicked(new SpriteEventHandler() {
+            .onClick(new SpriteEventHandler() {
                 @Override
                 public void handle(Sprite sprite) {
+
                     timer.stopwatch.reset();
                 }
             });

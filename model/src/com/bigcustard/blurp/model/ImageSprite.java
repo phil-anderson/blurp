@@ -22,7 +22,7 @@ public abstract class ImageSprite extends Sprite<ImageSprite> {
     public ImageSprite image(Image newImage) {
 
         image = newImage;
-        collisionShape = CollisionShape.CenterCircle;
+        targetStyle = TargetStyle.Circle;
         return this;
     }
 }

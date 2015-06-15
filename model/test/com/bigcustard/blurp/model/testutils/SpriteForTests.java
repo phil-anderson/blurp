@@ -14,7 +14,7 @@ public class SpriteForTests extends Sprite {
     }
 
     @Override
-    public boolean collidedWith(Sprite other) {
+    public boolean overlaps(Sprite other) {
 
         return false;
     }
@@ -37,7 +37,7 @@ public class SpriteForTests extends Sprite {
     }
 
     @Override
-    public Object stopEffect() {
+    public Object stopEffects() {
 
         return null;
     }

@@ -7,7 +7,7 @@ import com.bigcustard.blurp.model.constants.*;
 
 public class MouseState {
 
-    public static Vector3 getPosition(SpriteLayer layer) {
+    public static Vector3 getPosition(ScreenLayer layer) {
 
         // Find static position and clamp it to viewport
         Vector3 position = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
@@ -17,7 +17,7 @@ public class MouseState {
         position.y = MathUtils.clamp(position.y, 0, BlurpStore.staticViewport.getWorldHeight() - 1);
 
         // If a layer is static (background or overlay), then we're done.
-        if(layer != null && layer != SpriteLayer.Main) {
+        if(layer != null && layer != ScreenLayer.Main) {
             return position;
         }
 

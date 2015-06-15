@@ -37,6 +37,6 @@ public class CameraExample extends BlurpJavaProgram {
         return effects.combine(
             effects.rotateTo(sprite.angle),
             effects.moveTo(sprite.x, sprite.y),
-            effects.zoom(1 / sprite.scaleX));
+            effects.zoomTo(1 / sprite.scaleX));
     }
 }

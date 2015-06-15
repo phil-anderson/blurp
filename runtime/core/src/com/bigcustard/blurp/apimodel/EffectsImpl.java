@@ -50,9 +50,9 @@ public class EffectsImpl extends Effects {
     }
 
     @Override
-    public Effect alpha(double newAlpha) {
+    public Effect transparency(double newTransparency) {
 
-        return new TweenEffect(TweenTypes.ALPHA, false, (float) newAlpha);
+        return new TweenEffect(TweenTypes.ALPHA, false, (float) newTransparency);
     }
 
     @Override

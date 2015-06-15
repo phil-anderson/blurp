@@ -1,6 +1,6 @@
 package com.bigcustard.blurp.model.constants;
 
-public enum SpriteLayer {
+public enum ScreenLayer {
 
     Background, Main, Overlay;
 }

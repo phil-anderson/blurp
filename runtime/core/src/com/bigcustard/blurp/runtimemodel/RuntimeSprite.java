@@ -20,8 +20,8 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
     private Matrix4 transformMatrix = new Matrix4();
     private Circle collisionCircle = new Circle();
     private Polygon collisionRectangle = new Polygon();
-    private CollisionShape collisionShape;
-    private SpriteLayer layer;
+    private TargetStyle targetStyle;
+    private ScreenLayer layer;
 
     protected RuntimeSprite() {
 
@@ -37,7 +37,7 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
         setRotation((float) -modelSprite.angle);
         setColor(Convert.toGdxColour(modelSprite.colour, modelSprite.transparency));
         setVisible(!modelSprite.hidden);
-        this.collisionShape = modelSprite.collisionShape;
+        this.targetStyle = modelSprite.targetStyle;
 
         if(modelSprite.layer != this.layer) {
             this.layer = modelSprite.layer;
@@ -45,7 +45,7 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
         }
 
         // Sync mouse state from runtime to model
-        modelSprite.mouseState(mouseListener.buildState());
+        modelSprite.mouse(mouseListener.buildState());
     }
 
     @Override
@@ -81,7 +81,7 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
         if (!MouseState.isInsideWindow()) return null;
 
         Vector3 mouseXY = MouseState.getPosition(layer);
-        boolean hit = collisionShape == CollisionShape.CenterCircle ? collisionCircle.contains(mouseXY.x, mouseXY.y)
+        boolean hit = targetStyle == TargetStyle.Circle ? collisionCircle.contains(mouseXY.x, mouseXY.y)
                                                                     : collisionRectangle.contains(mouseXY.x, mouseXY.y);
         return hit ? this : null;
     }
@@ -103,10 +103,10 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
 
         shapes.set(ShapeRenderer.ShapeType.Line);
 
-        shapes.getColor().a = collisionShape == CollisionShape.BoundaryRectangle ? 1 : 0.5f;
+        shapes.getColor().a = targetStyle == TargetStyle.Rectangle ? 1 : 0.5f;
         shapes.polygon(collisionRectangle.getTransformedVertices());
 
-        shapes.getColor().a = collisionShape == CollisionShape.CenterCircle ? 1 : 0.5f;
+        shapes.getColor().a = targetStyle == TargetStyle.Circle ? 1 : 0.5f;
         shapes.circle(collisionCircle.x, collisionCircle.y, collisionCircle.radius,
                       (int) (9 * Math.cbrt(collisionCircle.radius)));
     }
@@ -139,7 +139,7 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
         return mouseListener;
     }
 
-    public SpriteLayer getLayer() {
+    public ScreenLayer getLayer() {
 
         return layer;
     }

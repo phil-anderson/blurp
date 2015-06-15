@@ -14,15 +14,20 @@ public abstract class Effects {
         return this;
     }
 
-    public Effects defaultEffectStyle(EffectStyle newDefaultEffectStyle) {
+    public Effects defaultStyle(EffectStyle newDefaultStyle) {
 
-        this.defaultEffectStyle = newDefaultEffectStyle;
+        this.defaultEffectStyle = newDefaultStyle;
         return this;
     }
 
-    public Effect zoom(double newZoom) {
+    public Effect zoomTo(double newZoom) {
 
         return scaleTo(newZoom, newZoom);
+    }
+
+    public Effect zoomBy(double newZoom) {
+
+        return scaleBy(newZoom, newZoom);
     }
 
     public Effect scaleTo(double newScale) {
@@ -47,7 +52,7 @@ public abstract class Effects {
 
     public abstract Effect scaleBy(double newScaleX, double newScaleY);
 
-    public abstract Effect alpha(double newAlpha);
+    public abstract Effect transparency(double newTransparency);
 
     public abstract Effect colour(Colour newColour);
 

@@ -7,19 +7,19 @@ public class SpriteCopier {
     public static void copy(Sprite source, Sprite target) {
 
         target.transparency = source.transparency;
-        target.collisionShape = source.collisionShape;
+        target.targetStyle = source.targetStyle;
         target.colour = source.colour;
         target.hidden = source.hidden;
         target.angle = source.angle;
         target.scaleX = source.scaleX;
         target.scaleY = source.scaleY;
-        target.whenMouseEnters = source.whenMouseEnters;
-        target.whenMouseLeaves = source.whenMouseLeaves;
-        target.whenClicked = source.whenClicked;
-        target.whenBeingDragged = source.whenBeingDragged;
-        target.whenDragReleased = source.whenDragReleased;
-        target.whenMousePressed = source.whenMousePressed;
-        target.whenMouseReleased = source.whenMouseReleased;
+        target.onMouseEnter = source.onMouseEnter;
+        target.onMouseExit = source.onMouseExit;
+        target.onClick = source.onClick;
+        target.onDrag = source.onDrag;
+        target.onDragRelease = source.onDragRelease;
+        target.onMousePress = source.onMousePress;
+        target.onMouseRelease = source.onMouseRelease;
         target.x = source.x;
         target.y = source.y;
     }

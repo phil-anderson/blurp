@@ -50,7 +50,7 @@ public class TextSpriteImpl extends TextSprite implements EffectContainer {
     }
 
     @Override
-    public boolean collidedWith(Sprite other) {
+    public boolean overlaps(Sprite other) {
 
         return CollisionDetector.detectCollision(this, other);
     }
@@ -58,7 +58,7 @@ public class TextSpriteImpl extends TextSprite implements EffectContainer {
     @Override
     public TextSprite runEffect(EffectBase effectToRun, SpriteEventHandler completionHandler, ExistingEffectStrategy existingEffectStrategy) {
 
-        if(runningEffect && existingEffectStrategy == ExistingEffectStrategy.DoNotRun) {
+        if(runningEffect && existingEffectStrategy == ExistingEffectStrategy.OnlyIfNoExistingEffect) {
             return this;
         }
 

@@ -24,7 +24,7 @@ public class DebugHudRenderer {
 
         if(!MouseState.isInsideWindow()) return;
 
-        Vector3 mousePosStatic = MouseState.getPosition(SpriteLayer.Overlay);
+        Vector3 mousePosStatic = MouseState.getPosition(ScreenLayer.Overlay);
 
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
@@ -90,7 +90,7 @@ public class DebugHudRenderer {
         font.setScale(reticuleSize * 0.003f);
         font.setColor(BlurpState.debugGdxColour());
 
-        Vector3 mousePosMain = MouseState.getPosition(SpriteLayer.Main);
+        Vector3 mousePosMain = MouseState.getPosition(ScreenLayer.Main);
 
         String zoomString = String.format("%.2f", (float) BlurpStore.modelCamera.zoom);
         String angleString = String.format("%.1f", 360 - BlurpStore.modelCamera.angle % 360) + (char) 127;

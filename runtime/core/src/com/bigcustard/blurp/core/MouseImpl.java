@@ -14,11 +14,11 @@ public class MouseImpl implements Mouse {
 
     public void sync() {
 
-        Vector3 position = MouseState.getPosition(SpriteLayer.Main);
+        Vector3 position = MouseState.getPosition(ScreenLayer.Main);
         this.x = position.x;
         this.y = position.y;
 
-        position = MouseState.getPosition(SpriteLayer.Background);
+        position = MouseState.getPosition(ScreenLayer.Background);
         this.absoluteX = position.x;
         this.absoluteY = position.y;
 

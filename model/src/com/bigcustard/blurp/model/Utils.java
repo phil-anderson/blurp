@@ -1,5 +1,6 @@
 package com.bigcustard.blurp.model;
 
+import java.lang.System;
 import java.util.*;
 
 public class Utils {
@@ -69,7 +70,7 @@ public class Utils {
      * @param high The highest value that could be returned
      * @return A number between the specified low and high values.
      */
-    public double wave(double low, double high, int wavelength) {
+    public double waveValue(double low, double high, int wavelength) {
 
         double angle = (System.currentTimeMillis() % wavelength) * 360 / (wavelength - 1);
 
@@ -103,32 +104,5 @@ public class Utils {
     public double tan(double angle) {
 
         return Math.tan(Math.toRadians(angle));
-    }
-
-    public boolean timedToggle(int millisecondsBetweenToggles) {
-
-        return (System.currentTimeMillis() % millisecondsBetweenToggles * 2) > millisecondsBetweenToggles;
-    }
-
-    public boolean timedToggle(int trueMilliseconds, int falseMilliseconds) {
-
-        return (System.currentTimeMillis() % trueMilliseconds + falseMilliseconds) > trueMilliseconds;
-    }
-
-    /**
-     * Makes your blurp script sleep for the specified number of seconds, after which it'll carry on normally again.
-     * <p>
-     * WARNING - Effects won't be moving as there will be no blurpify calls, they'll effectively be on pause until the
-     * end of the sleep.
-     *
-     * @param milliseconds The number of milliseconds to sleep for.
-     */
-    public void sleep(int milliseconds) {
-
-        try {
-            Thread.sleep(milliseconds);
-        } catch(InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }

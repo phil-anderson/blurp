@@ -8,11 +8,14 @@ public class HiddenExample extends BlurpJavaProgram {
     @Override
     public void run() {
 
-        ImageSprite world = resources.createImageSprite("hello-world.png");
+        final ImageSprite world = resources.createImageSprite("hello-world.png");
 
-        while(true) {
-            world.hidden = utils.timedToggle(1, 250);
-            screen.update();
-        }
+        timer.every(500, new Runnable() {
+            @Override
+            public void run() {
+                world.hidden = !world.hidden;
+            }
+        });
+        while(screen.update());
     }
 }

@@ -72,7 +72,7 @@ public abstract class Camera {
 
     public Camera runEffect(EffectBase effectToRun, CameraEventHandler whatToDoAtEnd) {
 
-        return runEffect(effectToRun, whatToDoAtEnd, ExistingEffectStrategy.CombineWithExisting);
+        return runEffect(effectToRun, whatToDoAtEnd, ExistingEffectStrategy.CombineWithExistingEffect);
     }
 
     public abstract Camera runEffect(EffectBase effectToRun, CameraEventHandler whatToDoAtEnd, ExistingEffectStrategy existingEffectStrategy);

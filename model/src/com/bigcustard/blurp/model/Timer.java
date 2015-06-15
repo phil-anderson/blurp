@@ -15,5 +15,5 @@ public abstract class Timer {
 
     public abstract Timer remove(Runnable action);
 
-    public abstract Timer clear();
+    public abstract Timer removeAll();
 }

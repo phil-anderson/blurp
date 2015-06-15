@@ -43,7 +43,7 @@ public class TimerImpl extends Timer {
     }
 
     @Override
-    public Timer clear() {
+    public Timer removeAll() {
 
         scheduledTasks.clear();
         return this;
@@ -51,6 +51,6 @@ public class TimerImpl extends Timer {
 
     public void reset() {
 
-        clear();
+        removeAll();
     }
 }

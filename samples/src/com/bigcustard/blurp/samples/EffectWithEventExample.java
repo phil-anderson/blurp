@@ -11,7 +11,7 @@ public class EffectWithEventExample extends BlurpJavaProgram {
     public void run() {
 
         EffectGroup destroyEffect = effects.combine(effects.scaleBy(4),
-                                                  effects.alpha(0));
+                                                  effects.transparency(0));
 
         while(true) {
             // Create a world...

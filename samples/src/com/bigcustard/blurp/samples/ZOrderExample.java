@@ -13,8 +13,8 @@ public class ZOrderExample extends BlurpJavaProgram {
         ImageSprite world = resources.createImageSprite("hello-world.png")
                                   .colour(Colours.RED)
                                   .position(300, 200)
-                                  .collisionShape(CollisionShape.CenterCircle)
-                                  .whenMouseEnters(new SpriteEventHandler() {
+                                  .targetStyle(TargetStyle.Circle)
+                                  .onMouseEnter(new SpriteEventHandler() {
                                       @Override
                                       public void handle(Sprite sprite) {
 

@@ -14,7 +14,7 @@ public class TimerExample extends BlurpJavaProgram {
             @Override
             public void run() {
 
-                world.runEffect(effects.rotateBy(6).duration(500).effectStyle(EffectStyle.BounceStop));
+                world.runEffect(effects.rotateBy(6).duration(500).style(EffectStyle.BounceStop));
             }
         });
 

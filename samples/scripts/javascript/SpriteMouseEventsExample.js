@@ -14,7 +14,7 @@ while(true) {
 function makeWorld(x, y) {
 
     return blurp.createImageSprite("hello-world.png")
-                .collisionShape(CenterCircle)
+                .targetStyle(Circle)
                 .scale(0.33)
                 .position(x, y)
                 .whenMouseEnters(spin)

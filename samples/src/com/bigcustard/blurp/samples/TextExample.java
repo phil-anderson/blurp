@@ -72,7 +72,7 @@ public class TextExample extends BlurpJavaProgram {
                 anchorText.text = "Center Handle\nCenter Handle\nCenter Handle";
             }
             rotateAndScaleText.rotateBy(2);
-            rotateAndScaleText.scale(utils.wave(0.5, 2, 2500));
+            rotateAndScaleText.scale(utils.waveValue(0.5, 2, 2500));
             frameCount = (frameCount + 1) % 450;
             screen.update();
         }

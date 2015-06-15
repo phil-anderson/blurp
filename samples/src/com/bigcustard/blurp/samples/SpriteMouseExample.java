@@ -12,23 +12,23 @@ public class SpriteMouseExample extends BlurpJavaProgram {
         ImageSprite world = resources.createImageSprite("hello-world.png");
         while(true) {
 
-            if(world.mouseState.holding) {
+            if(world.mouse.isHolding) {
                 world.colour(Colours.GOLD);
-            } else if(world.mouseState.over) {
+            } else if(world.mouse.isOver) {
                 world.colour(Colours.WHITE);
             } else {
                 world.colour(Colours.GREY);
             }
 
-            if(world.mouseState.dragging) {
-                world.position(world.mouseState.dragX, world.mouseState.dragY);
+            if(world.mouse.isDragging) {
+                world.position(world.mouse.dragX, world.mouse.dragY);
             }
 
-            if(world.mouseState.dragReleased) {
-                world.runEffect(effects.moveTo(400, 300).effectStyle(EffectStyle.ElasticStop).duration(750));
+            if(world.mouse.wasDragReleased) {
+                world.runEffect(effects.moveTo(400, 300).style(EffectStyle.ElasticStop).duration(750));
             }
 
-            if(world.mouseState.clicked) {
+            if(world.mouse.wasClicked) {
                 world.runEffect(effects.rotateBy(360).duration(750));
             }
 

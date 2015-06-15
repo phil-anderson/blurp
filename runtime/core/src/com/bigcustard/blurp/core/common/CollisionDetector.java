@@ -20,11 +20,11 @@ public class CollisionDetector {
 
         if(runtimeSpriteA == null || runtimeSpriteB == null) return false;
 
-        if(spriteA.collisionShape == CollisionShape.BoundaryRectangle) {
-            return spriteB.collisionShape == CollisionShape.BoundaryRectangle ? checkRectangleRectangle(runtimeSpriteA.getCollisionRectangle(), runtimeSpriteB.getCollisionRectangle())
+        if(spriteA.targetStyle == TargetStyle.Rectangle) {
+            return spriteB.targetStyle == TargetStyle.Rectangle ? checkRectangleRectangle(runtimeSpriteA.getCollisionRectangle(), runtimeSpriteB.getCollisionRectangle())
                                                                               : checkRectangleCircle(runtimeSpriteA.getCollisionRectangle(), runtimeSpriteB.getCollisionCircle());
         } else {
-            return spriteB.collisionShape == CollisionShape.CenterCircle ? checkCircleCircle(runtimeSpriteA.getCollisionCircle(), runtimeSpriteB.getCollisionCircle())
+            return spriteB.targetStyle == TargetStyle.Circle ? checkCircleCircle(runtimeSpriteA.getCollisionCircle(), runtimeSpriteB.getCollisionCircle())
                                                                          : checkRectangleCircle(runtimeSpriteB.getCollisionRectangle(), runtimeSpriteA.getCollisionCircle());
         }
     }

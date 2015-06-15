@@ -45,10 +45,10 @@ public class ScriptEngineBlurpRunnable implements Runnable {
         scriptEnginePutEnums(Justification.values(), bindings);
         scriptEnginePutEnums(Handle.values(), bindings);
         scriptEnginePutEnums(Key.values(), bindings);
-        scriptEnginePutEnums(CollisionShape.values(), bindings);
+        scriptEnginePutEnums(TargetStyle.values(), bindings);
         scriptEnginePutEnums(EffectStyle.values(), bindings);
         scriptEnginePutEnums(ExistingEffectStrategy.values(), bindings);
-        scriptEnginePutEnums(SpriteLayer.values(), bindings);
+        scriptEnginePutEnums(ScreenLayer.values(), bindings);
 
         if (language.equals("jruby")) JRubyWrapperSpike.wrap(scriptEngine, bindings);
 

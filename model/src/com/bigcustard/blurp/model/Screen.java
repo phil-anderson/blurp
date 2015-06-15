@@ -58,6 +58,7 @@ public abstract class Screen {
      */
     public abstract boolean update();
 
+    public abstract Screen setTitle(String title);
 }
 
 

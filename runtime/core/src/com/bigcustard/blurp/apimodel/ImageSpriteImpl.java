@@ -35,7 +35,7 @@ public class ImageSpriteImpl extends ImageSprite implements EffectContainer {
     }
 
     @Override
-    public boolean collidedWith(Sprite other) {
+    public boolean overlaps(Sprite other) {
 
         return CollisionDetector.detectCollision(this, other);
     }
@@ -43,7 +43,7 @@ public class ImageSpriteImpl extends ImageSprite implements EffectContainer {
     @Override
     public ImageSprite runEffect(EffectBase effectToRun, SpriteEventHandler completionHandler, ExistingEffectStrategy existingEffectStrategy) {
 
-        if(runningEffect && existingEffectStrategy == ExistingEffectStrategy.DoNotRun) {
+        if(runningEffect && existingEffectStrategy == ExistingEffectStrategy.OnlyIfNoExistingEffect) {
             return this;
         }
 
