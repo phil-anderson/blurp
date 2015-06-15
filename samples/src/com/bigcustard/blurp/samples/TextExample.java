@@ -14,30 +14,30 @@ public class TextExample extends BlurpJavaProgram {
 
 //        system.debugMode(true);
 
-        system.createTextSprite("LEFT-JUSTIFIED\n" + MESSAGE)
+        resources.createTextSprite("LEFT-JUSTIFIED\n" + MESSAGE)
              .position(150, 500)
              .wrap(220, Justification.AlignLeft);
 
-        system.createTextSprite("CENTER-JUSTIFIED\n" + MESSAGE)
+        resources.createTextSprite("CENTER-JUSTIFIED\n" + MESSAGE)
              .position(400, 500)
              .wrap(220, Justification.AlignCenter);
 
-        system.createTextSprite("RIGHT-JUSTIFIED\n" + MESSAGE)
+        resources.createTextSprite("RIGHT-JUSTIFIED\n" + MESSAGE)
             .position(650, 500)
             .wrap(220, Justification.AlignRight);
 
-        system.createTextSprite(COLOURFUL_MESSAGE)
+        resources.createTextSprite(COLOURFUL_MESSAGE)
                                        .position(400, 400)
                                        .colourTagsEnabled(true);
 
-        system.createImageSprite("hello-world.png")
+        resources.createImageSprite("hello-world.png")
              .position(250, 200)
              .alpha(0.3);
 
-        TextSprite anchorText = system.createTextSprite("")
+        TextSprite anchorText = resources.createTextSprite("")
                                      .position(250, 200);
 
-        TextSprite rotateAndScaleText = system.createTextSprite("Rotate and Scale!").position(600, 200);
+        TextSprite rotateAndScaleText = resources.createTextSprite("Rotate and Scale!").position(600, 200);
         rotateAndScaleText.colour = Colours.DODGER_BLUE;
 
         int frameCount = 0;

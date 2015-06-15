@@ -95,7 +95,7 @@ public class ImageSpriteImpl extends ImageSprite implements EffectContainer {
     @Override
     public ImageSprite copy() {
 
-        ImageSprite copy = BlurpStore.system.createImageSprite(this.image);
+        ImageSprite copy = BlurpStore.resources.createImageSprite(this.image);
         SpriteCopier.copy(this, copy);
         return copy;
     }

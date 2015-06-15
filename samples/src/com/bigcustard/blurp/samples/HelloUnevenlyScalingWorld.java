@@ -8,7 +8,7 @@ public class HelloUnevenlyScalingWorld extends BlurpJavaProgram {
     @Override
     public void run() {
 
-        ImageSprite world = system.createImageSprite("hello-world.png");
+        ImageSprite world = resources.createImageSprite("hello-world.png");
 
         while(true) {
             double waveValue = utils.wave(0, 0.5, 1000);

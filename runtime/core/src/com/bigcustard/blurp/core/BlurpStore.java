@@ -41,6 +41,7 @@ public class BlurpStore {
     public static OrthographicCamera staticCamera;
     public static ScalingViewport mainViewport;
     public static ScalingViewport staticViewport;
+    public static ResourcesImpl resources;
     public static EffectsImpl effects;
     public static ConsoleImpl console;
     public static RuntimeConsole runtimeConsole;
@@ -78,6 +79,7 @@ public class BlurpStore {
         console = new ConsoleImpl();
         runtimeConsole = new RuntimeConsole();
 
+        resources = new ResourcesImpl();
         effects = new EffectsImpl();
         Tween.registerAccessor(Sprite.class, new SpriteAccessor());
         Tween.registerAccessor(Camera.class, new CameraAccessor());

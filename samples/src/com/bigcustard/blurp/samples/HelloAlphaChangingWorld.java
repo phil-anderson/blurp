@@ -8,10 +8,10 @@ public class HelloAlphaChangingWorld extends BlurpJavaProgram {
     @Override
     public void run() {
 
-        Image worldImage = system.loadImage("hello-world.png");
+        Image worldImage = resources.loadImage("hello-world.png");
 
-        system.createImageSprite(worldImage);
-        ImageSprite upsideDownWorld = system.createImageSprite(worldImage).rotateBy(180); // Upside-down world exactly covering the normal one
+        resources.createImageSprite(worldImage);
+        ImageSprite upsideDownWorld = resources.createImageSprite(worldImage).rotateBy(180); // Upside-down world exactly covering the normal one
 
         while(true) {
             // Fade the upside-down one in and out, thus covering and revealing the normal one.

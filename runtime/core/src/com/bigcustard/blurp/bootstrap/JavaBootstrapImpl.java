@@ -33,6 +33,9 @@ public class JavaBootstrapImpl implements JavaBootstrap {
     }
 
     @Override
+    public Resources getResources() { return BlurpStore.resources; }
+
+    @Override
     public Effects getEffects() {
 
         return BlurpStore.effects;

@@ -9,11 +9,11 @@ public class CameraExample extends BlurpJavaProgram {
     @Override
     public void run() {
 
-        Image worldImage = system.loadImage("hello-world.png");
+        Image worldImage = resources.loadImage("hello-world.png");
 
         Sprite[] sprites = new Sprite[8];
         for(int i = 0; i < 8; i++) {
-            sprites[i] = system.createImageSprite(worldImage)
+            sprites[i] = resources.createImageSprite(worldImage)
                               .x(50 + i * 100)
                               .scale(utils.randomInRange(0.1, 0.5))
                               .rotation(utils.randomUpTo(360));

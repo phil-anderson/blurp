@@ -15,7 +15,7 @@ public class EffectWithEventExample extends BlurpJavaProgram {
 
         while(true) {
             // Create a world...
-            ImageSprite world = system.createImageSprite("hello-world.png")
+            ImageSprite world = resources.createImageSprite("hello-world.png")
                     .position(utils.randomInRange(50, 750), utils.randomInRange(50, 550))
                     .scale(utils.randomInRange(0.1, 0.5));
 

@@ -10,7 +10,7 @@ public class SpriteMultiplyExample extends BlurpJavaProgram {
     @Override
     public void run() {
 
-        ImageSprite[] worlds = system.createImageSprite("hello-world.png")
+        ImageSprite[] worlds = resources.createImageSprite("hello-world.png")
                                     .multiplyBy(NUM_WORLDS);
 
         for(ImageSprite world : worlds) {

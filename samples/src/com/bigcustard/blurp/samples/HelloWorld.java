@@ -7,7 +7,7 @@ public class HelloWorld extends BlurpJavaProgram {
     @Override
     public void run() {
 
-        system.createImageSprite("hello-world.png");
+        resources.createImageSprite("hello-world.png");
 
         screen.update();
     }

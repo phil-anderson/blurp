@@ -10,16 +10,16 @@ public class HelloColourTintedWorlds extends BlurpJavaProgram {
     @Override
     public void run() {
 
-        Image worldImage = system.loadImage("hello-world.png");
-        system.createImageSprite(worldImage)
+        Image worldImage = resources.loadImage("hello-world.png");
+        resources.createImageSprite(worldImage)
              .position(180, 180)
              .colour(Colours.RED);
 
-        system.createImageSprite(worldImage)
+        resources.createImageSprite(worldImage)
              .position(400, 420)
              .colour(Colours.GREEN);
 
-        system.createImageSprite(worldImage)
+        resources.createImageSprite(worldImage)
              .position(620, 180)
              .colour(Colours.BLUE);
 

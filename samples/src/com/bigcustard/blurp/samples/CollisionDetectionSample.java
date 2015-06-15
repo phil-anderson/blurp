@@ -10,36 +10,36 @@ public class CollisionDetectionSample extends BlurpJavaProgram {
     public void run() {
 
         system.debugMode(true);
-        Image worldImage = system.loadImage("hello-world.png");
+        Image worldImage = resources.loadImage("hello-world.png");
 
-        ImageSprite worldWithCircle1 = system.createImageSprite(worldImage)
+        ImageSprite worldWithCircle1 = resources.createImageSprite(worldImage)
                                            .scale(0.5)
                                            .position(200, 500)
                                            .collisionShape(CollisionShape.CenterCircle);
 
-        ImageSprite worldWithCircle2 = system.createImageSprite(worldImage)
+        ImageSprite worldWithCircle2 = resources.createImageSprite(worldImage)
                                            .scale(0.5)
                                            .position(600, 500)
                                            .collisionShape(CollisionShape.CenterCircle);
 
-        ImageSprite worldWithCircle3 = system.createImageSprite(worldImage)
+        ImageSprite worldWithCircle3 = resources.createImageSprite(worldImage)
                                            .scale(0.5)
                                            .position(200, 300)
                                            .collisionShape(CollisionShape.CenterCircle);
 
-        ImageSprite worldWithRectangle1 = system.createImageSprite(worldImage)
+        ImageSprite worldWithRectangle1 = resources.createImageSprite(worldImage)
                                               .scale(0.5)
                                               .rotation(45)
                                               .position(600, 300)
                                               .collisionShape(CollisionShape.BoundaryRectangle);
 
-        ImageSprite worldWithRectangle2 = system.createImageSprite(worldImage)
+        ImageSprite worldWithRectangle2 = resources.createImageSprite(worldImage)
                                               .scale(0.5)
                                               .rotation(45)
                                               .position(200, 100)
                                               .collisionShape(CollisionShape.BoundaryRectangle);
 
-        ImageSprite worldWithRectangle3 = system.createImageSprite(worldImage)
+        ImageSprite worldWithRectangle3 = resources.createImageSprite(worldImage)
                                               .scale(0.5)
                                               .rotation(70)
                                               .position(600, 100)

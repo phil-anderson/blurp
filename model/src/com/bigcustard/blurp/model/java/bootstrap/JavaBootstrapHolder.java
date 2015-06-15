@@ -66,6 +66,12 @@ public class JavaBootstrapHolder implements JavaBootstrap {
     }
 
     @Override
+    public Resources getResources() {
+
+        return delegate.getResources();
+    }
+
+    @Override
     public Keyboard getKeyboard() {
 
         return delegate.getKeyboard();

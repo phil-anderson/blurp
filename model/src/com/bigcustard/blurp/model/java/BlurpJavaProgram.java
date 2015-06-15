@@ -13,6 +13,7 @@ public abstract class BlurpJavaProgram implements Runnable {
     protected final Screen screen;
     protected final Console console;
     protected final Camera camera;
+    protected final Resources resources;
     protected final Effects effects;
     protected final Keyboard keyboard;
     protected final Mouse mouse;
@@ -27,6 +28,7 @@ public abstract class BlurpJavaProgram implements Runnable {
         screen = javaBootstrap.getScreen();
         console = javaBootstrap.getConsole();
         camera = javaBootstrap.getCamera();
+        resources = javaBootstrap.getResources();
         effects = javaBootstrap.getEffects();
         keyboard = javaBootstrap.getKeyboard();
         mouse = javaBootstrap.getMouse();

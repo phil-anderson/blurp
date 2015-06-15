@@ -110,7 +110,7 @@ public class TextSpriteImpl extends TextSprite implements EffectContainer {
     @Override
     public TextSprite copy() {
 
-        TextSprite copy = BlurpStore.system.createTextSprite(this.text);
+        TextSprite copy = BlurpStore.resources.createTextSprite(this.text);
         SpriteCopier.copy(this, copy);
         return copy;
     }

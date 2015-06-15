@@ -8,7 +8,7 @@ public class MouseExample extends BlurpJavaProgram {
     @Override
     public void run() {
 
-        ImageSprite world = system.createImageSprite("hello-world.png");
+        ImageSprite world = resources.createImageSprite("hello-world.png");
 
         while(true) {
 
