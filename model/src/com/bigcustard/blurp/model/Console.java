@@ -2,34 +2,34 @@ package com.bigcustard.blurp.model;
 
 import com.bigcustard.blurp.model.constants.*;
 
-public abstract class Log {
+public abstract class Console {
 
     public Colour colour = Colours.LIGHT_GREY;
     public double transparency = 1;
 
-    public Log colour(Colour newColour) {
+    public Console colour(Colour newColour) {
 
         this.colour = newColour;
         return this;
     }
 
-    public Log transparency(double newAlpha) {
+    public Console transparency(double newAlpha) {
 
         this.transparency = newAlpha;
         return this;
     }
 
-    public Log printLine(Object objectToPrint) {
+    public Console printLine(Object objectToPrint) {
 
         return println(objectToPrint);
     }
 
-    public Log println(Object objectToPrint) {
+    public Console println(Object objectToPrint) {
 
         return print(objectToPrint + "\n");
     }
 
-    public abstract Log clear();
+    public abstract Console clear();
 
-    public abstract Log print(Object objectToPrint);
+    public abstract Console print(Object objectToPrint);
 }

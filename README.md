@@ -4,7 +4,8 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
-* BUG - If colour tag disappears from start of log, lines before next color tag are rendered in last colour from previous render.
+* BUG - If colour tag disappears from start of console, lines before next color tag are rendered in last colour from previous render.
+* BUG - Timer.after doesn;t work + need to sort out potential concurrent modification
 * Keyboard - onKeyDown(), onKeyUp()
 * Mouse - onMouseMoved, onLeftButtonPressed, onRightButtonPressed, onLeftButtonReleased, onRightButtonReleased
 * NamedColour = Add to colourTag map on create, then user can create named colours too

@@ -32,7 +32,7 @@ public class BlurpStore {
     public static TweenManager tweener;
     public static Blurpifier blurpifier;
     public static RuntimeRepository runtimeRepository;
-    public static LogImpl log;
+    public static ConsoleImpl console;
     public static SystemImpl system;
     public static RuntimeScreen runtimeScreen;
     public static BlurpScreen blurpScreen;
@@ -87,7 +87,7 @@ public class BlurpStore {
         blurpScreen = new BlurpScreen();
         modelRepository = new ModelRepository();
         runtimeRepository = new RuntimeRepository();
-        log = new LogImpl();
+        console = new ConsoleImpl();
         runtimeLog = new RuntimeLog();
         system = new SystemImpl();
     }
@@ -131,7 +131,7 @@ public class BlurpStore {
         initialiseFonts();
 
         blurpifier.reset();
-        log.reset();
+        console.reset();
         modelCamera.reset();
         effects.reset();
         modelScreen.reset(configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight());

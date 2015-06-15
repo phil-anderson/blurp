@@ -5,17 +5,17 @@ import com.bigcustard.blurp.core.commands.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.constants.*;
 
-public class LogImpl extends Log {
+public class ConsoleImpl extends Console {
 
     @Override
-    public Log clear() {
+    public Console clear() {
 
         BlurpStore.runtimeRepository.registerCommand(new LogClearCommand());
         return this;
     }
 
     @Override
-    public Log print(Object textToPrint) {
+    public Console print(Object textToPrint) {
 
         BlurpStore.runtimeRepository.registerCommand(new LogPrintCommand("" + textToPrint, colour, transparency));
         return null;

@@ -13,7 +13,7 @@ public class SystemImpl extends System {
 
     public SystemImpl() {
 
-        super(BlurpStore.log);
+        super(BlurpStore.console);
     }
 
     @Override
@@ -36,6 +36,15 @@ public class SystemImpl extends System {
             Thread.sleep(milliseconds);
         } catch(InterruptedException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void wait(int milliseconds) {
+
+        long finishTime = java.lang.System.currentTimeMillis() + milliseconds;
+        while(java.lang.System.currentTimeMillis() < finishTime) {
+            BlurpStore.modelScreen.update();
         }
     }
 

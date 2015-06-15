@@ -6,7 +6,7 @@ import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.util.*;
 
-// A quick, hacky log
+// A quick, hacky console
 public class RuntimeLog {
 
     private final int lines, columns; // In characters
