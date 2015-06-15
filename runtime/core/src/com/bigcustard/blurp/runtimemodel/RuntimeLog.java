@@ -14,10 +14,12 @@ public class RuntimeLog {
     private final float pixelHeight;
     private final float lineSpacing;
     private final String[] contents;
+    private final StringBuilder stringContents;
 
     private Colour lastColour;
     private double lastAlpha;
     private int currentLine;
+
     private int currentColumn;
 
     public RuntimeLog() {
@@ -30,11 +32,13 @@ public class RuntimeLog {
         lineSpacing = pixelHeight / lines;
 
         contents = new String[lines];
+        stringContents = new StringBuilder();
         clear();
     }
 
     public void clear() {
 
+        stringContents.setLength(0);
         Arrays.fill(contents, "");
         currentLine = 0;
         currentColumn = 0;
@@ -42,6 +46,12 @@ public class RuntimeLog {
 
     public void print(String text, Colour colour, double alpha) {
 
+        text = text.replaceAll("\r\n", "\n").replaceAll("\r", "\n");
+
+        stringContents.append(text);
+        if(stringContents.length() > 32768) {
+            stringContents.delete(0, stringContents.length() - 32768); // Max 32K characters
+        }
         text = text.replaceAll("\\[", "[[");
 
         if(text.contains("\n")) {
@@ -100,5 +110,11 @@ public class RuntimeLog {
                 BlurpStore.systemFont.draw(batch, contents[i], 0, y);
             }
         }
+    }
+
+    @Override
+    public String toString() {
+
+        return stringContents.toString();
     }
 }

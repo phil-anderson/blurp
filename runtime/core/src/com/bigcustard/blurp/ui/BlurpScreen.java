@@ -186,15 +186,21 @@ public class BlurpScreen extends ScreenAdapter {
 
     private void handleSystemShortcuts() {
 
-        if(Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) || Gdx.input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
-            if(Gdx.input.isKeyJustPressed(Input.Keys.D)) {
-                enableDebug(!BlurpState.debugMode, BlurpState.debugColour);
-            } else if(Gdx.input.isKeyJustPressed(Input.Keys.C) && !BlurpState.scriptComplete) {
-                BlurpStore.runtime.stop();
-            } else if(Gdx.input.isKeyJustPressed(Input.Keys.R) && !BlurpState.scriptComplete) {
-                BlurpStore.runtime.restart();
-            } else if(Gdx.input.isKeyJustPressed(Input.Keys.X) && !BlurpState.scriptComplete) {
-                BlurpStore.runtime.terminate();
+        if(!BlurpState.scriptComplete) {
+            if(Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) || Gdx.input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
+                if(Gdx.input.isKeyJustPressed(Input.Keys.C)) {
+                    Gdx.app.getClipboard().setContents(BlurpStore.runtimeLog.toString());
+                } else if(Gdx.input.isKeyJustPressed(Input.Keys.L)) {
+                    BlurpStore.runtimeLog.clear();
+                } else if(Gdx.input.isKeyJustPressed(Input.Keys.D)) {
+                    enableDebug(!BlurpState.debugMode, BlurpState.debugColour);
+                } else if(Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+                    BlurpStore.runtime.stop();
+                } else if(Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+                    BlurpStore.runtime.restart();
+                } else if(Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
+                    BlurpStore.runtime.terminate();
+                }
             }
         }
     }
@@ -227,7 +233,7 @@ public class BlurpScreen extends ScreenAdapter {
         mainStage = new LayerStage(BlurpStore.mainViewport, batch);
         overlayStage = new LayerStage(BlurpStore.staticViewport, batch);
 
-        Gdx.input.setInputProcessor(new InputMultiplexer(overlayStage, mainStage, backgroundStage));
+        Gdx.input.setInputProcessor(new InputMultiplexer(KeyboardImpl.KEYBOARD_PROCESSOR, overlayStage, mainStage, backgroundStage));
 
         if(Gdx.graphics.getBufferFormat().samples > 0) {
             Gdx.gl.glLineWidth(1.5f);

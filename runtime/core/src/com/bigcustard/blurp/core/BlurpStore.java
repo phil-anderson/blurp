@@ -110,6 +110,7 @@ public class BlurpStore {
 
         runtimeScreen.sync();
         modelMouse.sync();
+        keyboard.sync();
     }
 
     public static void reset() {
