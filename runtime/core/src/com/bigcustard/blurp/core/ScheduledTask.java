@@ -24,4 +24,9 @@ public class ScheduledTask {
         }
         return false;
     }
+
+    public Runnable getAction() {
+
+        return action;
+    }
 }

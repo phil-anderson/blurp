@@ -14,9 +14,12 @@ public class TimerImpl extends Timer {
 
     public void dispatchEvents() {
 
-        for(Iterator<ScheduledTask> iter = scheduledTasks.iterator(); iter.hasNext(); ) {
-            if(iter.next().update()) {
-                iter.remove();
+        // Use a copy in case action triggered by task.update() wants to remove tasks
+        ArrayList<ScheduledTask> scheduledTasksCopy = new ArrayList<ScheduledTask>(scheduledTasks);
+        for(Iterator<ScheduledTask> iter = scheduledTasksCopy.iterator(); iter.hasNext(); ) {
+            ScheduledTask task = iter.next();
+            if(task.update()) {
+                scheduledTasks.remove(task);
             }
         }
     }
@@ -38,7 +41,12 @@ public class TimerImpl extends Timer {
     @Override
     public Timer remove(Runnable action) {
 
-        while(scheduledTasks.remove(action)) { }
+        for(Iterator<ScheduledTask> iter = scheduledTasks.iterator(); iter.hasNext(); ) {
+            ScheduledTask task = iter.next();
+            if(task.getAction() == action) {
+                iter.remove();
+            }
+        }
         return this;
     }
 
