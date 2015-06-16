@@ -38,7 +38,7 @@ public class TextExample extends BlurpJavaProgram {
                                      .position(250, 200);
 
         TextSprite rotateAndScaleText = resources.createTextSprite("Rotate and Scale!").position(600, 200);
-        rotateAndScaleText.colour = Colours.DODGER_BLUE;
+        rotateAndScaleText.colour = Colours.DodgerBlue;
 
         int frameCount = 0;
         while(true) {

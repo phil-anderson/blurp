@@ -28,7 +28,7 @@ public class BlurpRuntime {
         BlurpStore.initialise(config, mouseWindowChecker, this);
 
         if(config.isDebugEnabled()) {
-            SetDebugModeCommand debugCommand = new SetDebugModeCommand(config.isDebugEnabled(), Colours.LIME_GREEN);
+            SetDebugModeCommand debugCommand = new SetDebugModeCommand(config.isDebugEnabled(), Colours.LimeGreen);
             BlurpStore.runtimeRepository.registerCommand(debugCommand);
         }
     }

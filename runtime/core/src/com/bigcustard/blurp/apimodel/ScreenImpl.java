@@ -19,7 +19,7 @@ public class ScreenImpl extends Screen {
     public void reset(double viewportWidth, double viewportHeight) {
 
         viewport.size(viewportWidth, viewportHeight).stretchToFit(false);
-        backgroundColour = Colours.BLACK;
+        backgroundColour = Colours.Black;
     }
 
     @Override

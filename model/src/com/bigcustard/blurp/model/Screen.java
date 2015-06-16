@@ -20,7 +20,7 @@ public abstract class Screen {
      * anything we'd already displayed on the screen, but Blurp's far too clever to let that happen, and makes sure it
      * all works nicely.
      */
-    public Colour backgroundColour = Colours.BLACK;
+    public Colour backgroundColour = Colours.Black;
 
     public final Viewport viewport;
 

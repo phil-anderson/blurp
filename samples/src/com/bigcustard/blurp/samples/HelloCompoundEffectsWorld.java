@@ -13,7 +13,7 @@ public class HelloCompoundEffectsWorld extends BlurpJavaProgram {
         effects.defaultDuration(500);
 
         EffectBase squish = effects.scaleTo(1, 0.7);
-        EffectBase goRed = effects.colour(Colours.RED);
+        EffectBase goRed = effects.colour(Colours.Red);
         EffectBase squishAndGoRed = effects.combine(squish, goRed);
 
         EffectBase spin = effects.rotateBy(720);

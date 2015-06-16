@@ -8,7 +8,7 @@ import com.bigcustard.blurp.util.*;
 public class BlurpState {
 
     public static boolean debugMode;
-    public static Colour debugColour = Colours.LIME_GREEN;
+    public static Colour debugColour = Colours.LimeGreen;
     public static boolean scriptComplete;
     public static RuntimeException exception;
     public static long frameStartTime;
@@ -22,7 +22,7 @@ public class BlurpState {
     public static void reset() {
 
         debugMode = false;
-        debugColour = Colours.LIME_GREEN;
+        debugColour = Colours.LimeGreen;
         scriptComplete = false;
         exception = null;
         error = false;

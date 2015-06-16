@@ -13,10 +13,10 @@ public class HelloControllableWorld extends BlurpJavaProgram {
 
         while(true) {
 
-            if(keyboard.isKeyPressed(Key.Key_Left)) world.x -= 2;
-            if(keyboard.isKeyPressed(Key.Key_Right)) world.x += 2;
-            if(keyboard.isKeyPressed(Key.Key_Up)) world.y += 2;
-            if(keyboard.isKeyPressed(Key.Key_Down)) world.y -= 2;
+            if(keyboard.isKeyPressed(Key.Left_Key)) world.x -= 2;
+            if(keyboard.isKeyPressed(Key.Right_Key)) world.x += 2;
+            if(keyboard.isKeyPressed(Key.Up_Key)) world.y += 2;
+            if(keyboard.isKeyPressed(Key.Down_Key)) world.y -= 2;
 
             screen.update();
         }

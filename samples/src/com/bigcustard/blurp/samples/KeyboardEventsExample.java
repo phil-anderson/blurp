@@ -8,14 +8,14 @@ public class KeyboardEventsExample extends BlurpJavaProgram{
     @Override
     public void run() {
 
-        keyboard.onKeyPressed(Key.Key_Enter, new Runnable() {
+        keyboard.onKeyPressed(Key.Enter_Key, new Runnable() {
             @Override
             public void run() {
                 console.println("Enter Down");
             }
         });
 
-        keyboard.onKeyReleased(Key.Key_Enter, new Runnable() {
+        keyboard.onKeyReleased(Key.Enter_Key, new Runnable() {
             @Override
             public void run() {
                 console.println("Enter Up");
@@ -23,8 +23,8 @@ public class KeyboardEventsExample extends BlurpJavaProgram{
         });
 
         while(screen.update()) {
-            if(keyboard.wasKeyJustPressed(Key.Key_Space)) console.println("Space Down");
-            if(keyboard.wasKeyJustReleased(Key.Key_Space)) console.println("Space Up");
+            if(keyboard.wasKeyJustPressed(Key.Space_Key)) console.println("Space Down");
+            if(keyboard.wasKeyJustReleased(Key.Space_Key)) console.println("Space Up");
         }
     }
 }

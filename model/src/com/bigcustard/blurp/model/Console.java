@@ -4,7 +4,7 @@ import com.bigcustard.blurp.model.constants.*;
 
 public abstract class Console {
 
-    public Colour colour = Colours.LIGHT_GREY;
+    public Colour colour = Colours.LightGrey;
     public double transparency = 1;
 
     public Console colour(Colour newColour) {

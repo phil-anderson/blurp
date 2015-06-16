@@ -13,11 +13,11 @@ public class SpriteMouseExample extends BlurpJavaProgram {
         while(true) {
 
             if(world.mouse.isHolding) {
-                world.colour(Colours.GOLD);
+                world.colour(Colours.Gold);
             } else if(world.mouse.isOver) {
-                world.colour(Colours.WHITE);
+                world.colour(Colours.White);
             } else {
-                world.colour(Colours.GREY);
+                world.colour(Colours.GreenYellow);
             }
 
             if(world.mouse.isDragging) {

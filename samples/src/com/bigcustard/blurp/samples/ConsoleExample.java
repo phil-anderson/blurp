@@ -29,7 +29,7 @@ public class ConsoleExample extends BlurpJavaProgram {
             console.print("Blurp Rules!!! ");
             screen.update();
 
-            if(keyboard.wasKeyJustPressed(Key.Key_Space)) {
+            if(keyboard.wasKeyJustPressed(Key.Space_Key)) {
                 console.clear();
             }
         }

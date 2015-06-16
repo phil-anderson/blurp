@@ -19,7 +19,7 @@ public class TextSpriteImpl extends TextSprite implements EffectContainer {
         scaleX = 1;
         scaleY = 1;
         transparency = 1;
-        colour = Colours.WHITE;
+        colour = Colours.White;
         fontSize = 30;
         wrapWidth = -1;
         justification = Justification.AlignLeft;

@@ -23,25 +23,25 @@ public class ColourTest {
     @Test
     public void equalsReturnsFalseForDifferentColours() throws Exception {
 
-        assertThat(Colours.RED.equals(Colours.BLUE), is(false));
+        assertThat(Colours.Red.equals(Colours.Blue), is(false));
     }
 
     @Test
     public void canMixcolourss() throws Exception {
 
-        assertThat(Colours.RED.mixedWith(Colours.BLUE), is(Colours.PURPLE));
+        assertThat(Colours.Red.mixedWith(Colours.Blue), is(Colours.Purple));
     }
 
     @Test
     public void canChangeBrightness() throws Exception {
 
-        assertThat(Colours.MAROON.withBrightness(2), is(Colours.RED));
-        assertThat(Colours.RED.withBrightness(0.5), is(Colours.MAROON));
+        assertThat(Colours.Maroon.withBrightness(2), is(Colours.Red));
+        assertThat(Colours.Red.withBrightness(0.5), is(Colours.Maroon));
     }
 
     @Test
     public void brightnessChangeIsClamped() throws Exception {
 
-        assertThat(Colours.BLUE.withBrightness(2), is(Colours.BLUE));
+        assertThat(Colours.Blue.withBrightness(2), is(Colours.Blue));
     }
 }

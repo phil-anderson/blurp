@@ -23,7 +23,7 @@ public class ConsoleImpl extends Console {
 
     public void reset() {
 
-        colour = Colours.LIGHT_GREY;
+        colour = Colours.LightGrey;
         transparency = 1;
     }
 }

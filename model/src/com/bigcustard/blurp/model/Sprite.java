@@ -60,7 +60,7 @@ public abstract class Sprite<T> {
      *
      * @see Colour
      */
-    public Colour colour = Colours.WHITE;
+    public Colour colour = Colours.White;
 
     /**
      * The alpha transparency of the sprite. This odd phrase actual just means how transparent it is.

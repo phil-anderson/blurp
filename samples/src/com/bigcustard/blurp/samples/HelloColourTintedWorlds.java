@@ -13,15 +13,15 @@ public class HelloColourTintedWorlds extends BlurpJavaProgram {
         Image worldImage = resources.loadImage("hello-world.png");
         resources.createImageSprite(worldImage)
              .position(180, 180)
-             .colour(Colours.RED);
+             .colour(Colours.Red);
 
         resources.createImageSprite(worldImage)
              .position(400, 420)
-             .colour(Colours.GREEN);
+             .colour(Colours.Green);
 
         resources.createImageSprite(worldImage)
              .position(620, 180)
-             .colour(Colours.BLUE);
+             .colour(Colours.Blue);
 
         screen.update();
     }

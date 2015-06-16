@@ -6,7 +6,7 @@ public abstract class System {
 
     public System debugMode(boolean enable) {
 
-        debugMode(enable, Colours.LIME_GREEN);
+        debugMode(enable, Colours.LimeGreen);
         return this;
     }
 

@@ -17,7 +17,7 @@ public class CameraImpl extends Camera implements EffectContainer {
         this.y = y;
         this.zoom = 1;
         this.angle = 0;
-        this.colour = Colours.WHITE;
+        this.colour = Colours.White;
         this.transparency = 1;
     }
 
@@ -51,7 +51,7 @@ public class CameraImpl extends Camera implements EffectContainer {
         position(BlurpStore.configuration.getInitialViewportWidth() / 2, (float) BlurpStore.configuration.getInitialViewportHeight() / 2);
         this.zoom = 1;
         this.angle = 0;
-        this.colour = Colours.WHITE;
+        this.colour = Colours.White;
         this.transparency = 1;
         this.runningEffect = false;
     }

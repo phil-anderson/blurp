@@ -20,12 +20,12 @@ public class EffectStyleExample extends BlurpJavaProgram {
             resources.createTextSprite("Linear")
                 .position(250 + pageX, 500)
                 .handle(Handle.Right)
-                .colour(Colours.RED);
+                .colour(Colours.Red);
 
             Sprite linearWorld = resources.createImageSprite(worldImage)
                                      .position(350 + pageX, 500)
                                      .scale(0.25)
-                                     .colour(Colours.RED);
+                                     .colour(Colours.Red);
 
             runEffect(linearWorld, EffectStyle.Linear, effects);
 
@@ -48,7 +48,7 @@ public class EffectStyleExample extends BlurpJavaProgram {
         int currentPage = 0;
         while(true) {
 
-            if(keyboard.wasKeyJustPressed(Key.Key_Space)) {
+            if(keyboard.wasKeyJustPressed(Key.Space_Key)) {
                 currentPage = (currentPage + 1) % 3;
                 Effect moveCamera = effects.moveTo(currentPage * 800 + 400, 300).duration(500);
                 camera.runEffect(moveCamera);
