@@ -19,6 +19,6 @@ public class LogPrintCommand implements Command {
     @Override
     public void execute(float deltaTime) {
 
-        BlurpStore.runtimeLog.print(textToPrint, colour, alpha);
+        BlurpStore.runtimeConsole.print(textToPrint, colour, alpha);
     }
 }

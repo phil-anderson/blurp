@@ -7,7 +7,7 @@ import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.util.*;
 
 // A quick, hacky console
-public class RuntimeLog {
+public class RuntimeConsole {
 
     private final int lines, columns; // In characters
 
@@ -22,7 +22,7 @@ public class RuntimeLog {
 
     private int currentColumn;
 
-    public RuntimeLog() {
+    public RuntimeConsole() {
 
         // TODO: This is probably going to be wrong when we start mixing Camera zoom etc in.
         this.pixelHeight = BlurpStore.mainCamera.viewportHeight;
@@ -47,11 +47,11 @@ public class RuntimeLog {
     public void print(String text, Colour colour, double alpha) {
 
         text = text.replaceAll("\r\n", "\n").replaceAll("\r", "\n");
-
         stringContents.append(text);
         if(stringContents.length() > 32768) {
             stringContents.delete(0, stringContents.length() - 32768); // Max 32K characters
         }
+
         text = text.replaceAll("\\[", "[[");
 
         if(text.contains("\n")) {
@@ -80,7 +80,8 @@ public class RuntimeLog {
 
     private void printChunk(String text, Colour colour, double alpha) {
 
-        if(colour != lastColour || alpha != lastAlpha) {
+        // Lines should always start with a colour tag for when they scroll to top.
+        if (currentColumn == 0 || colour != lastColour || alpha != lastAlpha) {
             contents[currentLine] += "[#" + Convert.toGdxColour(colour, alpha).toString() + "]";
             lastColour = colour;
             lastAlpha = alpha;

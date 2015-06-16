@@ -7,6 +7,6 @@ public class LogClearCommand implements Command {
     @Override
     public void execute(float deltaTime) {
 
-        BlurpStore.runtimeLog.clear();
+        BlurpStore.runtimeConsole.clear();
     }
 }

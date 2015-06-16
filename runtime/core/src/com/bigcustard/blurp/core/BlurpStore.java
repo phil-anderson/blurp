@@ -44,7 +44,7 @@ public class BlurpStore {
     public static ScalingViewport staticViewport;
     public static ResourcesImpl resources;
     public static EffectsImpl effects;
-    public static RuntimeLog runtimeLog;
+    public static RuntimeConsole runtimeConsole;
     public static KeyboardImpl keyboard;
     public static TimerImpl timer;
     public static Utils utils;
@@ -88,7 +88,7 @@ public class BlurpStore {
         modelRepository = new ModelRepository();
         runtimeRepository = new RuntimeRepository();
         console = new ConsoleImpl();
-        runtimeLog = new RuntimeLog();
+        runtimeConsole = new RuntimeConsole();
         system = new SystemImpl();
     }
 
@@ -126,7 +126,7 @@ public class BlurpStore {
         staticViewport = new FitViewport((float) configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight(), staticCamera);
 
         runtimeScreen = new RuntimeScreen();
-        runtimeLog = new RuntimeLog();
+        runtimeConsole = new RuntimeConsole();
 
         initialiseFonts();
 

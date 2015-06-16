@@ -189,9 +189,9 @@ public class BlurpScreen extends ScreenAdapter {
         if(!BlurpState.scriptComplete) {
             if(Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) || Gdx.input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
                 if(Gdx.input.isKeyJustPressed(Input.Keys.C)) {
-                    Gdx.app.getClipboard().setContents(BlurpStore.runtimeLog.toString());
+                    Gdx.app.getClipboard().setContents(BlurpStore.runtimeConsole.toString());
                 } else if(Gdx.input.isKeyJustPressed(Input.Keys.L)) {
-                    BlurpStore.runtimeLog.clear();
+                    BlurpStore.runtimeConsole.clear();
                 } else if(Gdx.input.isKeyJustPressed(Input.Keys.D)) {
                     enableDebug(!BlurpState.debugMode, BlurpState.debugColour);
                 } else if(Gdx.input.isKeyJustPressed(Input.Keys.S)) {
@@ -217,7 +217,7 @@ public class BlurpScreen extends ScreenAdapter {
 
         batch.setProjectionMatrix(BlurpStore.staticCamera.combined);
         beginBatch();
-        BlurpStore.runtimeLog.render(batch);
+        BlurpStore.runtimeConsole.render(batch);
         endBatch();
 
         if(BlurpState.debugMode) debugHudRenderer.render();
