@@ -33,6 +33,7 @@ public class ScreenImpl extends Screen {
     @Override
     public Screen setTitle(String title) {
 
+        BlurpState.windowTitle = title;
         Gdx.graphics.setTitle(title);
         return this;
     }

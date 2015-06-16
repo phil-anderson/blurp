@@ -6,10 +6,28 @@ import com.bigcustard.blurp.model.Timer;
 public class TimerImpl extends Timer {
 
     private List<ScheduledTask> scheduledTasks;
+    private long holdTime = -1;
 
     public TimerImpl() {
 
         scheduledTasks = new ArrayList<ScheduledTask>();
+    }
+
+    public void hold() {
+
+        if(holdTime == -1) holdTime = System.currentTimeMillis();
+    }
+
+    public void unhold() {
+
+        if(holdTime != -1) {
+
+            long timeHeld = System.currentTimeMillis() - holdTime;
+            for(ScheduledTask task : scheduledTasks) {
+                task.delay(timeHeld);
+            }
+            holdTime = -1;
+        }
     }
 
     public void dispatchEvents() {

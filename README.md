@@ -4,7 +4,6 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
-* System.Freeze should pause timer. So should Ctrl+P pause.
 * Reference counting for images?
 * BUG Tall, narrow viewport causes completion message to be truncated.
 * Add toString() methods to model objects

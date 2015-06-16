@@ -36,7 +36,8 @@ public class BlurpApp extends Game {
     @Override
     public void create() {
 
-        Gdx.graphics.setTitle("Blurp: " + (javaClass != null ? javaClass.getSimpleName() : scriptName));
+        BlurpState.windowTitle = "Blurp: " + (javaClass != null ? javaClass.getSimpleName() : scriptName);
+        Gdx.graphics.setTitle(BlurpState.windowTitle);
         BlurpConfiguration config = new BlurpConfiguration(viewportWidth, viewportHeight);
         BlurpRuntime blurpRuntime = BlurpRuntime.begin(config, mouseWindowChecker);
 

@@ -195,7 +195,7 @@ public class BlurpScreen extends ScreenAdapter {
                 } else if(Gdx.input.isKeyJustPressed(Input.Keys.D)) {
                     enableDebug(!BlurpState.debugMode, BlurpState.debugColour);
                 } else if(Gdx.input.isKeyJustPressed(Input.Keys.P)) {
-                    BlurpState.paused = !BlurpState.paused;
+                    BlurpState.togglePause();
                 } else if(Gdx.input.isKeyJustPressed(Input.Keys.S)) {
                     BlurpStore.runtime.stop();
                 } else if(Gdx.input.isKeyJustPressed(Input.Keys.R)) {

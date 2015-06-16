@@ -29,4 +29,9 @@ public class ScheduledTask {
 
         return action;
     }
+
+    public void delay(long milliseconds) {
+
+        triggerTime += milliseconds;
+    }
 }

@@ -27,10 +27,13 @@ public class SystemImpl extends System {
     @Override
     public void pause(int milliseconds) {
 
+        BlurpState.pause();
         try {
             Thread.sleep(milliseconds);
         } catch(InterruptedException e) {
             e.printStackTrace();
+        } finally {
+            BlurpState.resume();
         }
     }
 
