@@ -19,7 +19,7 @@ public abstract class Console {
         return this;
     }
 
-    public Console printLine(Object objectToPrint) {
+    public Console puts(Object objectToPrint) {
 
         return println(objectToPrint);
     }
