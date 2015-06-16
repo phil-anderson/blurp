@@ -4,13 +4,6 @@ import com.bigcustard.blurp.model.constants.*;
 
 public abstract class System {
 
-    public final Console console;
-
-    protected System(Console console) {
-
-        this.console = console;
-    }
-
     public System debugMode(boolean enable) {
 
         debugMode(enable, Colours.LIME_GREEN);

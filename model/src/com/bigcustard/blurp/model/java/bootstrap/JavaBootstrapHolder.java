@@ -54,6 +54,12 @@ public class JavaBootstrapHolder implements JavaBootstrap {
     }
 
     @Override
+    public Console getConsole() {
+
+        return delegate.getConsole();
+    }
+
+    @Override
     public Effects getEffects() {
 
         return delegate.getEffects();

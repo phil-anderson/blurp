@@ -27,6 +27,12 @@ public class JavaBootstrapImpl implements JavaBootstrap {
     }
 
     @Override
+    public Console getConsole() {
+
+        return BlurpStore.console;
+    }
+
+    @Override
     public Resources getResources() { return BlurpStore.resources; }
 
     @Override
