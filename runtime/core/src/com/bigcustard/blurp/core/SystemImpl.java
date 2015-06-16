@@ -11,11 +11,6 @@ import static com.bigcustard.blurp.core.BlurpTerminatedException.CompletionActio
  */
 public class SystemImpl extends System {
 
-    public SystemImpl() {
-
-        super(BlurpStore.console);
-    }
-
     @Override
     public System debugMode(boolean enable, Colour debugColour) {
 
