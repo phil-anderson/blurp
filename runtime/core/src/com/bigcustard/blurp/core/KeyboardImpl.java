@@ -1,12 +1,18 @@
 package com.bigcustard.blurp.core;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.utils.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.constants.*;
 
 public class KeyboardImpl extends Keyboard {
 
     public static KeyboardProcessor KEYBOARD_PROCESSOR = new KeyboardProcessor();
+
+    private IntArray lastKeysPressed;
+    private IntArray lastKeysReleased;
+    private IntMap<Runnable> keyPressedActions = new IntMap<Runnable>();
+    private IntMap<Runnable> keyReleasedActions = new IntMap<Runnable>();
 
     @Override
     public boolean isKeyPressed(Key key) {
@@ -17,30 +23,49 @@ public class KeyboardImpl extends Keyboard {
     @Override
     public boolean wasKeyJustPressed(Key key) {
 
-        return Gdx.input.isKeyJustPressed(key.keyCode);
+        return lastKeysPressed.contains(key.keyCode);
+    }
+
+    @Override
+    public boolean wasKeyJustReleased(Key key) {
+
+        return lastKeysReleased.contains(key.keyCode);
+    }
+
+    @Override
+    public Keyboard onKeyPressed(Key key, Runnable action) {
+
+        keyPressedActions.put(key.keyCode, action);
+        return this;
+    }
+
+    @Override
+    public Keyboard onKeyReleased(Key key, Runnable action) {
+
+        keyReleasedActions.put(key.keyCode, action);
+        return this;
     }
 
     public void sync() {
 
-        typedKey = KEYBOARD_PROCESSOR.pullLastKeyTyped();
+        typedKey = KEYBOARD_PROCESSOR.lastKeyTyped;
+        lastKeysPressed = new IntArray(KEYBOARD_PROCESSOR.lastKeysPressed);
+        lastKeysReleased = new IntArray(KEYBOARD_PROCESSOR.lastKeysReleased);
+
+        KEYBOARD_PROCESSOR.clear();
     }
 
-    public static class KeyboardProcessor extends InputAdapter {
+    public void dispatchEvents() {
 
-        private char rawKeyTyped;
-
-        @Override
-        public boolean keyTyped(char character) {
-
-            rawKeyTyped = character;
-            return false;
+        for(int keycode : lastKeysPressed.items) {
+            if(keyPressedActions.containsKey(keycode)) {
+                keyPressedActions.get(keycode).run();
+            }
         }
-
-        public char pullLastKeyTyped() {
-
-            char result = rawKeyTyped;
-            rawKeyTyped = 0;
-            return result;
+        for(int keycode : lastKeysReleased.items) {
+            if(keyReleasedActions.containsKey(keycode)) {
+                keyReleasedActions.get(keycode).run();
+            }
         }
     }
 }

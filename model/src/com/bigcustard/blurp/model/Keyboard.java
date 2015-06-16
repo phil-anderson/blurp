@@ -25,6 +25,12 @@ public abstract class Keyboard {
      */
     public abstract boolean wasKeyJustPressed(Key key);
 
+    public abstract boolean wasKeyJustReleased(Key key);
+
+    public abstract Keyboard onKeyPressed(Key key, Runnable action);
+
+    public abstract Keyboard onKeyReleased(Key key, Runnable action);
+
     public boolean wasKeyTyped() {
 
         return typedKey != 0;
