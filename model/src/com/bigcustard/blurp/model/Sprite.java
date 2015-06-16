@@ -320,7 +320,7 @@ public abstract class Sprite<T> {
 
     public T runEffect(EffectBase effectToRun) {
 
-        return runEffect(effectToRun, SpriteEventHandler.NULL);
+        return runEffect(effectToRun, SpriteEventHandlers.DoNothing);
     }
 
     public T runEffect(EffectBase effectToRun, SpriteEventHandler whatToDoAtEnd) {
@@ -330,7 +330,7 @@ public abstract class Sprite<T> {
 
     public T stopEffects() {
 
-        return runEffect(null, SpriteEventHandler.NULL, ExistingEffectStrategy.StopExistingEffect);
+        return runEffect(null, SpriteEventHandlers.DoNothing, ExistingEffectStrategy.StopExistingEffect);
     }
 
     public T[] multiplyBy(int numberOfTimes) {

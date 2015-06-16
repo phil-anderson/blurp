@@ -2,7 +2,6 @@ package com.bigcustard.blurp.samples;
 
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.effects.*;
-import com.bigcustard.blurp.model.events.*;
 import com.bigcustard.blurp.model.java.*;
 
 public class EffectWithEventExample extends BlurpJavaProgram {
@@ -20,7 +19,7 @@ public class EffectWithEventExample extends BlurpJavaProgram {
                     .scale(utils.randomInRange(0.1, 0.5));
 
             // And immediately destroy it. Harsh.
-            world.runEffect(destroyEffect, SpriteEventHandler.AT_END_REMOVE_SPRITE);
+            world.runEffect(destroyEffect, AtEndRemoveSprite);
 
             screen.update();
         }

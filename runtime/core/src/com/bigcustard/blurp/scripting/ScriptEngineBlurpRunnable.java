@@ -6,7 +6,6 @@ import java.util.*;
 import javax.script.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.constants.*;
-import com.bigcustard.blurp.model.events.*;
 import com.bigcustard.blurp.util.*;
 
 public class ScriptEngineBlurpRunnable implements Runnable {
@@ -40,9 +39,9 @@ public class ScriptEngineBlurpRunnable implements Runnable {
         bindings.put("timer", BlurpStore.timer);
         bindings.put("utils", BlurpStore.utils);
 
-        bindings.put("AtEndRemoveSprite", SpriteEventHandler.AT_END_REMOVE_SPRITE);
-        bindings.put("AtEndRemoveSprite", SpriteEventHandler.AT_END_NORMALISE_ROTATION);
+        scriptEnginePutConstants(SpriteEventHandlers.class, bindings);
         scriptEnginePutConstants(Colours.class, bindings);
+
         scriptEnginePutEnums(Justification.values(), bindings);
         scriptEnginePutEnums(Handle.values(), bindings);
         scriptEnginePutEnums(Key.values(), bindings);

@@ -2,10 +2,11 @@ package com.bigcustard.blurp.model.java;
 
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.System;
+import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.model.effects.*;
 import com.bigcustard.blurp.model.java.bootstrap.*;
 
-public abstract class BlurpJavaProgram implements Runnable {
+public abstract class BlurpJavaProgram implements Runnable, Colours, SpriteEventHandlers {
 
     public static JavaBootstrap javaBootstrap;
 
