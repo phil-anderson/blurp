@@ -13,6 +13,7 @@ public class BlurpState {
     public static RuntimeException exception;
     public static long frameStartTime;
     public static boolean error;
+    public static volatile boolean paused;
 
     public static Color debugGdxColour() {
 
@@ -26,5 +27,6 @@ public class BlurpState {
         scriptComplete = false;
         exception = null;
         error = false;
+        paused = false;
     }
 }

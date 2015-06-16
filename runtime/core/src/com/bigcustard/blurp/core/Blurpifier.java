@@ -15,21 +15,27 @@ public class Blurpifier {
 
     private volatile RuntimeException exception;
 
-    public synchronized void blurpify() {
+    public void blurpify() {
 
-        if(requestState != Dormant) throw new IllegalStateException("Already blurpifying"); // Shouldn't be possible.
+        synchronized(this) {
+            if(requestState != Dormant) throw new IllegalStateException("Already blurpifying"); // Shouldn't be possible.
 
-        requestState = Requested;
-        waitForRequestAcknowledge();
-        waitForRequestCompleteState();
+            requestState = Requested;
+            waitForRequestAcknowledge();
+            waitForRequestCompleteState();
 
-        try {
-            if(exception != null) {
-                throw exception;
+            try {
+                if(exception != null) {
+                    throw exception;
+                }
+            } finally {
+                renderState = BlurpifyRenderState.NoRequest;
+                requestState = Dormant;
             }
-        } finally {
-            renderState = BlurpifyRenderState.NoRequest;
-            requestState = Dormant;
+        }
+
+        while(BlurpState.paused) {
+            try { Thread.sleep(1); } catch(InterruptedException e) { }
         }
     }
 

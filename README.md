@@ -4,20 +4,20 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
-* Make sprite events methods and not properties (i.e. move to impl)
-* [DV] Mouse - onMouseMoved, onLeftButtonPressed, onRightButtonPressed, onLeftButtonReleased, onRightButtonReleased
-* [DV] NamedColour = Add to colourTag map on create, then user can create named colours too
+* System.Freeze should pause timer. So should Ctrl+P pause.
 * Reference counting for images?
 * BUG Tall, narrow viewport causes completion message to be truncated.
 * Add toString() methods to model objects
 * Add display of exceptions to the script complete code
 * Add pause and resume methods to runtime - Use a flag in blurpifier (NOT BlurpScreen).
-* [DV] Blurp runtime should be a singleton.
 * Look at gradle build, and add a task to create an executable jar
 * Review, restructure and lots of renaming required in model API
 * Almost all examples need redoing / refactoring
 * Documentation
 
+* [DV] Mouse - onMouseMoved, onLeftButtonPressed, onRightButtonPressed, onLeftButtonReleased, onRightButtonReleased
+* [DV] NamedColour = Add to colourTag map on create, then user can create named colours too
+* [DV] Blurp runtime should be a singleton.
 * [DV] Provide a way to disable system shortcuts maybe?
 * [DV] Sprite mouse left and right clicks
 * [DV] Background drawing
