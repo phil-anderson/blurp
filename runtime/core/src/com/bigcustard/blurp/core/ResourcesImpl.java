@@ -51,4 +51,13 @@ public class ResourcesImpl extends Resources {
 
         return new Colour(red, green, blue);
     }
+
+    @Override
+    public String toString() {
+
+        return String.format("Resources: numImages=%d numImageSprites=%d numTextSprites=%d",
+                             BlurpStore.modelRepository.getImages().size(),
+                             BlurpStore.modelRepository.getImageSprites().size(),
+                             BlurpStore.modelRepository.getTextSprites().size());
+    }
 }

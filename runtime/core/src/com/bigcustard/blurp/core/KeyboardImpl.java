@@ -68,4 +68,10 @@ public class KeyboardImpl extends Keyboard {
             }
         }
     }
+
+    @Override
+    public String toString() {
+
+        return "Keyboard";
+    }
 }

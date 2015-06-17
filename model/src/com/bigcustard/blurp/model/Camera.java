@@ -87,7 +87,6 @@ public abstract class Camera {
     @Override
     public String toString() {
 
-        return String.format("Camera x=%.2f y=%.2f zoom=%.2f angle=%.2f colour=%s transparency=%.2f", x, y, zoom, angle, colour,
-                             transparency);
+        return String.format("Camera: x=%.1f y=%.1f zoom=%.2f angle=%.1f colour=%s transparency=%.2f", x, y, zoom, angle, colour, transparency);
     }
 }

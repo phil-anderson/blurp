@@ -105,4 +105,10 @@ public class Utils {
 
         return Math.tan(Math.toRadians(angle));
     }
+
+    @Override
+    public String toString() {
+
+        return "Utils";
+    }
 }

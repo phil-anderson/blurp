@@ -66,4 +66,11 @@ public class MouseImpl implements Mouse {
 
         return insideWindow;
     }
+
+    @Override
+    public String toString() {
+
+        return String.format("Mouse: x=%.1f y=%.1f absoluteX=%.1f absoluteY=%.1f leftPressed=%s rightPressed=%s",
+                             x, y, absoluteX, absoluteY, leftPressed, rightPressed);
+    }
 }

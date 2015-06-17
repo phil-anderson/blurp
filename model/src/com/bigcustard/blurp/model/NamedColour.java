@@ -13,6 +13,6 @@ public class NamedColour extends Colour {
     @Override
     public String toString() {
 
-        return name;
+        return "Colour: " + name;
     }
 }

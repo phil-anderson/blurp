@@ -25,4 +25,10 @@ public abstract class ImageSprite extends Sprite<ImageSprite> {
         targetStyle = TargetStyle.Circle;
         return this;
     }
+
+    @Override
+    public String toString() {
+
+        return String.format("ImageSprite: image=%s ", image.name) + super.toString();
+    }
 }

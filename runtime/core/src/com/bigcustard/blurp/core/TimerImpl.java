@@ -75,6 +75,12 @@ public class TimerImpl extends Timer {
         return this;
     }
 
+    @Override
+    public String toString() {
+
+        return String.format("Timer: numScheduledTasks=%d", scheduledTasks.size());
+    }
+
     public void reset() {
 
         removeAll();

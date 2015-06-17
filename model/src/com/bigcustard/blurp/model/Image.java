@@ -18,7 +18,7 @@ public abstract class Image {
     public final String name;
 
     /**
-     * This constructor is protected - Use {@link System#loadImage} instead.
+     * This constructor is protected - Use {@link Resources#loadImage} instead.
      */
     protected Image(String name) {
 
@@ -34,4 +34,11 @@ public abstract class Image {
      * they use up is freed and available for the rest of your program to use.
      */
     public abstract void remove();
+
+    @Override
+    public String toString() {
+
+        return String.format("Image: name=%s", name);
+    }
+
 }

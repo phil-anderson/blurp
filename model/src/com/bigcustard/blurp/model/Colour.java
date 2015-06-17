@@ -101,6 +101,6 @@ public class Colour {
     @Override
     public String toString() {
 
-        return String.format("Red = %.3f, Green == %.3f, Blue = %.3f", red, green, blue);
+        return String.format("Colour: Red=%.3f, Green=%.3f, Blue=%.3f", red, green, blue);
     }
 }

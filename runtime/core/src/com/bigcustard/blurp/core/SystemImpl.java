@@ -63,4 +63,10 @@ public class SystemImpl extends System {
 
         throw new BlurpTerminatedException(Terminate);
     }
+
+    @Override
+    public String toString() {
+
+        return String.format("System: debugMode=%s fps=%d", BlurpState.debugMode, getFps());
+    }
 }

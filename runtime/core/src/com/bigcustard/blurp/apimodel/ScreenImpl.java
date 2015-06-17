@@ -37,4 +37,10 @@ public class ScreenImpl extends Screen {
         Gdx.graphics.setTitle(title);
         return this;
     }
+
+    @Override
+    public String toString() {
+
+        return String.format("Screen: viewport=%s backgroundColour=%s", viewport, backgroundColour);
+    }
 }

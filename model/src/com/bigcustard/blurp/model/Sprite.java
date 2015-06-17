@@ -403,6 +403,13 @@ public abstract class Sprite<T> {
         }
     }
 
+    @Override
+    public String toString() {
+
+        return String.format("x=%.1f y=%.1f scaleX=%.2f scaleY=%.2f angle=%.1f colour=%s transparency=%.2f hidden=%s targetStyle=%s layer=%s",
+                             x, y, scaleX, scaleY, angle, colour, transparency, hidden, targetStyle, layer);
+    }
+
     private static class EffectSpriteEventHandler implements SpriteEventHandler {
 
         private final EffectBase effectToRun;

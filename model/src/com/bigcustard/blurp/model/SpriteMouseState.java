@@ -29,4 +29,11 @@ public class SpriteMouseState {
         this.dragX = dragX;
         this.dragY = dragY;
     }
+
+    @Override
+    public String toString() {
+
+        return String.format("SpriteMouseState : isOver=%s isHolding=%s isDragging=%s entered=%s exited=%s wasPressed=%s wasReleased=%s wasClicked=%s clickCount=%d wasDragReleased=%s dragX=%.1f dragY=%.1f",
+                   isOver, isHolding, isDragging, entered, exited, wasPressed, wasReleased, wasClicked, clickCount, wasDragReleased, dragX, dragY);
+    }
 }

@@ -29,4 +29,10 @@ public class Viewport {
         height = newViewportHeight;
         return this;
     }
+
+    @Override
+    public String toString() {
+
+        return String.format("Viewport: width=%.1f height=%.1f stretchToFit=%s", width, height, stretchToFit);
+    }
 }

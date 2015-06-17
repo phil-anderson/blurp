@@ -21,6 +21,12 @@ public class ConsoleImpl extends Console {
         return null;
     }
 
+    @Override
+    public String toString() {
+
+        return String.format("Console: colour=%s transparency=%.2f", colour, transparency);
+    }
+
     public void reset() {
 
         colour = Colours.LightGrey;

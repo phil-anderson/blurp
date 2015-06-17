@@ -59,4 +59,11 @@ public abstract class TextSprite extends Sprite<TextSprite> {
         this.justification = justification;
         return this;
     }
+
+    @Override
+    public String toString() {
+
+        return String.format("TextSprite: text=%s fontSize=%.2f wrapWidth=%.1f handle=%s justification=%s colourTagsEnabled=%s ",
+                             text, fontSize, wrapWidth, handle, justification, colourTagsEnabled) + super.toString();
+    }
 }
