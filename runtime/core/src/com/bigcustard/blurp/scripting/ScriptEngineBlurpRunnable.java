@@ -6,7 +6,6 @@ import java.util.*;
 import javax.script.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.constants.*;
-import com.bigcustard.blurp.util.*;
 
 public class ScriptEngineBlurpRunnable implements Runnable {
 
@@ -75,7 +74,8 @@ public class ScriptEngineBlurpRunnable implements Runnable {
 
         List allConstants = new ArrayList();
         for(Field field : constantsClass.getFields()) {
-            String fieldName = Convert.toCamelCase(field.getName());
+//            String fieldName = Convert.toCamelCase(field.getName());
+            String fieldName = field.getName();
             if(bindings.get(fieldName) != null) {
                 throw new RuntimeException("Conflicting constants - " + constantsClass + " vs " + bindings.get(fieldName).getClass());
             }

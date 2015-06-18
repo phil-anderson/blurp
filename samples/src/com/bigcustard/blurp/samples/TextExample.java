@@ -7,7 +7,7 @@ import com.bigcustard.blurp.model.java.*;
 public class TextExample extends BlurpJavaProgram {
 
     private static final String MESSAGE = "The quick, brown fox jumped over the lazy dog.";
-    private static final String COLOURFUL_MESSAGE = "All colours can be specified as [RED]red[], [GREEN]green[] and [BLUE]blue[] components";
+    private static final String COLOURFUL_MESSAGE = "All colours can be specified as [Red]red[], [Green]green[] and [Blue]blue[] components";
 
     @Override
     public void run() {

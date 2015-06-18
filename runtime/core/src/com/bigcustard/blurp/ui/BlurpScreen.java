@@ -34,6 +34,7 @@ public class BlurpScreen extends ScreenAdapter {
     private int fps;
     private int fpsFrameCounter;
     private long lastFpsReading;
+    private boolean errorTriggered = false;
 
     public void addActor(Actor actor) {
 
@@ -131,7 +132,13 @@ public class BlurpScreen extends ScreenAdapter {
         batch.begin();
         font.setMarkupEnabled(true);
         if(BlurpState.error) {
-            font.drawWrapped(batch, "[RED]An Error Occurred[] - Press SPACE to restart, ESC to exit", 0, textHeight, BlurpStore.staticCamera.viewportWidth, BitmapFont.HAlignment.CENTER);
+            if(!errorTriggered) {
+                BlurpStore.runtimeConsole.clear();
+                BlurpStore.runtimeConsole.print(Exceptions.getConcatenatedMessage(BlurpState.exception), Colours.White, 1);
+                errorTriggered = true;
+            }
+            font.drawWrapped(batch, "[Red]An Error Occurred[] - Press SPACE to restart, ESC to exit", 0, textHeight, BlurpStore.staticCamera.viewportWidth, BitmapFont.HAlignment.CENTER);
+            BlurpStore.runtimeConsole.render(batch);
         } else {
             font.drawWrapped(batch, "Program Complete - Press SPACE to restart, ESC to exit", 0, textHeight, BlurpStore.staticCamera.viewportWidth, BitmapFont.HAlignment.CENTER);
         }
@@ -331,6 +338,7 @@ public class BlurpScreen extends ScreenAdapter {
             overlayStage.dispose();
             Gdx.input.setInputProcessor(null);
             initialised = false;
+            errorTriggered = false;
         }
     }
 }

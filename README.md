@@ -6,10 +6,7 @@ WORK IN PROGRESS - CHECK BACK LATER
 *TODO*
 * Reference counting for images?
 * BUG Tall, narrow viewport causes completion message to be truncated.
-* Add display of exceptions to the script complete code
-* Add pause and resume methods to runtime - Use a flag in blurpifier (NOT BlurpScreen).
 * Look at gradle build, and add a task to create an executable jar
-* Review, restructure and lots of renaming required in model API
 * Almost all examples need redoing / refactoring
 * Documentation
 

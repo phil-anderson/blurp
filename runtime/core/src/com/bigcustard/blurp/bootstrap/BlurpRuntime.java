@@ -75,6 +75,16 @@ public class BlurpRuntime {
         startThread();
     }
 
+    public void pause() {
+
+        BlurpState.pause();
+    }
+
+    public void resume() {
+
+        BlurpState.resume();
+    }
+
     public void stop() {
 
         throw new BlurpTerminatedException(Normal);

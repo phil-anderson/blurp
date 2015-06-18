@@ -4,9 +4,10 @@ world = resources.createImageSprite("hello-world.png");
 
 while(true) {
 
-    if(keyboard.isKeyPressed(Key_Left)) world.x -= 2;
-    if(keyboard.isKeyPressed(Key_Right)) world.x += 2;
-    if(keyboard.isKeyPressed(Key_Up)) world.y += 2;
-    if(keyboard.isKeyPressed(Key_Down)) world.y -= 2;
+    if(keyboard.isKeyPressed(Left_Key)) world.x -= 2;
+    if(keyboard.isKeyPressed(Right_Key)) world.x += 2;
+    if(keyboard.isKeyPressed(Up_Key)) world.y += 2;
+    if(keyboard.isKeyPressed(Down_Key)) world.y -= 2;
     screen.update();
+    sdfsdfsdf
 }
