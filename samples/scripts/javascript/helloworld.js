@@ -9,5 +9,4 @@ while(true) {
     if(keyboard.isKeyPressed(Up_Key)) world.y += 2;
     if(keyboard.isKeyPressed(Down_Key)) world.y -= 2;
     screen.update();
-    sdfsdfsdf
 }
