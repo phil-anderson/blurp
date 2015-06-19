@@ -4,10 +4,11 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
-* BUG Restarting scripts throws - Need to reload script.
+* BUG Restarting scripts throws - Need to reload script
 * Reference counting for images?
 * Reduce size of "error" image
-* BUG Tall, narrow viewport causes completion message to be truncated.
+* Sprite.onCollision events
+* Do a graphical end-of-script dialog
 * Look at gradle build, and add a task to create an executable jar
 * Almost all examples need redoing / refactoring
 * Documentation

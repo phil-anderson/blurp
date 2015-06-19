@@ -49,8 +49,7 @@ public class BlurpRunner {
         if(options.language == null) {
             SupportedLanguage language = SupportedLanguage.forFile(new File(options.scriptName));
             if(language == null) {
-                System.out.println("Unable to infer what language to use for file: " + options.scriptName);
-                System.exit(1);
+                language = SupportedLanguage.Java;
             }
             options.language = language.getScriptEngineName();
         }
