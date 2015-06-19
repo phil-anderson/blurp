@@ -4,7 +4,6 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
-* BUG Restarting scripts throws - Need to reload script
 * Reference counting for images?
 * Reduce size of "error" image
 * Sprite.onCollision events
