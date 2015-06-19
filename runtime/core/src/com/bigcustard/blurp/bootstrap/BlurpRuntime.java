@@ -156,6 +156,7 @@ public class BlurpRuntime {
         public void run() {
 
             try {
+                // Initial blurpify to flush any defaults set in the model.
                 BlurpStore.blurpifier.blurpify();
                 script.run();
             } catch (RuntimeException e) {

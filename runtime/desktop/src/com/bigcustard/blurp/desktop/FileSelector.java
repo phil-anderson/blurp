@@ -19,7 +19,7 @@ public class FileSelector {
             chooser.addChoosableFileFilter(language.getFileFilter());
         }
 
-        JFrame frame = new JFrame();
+        JFrame frame = new JFrame("Blurp");
         int option = chooser.showOpenDialog(frame);
         frame.dispose();
 

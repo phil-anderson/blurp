@@ -14,7 +14,6 @@ import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.runtimemodel.*;
 import com.bigcustard.blurp.util.*;
 
-import static com.bigcustard.blurp.core.BlurpTerminatedException.CompletionAction.*;
 import static com.bigcustard.blurp.core.Blurpifier.*;
 
 // TODO: Add an abstract immutable parent that can be exposed through BlurpRuntime.
@@ -34,7 +33,8 @@ public class BlurpScreen extends ScreenAdapter {
     private int fps;
     private int fpsFrameCounter;
     private long lastFpsReading;
-    private boolean errorTriggered = false;
+
+    private ScriptCompleteOverlay completionOverlay = new ScriptCompleteOverlay();
 
     public void addActor(Actor actor) {
 
@@ -74,9 +74,8 @@ public class BlurpScreen extends ScreenAdapter {
             doFrame(delta);
 
             if(BlurpState.scriptComplete) {
-                scriptComplete();
+                completionOverlay.render(batch, shapes);
             }
-
         } catch(RuntimeException exception) {
             // Pass it on so blurpify method can throw it
             BlurpStore.blurpifier.setException(exception);
@@ -89,66 +88,6 @@ public class BlurpScreen extends ScreenAdapter {
         // Maybe libGdx isn't being particularly friendly outside of renders... Hmmmm...
         // I wonder if this will be an issue n Android?
         try { Thread.sleep(1); } catch(InterruptedException e) { }
-    }
-
-    // TODO: Temporary (and a bit hacky) keyboard-based controls. Need to build something mouse-based.
-    private void scriptComplete() {
-
-        Gdx.gl.glEnable(GL20.GL_BLEND);
-        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-
-        // Was it stopped with an action?
-        if(BlurpState.exception instanceof BlurpTerminatedException) {
-            BlurpTerminatedException exception = (BlurpTerminatedException) BlurpState.exception;
-            if(exception.getAction() == Restart) {
-                BlurpStore.configuration.getScriptCompletionHandler().onRestart();
-                return;
-            } else if(exception.getAction() == Terminate) {
-                BlurpStore.configuration.getScriptCompletionHandler().onTerminate();
-                return;
-            }
-        }
-
-        float textHeight = BlurpStore.staticCamera.viewportHeight / 20;
-
-        shapes.setProjectionMatrix(BlurpStore.staticCamera.combined);
-
-        shapes.setColor(0, 0, 0.15f, 0.9f);
-        shapes.begin(ShapeRenderer.ShapeType.Filled);
-        shapes.rect(0, 0, BlurpStore.staticCamera.viewportWidth, textHeight * 1.2f);
-        shapes.end();
-
-        shapes.setColor(Color.GRAY);
-        shapes.begin(ShapeRenderer.ShapeType.Line);
-        shapes.line(0, textHeight * 1.2f, BlurpStore.staticCamera.viewportWidth, textHeight * 1.2f);
-        shapes.end();
-
-        BlurpStore.defaultFont.reset();
-        BitmapFont font = BlurpStore.defaultFont.getFont();
-        font.setScale(textHeight / font.getLineHeight());
-        font.setColor(Color.LIGHT_GRAY);
-
-        batch.setProjectionMatrix(BlurpStore.staticCamera.combined);
-        batch.begin();
-        font.setMarkupEnabled(true);
-        if(BlurpState.error) {
-            if(!errorTriggered) {
-                BlurpStore.runtimeConsole.clear();
-                BlurpStore.runtimeConsole.print(Exceptions.getConcatenatedMessage(BlurpState.exception), Colours.White, 1);
-                errorTriggered = true;
-            }
-            font.drawWrapped(batch, "[Red]An Error Occurred[] - Press SPACE to restart, ESC to exit", 0, textHeight, BlurpStore.staticCamera.viewportWidth, BitmapFont.HAlignment.CENTER);
-            BlurpStore.runtimeConsole.render(batch);
-        } else {
-            font.drawWrapped(batch, "Program Complete - Press SPACE to restart, ESC to exit", 0, textHeight, BlurpStore.staticCamera.viewportWidth, BitmapFont.HAlignment.CENTER);
-        }
-        batch.end();
-
-        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            BlurpStore.configuration.getScriptCompletionHandler().onRestart();
-        } else if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            BlurpStore.configuration.getScriptCompletionHandler().onTerminate();
-        }
     }
 
     private void doFrame(float delta) {
@@ -205,9 +144,9 @@ public class BlurpScreen extends ScreenAdapter {
                     BlurpState.togglePause();
                 } else if(Gdx.input.isKeyJustPressed(Input.Keys.S)) {
                     BlurpStore.runtime.stop();
-                } else if(Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+                } else if(Gdx.input.isKeyJustPressed(Input.Keys.R) || Gdx.input.isKeyJustPressed(Input.Keys.F5)) {
                     BlurpStore.runtime.restart();
-                } else if(Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
+                } else if(Gdx.input.isKeyJustPressed(Input.Keys.X)) {
                     BlurpStore.runtime.terminate();
                 }
             }
@@ -338,7 +277,7 @@ public class BlurpScreen extends ScreenAdapter {
             overlayStage.dispose();
             Gdx.input.setInputProcessor(null);
             initialised = false;
-            errorTriggered = false;
         }
+        completionOverlay.reset();
     }
 }

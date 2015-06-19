@@ -10,9 +10,10 @@ import com.bigcustard.blurp.model.constants.*;
 public class ScriptEngineBlurpRunnable implements Runnable {
 
     private final String language;
-    private final Reader scriptReader;
     private final ScriptEngine scriptEngine;
     private final String scriptName;
+
+    private Reader scriptReader;
 
     public ScriptEngineBlurpRunnable(String language, Reader scriptReader, String scriptName) {
         this.language = language;
@@ -53,7 +54,16 @@ public class ScriptEngineBlurpRunnable implements Runnable {
 
         bindings.put(ScriptEngine.FILENAME, scriptName);
         try {
-            // Initial blurpify to flush any defaults set in the model.
+            // TODO: Remove these hacky script restart shenanigans that won't work on Android.
+            try {
+                scriptReader.ready();
+            } catch(IOException e) {
+                try {
+                    scriptReader = new FileReader(scriptName);
+                } catch(FileNotFoundException e2) {
+                    throw new BlurpException("Couldn't open script", e2);
+                }
+            }
             scriptEngine.eval(scriptReader, bindings);
         } catch(ScriptException e) {
             throw new BlurpException("Error running script", e);
