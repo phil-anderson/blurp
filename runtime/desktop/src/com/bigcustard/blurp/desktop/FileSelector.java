@@ -1,13 +1,18 @@
 package com.bigcustard.blurp.desktop;
 
-import java.io.*;
+import java.util.prefs.*;
 import javax.swing.*;
 
 public class FileSelector {
 
-    public static File selectFile() {
+    private static final String LAST_FOLDER_KEY = "last_folder_selected";
 
-        JFileChooser chooser = new JFileChooser();
+    public static String selectFile() {
+
+        Preferences preferences = Preferences.userNodeForPackage(FileSelector.class);
+        String folder = preferences.get(LAST_FOLDER_KEY, "");
+        JFileChooser chooser = new JFileChooser(folder);
+
         chooser.setDialogTitle("Blurp: Select program to run");
         chooser.setApproveButtonText("Run");
         for(SupportedLanguage language : SupportedLanguage.values()) {
@@ -18,6 +23,11 @@ public class FileSelector {
         int option = chooser.showOpenDialog(frame);
         frame.dispose();
 
-        return option == JFileChooser.APPROVE_OPTION ? chooser.getSelectedFile() : null;
+        if(option == JFileChooser.APPROVE_OPTION) {
+            String result = chooser.getSelectedFile().getPath();
+            preferences.put(LAST_FOLDER_KEY, result);
+            return result;
+        }
+        return null;
     }
 }

@@ -40,7 +40,7 @@ public class BlurpRunner {
     private static void handleMissingDetails(CommandLineOptions options) {
 
         if(options.scriptName == null) {
-            options.scriptName = FileSelector.selectFile().getPath();
+            options.scriptName = FileSelector.selectFile();
             if(options.scriptName == null) {
                 System.out.println("Blurp cancelled by user");
                 System.exit(1);
