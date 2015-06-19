@@ -21,7 +21,7 @@ public class SystemShortcutHandler {
                     BlurpStore.runtime.stop();
                 } else if(Gdx.input.isKeyJustPressed(Input.Keys.R) || Gdx.input.isKeyJustPressed(Input.Keys.F5)) {
                     BlurpStore.runtime.restart();
-                } else if(Gdx.input.isKeyJustPressed(Input.Keys.X)) {
+                } else if(Gdx.input.isKeyJustPressed(Input.Keys.Q) || Gdx.input.isKeyJustPressed(Input.Keys.F4)) {
                     BlurpStore.runtime.terminate();
                 }
             }

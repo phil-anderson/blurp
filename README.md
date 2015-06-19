@@ -4,11 +4,11 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
-* Reference counting for images?
 * Reduce size of "error" image
 * Sprite.onCollision events
 * Do a graphical end-of-script dialog
 * Look at gradle build, and add a task to create an executable jar
+* Reference counting for images?
 * Almost all examples need redoing / refactoring
 * Documentation
 

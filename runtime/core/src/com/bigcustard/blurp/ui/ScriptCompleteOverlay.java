@@ -20,7 +20,7 @@ public class ScriptCompleteOverlay {
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 
-        // Was it stopped with an action?
+        // Was it stopped with a system action?
         if(BlurpState.exception instanceof BlurpTerminatedException) {
             BlurpTerminatedException exception = (BlurpTerminatedException) BlurpState.exception;
             if(exception.getAction() == Restart) {
@@ -30,6 +30,14 @@ public class ScriptCompleteOverlay {
                 BlurpStore.configuration.getScriptCompletionHandler().onTerminate();
                 return;
             }
+        }
+
+        if(BlurpState.error) {
+            shapes.setProjectionMatrix(BlurpStore.staticCamera.combined);
+            shapes.setColor(0, 0, 0, 0.5f);
+            shapes.begin(ShapeRenderer.ShapeType.Filled);
+            shapes.rect(0, 0, BlurpStore.staticCamera.viewportWidth, BlurpStore.staticCamera.viewportHeight);
+            shapes.end();
         }
 
         float textHeight = BlurpStore.staticCamera.viewportHeight / 20;
