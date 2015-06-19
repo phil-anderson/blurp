@@ -1,6 +1,5 @@
 package com.bigcustard.blurp.samples;
 
-import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.model.java.*;
 
 public class ConsoleExample extends BlurpJavaProgram {
@@ -29,7 +28,7 @@ public class ConsoleExample extends BlurpJavaProgram {
             console.print("Blurp Rules!!! ");
             screen.update();
 
-            if(keyboard.wasKeyJustPressed(Key.Space_Key)) {
+            if(keyboard.Space.wasJustPressed()) {
                 console.clear();
             }
         }

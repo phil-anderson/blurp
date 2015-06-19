@@ -35,6 +35,7 @@ public class BlurpScreen extends ScreenAdapter {
     private long lastFpsReading;
 
     private ScriptCompleteOverlay completionOverlay = new ScriptCompleteOverlay();
+    private SystemShortcutHandler systemShortcutHandler = new SystemShortcutHandler();
 
     public void addActor(Actor actor) {
 
@@ -68,7 +69,7 @@ public class BlurpScreen extends ScreenAdapter {
 
         BlurpState.frameStartTime = System.currentTimeMillis();
         try {
-            handleSystemShortcuts();
+            systemShortcutHandler.check();
             renderListener.handlePreRenderEvent(delta);
             BlurpStore.defaultFont.reset();
             doFrame(delta);
@@ -128,29 +129,6 @@ public class BlurpScreen extends ScreenAdapter {
             lastFpsReading = time;
         }
         fpsFrameCounter++;
-    }
-
-    private void handleSystemShortcuts() {
-
-        if(!BlurpState.scriptComplete) {
-            if(Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) || Gdx.input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
-                if(Gdx.input.isKeyJustPressed(Input.Keys.C)) {
-                    Gdx.app.getClipboard().setContents(BlurpStore.runtimeConsole.toString());
-                } else if(Gdx.input.isKeyJustPressed(Input.Keys.L)) {
-                    BlurpStore.runtimeConsole.clear();
-                } else if(Gdx.input.isKeyJustPressed(Input.Keys.D)) {
-                    enableDebug(!BlurpState.debugMode, BlurpState.debugColour);
-                } else if(Gdx.input.isKeyJustPressed(Input.Keys.P)) {
-                    BlurpState.togglePause();
-                } else if(Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-                    BlurpStore.runtime.stop();
-                } else if(Gdx.input.isKeyJustPressed(Input.Keys.R) || Gdx.input.isKeyJustPressed(Input.Keys.F5)) {
-                    BlurpStore.runtime.restart();
-                } else if(Gdx.input.isKeyJustPressed(Input.Keys.X)) {
-                    BlurpStore.runtime.terminate();
-                }
-            }
-        }
     }
 
     private void doRender() {

@@ -44,7 +44,6 @@ public class ScriptEngineBlurpRunnable implements Runnable {
 
         scriptEnginePutEnums(Justification.values(), bindings);
         scriptEnginePutEnums(Handle.values(), bindings);
-        scriptEnginePutEnums(Key.values(), bindings);
         scriptEnginePutEnums(TargetStyle.values(), bindings);
         scriptEnginePutEnums(EffectStyle.values(), bindings);
         scriptEnginePutEnums(ExistingEffectStrategy.values(), bindings);

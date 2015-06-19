@@ -3,7 +3,6 @@ package com.bigcustard.blurp.core;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.utils.*;
 import com.bigcustard.blurp.model.*;
-import com.bigcustard.blurp.model.constants.*;
 
 public class KeyboardImpl extends Keyboard {
 
@@ -48,7 +47,7 @@ public class KeyboardImpl extends Keyboard {
 
     public void sync() {
 
-        typedKey = KEYBOARD_PROCESSOR.lastKeyTyped;
+        typedCharacter = KEYBOARD_PROCESSOR.lastKeyTyped;
         lastKeysPressed = new IntArray(KEYBOARD_PROCESSOR.lastKeysPressed);
         lastKeysReleased = new IntArray(KEYBOARD_PROCESSOR.lastKeysReleased);
 

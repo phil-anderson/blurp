@@ -10,7 +10,7 @@ public class KeyTypedExample extends BlurpJavaProgram{
 
         while(screen.update()) {
 
-            if(keyboard.wasKeyTyped()) console.print(keyboard.typedKey);
+            if(keyboard.wasKeyTyped()) console.print(keyboard.typedCharacter);
         }
     }
 }

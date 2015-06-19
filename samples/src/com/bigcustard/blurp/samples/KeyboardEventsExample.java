@@ -1,6 +1,5 @@
 package com.bigcustard.blurp.samples;
 
-import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.model.java.*;
 
 public class KeyboardEventsExample extends BlurpJavaProgram{
@@ -8,14 +7,14 @@ public class KeyboardEventsExample extends BlurpJavaProgram{
     @Override
     public void run() {
 
-        keyboard.onKeyPressed(Key.Enter_Key, new Runnable() {
+        keyboard.Enter.onPressed(new Runnable() {
             @Override
             public void run() {
                 console.println("Enter Down");
             }
         });
 
-        keyboard.onKeyReleased(Key.Enter_Key, new Runnable() {
+        keyboard.Enter.onReleased(new Runnable() {
             @Override
             public void run() {
                 console.println("Enter Up");
@@ -23,8 +22,12 @@ public class KeyboardEventsExample extends BlurpJavaProgram{
         });
 
         while(screen.update()) {
-            if(keyboard.wasKeyJustPressed(Key.Space_Key)) console.println("Space Down");
-            if(keyboard.wasKeyJustReleased(Key.Space_Key)) console.println("Space Up");
+            if(keyboard.Space.wasJustPressed()) {
+                console.println("Space Down");
+            }
+            if(keyboard.Space.wasJustReleased()) {
+                console.println("Space Up");
+            }
         }
     }
 }

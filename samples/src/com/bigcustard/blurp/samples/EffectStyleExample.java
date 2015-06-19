@@ -48,9 +48,9 @@ public class EffectStyleExample extends BlurpJavaProgram {
         int currentPage = 0;
         while(true) {
 
-            if(keyboard.wasKeyJustPressed(Key.Space_Key)) {
+            if(keyboard.Space.wasJustPressed()) {
                 currentPage = (currentPage + 1) % 3;
-                Effect moveCamera = effects.moveTo(currentPage * 800 + 400, 300).duration(500);
+                Effect moveCamera = effects.moveTo(currentPage * 800 + 400, 300).duration(500).style(EffectStyle.BounceStop);
                 camera.runEffect(moveCamera);
             }
 

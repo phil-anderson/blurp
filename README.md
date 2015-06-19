@@ -5,7 +5,6 @@ WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
 * BUG Restarting scripts throws - Need to reload script
-* Remove keyboard class and replace with a Key class with same methods - if(Key.Space.isPressed())...
 * Reference counting for images?
 * Reduce size of "error" image
 * Sprite.onCollision events
