@@ -1,6 +1,6 @@
 screen.backgroundColour = DarkBlue;
 
-world = resources.createImageSprite("hello-world.png");
+world = resources.createTextSprite("Hello World");
 
 while(true) {
 
