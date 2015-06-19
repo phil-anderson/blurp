@@ -5,6 +5,7 @@ WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
 * Reference counting for images?
+* Reduce size of "error" image
 * BUG Tall, narrow viewport causes completion message to be truncated.
 * Look at gradle build, and add a task to create an executable jar
 * Almost all examples need redoing / refactoring

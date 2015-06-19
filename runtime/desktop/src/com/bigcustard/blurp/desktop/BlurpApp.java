@@ -1,7 +1,8 @@
-package com.bigcustard.blurp.bootstrap;
+package com.bigcustard.blurp.desktop;
 
 import java.io.*;
 import com.badlogic.gdx.*;
+import com.bigcustard.blurp.bootstrap.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.java.*;
 import com.bigcustard.blurp.ui.*;
@@ -44,7 +45,6 @@ public class BlurpApp extends Game {
         blurpRuntime.onException(new BlurpExceptionHandler() {
             @Override
             public void handleException(RuntimeException e) {
-
                 e.printStackTrace();
             }
         });
@@ -52,6 +52,10 @@ public class BlurpApp extends Game {
             blurpRuntime.startClass(javaClass);
         } else {
             try {
+                String parent = new File(scriptName).getParent();
+                if(parent != null) {
+                    config.setContentRoot(parent);
+                }
                 blurpRuntime.startScript(language, new FileReader(scriptName), scriptName);
             } catch(FileNotFoundException e) {
                 throw new BlurpException("Error finding script file " + scriptName, e);

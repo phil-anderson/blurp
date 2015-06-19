@@ -1,7 +1,7 @@
 package com.bigcustard.blurp.desktop;
 
+import java.io.*;
 import com.badlogic.gdx.backends.lwjgl.*;
-import com.bigcustard.blurp.bootstrap.*;
 import org.kohsuke.args4j.*;
 
 public class BlurpRunner {
@@ -26,6 +26,8 @@ public class BlurpRunner {
             System.exit(1);
         }
 
+        handleMissingDetails(options);
+
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.width = options.width;
         config.height = options.height;
@@ -35,10 +37,29 @@ public class BlurpRunner {
         new LwjglApplication(blurpApp, config);
 	}
 
+    private static void handleMissingDetails(CommandLineOptions options) {
+
+        if(options.scriptName == null) {
+            options.scriptName = FileSelector.selectFile().getPath();
+            if(options.scriptName == null) {
+                System.out.println("Blurp cancelled by user");
+                System.exit(1);
+            }
+        }
+        if(options.language == null) {
+            SupportedLanguage language = SupportedLanguage.forFile(new File(options.scriptName));
+            if(language == null) {
+                System.out.println("Unable to infer what language to use for file: " + options.scriptName);
+                System.exit(1);
+            }
+            options.language = language.getScriptEngineName();
+        }
+    }
+
     private static class CommandLineOptions {
 
-        @Option(name="-language", aliases="-l", metaVar="language", usage="Language may be either \"Java\" or the name of a JVM scripting language. If omitted, the default is \"Java\"")
-        private String language = "Java";
+        @Option(name="-language", aliases="-l", metaVar="language", usage="Language may be either \"Java\" or the name of a JVM scripting language. If omitted, Blurp will infer it from the filename")
+        private String language = null;
 
         @Option(name="-width", aliases="-w", metaVar="width", usage="The width in pixels of the window that Blurp will run your script in", depends="-height")
         private int width = VIEWPORT_WIDTH;
@@ -46,8 +67,8 @@ public class BlurpRunner {
         @Option(name="-height", aliases="-h", metaVar="height", usage="The height in pixels of the window that Blurp will run your script in", depends="-width")
         private int height = VIEWPORT_HEIGHT;
 
-        @Argument(index=0, required=true, metaVar="script-name", usage="The filename of the script to run, or in the case of Java, the fully qualified name of the class to run, which must implement BlurpRunnable")
-        private String scriptName;
+        @Argument(index=0, metaVar="script-name", usage="The filename of the script to run, or in the case of Java, the fully qualified name of the class to run, which must extend BlurpJavaProgram")
+        private String scriptName = null;
     }
 
 }
