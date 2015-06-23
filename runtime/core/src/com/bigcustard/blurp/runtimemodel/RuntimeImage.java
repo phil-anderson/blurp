@@ -1,11 +1,12 @@
 package com.bigcustard.blurp.runtimemodel;
 
-import com.badlogic.gdx.*;
+import java.io.*;
 import com.badlogic.gdx.files.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.util.*;
 
 public class RuntimeImage implements RuntimeObject<Image> {
 
@@ -23,24 +24,12 @@ public class RuntimeImage implements RuntimeObject<Image> {
         String filename = BlurpStore.configuration.getContentRoot() + modelImage.name;
         // Images are immutable so only need syncing when new.
         if(newInstance) {
-            FileHandle localFile = Gdx.files.local(filename);
-            if(localFile.exists()) {
-                textureRegion = new TextureRegion(new Texture(localFile, true));
-            } else {
-                FileHandle absoluteFile = Gdx.files.absolute(filename);
-                if(absoluteFile.exists()) {
-                    textureRegion = new TextureRegion(new Texture(absoluteFile, true));
-                } else {
-                    FileHandle classpathFile = Gdx.files.classpath(filename);
-                    if(classpathFile.exists()) {
-                        textureRegion = new TextureRegion(new Texture(classpathFile, true));
-                    } else {
-                        // TODO: We should throw here really - Need to sort out tests
-                        textureRegion = new TextureRegion(new Texture(Gdx.files.classpath("image-error.png"), true));
-                    }
-                }
+            try {
+                FileHandle file = Files.getFile(filename);
+                textureRegion = new TextureRegion(new Texture(file, true));
+            } catch(FileNotFoundException e) {
+                textureRegion.getTexture().setFilter(Texture.TextureFilter.MipMapLinearNearest, Texture.TextureFilter.Linear);
             }
-            textureRegion.getTexture().setFilter(Texture.TextureFilter.MipMapLinearNearest, Texture.TextureFilter.Linear);
         }
     }
 

@@ -35,6 +35,7 @@ public class BlurpStore {
     public static ConsoleImpl console;
     public static SystemImpl system;
     public static RuntimeScreen runtimeScreen;
+    public static ScriptCompleteOverlay scriptCompleteOverlay;
     public static BlurpScreen blurpScreen;
     public static FontHolder defaultFont;
     public static BitmapFont systemFont;
@@ -84,6 +85,7 @@ public class BlurpStore {
 
         blurpifier = new Blurpifier();
         runtimeScreen = new RuntimeScreen();
+        scriptCompleteOverlay = new ScriptCompleteOverlay();
         blurpScreen = new BlurpScreen();
         modelRepository = new ModelRepository();
         runtimeRepository = new RuntimeRepository();
@@ -115,7 +117,13 @@ public class BlurpStore {
 
     public static void reset() {
 
-        dispose();
+        tweener.killAll();
+        tweener.update(9999);
+        blurpScreen.dispose();
+        modelRepository.dispose();
+        runtimeRepository.dispose();
+        defaultFont.dispose();
+        systemFont.dispose();
 
         mainCamera = new OrthographicCamera();
         mainCamera.setToOrtho(false, (float) configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight());
@@ -130,6 +138,7 @@ public class BlurpStore {
 
         initialiseFonts();
 
+        scriptCompleteOverlay.reset();
         blurpifier.reset();
         console.reset();
         modelCamera.reset();
@@ -148,5 +157,6 @@ public class BlurpStore {
         runtimeRepository.dispose();
         defaultFont.dispose();
         systemFont.dispose();
+        scriptCompleteOverlay.dispose();
     }
 }

@@ -51,15 +51,11 @@ public class BlurpApp extends Game {
         if(javaClass != null) {
             blurpRuntime.startClass(javaClass);
         } else {
-            try {
-                String parent = new File(scriptName).getParent();
-                if(parent != null) {
-                    config.setContentRoot(parent);
-                }
-                blurpRuntime.startScript(language, new FileReader(scriptName), scriptName);
-            } catch(FileNotFoundException e) {
-                throw new BlurpException("Error finding script file " + scriptName, e);
+            String parent = new File(scriptName).getAbsoluteFile().getParent();
+            if(parent != null) {
+                config.setContentRoot(parent);
             }
+            blurpRuntime.startScript(language, scriptName);
         }
         setScreen(BlurpStore.blurpScreen);
     }

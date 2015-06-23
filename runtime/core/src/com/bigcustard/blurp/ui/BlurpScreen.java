@@ -34,7 +34,6 @@ public class BlurpScreen extends ScreenAdapter {
     private int fpsFrameCounter;
     private long lastFpsReading;
 
-    private ScriptCompleteOverlay completionOverlay = new ScriptCompleteOverlay();
     private SystemShortcutHandler systemShortcutHandler = new SystemShortcutHandler();
 
     public void addActor(Actor actor) {
@@ -73,10 +72,6 @@ public class BlurpScreen extends ScreenAdapter {
             renderListener.handlePreRenderEvent(delta);
             BlurpStore.defaultFont.reset();
             doFrame(delta);
-
-            if(BlurpState.scriptComplete) {
-                completionOverlay.render(batch, shapes);
-            }
         } catch(RuntimeException exception) {
             // Pass it on so blurpify method can throw it
             BlurpStore.blurpifier.setException(exception);
@@ -145,6 +140,10 @@ public class BlurpScreen extends ScreenAdapter {
         beginBatch();
         BlurpStore.runtimeConsole.render(batch);
         endBatch();
+
+        if(BlurpState.scriptComplete) {
+            BlurpStore.scriptCompleteOverlay.render(batch, shapes);
+        }
 
         if(BlurpState.debugMode) debugHudRenderer.render();
     }
@@ -256,6 +255,5 @@ public class BlurpScreen extends ScreenAdapter {
             Gdx.input.setInputProcessor(null);
             initialised = false;
         }
-        completionOverlay.reset();
     }
 }

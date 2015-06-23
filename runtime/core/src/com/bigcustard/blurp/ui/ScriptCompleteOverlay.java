@@ -8,12 +8,22 @@ import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.util.*;
 
-import static com.bigcustard.blurp.core.BlurpTerminatedException.CompletionAction.Restart;
-import static com.bigcustard.blurp.core.BlurpTerminatedException.CompletionAction.Terminate;
+import static com.bigcustard.blurp.core.BlurpTerminatedException.CompletionAction.*;
 
 public class ScriptCompleteOverlay {
 
-    private boolean errorTriggered;
+    private boolean errorHandled;
+
+    private SimpleButton errorButton;
+    private SimpleButton restartButton;
+    private SimpleButton exitButton;
+
+    public ScriptCompleteOverlay() {
+
+        errorButton = new SimpleButton("error-icon.png", Colours.Red);
+        restartButton = new SimpleButton("restart-icon.png", Colours.White);
+        exitButton = new SimpleButton("exit-icon.png", Colours.White);
+    }
 
     public void render(Batch batch, ShapeRenderer shapes) {
 
@@ -38,52 +48,67 @@ public class ScriptCompleteOverlay {
             shapes.begin(ShapeRenderer.ShapeType.Filled);
             shapes.rect(0, 0, BlurpStore.staticCamera.viewportWidth, BlurpStore.staticCamera.viewportHeight);
             shapes.end();
+
+            batch.begin();
+            BlurpStore.runtimeConsole.render(batch);
+            batch.end();
         }
 
-        float textHeight = BlurpStore.staticCamera.viewportHeight / 20;
+        float size = BlurpStore.staticCamera.viewportHeight / 10;
 
-        shapes.setProjectionMatrix(BlurpStore.staticCamera.combined);
-
-        shapes.setColor(0, 0, 0.25f, 1f);
+        shapes.setColor(0, 0, 0f, 1f);
         shapes.begin(ShapeRenderer.ShapeType.Filled);
-        shapes.rect(0, 0, BlurpStore.staticCamera.viewportWidth, textHeight * 1.2f);
+        shapes.rect(0, 0, BlurpStore.staticCamera.viewportWidth, size * 1.2f);
         shapes.end();
 
         shapes.setColor(Color.GRAY);
         shapes.begin(ShapeRenderer.ShapeType.Line);
-        shapes.line(0, textHeight * 1.2f, BlurpStore.staticCamera.viewportWidth, textHeight * 1.2f);
+        shapes.line(0, size * 1.2f, BlurpStore.staticCamera.viewportWidth, size * 1.2f);
         shapes.end();
 
-        BlurpStore.defaultFont.reset();
-        BitmapFont font = BlurpStore.defaultFont.getFont();
-        font.setScale(textHeight / font.getLineHeight());
-        font.setColor(Color.LIGHT_GRAY);
+        float xPos = 400 - size; // Position for two buttons
 
         batch.setProjectionMatrix(BlurpStore.staticCamera.combined);
         batch.begin();
-        font.setMarkupEnabled(true);
         if(BlurpState.error) {
-            if(!errorTriggered) {
+            xPos -= size / 2; // Position for three buttons
+            if(!errorHandled) {
                 BlurpStore.runtimeConsole.clear();
-                BlurpStore.runtimeConsole.print(Exceptions.getConcatenatedMessage(BlurpState.exception), Colours.White, 1);
-                errorTriggered = true;
+                BlurpStore.runtimeConsole.print(Exceptions.getConcatenatedMessage(BlurpState.exception), Colours.LightGrey, 0.75);
+                errorHandled = true;
             }
-            font.drawWrapped(batch, "[Red]An Error Occurred[] - Press SPACE to restart, ESC to exit", 0, textHeight, BlurpStore.staticCamera.viewportWidth, BitmapFont.HAlignment.CENTER);
-            BlurpStore.runtimeConsole.render(batch);
-        } else {
-            font.drawWrapped(batch, "Program Complete - Press SPACE to restart, ESC to exit", 0, textHeight, BlurpStore.staticCamera.viewportWidth, BitmapFont.HAlignment.CENTER);
+            errorButton.setPosition(xPos, size * 0.1f, size);
+            errorButton.render(batch);
+            xPos += size;
         }
+
+        restartButton.setPosition(xPos, size * 0.1f, size);
+        xPos += size;
+        exitButton.setPosition(xPos, size * 0.1f, size);
+
+        restartButton.render(batch);
+        exitButton.render(batch);
         batch.end();
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+        if(errorButton.wasClicked()) {
+            BlurpStore.runtimeConsole.print(Exceptions.getStackTraceString(BlurpState.exception), Colours.LightGrey, 1);
+        } else if(restartButton.wasClicked()) {
             BlurpStore.configuration.getScriptCompletionHandler().onRestart();
-        } else if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+        } else if(exitButton.wasClicked()) {
             BlurpStore.configuration.getScriptCompletionHandler().onTerminate();
         }
     }
 
+    public void dispose() {
+
+        reset();
+        errorButton.dispose();
+        restartButton.dispose();
+        exitButton.dispose();
+    }
+
     public void reset() {
 
-        errorTriggered = false;
+        errorHandled = false;
     }
 }

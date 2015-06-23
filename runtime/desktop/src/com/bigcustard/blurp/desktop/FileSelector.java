@@ -9,6 +9,12 @@ public class FileSelector {
 
     public static String selectFile() {
 
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch(Exception e) {
+            // No big deal.
+        }
+
         Preferences preferences = Preferences.userNodeForPackage(FileSelector.class);
         String folder = preferences.get(LAST_FOLDER_KEY, "");
         JFileChooser chooser = new JFileChooser(folder);

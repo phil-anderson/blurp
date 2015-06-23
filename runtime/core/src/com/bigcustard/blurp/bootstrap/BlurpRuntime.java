@@ -1,6 +1,5 @@
 package com.bigcustard.blurp.bootstrap;
 
-import java.io.*;
 import java.lang.reflect.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.utils.*;
@@ -49,16 +48,10 @@ public class BlurpRuntime {
         BlurpStore.blurpScreen.onRenderEvent(listener);
     }
 
-    public void startScript(String language, String script, String scriptName) {
+    public void startScript(String language, String scriptFilename) {
 
         checkScriptRunning("start script");
-        startScript(language, new StringReader(script), scriptName);
-    }
-
-    public void startScript(String language, Reader scriptReader, String scriptName) {
-
-        checkScriptRunning("start script");
-        scriptRunnable = new RunnableWrapper(new ScriptEngineBlurpRunnable(language, scriptReader, scriptName));
+        scriptRunnable = new RunnableWrapper(new ScriptEngineBlurpRunnable(language, scriptFilename));
         startThread();
     }
 
@@ -102,9 +95,6 @@ public class BlurpRuntime {
 
     public void end() {
 
-        // Note: Use of deprecated stop method is inherently unsafe, however we really do want a hard stop and are going
-        // to clear down the runtime so there risk of damaged objects remaining is negligible. As we don;t have control
-        // over the code that is running in the thread, this is about the only way to stop it.
         BlurpStore.dispose();
     }
 

@@ -1,5 +1,7 @@
 package com.bigcustard.blurp.util;
 
+import java.io.*;
+
 public class Exceptions {
 
     public static String getConcatenatedMessage(Throwable throwable) {
@@ -15,5 +17,12 @@ public class Exceptions {
             throwable = throwable.getCause();
         }
         return result;
+    }
+
+    public static String getStackTraceString(Throwable throwable) {
+
+        StringWriter writer = new StringWriter();
+        throwable.printStackTrace(new PrintWriter(writer));
+        return writer.toString();
     }
 }

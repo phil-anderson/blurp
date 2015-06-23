@@ -6,19 +6,17 @@ import java.util.*;
 import javax.script.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.constants.*;
+import com.bigcustard.blurp.util.*;
 
 public class ScriptEngineBlurpRunnable implements Runnable {
 
     private final String language;
+    private final String scriptFilename;
     private final ScriptEngine scriptEngine;
-    private final String scriptName;
 
-    private Reader scriptReader;
-
-    public ScriptEngineBlurpRunnable(String language, Reader scriptReader, String scriptName) {
+    public ScriptEngineBlurpRunnable(String language, String scriptFilename) {
         this.language = language;
-        this.scriptReader = scriptReader;
-        this.scriptName = scriptName;
+        this.scriptFilename = scriptFilename;
         scriptEngine = new ScriptEngineManager().getEngineByName(language);
         if(scriptEngine == null) throw new BlurpException("Couldn't get ScriptEngine for language name '" + language + "'");
     }
@@ -51,20 +49,11 @@ public class ScriptEngineBlurpRunnable implements Runnable {
 
         if (language.equals("jruby")) JRubyWrapperSpike.wrap(scriptEngine, bindings);
 
-        bindings.put(ScriptEngine.FILENAME, scriptName);
+        bindings.put(ScriptEngine.FILENAME, scriptFilename);
         try {
-            // TODO: Remove these hacky script restart shenanigans that won't work on Android.
-            try {
-                scriptReader.ready();
-            } catch(IOException e) {
-                try {
-                    scriptReader = new FileReader(scriptName);
-                } catch(FileNotFoundException e2) {
-                    throw new BlurpException("Couldn't open script", e2);
-                }
-            }
+            Reader scriptReader = Files.getFile(scriptFilename).reader();
             scriptEngine.eval(scriptReader, bindings);
-        } catch(ScriptException e) {
+        } catch(Exception e) {
             throw new BlurpException("Error running script", e);
         }
     }
@@ -83,7 +72,6 @@ public class ScriptEngineBlurpRunnable implements Runnable {
 
         List allConstants = new ArrayList();
         for(Field field : constantsClass.getFields()) {
-//            String fieldName = Convert.toCamelCase(field.getName());
             String fieldName = field.getName();
             if(bindings.get(fieldName) != null) {
                 throw new RuntimeException("Conflicting constants - " + constantsClass + " vs " + bindings.get(fieldName).getClass());
