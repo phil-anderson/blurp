@@ -4,7 +4,7 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
-* BUG = System shortcuts (ctrl+keys) are screwed
+* Add sanity checks to model method parameters?
 * BUG - Completion buttons don't work if script not found.
 * Warm up script engine (mainly for JRuby)
 * Make console screen pixel based - AndaleMono font

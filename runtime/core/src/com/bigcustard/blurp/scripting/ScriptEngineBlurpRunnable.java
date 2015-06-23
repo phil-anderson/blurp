@@ -53,6 +53,8 @@ public class ScriptEngineBlurpRunnable implements Runnable {
         try {
             Reader scriptReader = Files.getFile(scriptFilename).reader();
             scriptEngine.eval(scriptReader, bindings);
+        } catch(RuntimeException e) {
+            throw e; // Rethrow
         } catch(Exception e) {
             throw new BlurpException("Error running script", e);
         }

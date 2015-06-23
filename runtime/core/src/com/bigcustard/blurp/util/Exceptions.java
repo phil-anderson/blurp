@@ -8,7 +8,7 @@ public class Exceptions {
 
         String result = "";
         while(throwable != null) {
-            if(!result.contains(throwable.getMessage())) {
+            if(throwable.getMessage() != null && !result.contains(throwable.getMessage())) {
                 result += throwable.getMessage();
                 if(!result.endsWith("\n")) {
                     result += "\n";
