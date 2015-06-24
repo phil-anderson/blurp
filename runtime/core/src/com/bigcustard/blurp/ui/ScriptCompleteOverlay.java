@@ -12,14 +12,19 @@ import static com.bigcustard.blurp.core.BlurpTerminatedException.CompletionActio
 
 public class ScriptCompleteOverlay {
 
-    private boolean errorHandled;
-
+    private SimpleButton successButton;
     private SimpleButton errorButton;
     private SimpleButton restartButton;
     private SimpleButton exitButton;
 
+    private SimpleButton leftHandButton;
+    private float alpha = 0;
+    private float size;
+    private int programDuration;
+
     public ScriptCompleteOverlay() {
 
+        successButton = new SimpleButton("success-icon.png", Colours.Lime);
         errorButton = new SimpleButton("error-icon.png", Colours.Red);
         restartButton = new SimpleButton("restart-icon.png", Colours.White);
         exitButton = new SimpleButton("exit-icon.png", Colours.White);
@@ -42,19 +47,16 @@ public class ScriptCompleteOverlay {
             }
         }
 
-        if(BlurpState.error) {
-            shapes.setProjectionMatrix(BlurpStore.staticCamera.combined);
-            shapes.setColor(0, 0, 0, 0.5f);
-            shapes.begin(ShapeRenderer.ShapeType.Filled);
-            shapes.rect(0, 0, BlurpStore.staticCamera.viewportWidth, BlurpStore.staticCamera.viewportHeight);
-            shapes.end();
+        if(alpha < 0.5) alpha += 0.01;
+        shapes.setProjectionMatrix(BlurpStore.staticCamera.combined);
+        shapes.setColor(0, 0, 0, alpha);
+        shapes.begin(ShapeRenderer.ShapeType.Filled);
+        shapes.rect(0, 0, BlurpStore.staticCamera.viewportWidth, BlurpStore.staticCamera.viewportHeight);
+        shapes.end();
 
-            batch.begin();
-            BlurpStore.runtimeConsole.render(batch);
-            batch.end();
-        }
-
-        float size = BlurpStore.staticCamera.viewportHeight / 10;
+        batch.begin();
+        BlurpStore.runtimeConsole.render(batch);
+        batch.end();
 
         shapes.setColor(0, 0, 0f, 1f);
         shapes.begin(ShapeRenderer.ShapeType.Filled);
@@ -66,32 +68,21 @@ public class ScriptCompleteOverlay {
         shapes.line(0, size * 1.2f, BlurpStore.staticCamera.viewportWidth, size * 1.2f);
         shapes.end();
 
-        float xPos = 400 - size; // Position for two buttons
-
         batch.setProjectionMatrix(BlurpStore.staticCamera.combined);
         batch.begin();
-        if(BlurpState.error) {
-            xPos -= size / 2; // Position for three buttons
-            if(!errorHandled) {
-                BlurpStore.runtimeConsole.clear();
-                BlurpStore.runtimeConsole.print(Exceptions.getConcatenatedMessage(BlurpState.exception), Colours.LightGrey, 0.75);
-                errorHandled = true;
-            }
-            errorButton.setPosition(xPos, size * 0.1f, size);
-            errorButton.render(batch);
-            xPos += size;
-        }
-
-        restartButton.setPosition(xPos, size * 0.1f, size);
-        xPos += size;
-        exitButton.setPosition(xPos, size * 0.1f, size);
-
+        leftHandButton.render(batch);
         restartButton.render(batch);
         exitButton.render(batch);
         batch.end();
 
-        if(errorButton.wasClicked()) {
-            BlurpStore.runtimeConsole.print(Exceptions.getStackTraceString(BlurpState.exception), Colours.LightGrey, 1);
+        if(leftHandButton.wasClicked()) {
+            if(BlurpState.error) {
+                BlurpStore.runtimeConsole.print(Exceptions.getStackTraceString(BlurpState.exception), Colours.LightGrey, 1);
+            } else {
+                String overview = String.format("\nTime taken: %dms\nFrames Rendered: %d\nAverage FPS: %.2f",
+                              programDuration, BlurpState.numFrames, BlurpState.numFrames / (float) programDuration * 1000);
+                BlurpStore.runtimeConsole.print(overview, Colours.LightGrey, 1);
+            }
         } else if(restartButton.wasClicked()) {
             BlurpStore.configuration.getScriptCompletionHandler().onRestart();
         } else if(exitButton.wasClicked()) {
@@ -99,16 +90,35 @@ public class ScriptCompleteOverlay {
         }
     }
 
+    public void initialise() {
+
+        programDuration = (int) (System.currentTimeMillis() - BlurpState.startTime);
+        alpha = 0;
+        BlurpStore.runtimeConsole.clear();
+        if(BlurpState.error) {
+            BlurpStore.runtimeConsole.print(Exceptions.getConcatenatedMessage(BlurpState.exception), Colours.LightGrey, 0.75);
+            leftHandButton = errorButton;
+        } else {
+            BlurpStore.runtimeConsole.print("Program Complete\n", Colours.LightGrey, 1);
+            leftHandButton = successButton;
+        }
+
+        size = BlurpStore.staticCamera.viewportHeight / 10;
+        float xPos = 400 - size * 1.5f;
+
+        successButton.setPosition(xPos, size * 0.1f, size);
+        errorButton.setPosition(xPos, size * 0.1f, size);
+        xPos += size;
+
+        restartButton.setPosition(xPos, size * 0.1f, size);
+        xPos += size;
+        exitButton.setPosition(xPos, size * 0.1f, size);
+    }
+
     public void dispose() {
 
-        reset();
         errorButton.dispose();
         restartButton.dispose();
         exitButton.dispose();
-    }
-
-    public void reset() {
-
-        errorHandled = false;
     }
 }

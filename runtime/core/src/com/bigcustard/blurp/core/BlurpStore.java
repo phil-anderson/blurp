@@ -98,8 +98,8 @@ public class BlurpStore {
     // pre-existing libGdx app (i.e. PlanetBlurp).
     public static void initialiseFonts() {
 
-        systemFont = new BitmapFont(Gdx.files.internal("small-rabbit.fnt"));
-        systemFont.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        systemFont = new BitmapFont(Gdx.files.internal("andale-mono.fnt"));
+        systemFont.getRegion().getTexture().setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
         systemFont.setMarkupEnabled(true);
 
         Texture systemFontTexture = new Texture(Gdx.files.classpath("RobotoCondensed.png"), true);
@@ -138,7 +138,6 @@ public class BlurpStore {
 
         initialiseFonts();
 
-        scriptCompleteOverlay.reset();
         blurpifier.reset();
         console.reset();
         modelCamera.reset();

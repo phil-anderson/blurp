@@ -32,7 +32,7 @@ public class SimpleButton {
 
     public void render(Batch batch) {
 
-        batch.setColor((float) colour.red, (float) colour.green, (float) colour.blue, isMouseOver() ? 1 : 0.5f);
+        batch.setColor((float) colour.red, (float) colour.green, (float) colour.blue, isMouseOver() ? 1 : 0.65f);
         batch.draw(textureRegion, x, y, size, size);
         batch.setColor(1, 1, 1, 1);
     }

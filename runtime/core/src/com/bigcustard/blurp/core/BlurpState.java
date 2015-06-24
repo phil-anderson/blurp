@@ -17,6 +17,9 @@ public class BlurpState {
     public static volatile boolean paused;
     public static String windowTitle;
 
+    public static int numFrames = -1;
+    public static long startTime;
+
     public static Color debugGdxColour() {
 
         return Convert.toGdxColour(debugColour);
@@ -53,5 +56,6 @@ public class BlurpState {
         exception = null;
         error = false;
         paused = false;
+        numFrames = -1;
     }
 }

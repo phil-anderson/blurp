@@ -93,6 +93,7 @@ public class BlurpScreen extends ScreenAdapter {
             if(BlurpStore.blurpifier.getRequestState() == BlurpifyRequestState.Requested) {
                 BlurpStore.blurpifier.setRenderState(BlurpifyRenderState.RequestAcknowledged);
                 try {
+                    BlurpState.numFrames++;
                     updateFps();
                     updateCamera();
                     BlurpStore.runtimeRepository.syncWithModelRepository(delta);

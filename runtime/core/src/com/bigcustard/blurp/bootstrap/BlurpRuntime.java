@@ -1,6 +1,7 @@
 package com.bigcustard.blurp.bootstrap;
 
 import java.lang.reflect.*;
+import java.lang.System;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.utils.*;
 import com.bigcustard.blurp.core.*;
@@ -148,6 +149,7 @@ public class BlurpRuntime {
             try {
                 // Initial blurpify to flush any defaults set in the model.
                 BlurpStore.blurpifier.blurpify();
+                BlurpState.startTime = System.currentTimeMillis();
                 script.run();
             } catch (RuntimeException e) {
                 BlurpState.exception = e;
@@ -156,6 +158,8 @@ public class BlurpRuntime {
                     exceptionHandler.handleException(e);
                 }
             }
+
+            BlurpStore.scriptCompleteOverlay.initialise();
             BlurpState.scriptComplete = true;
         }
     }
