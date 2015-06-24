@@ -29,22 +29,22 @@ public class BlurpState {
 
         if(paused) {
             resume();
+            setActualWindowTitle(BlurpState.windowTitle);
         } else {
             pause();
+            setActualWindowTitle(BlurpState.windowTitle + " [PAUSED]");
         }
     }
 
     public static void pause() {
 
         paused = true;
-        Gdx.graphics.setTitle(BlurpState.windowTitle + " [PAUSED]");
         BlurpStore.timer.hold();
     }
 
     public static void resume() {
 
         paused = false;
-        Gdx.graphics.setTitle(BlurpState.windowTitle);
         BlurpStore.timer.unhold();
     }
 
@@ -57,5 +57,21 @@ public class BlurpState {
         error = false;
         paused = false;
         numFrames = -1;
+    }
+
+    public static void setWindowTitle(final String newTitle) {
+
+        windowTitle = newTitle;
+        setActualWindowTitle(newTitle);
+    }
+
+    private static void setActualWindowTitle(final String newTitle) {
+
+        Gdx.app.postRunnable(new Runnable() {
+            @Override
+            public void run() {
+                Gdx.graphics.setTitle(newTitle);
+            }
+        });
     }
 }

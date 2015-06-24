@@ -1,6 +1,7 @@
 package com.bigcustard.blurp.runtimemodel;
 
 import java.util.*;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
@@ -9,12 +10,13 @@ import com.bigcustard.blurp.util.*;
 // A quick, hacky console
 public class RuntimeConsole {
 
-    private final int lines, columns; // In characters
+    private int lines, columns; // In characters
 
-    private final float pixelHeight;
-    private final float lineSpacing;
-    private final String[] contents;
-    private final StringBuilder stringContents;
+    private float pixelHeight;
+    private float lineSpacing;
+    private String[] contents;
+    private StringBuilder stringContents;
+    private OrthographicCamera pixelCamera;
 
     private Colour lastColour;
     private double lastAlpha;
@@ -24,9 +26,17 @@ public class RuntimeConsole {
 
     public RuntimeConsole() {
 
-        this.pixelHeight = BlurpStore.staticViewport.getWorldHeight();
+        initialise();
+    }
 
-        columns = (int) (BlurpStore.staticViewport.getWorldWidth() / BlurpStore.systemFont.getSpaceWidth());
+    public void initialise() {
+
+        pixelCamera = new OrthographicCamera();
+        pixelCamera.setToOrtho(false, BlurpStore.staticViewport.getScreenWidth(), BlurpStore.staticViewport.getScreenHeight());
+
+        this.pixelHeight = BlurpStore.staticViewport.getScreenHeight();
+
+        columns = (int) (BlurpStore.staticViewport.getScreenWidth() / BlurpStore.systemFont.getSpaceWidth());
         lines = (int) (pixelHeight / BlurpStore.systemFont.getLineHeight());
         lineSpacing = pixelHeight / lines;
 
@@ -104,6 +114,7 @@ public class RuntimeConsole {
 
     public void render(Batch batch) {
 
+        batch.setProjectionMatrix(pixelCamera.combined);
         for(int i = 0; i < lines; i++) {
             float y = pixelHeight - i * lineSpacing;
             if(!contents[i].isEmpty()) {

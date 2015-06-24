@@ -59,13 +59,7 @@ public class BlurpStore {
         BlurpStore.runtime = runtime;
         BlurpStore.configuration = configuration;
 
-        mainCamera = new OrthographicCamera();
-        mainCamera.setToOrtho(false, worldWidth, worldHeight);
-        mainViewport = new FitViewport(worldWidth, worldHeight, mainCamera);
-
-        staticCamera = new OrthographicCamera();
-        staticCamera.setToOrtho(false, worldWidth, worldHeight);
-        staticViewport = new FitViewport(worldWidth, worldHeight, staticCamera);
+        initialiseViewports();
 
         modelCamera = new CameraImpl(worldWidth / 2, worldHeight / 2);
         modelViewport = new Viewport().size(worldWidth, worldHeight);
@@ -125,13 +119,7 @@ public class BlurpStore {
         defaultFont.dispose();
         systemFont.dispose();
 
-        mainCamera = new OrthographicCamera();
-        mainCamera.setToOrtho(false, (float) configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight());
-        mainViewport = new FitViewport((float) configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight(), mainCamera);
-
-        staticCamera = new OrthographicCamera();
-        staticCamera.setToOrtho(false, (float) configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight());
-        staticViewport = new FitViewport((float) configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight(), staticCamera);
+        initialiseViewports();
 
         runtimeScreen = new RuntimeScreen();
         runtimeConsole = new RuntimeConsole();
@@ -145,6 +133,19 @@ public class BlurpStore {
         modelScreen.reset(configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight());
         timer.reset();
         BlurpState.reset();
+    }
+
+    private static void initialiseViewports() {
+
+        mainCamera = new OrthographicCamera();
+        mainCamera.setToOrtho(false, (float) configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight());
+        mainViewport = new FitViewport((float) configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight(), mainCamera);
+        mainViewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        staticCamera = new OrthographicCamera();
+        staticCamera.setToOrtho(false, (float) configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight());
+        staticViewport = new FitViewport((float) configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight(), staticCamera);
+        staticViewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
     public static void dispose() {

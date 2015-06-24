@@ -56,6 +56,7 @@ public class BlurpScreen extends ScreenAdapter {
 
         BlurpStore.mainViewport.update(width, height);
         BlurpStore.staticViewport.update(width, height);
+        BlurpStore.runtimeConsole.initialise();
     }
 
     @Override

@@ -18,10 +18,13 @@ public class SystemShortcutHandler {
                 } else if(Gdx.input.isKeyJustPressed(Input.Keys.P)) {
                     BlurpState.togglePause();
                 } else if(Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+                    if(BlurpState.paused) BlurpState.resume();
                     BlurpStore.runtime.stop();
                 } else if(Gdx.input.isKeyJustPressed(Input.Keys.R) || Gdx.input.isKeyJustPressed(Input.Keys.F5)) {
+                    if(BlurpState.paused) BlurpState.resume();
                     BlurpStore.runtime.restart();
                 } else if(Gdx.input.isKeyJustPressed(Input.Keys.Q) || Gdx.input.isKeyJustPressed(Input.Keys.F4)) {
+                    if(BlurpState.paused) BlurpState.resume();
                     BlurpStore.runtime.terminate();
                 }
             }
