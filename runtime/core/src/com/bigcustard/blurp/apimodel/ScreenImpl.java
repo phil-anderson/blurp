@@ -17,7 +17,7 @@ public class ScreenImpl extends Screen {
 
     public void reset(double viewportWidth, double viewportHeight) {
 
-        viewport.size(viewportWidth, viewportHeight).stretchToFit(false);
+        viewport.setSize(viewportWidth, viewportHeight).setStretchToFit(false);
         backgroundColour = Colours.Black;
     }
 

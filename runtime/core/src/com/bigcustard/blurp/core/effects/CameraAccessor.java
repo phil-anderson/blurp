@@ -43,23 +43,23 @@ public class CameraAccessor implements TweenAccessor<Camera>, TweenTypes {
 
         switch(tweenType) {
             case MOVE : {
-                camera.position(newValues[0], newValues[1]);
+                camera.setPosition(newValues[0], newValues[1]);
                 break;
             }
             case SCALE : {
-                camera.zoom(Math.max(newValues[0], newValues[1]));
+                camera.setZoom(Math.max(newValues[0], newValues[1]));
                 break;
             }
             case ROTATE : {
-                camera.rotation(newValues[0]);
+                camera.setAngle(newValues[0]);
                 break;
             }
             case ALPHA : {
-                camera.alpha(newValues[0]);
+                camera.setTransparency(newValues[0]);
                 break;
             }
             case COLOUR : {
-                camera.colour(new Colour(newValues[0], newValues[1], newValues[2]));
+                camera.setColour(new Colour(newValues[0], newValues[1], newValues[2]));
                 break;
             }
         }

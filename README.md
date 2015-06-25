@@ -4,11 +4,10 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
+* Sprite moveAtAngle
 * Add sanity checks to model method parameters?
 * BUG - Completion buttons don't work if script not found.
 * Warm up script engine (mainly for JRuby)
-* Make console screen pixel based - AndaleMono font
-* Completion overlay - add green thumbs-up for success
 * Reduce size of "error" image
 * Sprite.onCollision events
 * Do a graphical end-of-script dialog

@@ -16,44 +16,44 @@ public abstract class TextSprite extends Sprite<TextSprite> {
 
     public boolean colourTagsEnabled;
 
-    public TextSprite text(String newText) {
+    public TextSprite setText(String newText) {
 
         text = newText;
         targetStyle = TargetStyle.Rectangle;
         return this;
     }
 
-    public TextSprite fontSize(double newFontSize) {
+    public TextSprite setFontSize(double newFontSize) {
 
         fontSize = newFontSize;
         return this;
     }
 
-    public TextSprite wrapWidth(double newWrapWidth) {
+    public TextSprite setWrapWidth(double newWrapWidth) {
 
         wrapWidth = newWrapWidth;
         return this;
     }
 
-    public TextSprite handle(Handle newHandle) {
+    public TextSprite setHandle(Handle newHandle) {
 
         handle = newHandle;
         return this;
     }
 
-    public TextSprite justification(Justification newJustification) {
+    public TextSprite setJustification(Justification newJustification) {
 
         justification = newJustification;
         return this;
     }
 
-    public TextSprite colourTagsEnabled(boolean colourTagsEnabled) {
+    public TextSprite setColourTagsEnabled(boolean colourTagsEnabled) {
 
         this.colourTagsEnabled = colourTagsEnabled;
         return this;
     }
 
-    public TextSprite wrap(double width, Justification justification) {
+    public TextSprite setWrap(double width, Justification justification) {
 
         wrapWidth = width;
         this.justification = justification;

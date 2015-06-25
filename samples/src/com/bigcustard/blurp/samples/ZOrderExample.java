@@ -11,9 +11,9 @@ public class ZOrderExample extends BlurpJavaProgram {
     public void run() {
 
         ImageSprite world = resources.createImageSprite("hello-world.png")
-                                  .colour(Colours.Red)
-                                  .position(300, 200)
-                                  .targetStyle(TargetStyle.Circle)
+                                  .setColour(Colours.Red)
+                                  .setPosition(300, 200)
+                                  .setTargetStyle(TargetStyle.Circle)
                                   .onMouseEnter(new SpriteEventHandler() {
                                       @Override
                                       public void handle(Sprite sprite) {
@@ -22,8 +22,8 @@ public class ZOrderExample extends BlurpJavaProgram {
                                       }
                                   });
 
-        world.copy().colour(Colours.Green).position(500, 200);
-        world.copy().colour(Colours.Blue).position(400, 400);
+        world.copy().setColour(Colours.Green).setPosition(500, 200);
+        world.copy().setColour(Colours.Blue).setPosition(400, 400);
 
         while(screen.update()) { }
     }

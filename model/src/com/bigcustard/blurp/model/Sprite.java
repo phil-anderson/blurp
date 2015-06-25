@@ -31,7 +31,7 @@ public abstract class Sprite<T> {
 
     /**
      * The scale of the sprite in the x and y axes. Typically you'd want to set both of these to the same value to
-     * make the sprite larger or smaller, which can be done more easily by using the {@link #scale} convenience method.
+     * make the sprite larger or smaller, which can be done more easily by using the {@link #setScale} convenience method.
      * <p>
      * If you set them individually though, some cool effects can be achieved as only the x or y dimension will be
      * stretched or shrunk. For example, if your sprite was of a rubber ball, then shrinking the y scale a little, and
@@ -75,19 +75,19 @@ public abstract class Sprite<T> {
 
     public boolean hidden;
 
-    public SpriteEventHandler onMouseEnter;
+    public SpriteEventHandler mouseEnterHandler;
 
-    public SpriteEventHandler onMouseExit;
+    public SpriteEventHandler mouseExitHandler;
 
-    public SpriteEventHandler onClick;
+    public SpriteEventHandler clickHandler;
 
-    public SpriteEventHandler onDrag;
+    public SpriteEventHandler dragHandler;
 
-    public SpriteEventHandler onDragRelease;
+    public SpriteEventHandler dragReleasedHandler;
 
-    public SpriteEventHandler onMousePress;
+    public SpriteEventHandler mousePressedHandler;
 
-    public SpriteEventHandler onMouseRelease;
+    public SpriteEventHandler mouseReleasedHandler;
 
     public SpriteMouseState mouse = NULL_MOUSE_STATE;
 
@@ -95,55 +95,55 @@ public abstract class Sprite<T> {
 
     public ScreenLayer layer;
 
-    public T x(double newX) {
+    public T setX(double newX) {
 
         this.x = newX;
         return (T) this;
     }
 
-    public T y(double newY) {
+    public T setY(double newY) {
 
         this.y = newY;
         return (T) this;
     }
 
-    public T scaleX(double newScaleX) {
+    public T setScaleX(double newScaleX) {
 
         this.scaleX = newScaleX;
         return (T) this;
     }
 
-    public T scaleY(double newScaleY) {
+    public T setScaleY(double newScaleY) {
 
         this.scaleY = newScaleY;
         return (T) this;
     }
 
-    public T angle(double newRotation) {
+    public T setAngle(double newRotation) {
 
         this.angle = newRotation;
         return (T) this;
     }
 
-    public T colour(Colour newColour) {
+    public T setColour(Colour newColour) {
 
         this.colour = newColour;
         return (T) this;
     }
 
-    public T transparency(double newAlpha) {
+    public T setTransparency(double newAlpha) {
 
         this.transparency = newAlpha;
         return (T) this;
     }
 
-    public T hidden(boolean newHidden) {
+    public T setHidden(boolean newHidden) {
 
         this.hidden = newHidden;
         return (T) this;
     }
 
-    public T targetStyle(TargetStyle newTargetStyle) {
+    public T setTargetStyle(TargetStyle newTargetStyle) {
 
         this.targetStyle = newTargetStyle;
         return (T) this;
@@ -151,95 +151,95 @@ public abstract class Sprite<T> {
 
     public T onMouseEnter(SpriteEventHandler eventHandler) {
 
-        this.onMouseEnter = eventHandler;
+        this.mouseEnterHandler = eventHandler;
         return (T) this;
     }
 
     public T onMouseEnter(EffectBase effectToRun) {
 
-        this.onMouseEnter = new EffectSpriteEventHandler(effectToRun);
+        this.mouseEnterHandler = new EffectSpriteEventHandler(effectToRun);
         return (T) this;
     }
 
     public T onMouseExit(SpriteEventHandler eventHandler) {
 
-        this.onMouseExit = eventHandler;
+        this.mouseExitHandler = eventHandler;
         return (T) this;
     }
 
     public T onMouseExit(EffectBase effectToRun) {
 
-        this.onMouseExit = new EffectSpriteEventHandler(effectToRun);
+        this.mouseExitHandler = new EffectSpriteEventHandler(effectToRun);
         return (T) this;
     }
 
     public T onClick(SpriteEventHandler eventHandler) {
 
-        this.onClick = eventHandler;
+        this.clickHandler = eventHandler;
         return (T) this;
     }
 
     public T onClick(EffectBase effectToRun) {
 
-        this.onClick = new EffectSpriteEventHandler(effectToRun);
+        this.clickHandler = new EffectSpriteEventHandler(effectToRun);
         return (T) this;
     }
 
     public T onDrag(SpriteEventHandler eventHandler) {
 
-        this.onDrag = eventHandler;
+        this.dragHandler = eventHandler;
         return (T) this;
     }
 
     public T onDrag(EffectBase effectToRun) {
 
-        this.onDrag = new EffectSpriteEventHandler(effectToRun);
+        this.dragHandler = new EffectSpriteEventHandler(effectToRun);
         return (T) this;
     }
 
-    public T onDragRelease(SpriteEventHandler eventHandler) {
+    public T onDragReleased(SpriteEventHandler eventHandler) {
 
-        this.onDragRelease = eventHandler;
+        this.dragReleasedHandler = eventHandler;
         return (T) this;
     }
 
-    public T onDragRelease(EffectBase effectToRun) {
+    public T onDragReleased(EffectBase effectToRun) {
 
-        this.onDragRelease = new EffectSpriteEventHandler(effectToRun);
+        this.dragReleasedHandler = new EffectSpriteEventHandler(effectToRun);
         return (T) this;
     }
 
-    public T onMousePress(SpriteEventHandler eventHandler) {
+    public T onMousePressed(SpriteEventHandler eventHandler) {
 
-        this.onMousePress = eventHandler;
+        this.mousePressedHandler = eventHandler;
         return (T) this;
     }
 
-    public T onMousePress(EffectBase effectToRun) {
+    public T onMousePressed(EffectBase effectToRun) {
 
-        this.onMousePress = new EffectSpriteEventHandler(effectToRun);
+        this.mousePressedHandler = new EffectSpriteEventHandler(effectToRun);
         return (T) this;
     }
 
-    public T onMouseRelease(SpriteEventHandler eventHandler) {
+    public T onMouseReleased(SpriteEventHandler eventHandler) {
 
-        this.onMouseRelease = eventHandler;
+        this.mouseReleasedHandler = eventHandler;
         return (T) this;
     }
 
-    public T onMouseRelease(EffectBase effectToRun) {
+    public T onMouseReleased(EffectBase effectToRun) {
 
-        this.onMouseRelease = new EffectSpriteEventHandler(effectToRun);
+        this.mouseReleasedHandler = new EffectSpriteEventHandler(effectToRun);
         return (T) this;
     }
 
-    public T layer(ScreenLayer layerToAppearOn) {
+    public T setLayer(ScreenLayer layerToAppearOn) {
 
         this.layer = layerToAppearOn;
         return (T) this;
     }
 
-    public T mouse(SpriteMouseState newMouseState) {
+    public T setMouse(SpriteMouseState newMouseState) {
 
         this.mouse = newMouseState;
         return (T) this;
@@ -252,7 +252,7 @@ public abstract class Sprite<T> {
      * @param newY The new Y coordinate
      * @return The Sprite.
      */
-    public T position(double newX, double newY) {
+    public T setPosition(double newX, double newY) {
 
         x = newX;
         y = newY;
@@ -282,14 +282,14 @@ public abstract class Sprite<T> {
      * @param factor The scaling factor to multiply the size by.
      * @return The Sprite.
      */
-    public T scale(double factor) {
+    public T setScale(double factor) {
 
         scaleX = factor;
         scaleY = factor;
         return (T) this;
     }
 
-    public T scale(double newScaleX, double newScaleY) {
+    public T setScale(double newScaleX, double newScaleY) {
 
         this.scaleX = newScaleX;
         this.scaleY = newScaleY;

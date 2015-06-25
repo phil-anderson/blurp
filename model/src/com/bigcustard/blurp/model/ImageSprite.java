@@ -19,7 +19,7 @@ public abstract class ImageSprite extends Sprite<ImageSprite> {
      */
     public Image image;
 
-    public ImageSprite image(Image newImage) {
+    public ImageSprite setImage(Image newImage) {
 
         image = newImage;
         targetStyle = TargetStyle.Circle;

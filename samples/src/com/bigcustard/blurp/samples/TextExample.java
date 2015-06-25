@@ -15,29 +15,29 @@ public class TextExample extends BlurpJavaProgram {
 //        system.debugMode(true);
 
         resources.createTextSprite("LEFT-JUSTIFIED\n" + MESSAGE)
-             .position(150, 500)
-             .wrap(220, Justification.AlignLeft);
+             .setPosition(150, 500)
+             .setWrap(220, Justification.AlignLeft);
 
         resources.createTextSprite("CENTER-JUSTIFIED\n" + MESSAGE)
-             .position(400, 500)
-             .wrap(220, Justification.AlignCenter);
+             .setPosition(400, 500)
+             .setWrap(220, Justification.AlignCenter);
 
         resources.createTextSprite("RIGHT-JUSTIFIED\n" + MESSAGE)
-            .position(650, 500)
-            .wrap(220, Justification.AlignRight);
+            .setPosition(650, 500)
+            .setWrap(220, Justification.AlignRight);
 
         resources.createTextSprite(COLOURFUL_MESSAGE)
-                                       .position(400, 400)
-                                       .colourTagsEnabled(true);
+                                       .setPosition(400, 400)
+                                       .setColourTagsEnabled(true);
 
         resources.createImageSprite("hello-world.png")
-             .position(250, 200)
-             .transparency(0.3);
+             .setPosition(250, 200)
+             .setTransparency(0.3);
 
         TextSprite anchorText = resources.createTextSprite("")
-                                     .position(250, 200);
+                                     .setPosition(250, 200);
 
-        TextSprite rotateAndScaleText = resources.createTextSprite("Rotate and Scale!").position(600, 200);
+        TextSprite rotateAndScaleText = resources.createTextSprite("Rotate and Scale!").setPosition(600, 200);
         rotateAndScaleText.colour = Colours.DodgerBlue;
 
         int frameCount = 0;
@@ -72,7 +72,7 @@ public class TextExample extends BlurpJavaProgram {
                 anchorText.text = "Center Handle\nCenter Handle\nCenter Handle";
             }
             rotateAndScaleText.rotateBy(2);
-            rotateAndScaleText.scale(utils.waveValue(0.5, 2, 2500));
+            rotateAndScaleText.setScale(utils.waveValue(0.5, 2, 2500));
             frameCount = (frameCount + 1) % 450;
             screen.update();
         }

@@ -15,7 +15,7 @@ public class MoveTowardsHandlerTest {
     public void setUp() throws Exception {
 
         testSprite = new SpriteForTests();
-        testSprite.position(0, 0);
+        testSprite.setPosition(0, 0);
     }
 
     @Test

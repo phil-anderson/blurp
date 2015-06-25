@@ -62,7 +62,7 @@ public class BlurpStore {
         initialiseViewports();
 
         modelCamera = new CameraImpl(worldWidth / 2, worldHeight / 2);
-        modelViewport = new Viewport().size(worldWidth, worldHeight);
+        modelViewport = new Viewport().setSize(worldWidth, worldHeight);
         modelScreen = new ScreenImpl();
         keyboard = new KeyboardImpl();
         modelMouse = new MouseImpl();

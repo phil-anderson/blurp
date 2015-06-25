@@ -9,13 +9,13 @@ public class SpriteMouseEventDispatcher {
     public void dispatchEvents() {
 
         for(Sprite sprite : BlurpStore.modelRepository.getSprites()) {
-            dispatchEvent(sprite.mouse.entered, sprite.onMouseEnter, sprite);
-            dispatchEvent(sprite.mouse.exited, sprite.onMouseExit, sprite);
-            dispatchEvent(sprite.mouse.wasClicked, sprite.onClick, sprite);
-            dispatchEvent(sprite.mouse.isDragging, sprite.onDrag, sprite);
-            dispatchEvent(sprite.mouse.wasDragReleased, sprite.onDragRelease, sprite);
-            dispatchEvent(sprite.mouse.wasPressed, sprite.onMousePress, sprite);
-            dispatchEvent(sprite.mouse.wasReleased, sprite.onMouseRelease, sprite);
+            dispatchEvent(sprite.mouse.entered, sprite.mouseEnterHandler, sprite);
+            dispatchEvent(sprite.mouse.exited, sprite.mouseExitHandler, sprite);
+            dispatchEvent(sprite.mouse.wasClicked, sprite.clickHandler, sprite);
+            dispatchEvent(sprite.mouse.isDragging, sprite.dragHandler, sprite);
+            dispatchEvent(sprite.mouse.wasDragReleased, sprite.dragReleasedHandler, sprite);
+            dispatchEvent(sprite.mouse.wasPressed, sprite.mousePressedHandler, sprite);
+            dispatchEvent(sprite.mouse.wasReleased, sprite.mouseReleasedHandler, sprite);
         }
     }
 

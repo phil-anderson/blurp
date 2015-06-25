@@ -48,7 +48,8 @@ public class CameraImpl extends Camera implements EffectContainer {
 
     public void reset() {
 
-        position(BlurpStore.configuration.getInitialViewportWidth() / 2, (float) BlurpStore.configuration.getInitialViewportHeight() / 2);
+        setPosition(BlurpStore.configuration.getInitialViewportWidth() / 2,
+                    (float) BlurpStore.configuration.getInitialViewportHeight() / 2);
         this.zoom = 1;
         this.angle = 0;
         this.colour = Colours.White;
