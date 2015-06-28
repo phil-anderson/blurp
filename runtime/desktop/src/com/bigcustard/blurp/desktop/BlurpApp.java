@@ -3,6 +3,7 @@ package com.bigcustard.blurp.desktop;
 import java.io.*;
 import com.badlogic.gdx.*;
 import com.bigcustard.blurp.bootstrap.*;
+import com.bigcustard.blurp.bootstrap.languages.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.java.*;
 import com.bigcustard.blurp.ui.*;
@@ -13,15 +14,15 @@ public class BlurpApp extends Game {
     private final double viewportWidth, viewportHeight;
     private final MouseWindowChecker mouseWindowChecker;
     private String scriptName;
-    private String language;
+    private SupportedLanguage language;
     private Class<? extends BlurpJavaProgram> javaClass;
 
-    public BlurpApp(String language, String scriptName, double viewportWidth, double viewportHeight, MouseWindowChecker mouseWindowChecker) {
+    public BlurpApp(SupportedLanguage language, String scriptName, double viewportWidth, double viewportHeight, MouseWindowChecker mouseWindowChecker) {
 
         this.language = language;
         this.viewportWidth = viewportWidth;
         this.viewportHeight = viewportHeight;
-        if(language.equalsIgnoreCase("java")) {
+        if(language == SupportedLanguages.Java) {
             try {
                 this.javaClass = (Class<? extends BlurpJavaProgram>) Class.forName(scriptName);
             } catch(Exception e) {
@@ -55,7 +56,7 @@ public class BlurpApp extends Game {
             if(parent != null) {
                 config.setContentRoot(parent);
             }
-            blurpRuntime.startScript(language, scriptName);
+            blurpRuntime.startScriptFile(language, scriptName);
         }
         setScreen(BlurpStore.blurpScreen);
     }

@@ -4,13 +4,16 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
+* Program Complete message should be at start of line if following a print and full white
+* Go back to being able to run script form a string
+* BUG - Once got a malloc invalid checksum when doing a Ctrl+Q
+* BUG - Stop and Start unresponsive at end of an errored script - not parse errors though
 * Sprite moveAtAngle
 * Add sanity checks to model method parameters?
-* BUG - Completion buttons don't work if script not found.
 * Warm up script engine (mainly for JRuby)
+* Finish adding idiomatic language support
 * Reduce size of "error" image
 * Sprite.onCollision events
-* Do a graphical end-of-script dialog
 * Look at gradle build, and add a task to create an executable jar
 * Reference counting for images?
 * Almost all examples need redoing / refactoring
