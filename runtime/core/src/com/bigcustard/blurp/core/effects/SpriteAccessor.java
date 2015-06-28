@@ -43,23 +43,23 @@ public class SpriteAccessor implements TweenAccessor<Sprite>, TweenTypes {
 
         switch(tweenType) {
             case MOVE : {
-                sprite.position(newValues[0], newValues[1]);
+                sprite.setPosition(newValues[0], newValues[1]);
                 break;
             }
             case SCALE : {
-                sprite.scale(newValues[0], newValues[1]);
+                sprite.setScale(newValues[0], newValues[1]);
                 break;
             }
             case ROTATE : {
-                sprite.angle(newValues[0]);
+                sprite.setAngle(newValues[0]);
                 break;
             }
             case ALPHA : {
-                sprite.transparency(newValues[0]);
+                sprite.setTransparency(newValues[0]);
                 break;
             }
             case COLOUR : {
-                sprite.colour(new Colour(newValues[0], newValues[1], newValues[2]));
+                sprite.setColour(new Colour(newValues[0], newValues[1], newValues[2]));
                 break;
             }
         }

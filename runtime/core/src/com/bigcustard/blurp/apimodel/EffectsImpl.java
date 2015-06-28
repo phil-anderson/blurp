@@ -10,7 +10,7 @@ public class EffectsImpl extends Effects {
     public EffectsImpl() {
 
         defaultDuration = 1000;
-        defaultEffectStyle = EffectStyle.SmoothStartStop;
+        defaultStyle = EffectStyle.SmoothStartStop;
     }
 
     @Override
@@ -76,6 +76,6 @@ public class EffectsImpl extends Effects {
     public void reset() {
 
         defaultDuration = 1000;
-        defaultEffectStyle = EffectStyle.SmoothStartStop;
+        defaultStyle = EffectStyle.SmoothStartStop;
     }
 }

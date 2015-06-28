@@ -12,7 +12,7 @@ public class HelloScalingWorld extends BlurpJavaProgram {
 
         while(true) {
             // Earthquake!
-            world.scale(utils.randomInRange(0.95, 1.05));
+            world.setScale(utils.randomInRange(0.95, 1.05));
             screen.update();
         }
     }

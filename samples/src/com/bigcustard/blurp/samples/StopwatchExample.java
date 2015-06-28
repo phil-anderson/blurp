@@ -17,8 +17,8 @@ public class StopwatchExample extends BlurpJavaProgram {
         EffectGroup normal = effects.combine(effects.scaleTo(1), effects.colour(Colours.DarkGrey));
 
         TextSprite startButton = resources.createTextSprite("Click to START")
-            .position(200, 100)
-            .colour(Colours.DarkGrey)
+            .setPosition(200, 100)
+            .setColour(Colours.DarkGrey)
             .onMouseEnter(highlight)
             .onMouseExit(normal)
             .onClick(new SpriteEventHandler() {
@@ -30,8 +30,8 @@ public class StopwatchExample extends BlurpJavaProgram {
             });
 
         startButton.copy()
-            .text("Click to STOP")
-            .position(400, 100)
+            .setText("Click to STOP")
+            .setPosition(400, 100)
             .onClick(new SpriteEventHandler() {
                 @Override
                 public void handle(Sprite sprite) {
@@ -41,8 +41,8 @@ public class StopwatchExample extends BlurpJavaProgram {
             });
 
         startButton.copy()
-            .text("Click to RESET")
-            .position(600, 100)
+            .setText("Click to RESET")
+            .setPosition(600, 100)
             .onClick(new SpriteEventHandler() {
                 @Override
                 public void handle(Sprite sprite) {
@@ -52,9 +52,9 @@ public class StopwatchExample extends BlurpJavaProgram {
             });
 
         TextSprite elapsedTime = resources.createTextSprite("")
-                                     .fontSize(150)
-                                     .scaleY(1.5)
-                                     .colour(Colours.LimeGreen);
+                                     .setFontSize(150)
+                                     .setScaleY(1.5)
+                                     .setColour(Colours.LimeGreen);
         while(screen.update()) {
             elapsedTime.text = timer.stopwatch.toString();
         }

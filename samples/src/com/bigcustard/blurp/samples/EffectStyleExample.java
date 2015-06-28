@@ -12,20 +12,20 @@ public class EffectStyleExample extends BlurpJavaProgram {
 
         Image worldImage = resources.loadImage("hello-world.png");
 
-        resources.createTextSprite("Press Space to Change Page").position(400, 575);
+        resources.createTextSprite("Press Space to Change Page").setPosition(400, 575);
 
         for(int x = 0; x < 3; x++) {
 
             int pageX = x * 800;
             resources.createTextSprite("Linear")
-                .position(250 + pageX, 500)
-                .handle(Handle.Right)
-                .colour(Colours.Red);
+                .setPosition(250 + pageX, 500)
+                .setHandle(Handle.Right)
+                .setColour(Colours.Red);
 
             Sprite linearWorld = resources.createImageSprite(worldImage)
-                                     .position(350 + pageX, 500)
-                                     .scale(0.25)
-                                     .colour(Colours.Red);
+                                     .setPosition(350 + pageX, 500)
+                                     .setScale(0.25)
+                                     .setColour(Colours.Red);
 
             runEffect(linearWorld, EffectStyle.Linear, effects);
 
@@ -35,12 +35,12 @@ public class EffectStyleExample extends BlurpJavaProgram {
 
                 int yPos = 400 - y * 90;
                 resources.createTextSprite(style.name())
-                    .position(pageX + 250, yPos)
-                    .handle(Handle.Right);
+                    .setPosition(pageX + 250, yPos)
+                    .setHandle(Handle.Right);
 
                 Sprite effectWorld = resources.createImageSprite(worldImage)
-                                         .position(pageX + 350, yPos)
-                                         .scale(0.25);
+                                         .setPosition(pageX + 350, yPos)
+                                         .setScale(0.25);
                 runEffect(effectWorld, style, effects);
             }
         }

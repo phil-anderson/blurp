@@ -45,7 +45,7 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
         }
 
         // Sync mouse state from runtime to model
-        modelSprite.mouse(mouseListener.buildState());
+        modelSprite.setMouse(mouseListener.buildState());
     }
 
     @Override

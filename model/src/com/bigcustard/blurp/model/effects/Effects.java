@@ -6,17 +6,17 @@ import com.bigcustard.blurp.model.constants.*;
 public abstract class Effects {
 
     public int defaultDuration;
-    public EffectStyle defaultEffectStyle;
+    public EffectStyle defaultStyle;
 
-    public Effects defaultDuration(int newDefaultDurationInMilliseconds) {
+    public Effects setDefaultDuration(int newDefaultDurationInMilliseconds) {
 
         this.defaultDuration = newDefaultDurationInMilliseconds;
         return this;
     }
 
-    public Effects defaultStyle(EffectStyle newDefaultStyle) {
+    public Effects setDefaultStyle(EffectStyle newDefaultStyle) {
 
-        this.defaultEffectStyle = newDefaultStyle;
+        this.defaultStyle = newDefaultStyle;
         return this;
     }
 

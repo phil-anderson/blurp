@@ -14,9 +14,9 @@ public class CameraExample extends BlurpJavaProgram {
         Sprite[] sprites = new Sprite[8];
         for(int i = 0; i < 8; i++) {
             sprites[i] = resources.createImageSprite(worldImage)
-                              .x(50 + i * 100)
-                              .scale(utils.randomInRange(0.1, 0.5))
-                              .angle(utils.randomUpTo(360));
+                              .setX(50 + i * 100)
+                              .setScale(utils.randomInRange(0.1, 0.5))
+                              .setAngle(utils.randomUpTo(360));
         }
 
         int spriteIndex = 0;

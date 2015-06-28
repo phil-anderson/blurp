@@ -4,6 +4,7 @@ import java.lang.reflect.*;
 import java.lang.System;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.utils.*;
+import com.bigcustard.blurp.bootstrap.languages.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.core.commands.*;
 import com.bigcustard.blurp.model.*;
@@ -49,7 +50,7 @@ public class BlurpRuntime {
         BlurpStore.blurpScreen.onRenderEvent(listener);
     }
 
-    public void startScript(String language, String scriptFilename) {
+    public void startScriptFile(SupportedLanguage language, String scriptFilename) {
 
         checkScriptRunning("start script");
         scriptRunnable = new RunnableWrapper(new ScriptEngineBlurpRunnable(language, scriptFilename));

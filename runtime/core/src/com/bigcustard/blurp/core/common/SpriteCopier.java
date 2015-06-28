@@ -13,13 +13,13 @@ public class SpriteCopier {
         target.angle = source.angle;
         target.scaleX = source.scaleX;
         target.scaleY = source.scaleY;
-        target.onMouseEnter = source.onMouseEnter;
-        target.onMouseExit = source.onMouseExit;
-        target.onClick = source.onClick;
-        target.onDrag = source.onDrag;
-        target.onDragRelease = source.onDragRelease;
-        target.onMousePress = source.onMousePress;
-        target.onMouseRelease = source.onMouseRelease;
+        target.mouseEnterHandler = source.mouseEnterHandler;
+        target.mouseExitHandler = source.mouseExitHandler;
+        target.clickHandler = source.clickHandler;
+        target.dragHandler = source.dragHandler;
+        target.dragReleasedHandler = source.dragReleasedHandler;
+        target.mousePressedHandler = source.mousePressedHandler;
+        target.mouseReleasedHandler = source.mouseReleasedHandler;
         target.x = source.x;
         target.y = source.y;
     }

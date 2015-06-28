@@ -94,7 +94,6 @@ public class ScriptCompleteOverlay {
 
         programDuration = (int) (System.currentTimeMillis() - BlurpState.startTime);
         alpha = 0;
-        BlurpStore.runtimeConsole.clear();
         if(BlurpState.error) {
             BlurpStore.runtimeConsole.print(Exceptions.getConcatenatedMessage(BlurpState.exception), Colours.LightGrey, 0.75);
             leftHandButton = errorButton;
@@ -103,7 +102,7 @@ public class ScriptCompleteOverlay {
             leftHandButton = successButton;
         }
 
-        size = BlurpStore.staticCamera.viewportHeight / 10;
+        size = BlurpStore.staticCamera.viewportHeight / 20;
         float xPos = 400 - size * 1.5f;
 
         successButton.setPosition(xPos, size * 0.1f, size);

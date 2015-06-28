@@ -29,6 +29,12 @@ public abstract class Screen {
         this.viewport = viewport;
     }
 
+    public Screen setBackgroundColour(Colour backgroundColour) {
+
+        this.backgroundColour = backgroundColour;
+        return this;
+    }
+
     /**
      * This method is the beating heart of Blurp. It's responsible for telling Blurp to work it's magic, and it keeps
      * everything running smoothly. Without it, your program will do nothing.

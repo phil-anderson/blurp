@@ -5,25 +5,25 @@ public class Viewport {
     public double width, height;
     public boolean stretchToFit;
 
-    public Viewport width(double newViewportWidth) {
+    public Viewport setWidth(double newViewportWidth) {
 
         width = newViewportWidth;
         return this;
     }
 
-    public Viewport height(double newViewportHeight) {
+    public Viewport setHeight(double newViewportHeight) {
 
         height = newViewportHeight;
         return this;
     }
 
-    public Viewport stretchToFit(boolean newViewportStretch) {
+    public Viewport setStretchToFit(boolean newViewportStretch) {
 
         this.stretchToFit = newViewportStretch;
         return this;
     }
 
-    public Viewport size(double newViewportWidth, double newViewportHeight) {
+    public Viewport setSize(double newViewportWidth, double newViewportHeight) {
 
         width = newViewportWidth;
         height = newViewportHeight;

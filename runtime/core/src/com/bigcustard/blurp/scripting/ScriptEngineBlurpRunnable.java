@@ -4,21 +4,22 @@ import java.io.*;
 import java.lang.reflect.*;
 import java.util.*;
 import javax.script.*;
+import com.bigcustard.blurp.bootstrap.languages.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.util.*;
 
 public class ScriptEngineBlurpRunnable implements Runnable {
 
-    private final String language;
+    private final SupportedLanguage language;
     private final String scriptFilename;
     private final ScriptEngine scriptEngine;
 
-    public ScriptEngineBlurpRunnable(String language, String scriptFilename) {
+    public ScriptEngineBlurpRunnable(SupportedLanguage language, String scriptFilename) {
         this.language = language;
         this.scriptFilename = scriptFilename;
-        scriptEngine = new ScriptEngineManager().getEngineByName(language);
-        if(scriptEngine == null) throw new BlurpException("Couldn't get ScriptEngine for language name '" + language + "'");
+        scriptEngine = new ScriptEngineManager().getEngineByName(language.getName());
+        if(scriptEngine == null) throw new BlurpException("Couldn't get ScriptEngine for language name '" + language.getName() + "'");
     }
 
     @Override
@@ -47,7 +48,7 @@ public class ScriptEngineBlurpRunnable implements Runnable {
         scriptEnginePutEnums(ExistingEffectStrategy.values(), bindings);
         scriptEnginePutEnums(ScreenLayer.values(), bindings);
 
-        if (language.equals("jruby")) JRubyWrapperSpike.wrap(scriptEngine, bindings);
+//        if (language.equals("jruby")) JRubyWrapperSpike.wrap(scriptEngine, bindings);
 
         bindings.put(ScriptEngine.FILENAME, scriptFilename);
         try {
@@ -66,7 +67,8 @@ public class ScriptEngineBlurpRunnable implements Runnable {
             if(bindings.get(enumValue.name()) != null) {
                 throw new RuntimeException("Conflicting enumerations - " + enumValue.getClass() + " vs " + bindings.get(enumValue.name()).getClass());
             }
-            bindings.put(enumValue.name(), enumValue);
+            String enumName = language.getConstantStrategy().transform(enumValue.name());
+            bindings.put(enumName, enumValue);
         }
     }
 
@@ -75,6 +77,7 @@ public class ScriptEngineBlurpRunnable implements Runnable {
         List allConstants = new ArrayList();
         for(Field field : constantsClass.getFields()) {
             String fieldName = field.getName();
+            fieldName = language.getConstantStrategy().transform(fieldName);
             if(bindings.get(fieldName) != null) {
                 throw new RuntimeException("Conflicting constants - " + constantsClass + " vs " + bindings.get(fieldName).getClass());
             }

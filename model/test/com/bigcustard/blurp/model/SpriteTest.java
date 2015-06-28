@@ -21,7 +21,7 @@ public class SpriteTest {
     public void scaleAffectsBothXAndY() throws Exception {
 
         Sprite testCandidate = new SpriteForTests();
-        testCandidate.scale(10);
+        testCandidate.setScale(10);
         assertThat(testCandidate.scaleX, is(10.0));
         assertThat(testCandidate.scaleY, is(10.0));
     }
@@ -30,8 +30,8 @@ public class SpriteTest {
     public void flipsReverseScale() throws Exception {
 
         Sprite testCandidate = new SpriteForTests();
-        testCandidate.position(10, 10);
-        testCandidate.scale(10);
+        testCandidate.setPosition(10, 10);
+        testCandidate.setScale(10);
         testCandidate.flipX();
         assertThat(testCandidate.scaleX, is(-10.0));
         assertThat(testCandidate.scaleY, is(10.0));

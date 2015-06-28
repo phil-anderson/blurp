@@ -8,10 +8,10 @@ public class CreationZOrderExample extends BlurpJavaProgram {
     @Override
     public void run() {
 
-        resources.createImageSprite("hello-world.png").position(275, 300);
-        resources.createTextSprite("Sandwiched!").position(400, 400).fontSize(100).colour(Colours.Crimson);
-        resources.createImageSprite("hello-world.png").position(525, 300);
-        resources.createTextSprite("In Front!").position(400, 200).fontSize(100).colour(Colours.Crimson);
+        resources.createImageSprite("hello-world.png").setPosition(275, 300);
+        resources.createTextSprite("Sandwiched!").setPosition(400, 400).setFontSize(100).setColour(Colours.Crimson);
+        resources.createImageSprite("hello-world.png").setPosition(525, 300);
+        resources.createTextSprite("In Front!").setPosition(400, 200).setFontSize(100).setColour(Colours.Crimson);
         screen.update();
     }
 }

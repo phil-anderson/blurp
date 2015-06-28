@@ -12,8 +12,8 @@ public class HelloUnevenlyScalingWorld extends BlurpJavaProgram {
 
         while(true) {
             double waveValue = utils.waveValue(0, 0.5, 1000);
-            world.scaleX(0.75 + waveValue);
-            world.scaleY(1.25 - waveValue);
+            world.setScaleX(0.75 + waveValue);
+            world.setScaleY(1.25 - waveValue);
             screen.update();
         }
     }

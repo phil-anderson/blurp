@@ -44,7 +44,7 @@ public class TweenEffect extends EffectImpl<Effect> implements Effect {
         this.relative = relative;
         this.targetValues = targetValue;
         this.duration = BlurpStore.effects.defaultDuration;
-        this.effectStyle = BlurpStore.effects.defaultEffectStyle;
+        this.effectStyle = BlurpStore.effects.defaultStyle;
     }
 
     @Override

@@ -16,43 +16,43 @@ public abstract class Camera {
 
     public double transparency;
 
-    public Camera x(double newX) {
+    public Camera setX(double newX) {
 
         this.x = newX;
         return this;
     }
 
-    public Camera y(double newY) {
+    public Camera setY(double newY) {
 
         this.y = newY;
         return this;
     }
 
-    public Camera zoom(double newZoom) {
+    public Camera setZoom(double newZoom) {
 
         this.zoom = newZoom;
         return this;
     }
 
-    public Camera rotation(double newRotation) {
+    public Camera setAngle(double newAngle) {
 
-        this.angle = newRotation;
+        this.angle = newAngle;
         return this;
     }
 
-    public Camera alpha(double newAlpha) {
+    public Camera setTransparency(double newTransparency) {
 
-        this.transparency = newAlpha;
+        this.transparency = newTransparency;
         return this;
     }
 
-    public Camera colour(Colour newColour) {
+    public Camera setColour(Colour newColour) {
 
         this.colour = newColour;
         return this;
     }
 
-    public Camera position(double x, double y) {
+    public Camera setPosition(double x, double y) {
 
         this.x = x;
         this.y = y;

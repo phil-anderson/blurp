@@ -2,6 +2,8 @@ package com.bigcustard.blurp.desktop;
 
 import java.util.prefs.*;
 import javax.swing.*;
+import javax.swing.filechooser.*;
+import com.bigcustard.blurp.bootstrap.languages.*;
 
 public class FileSelector {
 
@@ -21,8 +23,8 @@ public class FileSelector {
 
         chooser.setDialogTitle("Blurp: Select program to run");
         chooser.setApproveButtonText("Run");
-        for(SupportedLanguage language : SupportedLanguage.values()) {
-            chooser.addChoosableFileFilter(language.getFileFilter());
+        for(SupportedLanguage language : SupportedLanguages.getAll()) {
+            chooser.addChoosableFileFilter(new FileNameExtensionFilter(language.getDescription(), language.getFileExtensions()));
         }
 
         JFrame frame = new JFrame("Blurp");

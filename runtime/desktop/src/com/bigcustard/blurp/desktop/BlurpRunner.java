@@ -1,7 +1,7 @@
 package com.bigcustard.blurp.desktop;
 
-import java.io.*;
 import com.badlogic.gdx.backends.lwjgl.*;
+import com.bigcustard.blurp.bootstrap.languages.*;
 import org.kohsuke.args4j.*;
 
 public class BlurpRunner {
@@ -26,18 +26,19 @@ public class BlurpRunner {
             System.exit(1);
         }
 
-        handleMissingDetails(options);
+        handleMissingScriptFile(options);
 
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.width = options.width;
         config.height = options.height;
         config.samples= 1;
 
-        BlurpApp blurpApp = new BlurpApp(options.language, options.scriptName, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, new LwjglMouseWindowChecker());
+        SupportedLanguage language = getLanguage(options);
+        BlurpApp blurpApp = new BlurpApp(language, options.scriptName, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, new LwjglMouseWindowChecker());
         new LwjglApplication(blurpApp, config);
 	}
 
-    private static void handleMissingDetails(CommandLineOptions options) {
+    private static void handleMissingScriptFile(CommandLineOptions options) {
 
         if(options.scriptName == null) {
             options.scriptName = FileSelector.selectFile();
@@ -46,13 +47,20 @@ public class BlurpRunner {
                 System.exit(1);
             }
         }
-        if(options.language == null) {
-            SupportedLanguage language = SupportedLanguage.forFile(new File(options.scriptName));
-            if(language == null) {
-                language = SupportedLanguage.Java;
-            }
-            options.language = language.getScriptEngineName();
+    }
+
+    private static SupportedLanguage getLanguage(CommandLineOptions options) {
+
+        SupportedLanguage language = SupportedLanguages.forName(options.language);
+
+        if(language == null) {
+            language = SupportedLanguages.forFile(options.scriptName);
         }
+
+        if(language == null) {
+            language = SupportedLanguages.Java;
+        }
+        return language;
     }
 
     private static class CommandLineOptions {

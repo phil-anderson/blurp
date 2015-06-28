@@ -172,7 +172,6 @@ public abstract class Keyboard {
 
     public final Key Unknown = new Key(0);
 
-
     public char typedCharacter = 0;
 
     public boolean wasKeyTyped() {

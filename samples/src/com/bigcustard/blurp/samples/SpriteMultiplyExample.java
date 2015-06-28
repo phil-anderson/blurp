@@ -18,8 +18,8 @@ public class SpriteMultiplyExample extends BlurpJavaProgram {
             double xPos = utils.randomInRange(75, 725);
             double yPos = utils.randomInRange(75, 525);
 
-            world.position(xPos, yPos)
-                 .scale(utils.randomInRange(0.25, 0.5))
+            world.setPosition(xPos, yPos)
+                 .setScale(utils.randomInRange(0.25, 0.5))
                  .rotateBy(utils.randomUpTo(360));
         }
 
