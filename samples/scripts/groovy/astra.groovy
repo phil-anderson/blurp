@@ -1,8 +1,8 @@
-////////////////////////////////////////////// 
-//         Welcome to Planet Burpl!         // 
-//      Start writing your game below       // 
-// Look in the Game Library for inspiration // 
-////////////////////////////////////////////// 
+//////////////////////////////////////////////
+//         Welcome to Planet Burpl!         //
+//      Start writing your game below       //
+// Look in the Game Library for inspiration //
+//////////////////////////////////////////////
 
 // Constants
 BOOST = 0.1
@@ -38,7 +38,7 @@ while (true) {
   velocityY = 0
   ship.setX(60).setY(233).setScale(1).setTransparency(1)
   targetBubble.setX(RIGHT - 40).setY(233).setColour(Orange).setScale(1).setTransparency(1)
-    
+
   levelStart()
 
   // Wait for key press to start
@@ -48,7 +48,7 @@ while (true) {
   }
 
   // Main game loop
-  levelLoop: 
+  levelLoop:
   while (true) {
     controlShip()
     for (planet in planets) {
@@ -62,16 +62,16 @@ while (true) {
     if (inTargetBubble()) {
         break levelLoop
     }
-    
+
     screen.update()
   }
-  
+
   // Level complete
   goWhite = effects.colour(White)
-  shrink = effects.scaleTo(0.01).style(SmoothStartStop)
+  shrink = effects.scaleTo(0.01).withStyle(SmoothStartStop)
   targetBubble.runEffect(effects.combine(goWhite, shrink))
   ship.runEffect(effects.transparency(0))
-  delay(1000) 
+  delay(1000)
   level = level + 1
   for (planet in planets) {
     planet.hidden = true
@@ -79,8 +79,8 @@ while (true) {
 }
 
 // Death  effect
-shimmer = effects.scaleBy(2).duration(50).timesToRun(20).yoyoMode(true)
-shimmerAndFade = effects.combine(shimmer, effects.transparency(0).duration(1000))
+shimmer = effects.scaleBy(2).withDuration(50).withTimesToRun(20).withYoyoMode(true)
+shimmerAndFade = effects.combine(shimmer, effects.transparency(0).withDuration(1000))
 ship.setScale(0.5).setImage(resources.loadImage("explosion")).runEffect(shimmerAndFade)
 delay(1000)
 ship.setTransparency(1).setImage(resources.loadImage("ship"))
@@ -102,7 +102,7 @@ void showPlanets() {
         planets[1].setX(600).setY(133).setScale(0.7)
     } else if (level == 3) {
         planets = planet.setHidden(false).multiplyBy(3)
-        
+
         planets[1].setX(550).setY(373).setScale(0.8)
         planets[2].setX(300).setY(100).setScale(1.1)
         planets[0].setX(150).setY(380).setScale(0.5)
@@ -125,10 +125,10 @@ void delay(ms) {
 
 void levelStart() {
     levelText = resources.createTextSprite("LEVEL " + level).setFontSize(80).setX(900).setY(233)
-    comeIn = effects.moveTo(400, 233).style(ElasticStop)
-    delay = effects.transparency(1).duration(300)
-    fade = effects.transparency(0).duration(1500)
-    levelText.runEffect(effects.sequence(comeIn, delay, fade)) 
+    comeIn = effects.moveTo(400, 233).withStyle(ElasticStop)
+    delay = effects.transparency(1).withDuration(300)
+    fade = effects.transparency(0).withDuration(1500)
+    levelText.runEffect(effects.sequence(comeIn, delay, fade))
 }
 
 boolean inTargetBubble() {
@@ -158,22 +158,22 @@ void gravity(planet) {
     planetMass = planet.scaleX * planet.scaleX * planet.scaleX
     force = G * planetMass * SHIP_MASS / distance * distance
     acceleration = force / SHIP_MASS
-    
+
     // Accelerate in direction of planet
     accelAngle = Math.toDegrees(Math.atan2(ship.y - planet.y, planet.x - ship.x))
-    
+
     accelerateShip(accelAngle, acceleration)
 }
 
 void controlShip() {
-    if (keyboard.Space.isPressed()) { 
+    if (keyboard.Space.isPressed()) {
         accelerateShip(ship.angle, BOOST)
     }
     if (keyboard.Left.isPressed()) {
-        turnShip(-10)                   
+        turnShip(-10)
     }
     if (keyboard.Right.isPressed()) {
-        turnShip(10)                  
+        turnShip(10)
     }
 }
 
@@ -188,5 +188,5 @@ void moveShip() {
 }
 
 void turnShip(amount) {
-    ship.runEffect(effects.rotateBy(amount).duration(50).style(SmoothStartStop))
+    ship.runEffect(effects.rotateBy(amount).withDuration(50).withStyle(SmoothStartStop))
 }
