@@ -1,6 +1,7 @@
 package com.bigcustard.blurp.util;
 
 import java.io.*;
+import com.bigcustard.blurp.core.*;
 
 public class Exceptions {
 
@@ -24,5 +25,17 @@ public class Exceptions {
         StringWriter writer = new StringWriter();
         throwable.printStackTrace(new PrintWriter(writer));
         return writer.toString();
+    }
+
+    public static RuntimeException exposeUserTemination(RuntimeException exception) {
+
+        Throwable currentException = exception;
+        while(currentException != null) {
+            if(currentException instanceof BlurpTerminatedException) {
+                return (RuntimeException) currentException;
+            }
+            currentException = currentException.getCause();
+        }
+        return exception;
     }
 }

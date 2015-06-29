@@ -153,10 +153,10 @@ public class BlurpRuntime {
                 BlurpState.startTime = System.currentTimeMillis();
                 script.run();
             } catch (RuntimeException e) {
-                BlurpState.exception = e;
-                if(exceptionHandler != null && !(e instanceof BlurpTerminatedException)) {
+                BlurpState.exception = Exceptions.exposeUserTemination(e);
+                if(exceptionHandler != null && !(BlurpState.exception instanceof BlurpTerminatedException)) {
                     BlurpState.error = true;
-                    exceptionHandler.handleException(e);
+                    exceptionHandler.handleException(BlurpState.exception);
                 }
             }
 

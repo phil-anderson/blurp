@@ -4,15 +4,11 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
-* Bloody Ruby wraps exceptions up like crazy. Need to check deeper for BlurpTerminatedException.
+* Ruby doesn't handle field remapping - method set_scale_x => setScaleX, but field scaleX !=> scale_x
 * Need a Ruby wrapper that will check for camel-case properties if snake-case not found.
-* BUG - Once got a malloc invalid checksum when doing a Ctrl+Q
-* BUG - Stop and Start unresponsive at end of an errored script - not parse errors though
-* Sprite moveAtAngle
+* GLITCH - If script parsing fails after screen.update, console display is slightly odd
 * Add sanity checks to model method parameters?
 * Warm up script engine (mainly for JRuby)
-* Ruby doesn't handle field remapping - method set_scale_x => setScaleX, but field scaleX !=> scale_x
-* Reduce size of "error" image
 * Sprite.onCollision events
 * Look at gradle build, and add a task to create an executable jar
 * Reference counting for images?
