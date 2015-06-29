@@ -50,7 +50,7 @@ public class EffectStyleExample extends BlurpJavaProgram {
 
             if(keyboard.Space.wasJustPressed()) {
                 currentPage = (currentPage + 1) % 3;
-                Effect moveCamera = effects.moveTo(currentPage * 800 + 400, 300).duration(500).style(EffectStyle.BounceStop);
+                Effect moveCamera = effects.moveTo(currentPage * 800 + 400, 300).withDuration(500).withStyle(EffectStyle.BounceStop);
                 camera.runEffect(moveCamera);
             }
 
@@ -62,11 +62,11 @@ public class EffectStyleExample extends BlurpJavaProgram {
     private void runEffect(Sprite sprite, EffectStyle effectStyle, Effects effects) {
 
         Effect effect = effects.moveBy(300, 0)
-                               .style(effectStyle)
-                               .timesToRun(1000000)
-                               .yoyoMode(true)
-                               .delayBeforeStart(500)
-                               .delayBetweenRuns(500);
+                               .withStyle(effectStyle)
+                               .withTimesToRun(1000000)
+                               .withYoyoMode(true)
+                               .withDelayBeforeStart(500)
+                               .withDelayBetweenRuns(500);
         sprite.runEffect(effect);
 
     }

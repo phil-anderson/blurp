@@ -95,10 +95,12 @@ public class ScriptCompleteOverlay {
         programDuration = (int) (System.currentTimeMillis() - BlurpState.startTime);
         alpha = 0;
         if(BlurpState.error) {
-            BlurpStore.runtimeConsole.print(Exceptions.getConcatenatedMessage(BlurpState.exception), Colours.LightGrey, 0.75);
+            printTitle("PROGRAM FAILED WITH ERRORS");
+            BlurpStore.runtimeConsole.print(Exceptions.getConcatenatedMessage(BlurpState.exception), Colours.LightGrey,
+                                            1);
             leftHandButton = errorButton;
         } else {
-            BlurpStore.runtimeConsole.print("Program Complete\n", Colours.LightGrey, 1);
+            printTitle("PROGRAM COMPLETED SUCCESSFULLY");
             leftHandButton = successButton;
         }
 
@@ -119,5 +121,17 @@ public class ScriptCompleteOverlay {
         errorButton.dispose();
         restartButton.dispose();
         exitButton.dispose();
+    }
+
+    private void printTitle(String title) {
+
+        BlurpStore.runtimeConsole.ensureStartOfLine();
+        String seperator = "";
+        for(int i = 0; i < title.length(); i++) {
+            seperator += "-";
+        }
+        BlurpStore.runtimeConsole.print(seperator + "\n", Colours.White, 1);
+        BlurpStore.runtimeConsole.print(title + "\n", Colours.White, 1);
+        BlurpStore.runtimeConsole.print(seperator + "\n", Colours.White, 1);
     }
 }

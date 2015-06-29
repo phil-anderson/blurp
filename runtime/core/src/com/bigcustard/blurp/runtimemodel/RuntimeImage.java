@@ -29,6 +29,7 @@ public class RuntimeImage implements RuntimeObject<Image> {
                 textureRegion = new TextureRegion(new Texture(file, true));
             } catch(FileNotFoundException e) {
                 textureRegion.getTexture().setFilter(Texture.TextureFilter.MipMapLinearNearest, Texture.TextureFilter.Linear);
+//                throw new BlurpException("Couldn't load image with name: " + modelImage.)
             }
         }
     }

@@ -123,6 +123,11 @@ public class RuntimeConsole {
         }
     }
 
+    public void ensureStartOfLine() {
+
+        if(currentColumn != 0) newLine();
+    }
+
     @Override
     public String toString() {
 

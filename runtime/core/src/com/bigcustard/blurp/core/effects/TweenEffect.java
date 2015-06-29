@@ -48,7 +48,7 @@ public class TweenEffect extends EffectImpl<Effect> implements Effect {
     }
 
     @Override
-    public Effect duration(int durationMillis) {
+    public Effect withDuration(int durationMillis) {
 
         TweenEffect copy = (TweenEffect) copy(this);
         copy.duration = durationMillis;
@@ -56,7 +56,7 @@ public class TweenEffect extends EffectImpl<Effect> implements Effect {
     }
 
     @Override
-    public Effect style(EffectStyle style) {
+    public Effect withStyle(EffectStyle style) {
 
         TweenEffect copy = (TweenEffect) copy(this);
         copy.effectStyle = style;

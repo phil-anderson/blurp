@@ -4,14 +4,13 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
-* Program Complete message should be at start of line if following a print and full white
-* Go back to being able to run script form a string
+* BUG - Image file not found error handled strangely - Restart / Exit butotns don't work.
 * BUG - Once got a malloc invalid checksum when doing a Ctrl+Q
 * BUG - Stop and Start unresponsive at end of an errored script - not parse errors though
 * Sprite moveAtAngle
 * Add sanity checks to model method parameters?
 * Warm up script engine (mainly for JRuby)
-* Finish adding idiomatic language support
+* Ruby doesn't handle field remapping - method set_scale_x => setScaleX, but field scaleX !=> scale_x
 * Reduce size of "error" image
 * Sprite.onCollision events
 * Look at gradle build, and add a task to create an executable jar

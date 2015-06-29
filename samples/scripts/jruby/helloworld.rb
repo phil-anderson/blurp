@@ -1,4 +1,4 @@
-world = resources.createImageSprite "hello-world.png"
+world = resources.createImageSprite "zzzhello-world.png"
 
 while screen.update do
 
@@ -8,6 +8,6 @@ while screen.update do
     world.y -= 2 if keyboard.Down.isPressed
 
     if keyboard.Space.wasJustPressed
-        world.runEffect(effects.rotateBy(360).style(Elastic_Stop))
+        world.run_effect(effects.rotate_by(360).with_style(Elastic_Stop))
     end
 end

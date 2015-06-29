@@ -25,11 +25,11 @@ public class SpriteMouseExample extends BlurpJavaProgram {
             }
 
             if(world.mouse.wasDragReleased) {
-                world.runEffect(effects.moveTo(400, 300).style(EffectStyle.ElasticStop).duration(750));
+                world.runEffect(effects.moveTo(400, 300).withStyle(EffectStyle.ElasticStop).withDuration(750));
             }
 
             if(world.mouse.wasClicked) {
-                world.runEffect(effects.rotateBy(360).duration(750));
+                world.runEffect(effects.rotateBy(360).withDuration(750));
             }
 
             screen.update();

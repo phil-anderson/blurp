@@ -13,11 +13,23 @@ public class ScriptEngineBlurpRunnable implements Runnable {
 
     private final SupportedLanguage language;
     private final String scriptFilename;
+    private final String scriptContents;
     private final ScriptEngine scriptEngine;
 
     public ScriptEngineBlurpRunnable(SupportedLanguage language, String scriptFilename) {
+
         this.language = language;
         this.scriptFilename = scriptFilename;
+        this.scriptContents = null;
+        scriptEngine = new ScriptEngineManager().getEngineByName(language.getName());
+        if(scriptEngine == null) throw new BlurpException("Couldn't get ScriptEngine for language name '" + language.getName() + "'");
+    }
+
+    public ScriptEngineBlurpRunnable(SupportedLanguage language, String scriptFilename, String scriptContents) {
+
+        this.language = language;
+        this.scriptFilename = scriptFilename;
+        this.scriptContents = scriptContents;
         scriptEngine = new ScriptEngineManager().getEngineByName(language.getName());
         if(scriptEngine == null) throw new BlurpException("Couldn't get ScriptEngine for language name '" + language.getName() + "'");
     }
@@ -48,12 +60,10 @@ public class ScriptEngineBlurpRunnable implements Runnable {
         scriptEnginePutEnums(ExistingEffectStrategy.values(), bindings);
         scriptEnginePutEnums(ScreenLayer.values(), bindings);
 
-//        if (language.equals("jruby")) JRubyWrapperSpike.wrap(scriptEngine, bindings);
-
         bindings.put(ScriptEngine.FILENAME, scriptFilename);
+
         try {
-            Reader scriptReader = Files.getFile(scriptFilename).reader();
-            scriptEngine.eval(scriptReader, bindings);
+            runScript(bindings);
         } catch(RuntimeException e) {
             throw e; // Rethrow
         } catch(Exception e) {
@@ -90,5 +100,15 @@ public class ScriptEngineBlurpRunnable implements Runnable {
             }
         }
         bindings.put("All" + constantsClass.getSimpleName(), allConstants.toArray());
+    }
+
+    private void runScript(Bindings bindings) throws FileNotFoundException, ScriptException {
+
+        if(scriptContents != null) {
+            scriptEngine.eval(scriptContents, bindings);
+        } else {
+            Reader scriptReader = Files.getFile(scriptFilename).reader();
+            scriptEngine.eval(scriptReader, bindings);
+        }
     }
 }

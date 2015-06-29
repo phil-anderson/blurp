@@ -12,7 +12,7 @@ public abstract class EffectImpl<T extends EffectBase> implements EffectBase<T> 
     protected int delayBetweenRuns = 0;
 
     @Override
-    public T timesToRun(int timesToRun) {
+    public T withTimesToRun(int timesToRun) {
 
         if(timesToRun <= 0) throw new IllegalArgumentException("Effects must run at least once");
 
@@ -22,7 +22,7 @@ public abstract class EffectImpl<T extends EffectBase> implements EffectBase<T> 
     }
 
     @Override
-    public T yoyoMode(boolean yoyoMode) {
+    public T withYoyoMode(boolean yoyoMode) {
 
         EffectImpl<T> copy = (EffectImpl<T>) copy((T) this);
         copy.yoyoMode = yoyoMode;
@@ -30,7 +30,7 @@ public abstract class EffectImpl<T extends EffectBase> implements EffectBase<T> 
     }
 
     @Override
-    public T delayBeforeStart(int delayBeforeStart) {
+    public T withDelayBeforeStart(int delayBeforeStart) {
 
         EffectImpl<T> copy = (EffectImpl<T>) copy((T) this);
         copy.delayBeforeStart = delayBeforeStart;
@@ -38,7 +38,7 @@ public abstract class EffectImpl<T extends EffectBase> implements EffectBase<T> 
     }
 
     @Override
-    public T delayBetweenRuns(int  delayBetweenRuns) {
+    public T withDelayBetweenRuns(int delayBetweenRuns) {
 
         EffectImpl<T> copy = (EffectImpl<T>) copy((T) this);
         copy.delayBetweenRuns = delayBetweenRuns;

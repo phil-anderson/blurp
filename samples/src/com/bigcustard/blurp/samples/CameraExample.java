@@ -24,7 +24,7 @@ public class CameraExample extends BlurpJavaProgram {
             if(!camera.isRunningAnEffect()) {
                 EffectBase alignWithSprite = buildCameraZoomInEffect(sprites[spriteIndex]);
 
-                camera.runEffect(alignWithSprite.delayBeforeStart(500));
+                camera.runEffect(alignWithSprite.withDelayBeforeStart(500));
                 spriteIndex = (spriteIndex + 1) % 8;
             }
 
