@@ -26,6 +26,8 @@ resources.createImageSprite("stars").setScale(1.2).setLayer(Background)
 ship = resources.createImageSprite("ship").setTargetStyle(Circle)
 planet = resources.createImageSprite("planet").setTargetStyle(Circle).setX(9999)
 
+screen.viewport.setSize(800, 600)
+
 replayLoop:
 while (true) {
 
