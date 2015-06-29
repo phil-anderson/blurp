@@ -1,4 +1,4 @@
-world = resources.createImageSprite "zzzhello-world.png"
+world = resources.createImageSprite "hello-world.png"
 
 while screen.update do
 
