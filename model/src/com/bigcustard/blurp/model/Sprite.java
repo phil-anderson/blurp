@@ -361,6 +361,8 @@ public abstract class Sprite<T> {
      */
     public abstract T moveTowards(double targetX, double targetY, double speed);
 
+    public abstract T move(double angle, double distance);
+
     /**
      * Checks whether this Sprite has collided with the specified Sprite, or to be more precise, it checks whether this
      * Sprite's {@link #targetStyle} overlaps the other Sprite's {@link #targetStyle}

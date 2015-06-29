@@ -14,6 +14,12 @@ public class SpriteForTests extends Sprite {
     }
 
     @Override
+    public Object move(double angle, double distance) {
+
+        return null;
+    }
+
+    @Override
     public boolean overlaps(Sprite other) {
 
         return false;

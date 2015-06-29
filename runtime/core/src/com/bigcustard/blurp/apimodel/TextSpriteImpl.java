@@ -50,6 +50,13 @@ public class TextSpriteImpl extends TextSprite implements EffectContainer {
     }
 
     @Override
+    public TextSprite move(double angle, double distance) {
+
+        MoveHandler.move(this, angle, distance);
+        return this;
+    }
+
+    @Override
     public boolean overlaps(Sprite other) {
 
         return CollisionDetector.detectCollision(this, other);

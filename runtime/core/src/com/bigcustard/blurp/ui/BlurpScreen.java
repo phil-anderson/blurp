@@ -250,11 +250,11 @@ public class BlurpScreen extends ScreenAdapter {
     public void dispose() {
 
         if(initialised) {
-            batch.dispose();
+            Gdx.input.setInputProcessor(null);
             backgroundStage.dispose();
             mainStage.dispose();
             overlayStage.dispose();
-            Gdx.input.setInputProcessor(null);
+            batch.dispose();
             initialised = false;
         }
     }

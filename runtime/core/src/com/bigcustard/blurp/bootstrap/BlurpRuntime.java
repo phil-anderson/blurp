@@ -1,7 +1,7 @@
 package com.bigcustard.blurp.bootstrap;
 
-import java.lang.reflect.*;
 import java.lang.System;
+import java.lang.reflect.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.utils.*;
 import com.bigcustard.blurp.bootstrap.languages.*;

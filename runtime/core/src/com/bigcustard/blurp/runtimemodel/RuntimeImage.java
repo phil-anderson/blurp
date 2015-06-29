@@ -20,7 +20,6 @@ public class RuntimeImage implements RuntimeObject<Image> {
     @Override
     public void sync(Image modelImage, boolean newInstance) {
 
-
         String filename = BlurpStore.configuration.getContentRoot() + modelImage.name;
         // Images are immutable so only need syncing when new.
         if(newInstance) {
@@ -28,8 +27,7 @@ public class RuntimeImage implements RuntimeObject<Image> {
                 FileHandle file = Files.getFile(filename);
                 textureRegion = new TextureRegion(new Texture(file, true));
             } catch(FileNotFoundException e) {
-                textureRegion.getTexture().setFilter(Texture.TextureFilter.MipMapLinearNearest, Texture.TextureFilter.Linear);
-//                throw new BlurpException("Couldn't load image with name: " + modelImage.)
+                throw new BlurpException("Couldn't load image with name: " + modelImage.name);
             }
         }
     }
@@ -37,6 +35,8 @@ public class RuntimeImage implements RuntimeObject<Image> {
     @Override
     public void dispose() {
 
-        textureRegion.getTexture().dispose();
+        if(textureRegion != null) {
+            textureRegion.getTexture().dispose();
+        }
     }
 }

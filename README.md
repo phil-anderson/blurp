@@ -4,7 +4,8 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
-* BUG - Image file not found error handled strangely - Restart / Exit butotns don't work.
+* Bloody Ruby wraps exceptions up like crazy. Need to check deeper for BlurpTerminatedException.
+* Need a Ruby wrapper that will check for camel-case properties if snake-case not found.
 * BUG - Once got a malloc invalid checksum when doing a Ctrl+Q
 * BUG - Stop and Start unresponsive at end of an errored script - not parse errors though
 * Sprite moveAtAngle
