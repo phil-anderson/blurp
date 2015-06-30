@@ -1,6 +1,7 @@
 package com.bigcustard.blurp.model;
 
 import java.lang.reflect.*;
+import java.util.*;
 import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.model.effects.*;
 import com.bigcustard.blurp.model.events.*;
@@ -94,6 +95,8 @@ public abstract class Sprite<T> {
     public TargetStyle targetStyle;
 
     public ScreenLayer layer;
+
+    public final Map<Sprite, SpriteEventHandler> collisionEventHandlers = new HashMap<Sprite, SpriteEventHandler>();
 
     public T setX(double newX) {
 
@@ -230,6 +233,12 @@ public abstract class Sprite<T> {
     public T onMouseReleased(EffectBase effectToRun) {
 
         this.mouseReleasedHandler = new EffectSpriteEventHandler(effectToRun);
+        return (T) this;
+    }
+
+    public T onCollisionWith(Sprite other, SpriteEventHandler eventHandler) {
+
+        this.collisionEventHandlers.put(other, eventHandler);
         return (T) this;
     }
 
