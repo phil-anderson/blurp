@@ -92,7 +92,7 @@ public class BlurpStore {
     // pre-existing libGdx app (i.e. PlanetBlurp).
     public static void initialiseFonts() {
 
-        systemFont = new BitmapFont(Gdx.files.internal("andale-mono.fnt"));
+        systemFont = new BitmapFont(Gdx.files.internal("system-font.fnt"));
         systemFont.getRegion().getTexture().setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
         systemFont.setMarkupEnabled(true);
 
