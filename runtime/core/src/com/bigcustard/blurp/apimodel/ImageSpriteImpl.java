@@ -7,10 +7,12 @@ import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.model.effects.*;
 import com.bigcustard.blurp.model.events.*;
+import com.bigcustard.blurp.util.*;
 
 public class ImageSpriteImpl extends ImageSprite implements EffectContainer {
 
     private boolean runningEffect;
+    private FalseTrueLatch justOverlapped = new FalseTrueLatch();
 
     public ImageSpriteImpl(Image image, double x, double y) {
 
@@ -45,6 +47,12 @@ public class ImageSpriteImpl extends ImageSprite implements EffectContainer {
     public boolean overlaps(Sprite other) {
 
         return CollisionDetector.detectCollision(this, other);
+    }
+
+    @Override
+    public boolean collidedWith(Sprite other) {
+
+        return justOverlapped.getValue(overlaps(other));
     }
 
     @Override

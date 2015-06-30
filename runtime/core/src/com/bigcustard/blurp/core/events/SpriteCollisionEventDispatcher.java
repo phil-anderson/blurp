@@ -12,7 +12,7 @@ public class SpriteCollisionEventDispatcher {
         for(Sprite sprite : BlurpStore.modelRepository.getSprites()) {
             // TODO: Why is this an unchecked cast!?!! The HashMap is correctly typed.
             for(Map.Entry<Sprite, SpriteEventHandler> entry : (Set<Map.Entry<Sprite, SpriteEventHandler>>) sprite.collisionEventHandlers.entrySet()) {
-                if(sprite.overlaps(entry.getKey())) {
+                if(sprite.collidedWith(entry.getKey())) {
                     entry.getValue().handle(sprite);
                 }
             }

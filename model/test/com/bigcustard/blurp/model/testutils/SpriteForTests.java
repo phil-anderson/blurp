@@ -26,6 +26,12 @@ public class SpriteForTests extends Sprite {
     }
 
     @Override
+    public boolean collidedWith(Sprite other) {
+
+        return false;
+    }
+
+    @Override
     public Object runEffect(EffectBase effectToRun, SpriteEventHandler onCompletion, ExistingEffectStrategy existingEffectStrategy) {
 
         return null;

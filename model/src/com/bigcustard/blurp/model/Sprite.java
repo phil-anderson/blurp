@@ -384,6 +384,13 @@ public abstract class Sprite<T> {
      */
     public abstract boolean overlaps(Sprite other);
 
+    /**
+     * Overlapped since last call to this method.
+     * @param other
+     * @return
+     */
+    public abstract boolean collidedWith(Sprite other);
+
     public abstract T runEffect(EffectBase effectToRun, SpriteEventHandler whatToDoAtEnd, ExistingEffectStrategy whatIfAlreadyRunningOne);
 
     /**
