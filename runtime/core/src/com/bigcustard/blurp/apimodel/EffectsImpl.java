@@ -1,5 +1,6 @@
 package com.bigcustard.blurp.apimodel;
 
+import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.core.effects.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.constants.*;
@@ -11,6 +12,14 @@ public class EffectsImpl extends Effects {
 
         defaultDuration = 1000;
         defaultStyle = EffectStyle.SmoothStartStop;
+    }
+
+    @Override
+    public Effect move(double angle, double distance) {
+
+        double dx = BlurpStore.utils.sin(angle) * distance;
+        double dy = BlurpStore.utils.cos(angle) * distance;
+        return moveBy(dx, dy);
     }
 
     @Override

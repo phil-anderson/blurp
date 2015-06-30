@@ -40,6 +40,8 @@ public abstract class Effects {
         return scaleBy(newScale, newScale);
     }
 
+    public abstract Effect move(double angle, double distance);
+
     public abstract Effect moveTo(double newX, double newY);
 
     public abstract Effect moveBy(double changeInX, double changeInY);
