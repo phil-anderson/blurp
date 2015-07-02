@@ -6,32 +6,11 @@ import com.bigcustard.blurp.model.*;
 public class ResourcesImpl extends Resources {
 
     @Override
-    public Image loadImage(String filename) {
-
-        if(filename == null) throw new RuntimeException("Image file name can't be null");
-
-        // See if we already have one
-        Image image = BlurpStore.modelRepository.getImage(filename);
-        if(image == null) {
-            image = new ImageImpl(filename);
-            BlurpStore.modelRepository.addImage(image);
-        }
-        return image;
-    }
-
-    @Override
     public ImageSprite createImageSprite(String imageFilename) {
 
         if(imageFilename == null) throw new RuntimeException("Image file name can't be null");
 
-        return createImageSprite(loadImage(imageFilename));
-    }
-
-    public ImageSprite createImageSprite(Image image) {
-
-        if(image == null) throw new RuntimeException("Image can't be null");
-
-        ImageSprite imageSprite = new ImageSpriteImpl(image, BlurpStore.mainCamera.position.x, BlurpStore.mainCamera.position.y);
+        ImageSprite imageSprite = new ImageSpriteImpl(imageFilename, BlurpStore.mainCamera.position.x, BlurpStore.mainCamera.position.y);
         BlurpStore.modelRepository.addImageSprite(imageSprite);
         return imageSprite;
     }
@@ -55,8 +34,7 @@ public class ResourcesImpl extends Resources {
     @Override
     public String toString() {
 
-        return String.format("Resources: numImages=%d numImageSprites=%d numTextSprites=%d",
-                             BlurpStore.modelRepository.getImages().size(),
+        return String.format("Resources: numImageSprites=%d numTextSprites=%d",
                              BlurpStore.modelRepository.getImageSprites().size(),
                              BlurpStore.modelRepository.getTextSprites().size());
     }

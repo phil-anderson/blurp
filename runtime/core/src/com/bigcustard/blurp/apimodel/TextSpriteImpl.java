@@ -31,6 +31,7 @@ public class TextSpriteImpl extends TextSprite implements EffectContainer {
     @Override
     public void remove() {
 
+        stopEffects();
         BlurpStore.modelRepository.removeTextSprite(this);
     }
 

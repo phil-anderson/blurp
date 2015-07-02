@@ -2,8 +2,6 @@ package com.bigcustard.blurp.model;
 
 public abstract class Resources {
 
-    public abstract Image loadImage(String filename);
-
     /**
      * Constructs a new ImageSprite using the image file specified, and places it at the center of the Screen.
      * <p>
@@ -17,8 +15,6 @@ public abstract class Resources {
      * @param imageFilename The name of the image file to load
      */
     public abstract ImageSprite createImageSprite(String imageFilename);
-
-    public abstract ImageSprite createImageSprite(Image image);
 
     public abstract TextSprite createTextSprite(String text);
 

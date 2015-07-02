@@ -14,7 +14,7 @@ public class ImageSpriteImpl extends ImageSprite implements EffectContainer {
     private boolean runningEffect;
     private FalseTrueLatch justOverlapped = new FalseTrueLatch();
 
-    public ImageSpriteImpl(Image image, double x, double y) {
+    public ImageSpriteImpl(String image, double x, double y) {
 
         this.image = image;
         this.setPosition(x, y);
@@ -26,6 +26,7 @@ public class ImageSpriteImpl extends ImageSprite implements EffectContainer {
     @Override
     public void remove() {
 
+        stopEffects();
         BlurpStore.modelRepository.removeImageSprite(this);
     }
 

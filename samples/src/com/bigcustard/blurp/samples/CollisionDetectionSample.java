@@ -10,36 +10,35 @@ public class CollisionDetectionSample extends BlurpJavaProgram {
     public void run() {
 
         system.debugMode(true);
-        Image worldImage = resources.loadImage("hello-world.png");
 
-        ImageSprite worldWithCircle1 = resources.createImageSprite(worldImage)
+        ImageSprite worldWithCircle1 = resources.createImageSprite("hello-world.png")
                                            .setScale(0.5)
                                            .setPosition(200, 500)
                                            .setTargetStyle(TargetStyle.Circle);
 
-        ImageSprite worldWithCircle2 = resources.createImageSprite(worldImage)
+        ImageSprite worldWithCircle2 = resources.createImageSprite("hello-world.png")
                                            .setScale(0.5)
                                            .setPosition(600, 500)
                                            .setTargetStyle(TargetStyle.Circle);
 
-        ImageSprite worldWithCircle3 = resources.createImageSprite(worldImage)
+        ImageSprite worldWithCircle3 = resources.createImageSprite("hello-world.png")
                                            .setScale(0.5)
                                            .setPosition(200, 300)
                                            .setTargetStyle(TargetStyle.Circle);
 
-        ImageSprite worldWithRectangle1 = resources.createImageSprite(worldImage)
+        ImageSprite worldWithRectangle1 = resources.createImageSprite("hello-world.png")
                                               .setScale(0.5)
                                               .setAngle(45)
                                               .setPosition(600, 300)
                                               .setTargetStyle(TargetStyle.Rectangle);
 
-        ImageSprite worldWithRectangle2 = resources.createImageSprite(worldImage)
+        ImageSprite worldWithRectangle2 = resources.createImageSprite("hello-world.png")
                                               .setScale(0.5)
                                               .setAngle(45)
                                               .setPosition(200, 100)
                                               .setTargetStyle(TargetStyle.Rectangle);
 
-        ImageSprite worldWithRectangle3 = resources.createImageSprite(worldImage)
+        ImageSprite worldWithRectangle3 = resources.createImageSprite("hello-world.png")
                                               .setScale(0.5)
                                               .setAngle(70)
                                               .setPosition(600, 100)

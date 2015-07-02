@@ -8,27 +8,15 @@ import com.bigcustard.blurp.model.*;
  */
 public class ModelRepository {
 
-    private List<Image> images;
     private List<ImageSprite> imageSprites;
     private List<TextSprite> textSprites;
     private List<Sprite> createdSprites;
 
     public ModelRepository() {
 
-        images = new ArrayList<Image>();
         imageSprites = new ArrayList<ImageSprite>();
         textSprites = new ArrayList<TextSprite>();
         createdSprites = new ArrayList<Sprite>();
-    }
-
-    public void addImage(Image image) {
-
-        images.add(image);
-    }
-
-    public void removeImage(Image image) {
-
-        images.remove(image);
     }
 
     public void addImageSprite(ImageSprite imageSprite) {
@@ -58,17 +46,8 @@ public class ModelRepository {
         return textSprites;
     }
 
-    public Image getImage(String imageFilename) {
-
-        for(Image image : images) {
-            if(image.name.equals(imageFilename)) return image;
-        }
-        return null;
-    }
-
     public void dispose() {
 
-        images.clear();
         imageSprites.clear();
         textSprites.clear();
         createdSprites.clear();
@@ -87,11 +66,6 @@ public class ModelRepository {
         ArrayList<Sprite> result = new ArrayList<Sprite>(createdSprites);
         createdSprites.clear();
         return result;
-    }
-
-    List<Image> getImages() {
-
-        return images;
     }
 
     List<ImageSprite> getImageSprites() {

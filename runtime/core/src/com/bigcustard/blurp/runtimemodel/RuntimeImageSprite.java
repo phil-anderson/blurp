@@ -6,6 +6,7 @@ import com.bigcustard.blurp.model.*;
 
 public class RuntimeImageSprite extends RuntimeSprite<ImageSprite> {
 
+    private String imageName;
     private RuntimeImage image;
 
     @Override
@@ -13,8 +14,14 @@ public class RuntimeImageSprite extends RuntimeSprite<ImageSprite> {
 
         super.sync(modelImageSprite, newInstance);
 
-        image = BlurpStore.runtimeRepository.getImage(modelImageSprite.image);
+        if(modelImageSprite.image != imageName) {
+            if(image != null) {
+                BlurpStore.imageCache.stopUsingImage(image);
+            }
+            imageName = modelImageSprite.image;
+            image = BlurpStore.imageCache.useImage(modelImageSprite.image);
 
+        }
         int width = image.getTextureRegion().getRegionWidth();
         int height = image.getTextureRegion().getRegionHeight();
         setSize(width, height);
@@ -33,5 +40,6 @@ public class RuntimeImageSprite extends RuntimeSprite<ImageSprite> {
     public void dispose() {
 
         remove();
+        BlurpStore.imageCache.stopUsingImage(image);
     }
 }

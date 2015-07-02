@@ -13,7 +13,6 @@ import com.bigcustard.blurp.runtimemodel.*;
  */
 public class RuntimeRepository {
 
-    private final ModelToRuntimeObjectMap<Image, RuntimeImage> runtimeImages;
     private final ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite> runtimeImageSprites;
     private final ModelToRuntimeObjectMap<TextSprite, RuntimeTextSprite> runtimeTextSprites;
 
@@ -22,7 +21,6 @@ public class RuntimeRepository {
 
     public RuntimeRepository() {
 
-        runtimeImages = new ModelToRuntimeObjectMap<Image, RuntimeImage>(RuntimeImage.class);
         runtimeImageSprites = new ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite>(RuntimeImageSprite.class);
         runtimeTextSprites = new ModelToRuntimeObjectMap<TextSprite, RuntimeTextSprite>(RuntimeTextSprite.class);
 
@@ -38,7 +36,6 @@ public class RuntimeRepository {
 
         // Then sync the various model object types
         BlurpStore.syncSingletons();
-        runtimeImages.syncAll(BlurpStore.modelRepository.getImages());
         runtimeImageSprites.syncAll(BlurpStore.modelRepository.getImageSprites());
         runtimeTextSprites.syncAll(BlurpStore.modelRepository.getTextSprites());
 
@@ -49,11 +46,6 @@ public class RuntimeRepository {
         // Finally, run any commands that were deferred
         executeCommands(deferredCommands, deltaTime);
         commands.clear();
-    }
-
-    public RuntimeImage getImage(Image modelImage) {
-
-        return runtimeImages.get(modelImage);
     }
 
     public RuntimeImageSprite getImageSprite(ImageSprite modelImageSprite) {
@@ -91,11 +83,6 @@ public class RuntimeRepository {
 
     public void dispose() {
 
-        for(RuntimeImage image : runtimeImages) {
-            image.dispose();
-        }
-
-        runtimeImages.clear();
         runtimeImageSprites.clear();
         runtimeTextSprites.clear();
 

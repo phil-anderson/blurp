@@ -23,9 +23,8 @@ public class HelloCompoundEffectsWorld extends BlurpJavaProgram {
         EffectBase animation = effects.sequence(squishAndGoRed, spinAndNormalise);
         animation = animation.withTimesToRun(4).withYoyoMode(true).withDelayBetweenRuns(250);
 
-        Image worldImage = resources.loadImage("hello-world.png");
-        ImageSprite world1 = resources.createImageSprite(worldImage).setPosition(250, 300);
-        ImageSprite world2 = resources.createImageSprite(worldImage).setPosition(550, 300);
+        ImageSprite world1 = resources.createImageSprite("hello-world.png").setPosition(250, 300);
+        ImageSprite world2 = resources.createImageSprite("hello-world.png").setPosition(550, 300);
 
         world1.runEffect(animation);
         world2.runEffect(animation.withDelayBeforeStart(1000));

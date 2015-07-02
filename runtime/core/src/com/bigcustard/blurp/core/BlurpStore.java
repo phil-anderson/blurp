@@ -32,6 +32,8 @@ public class BlurpStore {
     public static TweenManager tweener;
     public static Blurpifier blurpifier;
     public static RuntimeRepository runtimeRepository;
+    public static ImageCache imageCache;
+
     public static ConsoleImpl console;
     public static SystemImpl system;
     public static RuntimeScreen runtimeScreen;
@@ -83,6 +85,8 @@ public class BlurpStore {
         blurpScreen = new BlurpScreen();
         modelRepository = new ModelRepository();
         runtimeRepository = new RuntimeRepository();
+        imageCache = new ImageCache();
+
         console = new ConsoleImpl();
         runtimeConsole = new RuntimeConsole();
         system = new SystemImpl();
@@ -118,6 +122,7 @@ public class BlurpStore {
         runtimeRepository.dispose();
         defaultFont.dispose();
         systemFont.dispose();
+        imageCache.clear();
 
         initialiseViewports();
 
@@ -158,5 +163,6 @@ public class BlurpStore {
         defaultFont.dispose();
         systemFont.dispose();
         scriptCompleteOverlay.dispose();
+        imageCache.clear();
     }
 }

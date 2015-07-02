@@ -4,13 +4,13 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
+* BUG - File selector: Selecting class file doesn't run it. Needs changing to a fully qualified class. Hmmmm...
 * Ruby doesn't handle field remapping - method set_scale_x => setScaleX, but field scaleX !=> scale_x
   * Need a Ruby wrapper that will check for camel-case properties if snake-case not found.
 * GLITCH - If script parsing fails after screen.update, console display is slightly odd
 * Add sanity checks to model method parameters?
 * Warm up script engine (mainly for JRuby)
 * Look at gradle build, and add a task to create an executable jar
-* Reference counting for images?
 * Almost all examples need redoing / refactoring
 * Documentation
 
