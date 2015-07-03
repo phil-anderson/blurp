@@ -16,6 +16,16 @@ public class ResourcesImpl extends Resources {
     }
 
     @Override
+    public AnimationSprite createAnimationSprite(String... imageFilenames) {
+
+        if(imageFilenames == null) throw new RuntimeException("Image file names can't be null");
+
+        AnimationSprite animationSprite = new AnimationSpriteImpl(BlurpStore.mainCamera.position.x, BlurpStore.mainCamera.position.y, imageFilenames);
+        BlurpStore.modelRepository.addAnimationSprite(animationSprite);
+        return animationSprite;
+    }
+
+    @Override
     public TextSprite createTextSprite(String text) {
 
         if(text == null) text = "";

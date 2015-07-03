@@ -14,6 +14,7 @@ import com.bigcustard.blurp.runtimemodel.*;
 public class RuntimeRepository {
 
     private final ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite> runtimeImageSprites;
+    private final ModelToRuntimeObjectMap<AnimationSprite, RuntimeAnimationSprite> runtimeAnimationSprites;
     private final ModelToRuntimeObjectMap<TextSprite, RuntimeTextSprite> runtimeTextSprites;
 
     private final List<Command> commands;
@@ -22,6 +23,7 @@ public class RuntimeRepository {
     public RuntimeRepository() {
 
         runtimeImageSprites = new ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite>(RuntimeImageSprite.class);
+        runtimeAnimationSprites = new ModelToRuntimeObjectMap<AnimationSprite, RuntimeAnimationSprite>(RuntimeAnimationSprite.class);
         runtimeTextSprites = new ModelToRuntimeObjectMap<TextSprite, RuntimeTextSprite>(RuntimeTextSprite.class);
 
         commands = new ArrayList<Command>();
@@ -37,6 +39,7 @@ public class RuntimeRepository {
         // Then sync the various model object types
         BlurpStore.syncSingletons();
         runtimeImageSprites.syncAll(BlurpStore.modelRepository.getImageSprites());
+        runtimeAnimationSprites.syncAll(BlurpStore.modelRepository.getAnimationSprites());
         runtimeTextSprites.syncAll(BlurpStore.modelRepository.getTextSprites());
 
         for(Sprite modelSprite : BlurpStore.modelRepository.pullCreatedSprites()) {
@@ -53,6 +56,11 @@ public class RuntimeRepository {
         return runtimeImageSprites.get(modelImageSprite);
     }
 
+    private RuntimeSprite getAnimationSprite(AnimationSprite modelAnimationSprite) {
+
+        return runtimeAnimationSprites.get(modelAnimationSprite);
+    }
+
     public RuntimeTextSprite getTextSprite(TextSprite modelTextSprite) {
 
         return runtimeTextSprites.get(modelTextSprite);
@@ -62,6 +70,7 @@ public class RuntimeRepository {
     public RuntimeSprite getSprite(Sprite modelSprite) {
 
         if(modelSprite instanceof ImageSprite) return getImageSprite((ImageSprite) modelSprite);
+        if(modelSprite instanceof AnimationSprite) return getAnimationSprite((AnimationSprite) modelSprite);
         if(modelSprite instanceof TextSprite) return getTextSprite((TextSprite) modelSprite);
         return null;
     }

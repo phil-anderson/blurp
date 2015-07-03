@@ -9,12 +9,14 @@ import com.bigcustard.blurp.model.*;
 public class ModelRepository {
 
     private List<ImageSprite> imageSprites;
+    private List<AnimationSprite> animationSprites;
     private List<TextSprite> textSprites;
     private List<Sprite> createdSprites;
 
     public ModelRepository() {
 
         imageSprites = new ArrayList<ImageSprite>();
+        animationSprites = new ArrayList<AnimationSprite>();
         textSprites = new ArrayList<TextSprite>();
         createdSprites = new ArrayList<Sprite>();
     }
@@ -30,6 +32,17 @@ public class ModelRepository {
         imageSprites.remove(imageSprite);
     }
 
+    public void addAnimationSprite(AnimationSprite animationSprite) {
+
+        animationSprites.add(animationSprite);
+        createdSprites.add(animationSprite);
+    }
+
+    public void removeAnimationSprite(AnimationSprite animationSprite) {
+
+        animationSprites.remove(animationSprite);
+    }
+
     public void addTextSprite(TextSprite textSprite) {
 
         textSprites.add(textSprite);
@@ -41,16 +54,19 @@ public class ModelRepository {
         textSprites.remove(textSprite);
     }
 
+    List<ImageSprite> getImageSprites() {
+
+        return imageSprites;
+    }
+
+    public List<AnimationSprite> getAnimationSprites() {
+
+        return animationSprites;
+    }
+
     public List<TextSprite> getTextSprites() {
 
         return textSprites;
-    }
-
-    public void dispose() {
-
-        imageSprites.clear();
-        textSprites.clear();
-        createdSprites.clear();
     }
 
     public List<Sprite> getSprites() {
@@ -61,15 +77,17 @@ public class ModelRepository {
         return sprites;
     }
 
+    public void dispose() {
+
+        imageSprites.clear();
+        textSprites.clear();
+        createdSprites.clear();
+    }
+
     public List<Sprite> pullCreatedSprites() {
 
         ArrayList<Sprite> result = new ArrayList<Sprite>(createdSprites);
         createdSprites.clear();
         return result;
-    }
-
-    List<ImageSprite> getImageSprites() {
-
-        return imageSprites;
     }
 }

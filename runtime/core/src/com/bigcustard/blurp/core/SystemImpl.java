@@ -25,6 +25,12 @@ public class SystemImpl extends System {
     }
 
     @Override
+    public int getFrameCount() {
+
+        return BlurpState.numFrames;
+    }
+
+    @Override
     public void pause(int milliseconds) {
 
         BlurpState.pause();

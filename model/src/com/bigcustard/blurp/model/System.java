@@ -14,6 +14,8 @@ public abstract class System {
 
     public abstract int getFps();
 
+    public abstract int getFrameCount();
+
     /**
      * Makes your blurp script pause for the specified number of seconds, after which it'll carry on normally again.
      * <p>
