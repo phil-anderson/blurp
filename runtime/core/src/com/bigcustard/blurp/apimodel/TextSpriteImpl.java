@@ -46,13 +46,6 @@ public class TextSpriteImpl extends TextSprite implements EffectContainer {
     }
 
     @Override
-    public TextSprite moveTowards(double targetX, double targetY, double distanceToMove) {
-
-        MoveTowardsHandler.moveTowards(this, targetX, targetY, distanceToMove);
-        return this;
-    }
-
-    @Override
     public TextSprite move(double angle, double distance) {
 
         MoveHandler.move(this, angle, distance);

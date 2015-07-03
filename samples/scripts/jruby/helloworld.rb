@@ -8,6 +8,7 @@ while screen.update do
     world.y -= 2 if keyboard.Down.isPressed
 
     if keyboard.Space.wasJustPressed
-        world.run_effect(effects.rotate_by(360).with_style(Elastic_Stop))
+        world.angle = 45
+        world.run_effect(effects.rotate_to(0).with_style(Elastic_Stop))
     end
 end

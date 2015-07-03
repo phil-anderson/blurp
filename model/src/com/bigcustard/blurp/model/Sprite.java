@@ -353,22 +353,50 @@ public abstract class Sprite<T> {
         return sprites;
     }
 
-    /**
-     * Moves the Sprite towards the specified target coordinates <u>the next time blurpify is called</u>. If you  keep
-     * calling this method then eventually it'll reach the target. The speed parameter specified how fast the Sprite
-     * should move and therefore how quickly it will reach the target. This method does all the hard work of calculating
-     * how far the sprite needs to move in the X and Y dimensions in order to move smoothly, straight towards the
-     * target.
-     * <p>
-     * How much the Sprite will move towards the target depends on the speed parameter, and how much time has passed
-     * since the last call to {@link Screen#update() Screen.update()}
-     *
-     * @param targetX The target X coordinate
-     * @param targetY The target Y coordinate
-     * @param speed The speed in units-per-second that we want the Sprite to move at.
-     * @return The Sprite.
-     */
-    public abstract T moveTowards(double targetX, double targetY, double speed);
+    public T moveTowards(Sprite otherSprite, double distance) {
+
+        return moveTowards(otherSprite.x, otherSprite.y, distance);
+    }
+
+    public T moveTowards(double targetX, double targetY, double distanceToMove) {
+
+        // Total distances to move in X and Y
+        double xDistance = targetX - x;
+        double yDistance = targetY - y;
+        double distanceToTarget = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
+
+        if(distanceToMove > Math.abs(distanceToTarget)) {
+            x = targetX;
+            y = targetY;
+        } else {
+            double ratio = distanceToMove / distanceToTarget;
+            x += xDistance * ratio;
+            y += yDistance * ratio;
+        }
+        return (T) this;
+    }
+
+    public double distanceTo(Sprite otherSprite) {
+
+        return distanceTo(otherSprite.x, otherSprite.y);
+    }
+
+    public double distanceTo(double targetX, double targetY) {
+
+        double xDistance = targetX - x;
+        double yDistance = targetY - y;
+        return Math.sqrt(xDistance * xDistance + yDistance * yDistance);
+    }
+
+    public double angleTo(Sprite otherSprite) {
+
+        return angleTo(otherSprite.x, otherSprite.y);
+    }
+
+    public double angleTo(double targetX, double targetY) {
+
+        return Math.toDegrees(Math.atan2(y - targetY, targetX - x));
+    }
 
     public abstract T move(double angle, double distance);
 

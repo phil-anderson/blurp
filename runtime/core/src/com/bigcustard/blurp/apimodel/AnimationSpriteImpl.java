@@ -61,13 +61,6 @@ public class AnimationSpriteImpl extends AnimationSprite implements EffectContai
     }
 
     @Override
-    public AnimationSprite moveTowards(double targetX, double targetY, double distanceToMove) {
-
-        MoveTowardsHandler.moveTowards(this, targetX, targetY, distanceToMove);
-        return this;
-    }
-
-    @Override
     public AnimationSprite move(double angle, double distance) {
 
         MoveHandler.move(this, angle, distance);

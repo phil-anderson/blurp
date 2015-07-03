@@ -95,6 +95,11 @@ public class BlurpRuntime {
         throw new BlurpTerminatedException(Restart);
     }
 
+    public void reset() {
+
+        BlurpStore.reset();
+    }
+
     public void end() {
 
         BlurpStore.dispose();

@@ -31,13 +31,6 @@ public class ImageSpriteImpl extends ImageSprite implements EffectContainer {
     }
 
     @Override
-    public ImageSprite moveTowards(double targetX, double targetY, double distanceToMove) {
-
-        MoveTowardsHandler.moveTowards(this, targetX, targetY, distanceToMove);
-        return this;
-    }
-
-    @Override
     public ImageSprite move(double angle, double distance) {
 
         MoveHandler.move(this, angle, distance);
