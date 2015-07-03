@@ -4,8 +4,6 @@ Beginner's game rendering engine built on libgdx
 WORK IN PROGRESS - CHECK BACK LATER
 
 *TODO*
-* Timer.every should handle calls to dispatchEvents that happen more than the specified interval apart
-* Include initial exception class in error messages display
 * BUG - File selector: Selecting class file doesn't run it. Needs changing to a fully qualified class. Hmmmm...
 * Ruby doesn't handle field remapping - method set_scale_x => setScaleX, but field scaleX !=> scale_x
   * Need a Ruby wrapper that will check for camel-case properties if snake-case not found.

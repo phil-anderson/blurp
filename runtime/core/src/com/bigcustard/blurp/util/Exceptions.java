@@ -7,7 +7,7 @@ public class Exceptions {
 
     public static String getConcatenatedMessage(Throwable throwable) {
 
-        String result = "";
+        String result = throwable.getClass().getName() + ": ";
         while(throwable != null) {
             if(throwable.getMessage() != null && !result.contains(throwable.getMessage())) {
                 result += throwable.getMessage();

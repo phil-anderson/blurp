@@ -13,14 +13,18 @@ public class ScheduledTask {
         this.repeatInterval = repeatInterval;
     }
 
+//    150 530
+
+
     public boolean update() {
 
-        if(BlurpState.frameStartTime >= triggerTime) {
+        long delta = BlurpState.frameStartTime - triggerTime;
+        if(delta >= 0) {
             action.run();
             if(repeatInterval <= 0) {
                 return true; // done
             }
-            triggerTime = (long) (triggerTime + repeatInterval);
+            triggerTime = (long) (triggerTime + (delta / repeatInterval + 1) * repeatInterval);
         }
         return false;
     }
