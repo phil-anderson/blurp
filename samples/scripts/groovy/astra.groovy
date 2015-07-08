@@ -69,7 +69,7 @@ while (true) {
         targetBubble.runEffect(effects.combine(goWhite, shrink))
         ship.runEffect(effects.transparency(0))
 
-        system.wait(1000)
+        system.sleep(1000)
         level = level + 1
     }
 
@@ -77,7 +77,7 @@ while (true) {
     shimmer = effects.scaleBy(2).withDuration(50).withTimesToRun(20).withYoyoMode(true)
     shimmerAndFade = effects.combine(shimmer, effects.transparency(0).withDuration(1000))
     ship.setScale(0.5).setImage("explosion").runEffect(shimmerAndFade)
-    system.wait(1000)
+    system.sleep(1000)
     ship.setTransparency(1).setImage("ship")
 }
 

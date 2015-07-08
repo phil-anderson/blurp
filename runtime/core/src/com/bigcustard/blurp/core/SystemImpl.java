@@ -44,7 +44,7 @@ public class SystemImpl extends System {
     }
 
     @Override
-    public void wait(int milliseconds) {
+    public void sleep(int milliseconds) {
 
         long finishTime = java.lang.System.currentTimeMillis() + milliseconds;
         while(java.lang.System.currentTimeMillis() < finishTime) {

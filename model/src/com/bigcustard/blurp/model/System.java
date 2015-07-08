@@ -31,7 +31,7 @@ public abstract class System {
      *
      * @param milliseconds
      */
-    public abstract void wait(int milliseconds);
+    public abstract void sleep(int milliseconds);
 
     public abstract void stop();
 

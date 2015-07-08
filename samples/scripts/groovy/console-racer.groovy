@@ -20,7 +20,7 @@ while (screen.update()) {
     controlCar()
     if (hitWall()) {
         deathAnimation()
-        system.wait(1800)
+        system.sleep(1800)
         break
     }
     scoreText.setText("Score: " + score++)

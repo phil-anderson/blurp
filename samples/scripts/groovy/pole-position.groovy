@@ -1,7 +1,7 @@
-//////////////////////////////////// 
-//         Pole Position          // 
-//      Spencer Ward (2015)       // 
-//////////////////////////////////// 
+////////////////////////////////////
+//         Pole Position          //
+//      Spencer Ward (2015)       //
+////////////////////////////////////
 
 SCREEN_DIST = 100
 ROAD_BELOW = 150
@@ -33,7 +33,7 @@ while (screen.update()) {
 
 void death() {
     car.setImage("explosion")
-    system.wait(2000)
+    system.sleep(2000)
     system.restart()
 }
 
