@@ -12,6 +12,18 @@ This document is a **WORK IN PROGRESS** - There's a ton of stuff that hasn't bee
         -width (-w)    : The width in pixels of the window that Blurp will run your script in (default: 800)
         -height (-h)   : The height in pixels of the window that Blurp will run your script in (default: 600)
 
+The following shortcuts are available whilst Blurp is running...
+
+  * **Ctrl + P** Pause script
+  * **Ctrl + S** Stop script
+  * **Ctrl + R** Reload and restart script (Ctrl + F5 also works)
+  * **Ctrl + Q** Quit Blurp (Ctrl + F4 also works)
+  * **Ctrl + D** Toggle debug mode
+  * **Ctrl + L** Clear console
+  * **Ctrl + C** Copy console contents to clipboard
+
+Note that **Ctrl + R** reloads the script from file, so it will include any changes you have made.
+
 ## General
 Blurp provides several global objects (or properties if you're using Blurp from Java ) that can be used to build games
 and programs. Often they represent real things like the keyboard, the mouse or the screen.
