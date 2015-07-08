@@ -53,9 +53,9 @@ Here's a typical blurp Ruby program that does some animation...
 
     world = $resources.create_image_sprite "hello-world.png"
 
-    while screen.update do
-        world.rotate_by(1);
-    }
+    while $screen.update do
+        world.rotate_by 1
+    end
 
 The screen.update() method is intentionally designed to wait until your computer screen has actually displayed
 everything before exiting. This has two key benefits...
