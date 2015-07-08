@@ -61,4 +61,6 @@ public abstract class Effects {
     public abstract EffectGroup combine(EffectBase... effectsToCombine);
 
     public abstract EffectGroup sequence(EffectBase... effectsToDoInSequence);
+
+    public abstract Effects stopAll();
 }

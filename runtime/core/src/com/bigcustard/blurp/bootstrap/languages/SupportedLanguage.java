@@ -7,11 +7,13 @@ public class SupportedLanguage {
     private String[] fileExtensions;
 
     private NamingStrategy constantStrategy;
+    private NamingStrategy globalStrategy;
 
-    protected SupportedLanguage(String name, String description, NamingStrategy constantStrategy, String... fileExtensions) {
+    protected SupportedLanguage(String name, String description, NamingStrategy globalStrategy, NamingStrategy constantStrategy, String... fileExtensions) {
 
         this.name = name;
         this.description = description;
+        this.globalStrategy = globalStrategy;
         this.constantStrategy = constantStrategy;
         this.fileExtensions = fileExtensions;
     }
@@ -29,6 +31,11 @@ public class SupportedLanguage {
     public String[] getFileExtensions() {
 
         return fileExtensions;
+    }
+
+    public NamingStrategy getGlobalStrategy() {
+
+        return globalStrategy;
     }
 
     public NamingStrategy getConstantStrategy() {

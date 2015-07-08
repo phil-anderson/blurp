@@ -73,6 +73,7 @@ public class ModelRepository {
 
         ArrayList<Sprite> sprites = new ArrayList<Sprite>();
         sprites.addAll(imageSprites);
+        sprites.addAll(animationSprites);
         sprites.addAll(textSprites);
         return sprites;
     }

@@ -19,8 +19,8 @@ public class StopwatchExample extends BlurpJavaProgram {
         TextSprite startButton = resources.createTextSprite("Click to START")
             .setPosition(200, 100)
             .setColour(Colours.DarkGrey)
-            .onMouseEnter(highlight)
-            .onMouseExit(normal)
+            .onMouseEnter(new EffectSpriteEventHandler(highlight))
+            .onMouseExit(new EffectSpriteEventHandler(normal))
             .onClick(new SpriteEventHandler() {
                 @Override
                 public void handle(Sprite sprite) {

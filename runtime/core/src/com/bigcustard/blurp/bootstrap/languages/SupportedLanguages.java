@@ -7,11 +7,11 @@ import static com.bigcustard.blurp.bootstrap.languages.NamingStrategy.*;
 
 public class SupportedLanguages {
 
-    public static final SupportedLanguage Java = new SupportedLanguage("java", "Java classes", PASS_THROUGH, "class");
-    public static final SupportedLanguage JavaScript = new SupportedLanguage("javascript", "JavaScript scripts", PASS_THROUGH, "js");
-    public static final SupportedLanguage Python = new SupportedLanguage("python", "Python scripts", PASS_THROUGH, "py");
-    public static final SupportedLanguage Groovy = new SupportedLanguage("groovy", "Groovy scripts", PASS_THROUGH, "groovy", "gry", "gr", "gsh");
-    public static final SupportedLanguage Ruby = new SupportedLanguage("ruby", "Ruby scripts [WIP]", RUBY_CONSTANT, "rb");
+    public static final SupportedLanguage Java = new SupportedLanguage("java", "Java classes", PASS_THROUGH, PASS_THROUGH, "class");
+    public static final SupportedLanguage JavaScript = new SupportedLanguage("javascript", "JavaScript scripts", PASS_THROUGH, PASS_THROUGH, "js");
+    public static final SupportedLanguage Python = new SupportedLanguage("python", "Python scripts", PASS_THROUGH, PASS_THROUGH, "py");
+    public static final SupportedLanguage Groovy = new SupportedLanguage("groovy", "Groovy scripts", PASS_THROUGH, PASS_THROUGH, "groovy", "gry", "gr", "gsh");
+    public static final SupportedLanguage Ruby = new SupportedLanguage("ruby", "Ruby scripts [WIP]", RUBY_GLOBAL, RUBY_CONSTANT, "rb");
 
     private static Map<String, SupportedLanguage> ALL_BY_NAME = new HashMap<String, SupportedLanguage>();
     static {

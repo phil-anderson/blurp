@@ -1,6 +1,7 @@
 package com.bigcustard.blurp.apimodel;
 
 import com.bigcustard.blurp.core.*;
+import com.bigcustard.blurp.core.commands.*;
 import com.bigcustard.blurp.core.effects.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.constants.*;
@@ -86,5 +87,12 @@ public class EffectsImpl extends Effects {
 
         defaultDuration = 1000;
         defaultStyle = EffectStyle.SmoothStartStop;
+    }
+
+    @Override
+    public Effects stopAll() {
+
+        BlurpStore.runtimeRepository.registerCommand(new StopAllEffectsCommand());
+        return this;
     }
 }

@@ -39,16 +39,16 @@ public class ScriptEngineBlurpRunnable implements Runnable {
 
         Bindings bindings = scriptEngine.createBindings();
 
-        bindings.put("system", BlurpStore.system);
-        bindings.put("screen", BlurpStore.modelScreen);
-        bindings.put("camera", BlurpStore.modelCamera);
-        bindings.put("console", BlurpStore.console);
-        bindings.put("resources", BlurpStore.resources);
-        bindings.put("effects", BlurpStore.effects);
-        bindings.put("keyboard", BlurpStore.keyboard);
-        bindings.put("mouse", BlurpStore.modelMouse);
-        bindings.put("timer", BlurpStore.timer);
-        bindings.put("utils", BlurpStore.utils);
+        bindings.put(language.getGlobalStrategy().transform("system"), BlurpStore.system);
+        bindings.put(language.getGlobalStrategy().transform("screen"), BlurpStore.modelScreen);
+        bindings.put(language.getGlobalStrategy().transform("camera"), BlurpStore.modelCamera);
+        bindings.put(language.getGlobalStrategy().transform("console"), BlurpStore.console);
+        bindings.put(language.getGlobalStrategy().transform("resources"), BlurpStore.resources);
+        bindings.put(language.getGlobalStrategy().transform("effects"), BlurpStore.effects);
+        bindings.put(language.getGlobalStrategy().transform("keyboard"), BlurpStore.keyboard);
+        bindings.put(language.getGlobalStrategy().transform("mouse"), BlurpStore.modelMouse);
+        bindings.put(language.getGlobalStrategy().transform("timer"), BlurpStore.timer);
+        bindings.put(language.getGlobalStrategy().transform("utils"), BlurpStore.utils);
 
         scriptEnginePutConstants(SpriteEventHandlers.class, bindings);
         scriptEnginePutConstants(Colours.class, bindings);

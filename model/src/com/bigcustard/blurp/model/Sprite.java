@@ -158,21 +158,9 @@ public abstract class Sprite<T> {
         return (T) this;
     }
 
-    public T onMouseEnter(EffectBase effectToRun) {
-
-        this.mouseEnterHandler = new EffectSpriteEventHandler(effectToRun);
-        return (T) this;
-    }
-
     public T onMouseExit(SpriteEventHandler eventHandler) {
 
         this.mouseExitHandler = eventHandler;
-        return (T) this;
-    }
-
-    public T onMouseExit(EffectBase effectToRun) {
-
-        this.mouseExitHandler = new EffectSpriteEventHandler(effectToRun);
         return (T) this;
     }
 
@@ -182,21 +170,9 @@ public abstract class Sprite<T> {
         return (T) this;
     }
 
-    public T onClick(EffectBase effectToRun) {
-
-        this.clickHandler = new EffectSpriteEventHandler(effectToRun);
-        return (T) this;
-    }
-
     public T onDrag(SpriteEventHandler eventHandler) {
 
         this.dragHandler = eventHandler;
-        return (T) this;
-    }
-
-    public T onDrag(EffectBase effectToRun) {
-
-        this.dragHandler = new EffectSpriteEventHandler(effectToRun);
         return (T) this;
     }
 
@@ -206,33 +182,15 @@ public abstract class Sprite<T> {
         return (T) this;
     }
 
-    public T onDragReleased(EffectBase effectToRun) {
-
-        this.dragReleasedHandler = new EffectSpriteEventHandler(effectToRun);
-        return (T) this;
-    }
-
     public T onMousePressed(SpriteEventHandler eventHandler) {
 
         this.mousePressedHandler = eventHandler;
         return (T) this;
     }
 
-    public T onMousePressed(EffectBase effectToRun) {
-
-        this.mousePressedHandler = new EffectSpriteEventHandler(effectToRun);
-        return (T) this;
-    }
-
     public T onMouseReleased(SpriteEventHandler eventHandler) {
 
         this.mouseReleasedHandler = eventHandler;
-        return (T) this;
-    }
-
-    public T onMouseReleased(EffectBase effectToRun) {
-
-        this.mouseReleasedHandler = new EffectSpriteEventHandler(effectToRun);
         return (T) this;
     }
 
@@ -334,7 +292,7 @@ public abstract class Sprite<T> {
 
     public T runEffect(EffectBase effectToRun, SpriteEventHandler whatToDoAtEnd) {
 
-        return runEffect(effectToRun, whatToDoAtEnd, ExistingEffectStrategy.CombineWithExistingEffect);
+        return runEffect(effectToRun, whatToDoAtEnd, ExistingEffectStrategy.StopExistingEffect);
     }
 
     public T stopEffects() {
@@ -454,21 +412,5 @@ public abstract class Sprite<T> {
 
         return String.format("x=%.1f y=%.1f scaleX=%.2f scaleY=%.2f angle=%.1f colour=%s transparency=%.2f hidden=%s targetStyle=%s layer=%s",
                              x, y, scaleX, scaleY, angle, colour, transparency, hidden, targetStyle, layer);
-    }
-
-    private static class EffectSpriteEventHandler implements SpriteEventHandler {
-
-        private final EffectBase effectToRun;
-
-        public EffectSpriteEventHandler(EffectBase effectToRun) {
-
-            this.effectToRun = effectToRun;
-        }
-
-        @Override
-        public void handle(Sprite sprite) {
-
-            sprite.runEffect(effectToRun);
-        }
     }
 }

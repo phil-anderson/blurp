@@ -54,6 +54,7 @@ public class RuntimeAnimationSprite extends RuntimeSprite<AnimationSprite> {
     @Override
     public void dispose() {
 
+        remove();
         super.dispose();
     }
 }

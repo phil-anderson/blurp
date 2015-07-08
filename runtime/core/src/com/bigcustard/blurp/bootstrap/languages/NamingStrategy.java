@@ -8,6 +8,7 @@ public abstract class NamingStrategy {
 
     public static final NamingStrategy PASS_THROUGH = new PassThroughStrategy();
     public static final NamingStrategy RUBY_CONSTANT = new RubyConstantStrategy();
+    public static final NamingStrategy RUBY_GLOBAL = new RubyGlobalStrategy();
 
     public String transform(String name) {
 
