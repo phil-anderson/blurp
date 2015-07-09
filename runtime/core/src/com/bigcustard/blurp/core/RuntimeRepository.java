@@ -16,6 +16,8 @@ public class RuntimeRepository {
     private final ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite> runtimeImageSprites;
     private final ModelToRuntimeObjectMap<AnimationSprite, RuntimeAnimationSprite> runtimeAnimationSprites;
     private final ModelToRuntimeObjectMap<TextSprite, RuntimeTextSprite> runtimeTextSprites;
+    private final List<SoundEffectImpl> soundEffects;
+    private final List<MusicImpl> activeMusicInstances;
 
     private final List<Command> commands;
     private final List<Command> deferredCommands;
@@ -25,6 +27,8 @@ public class RuntimeRepository {
         runtimeImageSprites = new ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite>(RuntimeImageSprite.class);
         runtimeAnimationSprites = new ModelToRuntimeObjectMap<AnimationSprite, RuntimeAnimationSprite>(RuntimeAnimationSprite.class);
         runtimeTextSprites = new ModelToRuntimeObjectMap<TextSprite, RuntimeTextSprite>(RuntimeTextSprite.class);
+        activeMusicInstances = new ArrayList<MusicImpl>();
+        soundEffects = new ArrayList<SoundEffectImpl>();
 
         commands = new ArrayList<Command>();
         deferredCommands = new ArrayList<Command>();
@@ -75,6 +79,21 @@ public class RuntimeRepository {
         return null;
     }
 
+    public void registerMusic(MusicImpl music) {
+
+        activeMusicInstances.add(music);
+    }
+
+    public void deregisterMusic(Music music) {
+
+        activeMusicInstances.remove(music);
+    }
+
+    public void registerSoundEffect(SoundEffectImpl soundEffect) {
+
+        soundEffects.add(soundEffect);
+    }
+
     public void registerCommand(Command command) {
 
         commands.add(command);
@@ -94,9 +113,23 @@ public class RuntimeRepository {
 
         runtimeImageSprites.clear();
         runtimeTextSprites.clear();
+        disposeAudio();
 
         commands.clear();
         deferredCommands.clear();
+    }
+
+    public void disposeAudio() {
+
+        for(MusicImpl music : activeMusicInstances) {
+            music.dispose();
+        }
+        activeMusicInstances.clear();
+
+        for(SoundEffectImpl soundEffect: soundEffects) {
+            soundEffect.dispose();
+        }
+        soundEffects.clear();
     }
 
     public void executeCommands(List<Command> commands, float delta) {

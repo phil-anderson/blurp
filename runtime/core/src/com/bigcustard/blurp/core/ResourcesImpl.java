@@ -36,6 +36,18 @@ public class ResourcesImpl extends Resources {
     }
 
     @Override
+    public Music loadMusic(String musicFilename) {
+
+        return new MusicImpl(musicFilename);
+    }
+
+    @Override
+    public SoundEffect loadSoundEffect(String soundEffectFilename) {
+
+        return new SoundEffectImpl(soundEffectFilename);
+    }
+
+    @Override
     public Colour createColour(double red, double green, double blue) {
 
         return new Colour(red, green, blue);

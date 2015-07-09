@@ -87,6 +87,9 @@ public class ModelToRuntimeObjectMap<K, V extends RuntimeObject<K>> implements I
 
     public void clear() {
 
+        for(V runtimeObject : store.values()) {
+            runtimeObject.dispose();
+        }
         store.clear();
     }
 }

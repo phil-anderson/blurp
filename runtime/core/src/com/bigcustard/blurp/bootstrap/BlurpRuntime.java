@@ -165,6 +165,7 @@ public class BlurpRuntime {
                 }
             }
 
+            BlurpStore.runtimeRepository.disposeAudio();
             BlurpStore.scriptCompleteOverlay.initialise();
             BlurpState.scriptComplete = true;
         }

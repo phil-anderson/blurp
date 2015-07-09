@@ -28,6 +28,11 @@ public class FileSelector {
         }
 
         JFrame frame = new JFrame("Blurp");
+
+        // I think this may fix the issue of the file selector not always appearing
+        frame.setUndecorated(true);
+        frame.setVisible(true);
+
         int option = chooser.showOpenDialog(frame);
         frame.dispose();
 

@@ -1,13 +1,16 @@
 $screen.viewport.set_size 800, 600
-$screen.backgroundColour = Grey
-$resources.create_image_sprite("gingham.png").set_layer(Background)
+$resources.create_image_sprite("gingham.png").set_layer(Background).set_colour(Gainsboro)
+$resources.load_music("music.mp3").play(0.5)
 
 @fly_spawn_rate = 2000
 @score = 0
 @swat_count = 0
 
-@score_sprite = $resources.create_text_sprite("SCORE 000000").set_position(80, 570).set_layer(Overlay)
+@score_sprite = $resources.create_text_sprite("SCORE 000000").set_position(150, 570).set_font_size(50).set_layer(Overlay)
 @pizza = $resources.create_image_sprite "pizza.png"
+@squish_sound = $resources.load_sound_effect "squish.wav"
+@chomp_sound = $resources.load_sound_effect "chomp.wav"
+
 @flies = [];
 
 Fly_To_Pizza = $effects.combine $effects.move_to(400, 300).with_style(Linear).with_duration(10000),
@@ -49,7 +52,6 @@ def spawn_fly
 end
 
 def reached_pizza fly
-
     $timer.remove_all
     fly.on_collision_with @pizza, Do_Nothing
     fly.on_mouse_pressed Do_Nothing
@@ -57,6 +59,8 @@ def reached_pizza fly
     @flies.each { |other_fly|
         other_fly.run_effect(Fly_Away, At_End_Remove_Sprite) if other_fly != fly
     }
+
+    @chomp_sound.play
     @pizza.run_effect $effects.scaleTo 0
     fly.run_effect Victory_Dance
     end_game "GAME OVER"
@@ -66,6 +70,7 @@ def killed fly
     fly.on_collision_with @pizza, Do_Nothing
     fly.run_effect(Fly_Swatted, At_End_Remove_Sprite)
 
+    @squish_sound.play()
     distance = @pizza.distance_to(fly)
     if distance < 130
         increase_score fly, 1000, Lime
@@ -113,7 +118,7 @@ def end_game message_text
                                .set_scale(0)
     message_sprite.run_effect(End_Game_Message)
 
-    $system.sleep 3000
+    $system.sleep 5000
     $system.restart
 end
 
