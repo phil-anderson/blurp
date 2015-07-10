@@ -27,15 +27,7 @@ public class FileSelector {
             chooser.addChoosableFileFilter(new FileNameExtensionFilter(language.getDescription(), language.getFileExtensions()));
         }
 
-        JFrame frame = new JFrame("Blurp");
-
-        // I think this may fix the issue of the file selector not always appearing
-        frame.setUndecorated(true);
-        frame.setVisible(true);
-
-        int option = chooser.showOpenDialog(frame);
-        frame.dispose();
-
+        int option = chooser.showOpenDialog(null);
         if(option == JFileChooser.APPROVE_OPTION) {
             String result = chooser.getSelectedFile().getPath();
             preferences.put(LAST_FOLDER_KEY, result);

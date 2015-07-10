@@ -9,14 +9,14 @@ import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.util.*;
 
-public class ScriptEngineBlurpRunnable implements Runnable {
+public class ScriptEngineRunner implements Runnable {
 
     private final SupportedLanguage language;
     private final String scriptFilename;
     private final String scriptContents;
     private final ScriptEngine scriptEngine;
 
-    public ScriptEngineBlurpRunnable(SupportedLanguage language, String scriptFilename) {
+    public ScriptEngineRunner(SupportedLanguage language, String scriptFilename) {
 
         this.language = language;
         this.scriptFilename = scriptFilename;
@@ -25,7 +25,7 @@ public class ScriptEngineBlurpRunnable implements Runnable {
         if(scriptEngine == null) throw new BlurpException("Couldn't get ScriptEngine for language name '" + language.getName() + "'");
     }
 
-    public ScriptEngineBlurpRunnable(SupportedLanguage language, String scriptFilename, String scriptContents) {
+    public ScriptEngineRunner(SupportedLanguage language, String scriptFilename, String scriptContents) {
 
         this.language = language;
         this.scriptFilename = scriptFilename;

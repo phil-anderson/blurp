@@ -53,7 +53,7 @@ public class BlurpRuntime {
     public void startScriptFile(SupportedLanguage language, String scriptFilename) {
 
         checkScriptRunning("start script");
-        scriptRunnable = new RunnableWrapper(new ScriptEngineBlurpRunnable(language, scriptFilename));
+        scriptRunnable = new RunnableWrapper(new ScriptEngineRunner(language, scriptFilename));
         startThread();
     }
 
