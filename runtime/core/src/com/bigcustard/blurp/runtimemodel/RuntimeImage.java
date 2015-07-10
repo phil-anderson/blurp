@@ -25,7 +25,15 @@ public class RuntimeImage {
         String filename = BlurpStore.configuration.getContentRoot() + name;
         try {
             FileHandle file = Files.getFile(filename);
-            textureRegion = new TextureRegion(new Texture(file, true));
+            Pixmap pixmap = new Pixmap(file);
+            boolean useMipMaps = pixmap.getWidth() >= 4 && pixmap.getWidth() <= 1024 && pixmap.getHeight() >= 4 && pixmap.getHeight() <= 1024;
+            Texture texture = new Texture(pixmap, useMipMaps);
+            if(useMipMaps) {
+                texture.setFilter(Texture.TextureFilter.MipMapLinearNearest, Texture.TextureFilter.Linear);
+            } else {
+                texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+            }
+            textureRegion = new TextureRegion(texture);
         } catch(FileNotFoundException e) {
             throw new BlurpException("Couldn't load image with name: " + name);
         }
