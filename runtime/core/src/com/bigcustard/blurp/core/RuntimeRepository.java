@@ -113,6 +113,7 @@ public class RuntimeRepository {
 
         runtimeImageSprites.clear();
         runtimeTextSprites.clear();
+        runtimeAnimationSprites.clear();
         disposeAudio();
 
         commands.clear();

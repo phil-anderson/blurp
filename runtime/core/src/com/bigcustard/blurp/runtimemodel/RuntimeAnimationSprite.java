@@ -55,6 +55,10 @@ public class RuntimeAnimationSprite extends RuntimeSprite<AnimationSprite> {
     public void dispose() {
 
         remove();
+        for(RuntimeImage image: images) {
+            BlurpStore.imageCache.stopUsingImage(image);
+        }
+        images = null;
         super.dispose();
     }
 }

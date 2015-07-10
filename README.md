@@ -217,8 +217,7 @@ You can specify a colour and transparency for the console that subsequent text w
 
 # Todo List
 * GLITCH - Audio should pause when Blurp is paused
-* Use the Java Comiler API to compile .java files at runtime
-* AnimationSprite.dispose needs to deregister texture usages.
+* Use the Java Compiler API to compile .java files at runtime
 * GLITCH - TextSprites have jaggies when tinted, and rendered on non-white background. Rebuild png with extra padding
 * BUG - File selector doesn't always appear... Something to do with the lightweight Jframe I think
 * [DV] Ruby doesn't handle field remapping - method set_scale_x => setScaleX, but field scaleX !=> scale_x
