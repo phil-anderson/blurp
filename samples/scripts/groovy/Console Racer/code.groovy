@@ -1,5 +1,5 @@
 /////////////////////////////////////////
-//             Console Race            //
+//            Console Racer            //
 //         Spencer Ward (2015)         //
 /////////////////////////////////////////
 
@@ -12,7 +12,7 @@ walls = []
 
 car = resources.createImageSprite("car").setPosition(carStartX, 20)
 explosion = resources.createImageSprite("explosion").setHidden(true)
-wall = resources.createImageSprite("wall").setScale(0.2).setX(9999)
+wall = resources.createImageSprite("wall").setScale(0.8).setX(9999)
 scoreText = resources.createTextSprite("").setPosition(750, 580).setFontSize(20).setColour(DarkBlue)
 
 while (screen.update()) {
@@ -46,10 +46,7 @@ void controlCar() {
 }
 
 boolean hitWall() {
-    for (wall in walls) {
-        if (wall.overlaps(car)) return true
-    }
-    return false
+    return walls.any{it.overlaps(car)}
 }
 
 void deathAnimation(){
