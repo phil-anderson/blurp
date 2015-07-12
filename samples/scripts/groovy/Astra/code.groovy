@@ -1,7 +1,7 @@
 //////////////////////////////////////////////
-//         Welcome to Planet Burpl!         //
-//      Start writing your game below       //
-// Look in the Game Library for inspiration //
+//                  ASTRA                   //
+//           A space gravity game           //
+//          by Spencer Ward (2015)          //
 //////////////////////////////////////////////
 
 screen.viewport.setSize(800, 600)
@@ -9,9 +9,7 @@ screen.viewport.setSize(800, 600)
 // Constants
 BOOST = 0.1
 G = 0.01
-PLANET_MASS = 100
 SHIP_MASS = 1
-PLANETS = 1
 TOP = 572
 RIGHT = 772
 BOTTOM = 28
@@ -20,14 +18,13 @@ BUBBLE_CAPTURE = 15
 
 // Sprites
 resources.createImageSprite("stars").setScale(1.2).setLayer(Background)
-resources.createImageSprite("bubble").setPosition(60, 233).setTransparency(0.8)
+resources.createImageSprite("bubble").setPosition(60, 300).setTransparency(0.8)
 targetBubble = resources.createImageSprite("bubble")
 ship = resources.createImageSprite("ship")
 planets = []
 
 replayLoop:
 while (true) {
-
     level = 1
 
     mainLoop:
@@ -35,8 +32,8 @@ while (true) {
         showPlanets()
         velocityX = 0
         velocityY = 0
-        ship.setPosition(60, 233).setScale(1).setTransparency(1)
-        targetBubble.setX(732).setY(233).setColour(Orange).setScale(1).setTransparency(1)
+        ship.setPosition(60, 300).setScale(1).setTransparency(1)
+        targetBubble.setPosition(732, 300).setColour(Orange).setScale(1).setTransparency(1)
 
         levelStart()
 
@@ -69,7 +66,7 @@ while (true) {
         targetBubble.runEffect(effects.combine(goWhite, shrink))
         ship.runEffect(effects.transparency(0))
 
-        system.sleep(1000)
+        system.sleep(1500)
         level = level + 1
     }
 
@@ -77,29 +74,28 @@ while (true) {
     shimmer = effects.scaleBy(2).withDuration(50).withTimesToRun(20).withYoyoMode(true)
     shimmerAndFade = effects.combine(shimmer, effects.transparency(0).withDuration(1000))
     ship.setScale(0.5).setImage("explosion").runEffect(shimmerAndFade)
-    system.sleep(1000)
+    system.sleep(1500)
     ship.setTransparency(1).setImage("ship")
 }
 
 //-----------------------------------------------------------------------
 
 void showPlanets() {
-
     planets.each { it.remove() }
     planet = resources.createImageSprite("planet").setX(9999)
 
     if (level == 1) {
         planets = [planet]
-        planets[0].setPosition(400,233)
+        planets[0].setPosition(400,300)
     } else if (level == 2) {
         planets = planet.multiplyBy(2)
-        planets[0].setPosition(300, 363)
-        planets[1].setPosition(600, 133).setScale(0.7)
+        planets[0].setPosition(300, 423)
+        planets[1].setPosition(600, 153).setScale(0.7)
     } else if (level == 3) {
         planets = planet.multiplyBy(3)
-        planets[1].setPosition(550, 373).setScale(0.8)
-        planets[2].setPosition(300, 100).setScale(1.1)
-        planets[0].setPosition(150, 380).setScale(0.5)
+        planets[1].setPosition(550, 423).setScale(0.8)
+        planets[2].setPosition(300, 130).setScale(1.1)
+        planets[0].setPosition(150, 470).setScale(0.5)
     } else if (level == 4) {
         planets = [planet]
         planets[0].setPosition(400, -100).setScale(2)
@@ -114,8 +110,8 @@ void showPlanets() {
 }
 
 void levelStart() {
-    levelText = resources.createTextSprite("LEVEL " + level).setFontSize(80).setPosition(900, 233)
-    comeIn = effects.moveTo(400, 233).withStyle(ElasticStop)
+    levelText = resources.createTextSprite("LEVEL " + level).setFontSize(80).setPosition(900, 300)
+    comeIn = effects.moveTo(400, 300).withStyle(ElasticStop)
     fade = effects.transparency(0).withDuration(1500)
     levelText.runEffect(effects.sequence(comeIn, fade.withDelayBeforeStart(300)))
 }
@@ -142,28 +138,31 @@ void gravity(planet) {
     acceleration = force / SHIP_MASS
 
     // Accelerate in direction of planet
-    accelAngle = ship.angleTo(planet);
+    accelAngle = ship.angleTo(planet)
     accelerateShip(accelAngle, acceleration)
 }
 
 void controlShip() {
     if (keyboard.Space.isPressed()) {
         accelerateShip(ship.angle, BOOST)
+        ship.setImage("shipwithflames")
+    } else {
+        ship.setImage("ship")
     }
     if (keyboard.Left.isPressed()) {
-        ship.angle -= 10
+        ship.angle -= 5
     }
     if (keyboard.Right.isPressed()) {
-        ship.angle += 10
+        ship.angle += 5
     }
 }
 
 void accelerateShip(accelAngle, amount) {
-    velocityX = velocityX + amount * utils.cos(accelAngle)
-    velocityY = velocityY - amount * utils.sin(accelAngle)
+    velocityX += amount * utils.cos(accelAngle)
+    velocityY -= amount * utils.sin(accelAngle)
 }
 
 void moveShip() {
-    ship.x = ship.x + velocityX
-    ship.y = ship.y + velocityY
+    ship.x += velocityX
+    ship.y += velocityY
 }
