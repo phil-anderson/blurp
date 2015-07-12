@@ -93,7 +93,7 @@ public class DebugHudRenderer {
         Vector3 mousePosMain = MouseState.getPosition(ScreenLayer.Main);
 
         String zoomString = String.format("%.2f", (float) BlurpStore.modelCamera.zoom);
-        String angleString = String.format("%.1f", 360 - BlurpStore.modelCamera.angle % 360) + (char) 127;
+        String angleString = String.format("%.1f", 360 - BlurpStore.modelCamera.angle % 360) + "°";
         String staticMouseString = String.format("x:%.1f  y:%.1f", mousePosStatic.x, mousePosStatic.y);
 
         batch.begin(); // Assumes batch was left in "static camera" mode
