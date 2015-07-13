@@ -112,7 +112,6 @@ project(":installers") {
     group = 'blurp'
 
     artifacts {
-        archives file: file('../runtime/desktop/build/libs/desktop*.jar'), classifier: 'executable jar'
         archives file: file('../build/Blurp-windows64-offline.exe'), classifier: 'windows installer'
         archives file: file('../build/Blurp-macos64-offline.dmg'), classifier: 'mac installer'
         archives file: file('../build/Blurp-linux64-offline.tar'), classifier: 'linux 64 installer'
