@@ -11,7 +11,7 @@ allprojects {
     apply plugin: "eclipse"
     apply plugin: "idea"
 
-    version = '1.0'
+    version = '0.0.1'
     ext {
         appName = 'Blurp'
         gdxVersion = '1.5.4'
@@ -32,6 +32,9 @@ allprojects {
 project(":model") {
     apply plugin: "java"
 
+    targetCompatibility = 1.6
+    sourceCompatibility = 1.6
+
     dependencies {
         testCompile "junit:junit:4.12"
         testCompile "org.mockito:mockito-all:1.9.5"
@@ -49,6 +52,8 @@ project(":samples") {
 project(":runtime:desktop") {
     apply plugin: "java"
 
+    targetCompatibility = 1.6
+    sourceCompatibility = 1.6
 
     dependencies {
         compile project(":runtime:core")
@@ -62,6 +67,9 @@ project(":runtime:desktop") {
 
 project(":runtime:core") {
     apply plugin: "java"
+
+    targetCompatibility = 1.6
+    sourceCompatibility = 1.6
 
     dependencies {
         compile project(":model")
