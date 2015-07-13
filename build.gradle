@@ -3,13 +3,25 @@ import sun.misc.ExtensionDependency
 buildscript {
     repositories {
         mavenCentral()
+        jcenter()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url "https://dl.bintray.com/bmuschko/gradle-plugins" }
+    }
+    dependencies {
+        classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
     }
 }
 
 allprojects {
     apply plugin: "eclipse"
     apply plugin: "idea"
+
+    apply plugin: "com.bmuschko.nexus"
+    nexus {
+        sign = false
+        repositoryUrl = "http://leonandjosh.ddns.net:8081/nexus/content/repositories/blurp"
+        snapshotRepositoryUrl = "http://leonandjosh.ddns.net:8081/nexus/content/repositories/blurp"
+    }
 
     version = '0.0.1'
     ext {
@@ -85,6 +97,26 @@ project(":runtime:core") {
         testCompile "org.mockito:mockito-all:1.9.5"
         testCompile "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
         testRuntime project(":runtime:desktop")
+    }
+}
+
+project(":installers") {
+
+    apply plugin: "com.bmuschko.nexus"
+    nexus {
+        sign = false
+        repositoryUrl = "http://leonandjosh.ddns.net:8081/nexus/content/repositories/blurp"
+        snapshotRepositoryUrl = "http://leonandjosh.ddns.net:8081/nexus/content/repositories/blurp"
+    }
+
+    group = 'blurp'
+
+    artifacts {
+        archives file: file('../runtime/desktop/build/libs/desktop*.jar'), classifier: 'executable jar'
+        archives file: file('../build/Blurp-windows64-offline.exe'), classifier: 'windows installer'
+        archives file: file('../build/Blurp-macos64-offline.dmg'), classifier: 'mac installer'
+        archives file: file('../build/Blurp-linux64-offline.tar'), classifier: 'linux 64 installer'
+        archives file: file('../build/Blurp-linux32-offline.tar'), classifier: 'linux 32 installer'
     }
 }
 
