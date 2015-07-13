@@ -8,7 +8,7 @@ To upload jars to [nexus](http://leonandjosh.ddns.net:8081/nexus) you need to ha
 
 To build the executables you need to download the JRE-1.6 to the root directory from [here] (http://www.jwrapper.com/download.html).
 
-The sister runtime project can be found [here](https://github.com/SpencerArtisan/glide).  This project offers a kids IDE frontend to Blurp.  It has a separate versioning strategy.  
+The sister runtime project can be found [here](https://github.com/SpencerArtisan/glide).  This project offers a kids' IDE frontend to Blurp.  It has a separate versioning strategy.  
 
 ## Release Process
 
