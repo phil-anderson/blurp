@@ -45,6 +45,11 @@ public class SoundEffectImpl extends SoundEffect {
         return this;
     }
 
+    public Sound getGdxSound() {
+
+        return gdxSound;
+    }
+
     public void dispose() {
 
         Gdx.app.postRunnable(new Runnable() {

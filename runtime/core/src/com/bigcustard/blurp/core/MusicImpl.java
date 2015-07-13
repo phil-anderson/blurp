@@ -3,13 +3,14 @@ package com.bigcustard.blurp.core;
 import java.io.*;
 import com.badlogic.gdx.*;
 import com.bigcustard.blurp.core.commands.*;
-import com.bigcustard.blurp.util.Files;
 import com.bigcustard.blurp.model.*;
+import com.bigcustard.blurp.util.Files;
 
 public class MusicImpl implements Music {
 
     private final String filename;
     private com.badlogic.gdx.audio.Music gdxMusic;
+    private boolean initialised;
     private float volume = 1;
 
     public MusicImpl(final String filename) {
@@ -98,7 +99,7 @@ public class MusicImpl implements Music {
 
     private void ensureLoaded() {
 
-        if(gdxMusic == null) {
+        if(!initialised) {
             BlurpStore.runtimeRepository.registerCommand(new Command() {
                 @Override
                 public void execute(float deltaTime) {
@@ -113,7 +114,13 @@ public class MusicImpl implements Music {
                     }
                 }
             });
+            initialised = true;
         }
+    }
+
+    public com.badlogic.gdx.audio.Music getGdxMusic() {
+
+        return gdxMusic;
     }
 
     public void dispose() {

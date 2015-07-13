@@ -40,12 +40,14 @@ public class BlurpState {
 
         paused = true;
         BlurpStore.timer.hold();
+        BlurpStore.runtimeRepository.pauseAudio();
     }
 
     public static void resume() {
 
         paused = false;
         BlurpStore.timer.unhold();
+        BlurpStore.runtimeRepository.resumeAudio();
     }
 
     public static void reset() {

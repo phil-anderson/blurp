@@ -16,8 +16,10 @@ public class RuntimeRepository {
     private final ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite> runtimeImageSprites;
     private final ModelToRuntimeObjectMap<AnimationSprite, RuntimeAnimationSprite> runtimeAnimationSprites;
     private final ModelToRuntimeObjectMap<TextSprite, RuntimeTextSprite> runtimeTextSprites;
+
     private final List<SoundEffectImpl> soundEffects;
-    private final List<MusicImpl> activeMusicInstances;
+    private final List<MusicImpl> musicInstances;
+    private final List<MusicImpl> heldMusic;
 
     private final List<Command> commands;
     private final List<Command> deferredCommands;
@@ -27,7 +29,8 @@ public class RuntimeRepository {
         runtimeImageSprites = new ModelToRuntimeObjectMap<ImageSprite, RuntimeImageSprite>(RuntimeImageSprite.class);
         runtimeAnimationSprites = new ModelToRuntimeObjectMap<AnimationSprite, RuntimeAnimationSprite>(RuntimeAnimationSprite.class);
         runtimeTextSprites = new ModelToRuntimeObjectMap<TextSprite, RuntimeTextSprite>(RuntimeTextSprite.class);
-        activeMusicInstances = new ArrayList<MusicImpl>();
+        musicInstances = new ArrayList<MusicImpl>();
+        heldMusic = new ArrayList<MusicImpl>();
         soundEffects = new ArrayList<SoundEffectImpl>();
 
         commands = new ArrayList<Command>();
@@ -81,12 +84,12 @@ public class RuntimeRepository {
 
     public void registerMusic(MusicImpl music) {
 
-        activeMusicInstances.add(music);
+        musicInstances.add(music);
     }
 
     public void deregisterMusic(Music music) {
 
-        activeMusicInstances.remove(music);
+        musicInstances.remove(music);
     }
 
     public void registerSoundEffect(SoundEffectImpl soundEffect) {
@@ -109,6 +112,39 @@ public class RuntimeRepository {
         return commands;
     }
 
+    public void executeCommands(List<Command> commands, float delta) {
+
+        for(Command command : commands) {
+            command.execute(delta);
+        }
+    }
+
+    public void pauseAudio() {
+
+        for(SoundEffectImpl sound : soundEffects) {
+            sound.getGdxSound().pause();
+        }
+
+        for(MusicImpl music : musicInstances) {
+            if(music.getGdxMusic().isPlaying()) {
+                music.pause();
+                heldMusic.add(music);
+            }
+        }
+    }
+
+    public void resumeAudio() {
+
+        for(SoundEffectImpl sound : soundEffects) {
+            sound.getGdxSound().resume();
+        }
+
+        for(MusicImpl music : heldMusic) {
+            music.play();
+        }
+        heldMusic.clear();
+    }
+
     public void dispose() {
 
         runtimeImageSprites.clear();
@@ -122,22 +158,16 @@ public class RuntimeRepository {
 
     public void disposeAudio() {
 
-        for(MusicImpl music : activeMusicInstances) {
+        for(MusicImpl music : musicInstances) {
             music.dispose();
         }
-        activeMusicInstances.clear();
+        musicInstances.clear();
+        heldMusic.clear();
 
         for(SoundEffectImpl soundEffect: soundEffects) {
             soundEffect.dispose();
         }
         soundEffects.clear();
-    }
-
-    public void executeCommands(List<Command> commands, float delta) {
-
-        for(Command command : commands) {
-            command.execute(delta);
-        }
     }
 }
 
