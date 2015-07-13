@@ -1,1 +1,1 @@
-include 'model', 'samples', 'runtime:desktop', 'runtime:core'
+include 'model', 'samples', 'runtime:desktop', 'runtime:core', 'installers'
