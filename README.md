@@ -2,6 +2,22 @@
 
 This document is a **WORK IN PROGRESS** - There's a ton of stuff that hasn't been written up yet.
 
+## Setting up a Development Environment
+
+To upload jars to [nexus](http://leonandjosh.ddns.net:8081/nexus) you need to have nexusUsername and nexusPassword defined in ~/.gradle/gradle.properties.
+
+To build the executables you need to download the JRE-1.6 to the root directory from [here] (http://www.jwrapper.com/download.html).
+
+The sister runtime project can be found [here](https://github.com/SpencerArtisan/glide).  This project offers a kids' IDE frontend to Blurp.  It has a separate versioning strategy.  
+
+## Release Process
+
+1. Update the version numbers in ``build.gradle``, ``installers/jwrapper-blurp.xml`` and ``run.sh``
+2. `./gradlew clean build dist`
+3. `./run.sh` and manually smoke test
+4. `./package.sh`
+5. `./gradlew uploadArchives`
+
 ## Usage
     java -jar blurp.jar [Options...] script-name
 

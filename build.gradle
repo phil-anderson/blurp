@@ -3,7 +3,12 @@ import sun.misc.ExtensionDependency
 buildscript {
     repositories {
         mavenCentral()
+        jcenter()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url "https://dl.bintray.com/bmuschko/gradle-plugins" }
+    }
+    dependencies {
+        classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
     }
 }
 
@@ -11,7 +16,14 @@ allprojects {
     apply plugin: "eclipse"
     apply plugin: "idea"
 
-    version = '1.0'
+    apply plugin: "com.bmuschko.nexus"
+    nexus {
+        sign = false
+        repositoryUrl = "http://leonandjosh.ddns.net:8081/nexus/content/repositories/blurp"
+        snapshotRepositoryUrl = "http://leonandjosh.ddns.net:8081/nexus/content/repositories/blurp"
+    }
+
+    version = '0.0.1'
     ext {
         appName = 'Blurp'
         gdxVersion = '1.5.4'
@@ -32,6 +44,9 @@ allprojects {
 project(":model") {
     apply plugin: "java"
 
+    targetCompatibility = 1.6
+    sourceCompatibility = 1.6
+
     dependencies {
         testCompile "junit:junit:4.12"
         testCompile "org.mockito:mockito-all:1.9.5"
@@ -49,6 +64,8 @@ project(":samples") {
 project(":runtime:desktop") {
     apply plugin: "java"
 
+    targetCompatibility = 1.6
+    sourceCompatibility = 1.6
 
     dependencies {
         compile project(":runtime:core")
@@ -62,6 +79,9 @@ project(":runtime:desktop") {
 
 project(":runtime:core") {
     apply plugin: "java"
+
+    targetCompatibility = 1.6
+    sourceCompatibility = 1.6
 
     dependencies {
         compile project(":model")
@@ -77,6 +97,25 @@ project(":runtime:core") {
         testCompile "org.mockito:mockito-all:1.9.5"
         testCompile "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
         testRuntime project(":runtime:desktop")
+    }
+}
+
+project(":installers") {
+
+    apply plugin: "com.bmuschko.nexus"
+    nexus {
+        sign = false
+        repositoryUrl = "http://leonandjosh.ddns.net:8081/nexus/content/repositories/blurp"
+        snapshotRepositoryUrl = "http://leonandjosh.ddns.net:8081/nexus/content/repositories/blurp"
+    }
+
+    group = 'blurp'
+
+    artifacts {
+        archives file: file('../build/Blurp-windows64-offline.exe'), classifier: 'windows installer'
+        archives file: file('../build/Blurp-macos64-offline.dmg'), classifier: 'mac installer'
+        archives file: file('../build/Blurp-linux64-offline.tar'), classifier: 'linux 64 installer'
+        archives file: file('../build/Blurp-linux32-offline.tar'), classifier: 'linux 32 installer'
     }
 }
 

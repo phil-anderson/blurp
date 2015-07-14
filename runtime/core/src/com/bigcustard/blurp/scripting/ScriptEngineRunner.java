@@ -8,6 +8,8 @@ import com.bigcustard.blurp.bootstrap.languages.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.util.*;
+import org.codehaus.groovy.jsr223.GroovyScriptEngineFactory;
+import org.jruby.embed.jsr223.JRubyEngineFactory;
 
 public class ScriptEngineRunner implements Runnable {
 
@@ -17,21 +19,22 @@ public class ScriptEngineRunner implements Runnable {
     private final ScriptEngine scriptEngine;
 
     public ScriptEngineRunner(SupportedLanguage language, String scriptFilename) {
-
-        this.language = language;
-        this.scriptFilename = scriptFilename;
-        this.scriptContents = null;
-        scriptEngine = new ScriptEngineManager().getEngineByName(language.getName());
-        if(scriptEngine == null) throw new BlurpException("Couldn't get ScriptEngine for language name '" + language.getName() + "'");
+        this(language, scriptFilename, null);
     }
 
     public ScriptEngineRunner(SupportedLanguage language, String scriptFilename, String scriptContents) {
-
         this.language = language;
         this.scriptFilename = scriptFilename;
         this.scriptContents = scriptContents;
-        scriptEngine = new ScriptEngineManager().getEngineByName(language.getName());
+        scriptEngine = getScriptEngineManager().getEngineByName(language.getName());
         if(scriptEngine == null) throw new BlurpException("Couldn't get ScriptEngine for language name '" + language.getName() + "'");
+    }
+
+    private ScriptEngineManager getScriptEngineManager() {
+        ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
+        scriptEngineManager.registerEngineName("ruby", new JRubyEngineFactory());
+        scriptEngineManager.registerEngineName("groovy", new GroovyScriptEngineFactory());
+        return scriptEngineManager;
     }
 
     @Override

@@ -4,7 +4,7 @@ package aurelienribon.tweenengine;
  * BaseTween is the base class of Tween and Timeline. It defines the
  * iteration engine used to play animations for any number of times, and in
  * any direction, at any speed.
- * <p/>
+ * <p></p>
  *
  * It is responsible for calling the different callbacks at the right moments,
  * and for making sure that every callbacks are triggered, even if the update
@@ -177,7 +177,7 @@ public abstract class BaseTween<T> {
     /**
      * Sets the callback. By default, it will be fired at the completion of the
      * tween or timeline (event COMPLETE). If you want to change this behavior
-     * and add more triggers, use the {@link setCallbackTriggers()} method.
+     * and add more triggers, use the {@link setCallbackTriggers} method.
      *
      * @see TweenCallback
      */
@@ -189,17 +189,17 @@ public abstract class BaseTween<T> {
     /**
      * Changes the triggers of the callback. The available triggers, listed as
      * members of the {@link TweenCallback} interface, are:
-     * <p/>
+     * <p></p>
      *
-     * <b>BEGIN</b>: right after the delay (if any)<br/>
-     * <b>START</b>: at each iteration beginning<br/>
-     * <b>END</b>: at each iteration ending, before the repeat delay<br/>
-     * <b>COMPLETE</b>: at last END event<br/>
-     * <b>BACK_BEGIN</b>: at the beginning of the first backward iteration<br/>
-     * <b>BACK_START</b>: at each backward iteration beginning, after the repeat delay<br/>
-     * <b>BACK_END</b>: at each backward iteration ending<br/>
+     * <b>BEGIN</b>: right after the delay (if any)
+     * <b>START</b>: at each iteration beginning
+     * <b>END</b>: at each iteration ending, before the repeat delay
+     * <b>COMPLETE</b>: at last END event
+     * <b>BACK_BEGIN</b>: at the beginning of the first backward iteration
+     * <b>BACK_START</b>: at each backward iteration beginning, after the repeat delay
+     * <b>BACK_END</b>: at each backward iteration ending
      * <b>BACK_COMPLETE</b>: at last BACK_END event
-     * <p/>
+     * <p></p>
      *
      * <pre> {@code
      * forward :      BEGIN                                   COMPLETE
@@ -282,13 +282,14 @@ public abstract class BaseTween<T> {
     }
 
     /**
-     * Gets the id of the current step. Values are as follows:<br/>
+     * Gets the id of the current step. Values are as follows:
      * <ul>
-     * <li>even numbers mean that an iteration is playing,<br/>
-     * <li>odd numbers mean that we are between two iterations,<br/>
-     * <li>-2 means that the initial delay has not ended,<br/>
-     * <li>-1 means that we are before the first iteration,<br/>
+     * <li>even numbers mean that an iteration is playing,
+     * <li>odd numbers mean that we are between two iterations,
+     * <li>-2 means that the initial delay has not ended,
+     * <li>-1 means that we are before the first iteration,
      * <li>repeatCount*2 + 1 means that we are after the last iteration
+     * </ul>
      */
     public int getStep() {
         return step;
