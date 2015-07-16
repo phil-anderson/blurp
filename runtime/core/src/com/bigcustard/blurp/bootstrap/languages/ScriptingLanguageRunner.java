@@ -1,46 +1,34 @@
-package com.bigcustard.blurp.scripting;
+package com.bigcustard.blurp.bootstrap.languages;
 
 import java.io.*;
 import java.lang.reflect.*;
 import java.util.*;
 import javax.script.*;
-import com.bigcustard.blurp.bootstrap.languages.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.util.*;
-import org.codehaus.groovy.jsr223.GroovyScriptEngineFactory;
-import org.jruby.embed.jsr223.JRubyEngineFactory;
 
-public class ScriptEngineRunner implements Runnable {
+public class ScriptingLanguageRunner implements Runner {
 
-    private final SupportedLanguage language;
-    private final String scriptFilename;
-    private final String scriptContents;
-    private final ScriptEngine scriptEngine;
+    private final ScriptingLanguage language;
 
-    public ScriptEngineRunner(SupportedLanguage language, String scriptFilename) {
-        this(language, scriptFilename, null);
-    }
+    private String scriptFilename;
 
-    public ScriptEngineRunner(SupportedLanguage language, String scriptFilename, String scriptContents) {
+    public ScriptingLanguageRunner(ScriptingLanguage language) {
+
         this.language = language;
-        this.scriptFilename = scriptFilename;
-        this.scriptContents = scriptContents;
-        scriptEngine = getScriptEngineManager().getEngineByName(language.getName());
-        if(scriptEngine == null) throw new BlurpException("Couldn't get ScriptEngine for language name '" + language.getName() + "'");
     }
 
-    private ScriptEngineManager getScriptEngineManager() {
-        ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
-        scriptEngineManager.registerEngineName("ruby", new JRubyEngineFactory());
-        scriptEngineManager.registerEngineName("groovy", new GroovyScriptEngineFactory());
-        return scriptEngineManager;
+    public void prepare(String scriptFilename) {
+
+        this.scriptFilename = scriptFilename;
     }
 
     @Override
     public void run() {
 
-        Bindings bindings = scriptEngine.createBindings();
+        ScriptEngine scriptingEngine = language.getScriptingEngine();
+        Bindings bindings = scriptingEngine.createBindings();
 
         bindings.put(language.getGlobalStrategy().transform("system"), BlurpStore.system);
         bindings.put(language.getGlobalStrategy().transform("screen"), BlurpStore.modelScreen);
@@ -66,7 +54,8 @@ public class ScriptEngineRunner implements Runnable {
         bindings.put(ScriptEngine.FILENAME, scriptFilename);
 
         try {
-            runScript(bindings);
+            Reader scriptReader = Files.getFile(scriptFilename).reader();
+            scriptingEngine.eval(scriptReader, bindings);
         } catch(RuntimeException e) {
             throw e; // Rethrow
         } catch(Exception e) {
@@ -103,15 +92,5 @@ public class ScriptEngineRunner implements Runnable {
             }
         }
         bindings.put("All" + constantsClass.getSimpleName(), allConstants.toArray());
-    }
-
-    private void runScript(Bindings bindings) throws FileNotFoundException, ScriptException {
-
-        if(scriptContents != null) {
-            scriptEngine.eval(scriptContents, bindings);
-        } else {
-            Reader scriptReader = Files.getFile(scriptFilename).reader();
-            scriptEngine.eval(scriptReader, bindings);
-        }
     }
 }

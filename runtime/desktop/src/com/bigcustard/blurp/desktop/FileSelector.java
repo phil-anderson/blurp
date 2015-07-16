@@ -21,11 +21,18 @@ public class FileSelector {
         String folder = preferences.get(LAST_FOLDER_KEY, "");
         JFileChooser chooser = new JFileChooser(folder);
 
+        // Trying this out to see if it fixes the intermittent issue of dialog not appearing.
+        // If it fails, could try calling it from SwingUtilities.invokeAndWait() OR call the rest of this mehod from invokeLater
+        chooser.updateUI();
+
         chooser.setDialogTitle("Blurp: Select program to run");
         chooser.setApproveButtonText("Run");
         for(SupportedLanguage language : SupportedLanguages.getAll()) {
-            chooser.addChoosableFileFilter(new FileNameExtensionFilter(language.getDescription(), language.getFileExtensions()));
+            if(language.getFileExtensions().length != 0) {
+                chooser.addChoosableFileFilter(new FileNameExtensionFilter(language.getDescription(), language.getFileExtensions()));
+            }
         }
+
 
         int option = chooser.showOpenDialog(null);
         if(option == JFileChooser.APPROVE_OPTION) {

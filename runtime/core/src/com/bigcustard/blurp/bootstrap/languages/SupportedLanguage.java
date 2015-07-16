@@ -1,26 +1,17 @@
 package com.bigcustard.blurp.bootstrap.languages;
 
-public class SupportedLanguage {
+public abstract class SupportedLanguage {
 
-    private String name;
     private String description;
     private String[] fileExtensions;
 
-    private NamingStrategy constantStrategy;
-    private NamingStrategy globalStrategy;
+    protected NamingStrategy constantStrategy = NamingStrategy.PASS_THROUGH;
+    protected NamingStrategy globalStrategy = NamingStrategy.PASS_THROUGH;
 
-    protected SupportedLanguage(String name, String description, NamingStrategy globalStrategy, NamingStrategy constantStrategy, String... fileExtensions) {
+    protected SupportedLanguage(String description, String... fileExtensions) {
 
-        this.name = name;
         this.description = description;
-        this.globalStrategy = globalStrategy;
-        this.constantStrategy = constantStrategy;
         this.fileExtensions = fileExtensions;
-    }
-
-    public String getName() {
-
-        return name;
     }
 
     public String getDescription() {
@@ -52,4 +43,6 @@ public class SupportedLanguage {
         }
         return false;
     }
+
+    public abstract Runner getRunner();
 }

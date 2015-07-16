@@ -40,6 +40,6 @@ public class RuntimeImageSprite extends RuntimeSprite<ImageSprite> {
     public void dispose() {
 
         remove();
-        BlurpStore.imageCache.stopUsingImage(image);
+        if(image != null) BlurpStore.imageCache.stopUsingImage(image);
     }
 }

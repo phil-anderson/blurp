@@ -5,32 +5,21 @@ import com.badlogic.gdx.*;
 import com.bigcustard.blurp.bootstrap.*;
 import com.bigcustard.blurp.bootstrap.languages.*;
 import com.bigcustard.blurp.core.*;
-import com.bigcustard.blurp.model.java.*;
 import com.bigcustard.blurp.ui.*;
 
-// TODO: Tidy this up a bit. Don't like having Scripts AND Classes  - feels like it should be split in two.
 public class BlurpApp extends Game {
 
     private final double viewportWidth, viewportHeight;
     private final MouseWindowChecker mouseWindowChecker;
     private String scriptName;
     private SupportedLanguage language;
-    private Class<? extends BlurpJavaProgram> javaClass;
 
     public BlurpApp(SupportedLanguage language, String scriptName, double viewportWidth, double viewportHeight, MouseWindowChecker mouseWindowChecker) {
 
         this.language = language;
         this.viewportWidth = viewportWidth;
         this.viewportHeight = viewportHeight;
-        if(language == SupportedLanguages.Java) {
-            try {
-                this.javaClass = (Class<? extends BlurpJavaProgram>) Class.forName(scriptName);
-            } catch(Exception e) {
-                throw new BlurpException("Error finding BlurpJavaProgram subclass " + scriptName, e);
-            }
-        } else {
-            this.scriptName = scriptName;
-        }
+        this.scriptName = scriptName;
         this.mouseWindowChecker = mouseWindowChecker;
     }
 
@@ -38,7 +27,7 @@ public class BlurpApp extends Game {
     @Override
     public void create() {
 
-        BlurpState.windowTitle = "Blurp: " + (javaClass != null ? javaClass.getSimpleName() : scriptName);
+        BlurpState.windowTitle = "Blurp: " + scriptName;
         Gdx.graphics.setTitle(BlurpState.windowTitle);
         BlurpConfiguration config = new BlurpConfiguration(viewportWidth, viewportHeight);
         BlurpRuntime blurpRuntime = BlurpRuntime.begin(config, mouseWindowChecker);
@@ -49,15 +38,24 @@ public class BlurpApp extends Game {
                 e.printStackTrace();
             }
         });
-        if(javaClass != null) {
-            blurpRuntime.startClass(javaClass);
-        } else {
-            String parent = new File(scriptName).getAbsoluteFile().getParent();
-            if(parent != null) {
-                config.setContentRoot(parent);
-            }
-            blurpRuntime.startScriptFile(language, scriptName);
+        String parent = new File(scriptName).getAbsoluteFile().getParent();
+        if(parent != null) {
+            config.setContentRoot(parent);
+        }
+        try {
+            blurpRuntime.start(language, scriptName);
+        } catch(RuntimeException e) {
+            System.out.println("Error starting script " + scriptName);
+            e.printStackTrace();
+            Gdx.app.exit();
         }
         setScreen(BlurpStore.blurpScreen);
+    }
+
+    @Override
+    public void dispose() {
+
+        BlurpStore.dispose();
+        Gdx.app.exit();
     }
 }

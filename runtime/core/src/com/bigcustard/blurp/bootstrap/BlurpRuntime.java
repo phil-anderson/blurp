@@ -9,9 +9,6 @@ import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.core.commands.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.constants.*;
-import com.bigcustard.blurp.model.java.*;
-import com.bigcustard.blurp.model.java.bootstrap.*;
-import com.bigcustard.blurp.scripting.*;
 import com.bigcustard.blurp.ui.*;
 import com.bigcustard.blurp.util.*;
 
@@ -21,7 +18,7 @@ import static com.bigcustard.blurp.core.BlurpTerminatedException.CompletionActio
 public class BlurpRuntime {
 
     private BlurpExceptionHandler exceptionHandler;
-    private Runnable scriptRunnable;
+    private Runnable runnable;
     private Thread scriptThread;
 
     private BlurpRuntime(BlurpConfiguration config, MouseWindowChecker mouseWindowChecker) {
@@ -50,23 +47,13 @@ public class BlurpRuntime {
         BlurpStore.blurpScreen.onRenderEvent(listener);
     }
 
-    public void startScriptFile(SupportedLanguage language, String scriptFilename) {
+    public void start(SupportedLanguage language, String filename) {
 
         checkScriptRunning("start script");
-        scriptRunnable = new RunnableWrapper(new ScriptEngineRunner(language, scriptFilename));
-        startThread();
-    }
 
-    public void startClass(Class<? extends BlurpJavaProgram> javaClass) {
-
-        checkScriptRunning("start class");
-        try {
-            JavaBootstrapHolder.initialise(new JavaBootstrapImpl());
-            BlurpJavaProgram blurpJavaProgram = javaClass.newInstance();
-            scriptRunnable = new RunnableWrapper(blurpJavaProgram);
-        } catch(Exception e) {
-            throw new BlurpException("Error instantiating BlurpJavaProgram " + javaClass.getName(), e);
-        }
+        Runner runner = language.getRunner();
+        runner.prepare(filename);
+        runnable = new RunnableWrapper(runner);
         startThread();
     }
 
@@ -108,7 +95,7 @@ public class BlurpRuntime {
     public void startThread() {
 
         checkScriptRunning("start script thread");
-        scriptThread = new Thread(scriptRunnable);
+        scriptThread = new Thread(runnable);
         scriptThread.start();
     }
 
@@ -137,9 +124,6 @@ public class BlurpRuntime {
         }
     }
 
-    // TODO: Need a way to pause / resume the script
-    //       Note - When paused, the Blurpifier will still have to allow renders to continue so that input gestures
-    //              (e.g. to resume) get picked up.
     private class RunnableWrapper implements Runnable {
 
         private Runnable script;

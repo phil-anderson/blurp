@@ -17,6 +17,7 @@ public class BlurpRunner {
 
         CommandLineOptions options = new CommandLineOptions();
         CmdLineParser parser = new CmdLineParser(options, ParserProperties.defaults().withUsageWidth(120).withOptionSorter(null));
+
         try {
             parser.parseArgument(args);
         } catch(CmdLineException e) {
@@ -27,13 +28,13 @@ public class BlurpRunner {
         }
 
         handleMissingScriptFile(options);
+        SupportedLanguage language = SupportedLanguages.forFile(options.scriptName);
 
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.width = options.width;
         config.height = options.height;
         config.samples= 1;
 
-        SupportedLanguage language = getLanguage(options);
         BlurpApp blurpApp = new BlurpApp(language, options.scriptName, VIEWPORT_WIDTH, VIEWPORT_HEIGHT, new LwjglMouseWindowChecker());
         new LwjglApplication(blurpApp, config);
 	}
@@ -43,30 +44,18 @@ public class BlurpRunner {
         if(options.scriptName == null) {
             options.scriptName = FileSelector.selectFile();
             if(options.scriptName == null) {
-                System.out.println("Blurp cancelled by user");
-                System.exit(1);
+                exit("Blurp cancelled by user");
             }
         }
     }
 
-    private static SupportedLanguage getLanguage(CommandLineOptions options) {
+    private static void exit(String message) {
 
-        SupportedLanguage language = SupportedLanguages.forName(options.language);
-
-        if(language == null) {
-            language = SupportedLanguages.forFile(options.scriptName);
-        }
-
-        if(language == null) {
-            language = SupportedLanguages.Java;
-        }
-        return language;
+        System.out.println(message);
+        System.exit(1);
     }
 
     private static class CommandLineOptions {
-
-        @Option(name="-language", aliases="-l", metaVar="language", usage="Language may be either \"Java\" or the name of a JVM scripting language. If omitted, Blurp will infer it from the filename")
-        private String language = null;
 
         @Option(name="-width", aliases="-w", metaVar="width", usage="The width in pixels of the window that Blurp will run your script in", depends="-height")
         private int width = VIEWPORT_WIDTH;
@@ -74,7 +63,7 @@ public class BlurpRunner {
         @Option(name="-height", aliases="-h", metaVar="height", usage="The height in pixels of the window that Blurp will run your script in", depends="-width")
         private int height = VIEWPORT_HEIGHT;
 
-        @Argument(index=0, metaVar="script-name", usage="The filename of the script to run, or in the case of Java, the fully qualified name of the class to run, which must extend BlurpJavaProgram")
+        @Argument(index=0, metaVar="script-name", usage="The filename of either a script, a Java source file, a Java class file, or the fully qualified name of a Java class that is on the classpath. Java code must extend BlurpJavaProgram, and shouldn't have a package unless running from the classpath.")
         private String scriptName = null;
     }
 
