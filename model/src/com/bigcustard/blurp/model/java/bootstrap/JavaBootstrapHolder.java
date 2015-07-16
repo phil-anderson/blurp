@@ -16,10 +16,9 @@ public class JavaBootstrapHolder implements JavaBootstrap {
 
     public static JavaBootstrapHolder initialise(JavaBootstrap javaBootstrap) {
 
-        if(SingletonHolder.INSTANCE.delegate != null) {
-            throw new IllegalStateException("JavaBootstrapHolder already initialised");
+        if(SingletonHolder.INSTANCE.delegate == null) {
+            SingletonHolder.INSTANCE.delegate = javaBootstrap;
         }
-        SingletonHolder.INSTANCE.delegate = javaBootstrap;
         return SingletonHolder.INSTANCE;
     }
 

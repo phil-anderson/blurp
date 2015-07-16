@@ -1,5 +1,4 @@
 # Todo List
-* BUG - Restart not working on Java classpath (at least)
 * Uncomment groovy in ScriptingLanguage once I do a gradle build and sort out IntelliJ project
 * Put back facility to run contents
 * GLITCH - If script fails to load (i.e. prepare issue) then only error is on console, which won't show if launched from FileSelector
