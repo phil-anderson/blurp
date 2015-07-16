@@ -18,7 +18,7 @@ public class ScriptCompleteOverlay {
     private SimpleButton exitButton;
 
     private SimpleButton leftHandButton;
-    private float alpha = 0;
+    private float alpha;
     private float size;
     private int programDuration;
 
@@ -47,7 +47,7 @@ public class ScriptCompleteOverlay {
             }
         }
 
-        if(alpha < 0.5) alpha += 0.01;
+        if(alpha < 0.5) alpha += 0.02;
         shapes.setProjectionMatrix(BlurpStore.staticCamera.combined);
         shapes.setColor(0, 0, 0, alpha);
         shapes.begin(ShapeRenderer.ShapeType.Filled);
@@ -93,7 +93,7 @@ public class ScriptCompleteOverlay {
     public void initialise() {
 
         programDuration = (int) (System.currentTimeMillis() - BlurpState.startTime);
-        alpha = 0;
+        alpha = -1f;
         if(BlurpState.error) {
             printTitle("PROGRAM FAILED WITH ERRORS");
             BlurpStore.runtimeConsole.print(Exceptions.getConcatenatedMessage(BlurpState.exception), Colours.LightGrey,

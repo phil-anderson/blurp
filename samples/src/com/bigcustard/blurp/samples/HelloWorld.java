@@ -8,7 +8,5 @@ public class HelloWorld extends BlurpJavaProgram {
     public void run() {
 
         resources.createImageSprite("hello-world.png");
-
-        screen.update();
     }
 }

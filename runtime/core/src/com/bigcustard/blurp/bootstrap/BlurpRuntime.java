@@ -141,6 +141,7 @@ public class BlurpRuntime {
                 BlurpStore.blurpifier.blurpify();
                 BlurpState.startTime = System.currentTimeMillis();
                 script.run();
+                BlurpStore.blurpifier.blurpify(); // Allows for non-looping scripts e.g. one-liner hello world
             } catch (RuntimeException e) {
                 BlurpState.exception = Exceptions.exposeUserTemination(e);
                 if(exceptionHandler != null && !(BlurpState.exception instanceof BlurpTerminatedException)) {
