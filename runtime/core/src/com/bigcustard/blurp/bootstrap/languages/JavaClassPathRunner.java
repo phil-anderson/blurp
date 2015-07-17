@@ -10,7 +10,7 @@ public class JavaClassPathRunner extends JavaClassRunner {
         try {
             classToRun = Class.forName(className);
         } catch(ClassNotFoundException e) {
-            throw new BlurpException("Couldn't determine language based on the name. Tried to load as a Java class, but couldn't find find it on classpath: " + className);
+            throw new BlurpException("Couldn't determine language of " + className + ", and couldn't find a class with that name on the classpath.");
         }
     }
 }

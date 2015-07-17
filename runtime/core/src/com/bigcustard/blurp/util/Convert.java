@@ -51,4 +51,18 @@ public class Convert {
         e.printStackTrace(new PrintWriter(stringWriter));
         return stringWriter.toString();
     }
+
+    public static String toWrapped(String text, int wrapWidth) {
+
+        text = text.trim();
+        if(text.length() > wrapWidth) {
+            int position = text.indexOf(" ", wrapWidth);
+            if (position < 0) return text; // No more spaces to split at
+
+            String chunk = text.substring(0, position);
+            String theRest = text.substring(position);
+            return chunk + "\n" + toWrapped(theRest, wrapWidth);
+        }
+        return text;
+    }
 }

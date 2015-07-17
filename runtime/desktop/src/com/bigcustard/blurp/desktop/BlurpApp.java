@@ -1,13 +1,17 @@
 package com.bigcustard.blurp.desktop;
 
 import java.io.*;
+import javax.swing.*;
 import com.badlogic.gdx.*;
 import com.bigcustard.blurp.bootstrap.*;
 import com.bigcustard.blurp.bootstrap.languages.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.ui.*;
+import com.bigcustard.blurp.util.*;
 
 public class BlurpApp extends Game {
+
+    private static final String[] CLOSE_BUTTON = new String[] { "Close" };
 
     private final double viewportWidth, viewportHeight;
     private final MouseWindowChecker mouseWindowChecker;
@@ -45,11 +49,28 @@ public class BlurpApp extends Game {
         try {
             blurpRuntime.start(language, scriptName);
         } catch(RuntimeException e) {
+            if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+                showErrorDialog(e);
+            }
+
             System.out.println("Error starting script " + scriptName);
             e.printStackTrace();
             Gdx.app.exit();
         }
         setScreen(BlurpStore.blurpScreen);
+    }
+
+    public void showErrorDialog(RuntimeException e) {
+
+        // In case jar wasn't run from a console
+        JOptionPane.showOptionDialog(null,
+                                     Convert.toWrapped(e.getMessage(), 40) + "\n\nClosing Blurp.",
+                                     "Blurp Error",
+                                     JOptionPane.DEFAULT_OPTION,
+                                     JOptionPane.ERROR_MESSAGE,
+                                     null,
+                                     CLOSE_BUTTON,
+                                     null);
     }
 
     @Override
