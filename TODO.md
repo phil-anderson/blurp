@@ -1,17 +1,14 @@
 # Todo List
-* Uncomment groovy in ScriptingLanguage once I do a gradle build and sort out IntelliJ project
 * Put back facility to run contents
-* GLITCH - If script fails to load (i.e. prepare issue) then only error is on console, which won't show if launched from FileSelector
 * BUG - File selector occasionally fails to appear, and I have literally no idea why.
+* Almost all examples need redoing / refactoring
+* Documentation
+
 * [DV] Ruby doesn't handle field remapping - method set_scale_x => setScaleX, but field scaleX !=> scale_x
 * [DV] Need a Ruby wrapper that will check for camel-case properties if snake-case not found.
 * [DV] Need a Ruby wrapper that will check for vanilla properties if ! or ? not found.
 * [DV] Add sanity checks to model method parameters?
 * [DV] Warm up script engine (mainly for JRuby)
-* Look at gradle build, and add a task to create an executable jar
-* Almost all examples need redoing / refactoring
-* Documentation
-
 * [DV] Image filename syntax for defining regions "spritesheet.png:x:y:w:h"
 * [DV] Mouse - onMouseMoved, onLeftButtonPressed, onRightButtonPressed, onLeftButtonReleased, onRightButtonReleased
 * [DV] NamedColour = Add to colourTag map on create, then user can create named colours too
