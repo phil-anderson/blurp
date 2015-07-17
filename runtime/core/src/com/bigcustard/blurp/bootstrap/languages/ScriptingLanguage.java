@@ -2,6 +2,7 @@ package com.bigcustard.blurp.bootstrap.languages;
 
 import javax.script.*;
 import com.bigcustard.blurp.core.*;
+import org.codehaus.groovy.jsr223.*;
 import org.jruby.embed.jsr223.*;
 
 public class ScriptingLanguage extends SupportedLanguage {
@@ -33,7 +34,7 @@ public class ScriptingLanguage extends SupportedLanguage {
 
         ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
         scriptEngineManager.registerEngineName("ruby", new JRubyEngineFactory());
-//        scriptEngineManager.registerEngineName("groovy", new GroovyScriptEngineFactory());
+        scriptEngineManager.registerEngineName("groovy", new GroovyScriptEngineFactory());
         return scriptEngineManager;
     }
 }
