@@ -255,6 +255,7 @@ public class BlurpScreen extends ScreenAdapter {
             mainStage.dispose();
             overlayStage.dispose();
             batch.dispose();
+            shapes.dispose();
             initialised = false;
         }
     }

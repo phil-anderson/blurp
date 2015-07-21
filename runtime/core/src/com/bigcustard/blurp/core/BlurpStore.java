@@ -140,19 +140,6 @@ public class BlurpStore {
         BlurpState.reset();
     }
 
-    private static void initialiseViewports() {
-
-        mainCamera = new OrthographicCamera();
-        mainCamera.setToOrtho(false, (float) configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight());
-        mainViewport = new FitViewport((float) configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight(), mainCamera);
-        mainViewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
-        staticCamera = new OrthographicCamera();
-        staticCamera.setToOrtho(false, (float) configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight());
-        staticViewport = new FitViewport((float) configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight(), staticCamera);
-        staticViewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-    }
-
     public static void dispose() {
 
         tweener.killAll();
@@ -164,5 +151,18 @@ public class BlurpStore {
         systemFont.dispose();
         scriptCompleteOverlay.dispose();
         imageCache.clear();
+    }
+
+    private static void initialiseViewports() {
+
+        mainCamera = new OrthographicCamera();
+        mainCamera.setToOrtho(false, (float) configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight());
+        mainViewport = new FitViewport((float) configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight(), mainCamera);
+        mainViewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        staticCamera = new OrthographicCamera();
+        staticCamera.setToOrtho(false, (float) configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight());
+        staticViewport = new FitViewport((float) configuration.getInitialViewportWidth(), (float) configuration.getInitialViewportHeight(), staticCamera);
+        staticViewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 }
