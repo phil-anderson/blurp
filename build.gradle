@@ -23,7 +23,7 @@ allprojects {
         snapshotRepositoryUrl = "http://leonandjosh.ddns.net:8081/nexus/content/repositories/blurp"
     }
 
-    version = '0.0.1'
+    version = '0.1.1'
     ext {
         appName = 'Blurp'
         gdxVersion = '1.5.4'
