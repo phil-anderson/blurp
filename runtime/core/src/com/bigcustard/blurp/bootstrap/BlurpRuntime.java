@@ -73,7 +73,7 @@ public class BlurpRuntime {
     public void startThread() {
 
         checkScriptRunning("start script thread");
-        scriptThread = new Thread(runnable);
+        scriptThread = new Thread(runnable, "ScriptThread");
         scriptThread.start();
     }
 
