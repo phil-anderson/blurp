@@ -3,6 +3,10 @@ package com.bigcustard.blurp.ui;
 import com.badlogic.gdx.*;
 import com.bigcustard.blurp.core.*;
 
+import static com.bigcustard.blurp.core.BlurpTerminatedException.CompletionAction.Normal;
+import static com.bigcustard.blurp.core.BlurpTerminatedException.CompletionAction.Restart;
+import static com.bigcustard.blurp.core.BlurpTerminatedException.CompletionAction.Terminate;
+
 public class SystemShortcutHandler {
 
     public void check() {
@@ -19,13 +23,13 @@ public class SystemShortcutHandler {
                     BlurpState.togglePause();
                 } else if(Gdx.input.isKeyJustPressed(Input.Keys.S)) {
                     if(BlurpState.paused) BlurpState.resume();
-                    BlurpStore.runtime.stop();
+                    throw new BlurpTerminatedException(Normal);
                 } else if(Gdx.input.isKeyJustPressed(Input.Keys.R) || Gdx.input.isKeyJustPressed(Input.Keys.F5)) {
                     if(BlurpState.paused) BlurpState.resume();
-                    BlurpStore.runtime.restart();
+                    throw new BlurpTerminatedException(Restart);
                 } else if(Gdx.input.isKeyJustPressed(Input.Keys.Q) || Gdx.input.isKeyJustPressed(Input.Keys.F4)) {
                     if(BlurpState.paused) BlurpState.resume();
-                    BlurpStore.runtime.terminate();
+                    throw new BlurpTerminatedException(Terminate);
                 }
             }
         }

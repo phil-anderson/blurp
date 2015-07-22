@@ -1,6 +1,5 @@
 # Todo List
-* Put back facility to run contents
-* BUG - File selector occasionally fails to appear, and I have literally no idea why.
+* GLITCH - File selector occasionally fails to appear, and I have literally no idea why.
 * Almost all examples need redoing / refactoring
 * Documentation
 

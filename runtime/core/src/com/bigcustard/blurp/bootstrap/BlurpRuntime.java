@@ -12,8 +12,6 @@ import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.ui.*;
 import com.bigcustard.blurp.util.*;
 
-import static com.bigcustard.blurp.core.BlurpTerminatedException.CompletionAction.*;
-
 // TODO: Test
 public class BlurpRuntime {
 
@@ -60,26 +58,6 @@ public class BlurpRuntime {
     public void pause() {
 
         BlurpState.pause();
-    }
-
-    public void resume() {
-
-        BlurpState.resume();
-    }
-
-    public void stop() {
-
-        throw new BlurpTerminatedException(Normal);
-    }
-
-    public void terminate() {
-
-        throw new BlurpTerminatedException(Terminate);
-    }
-
-    public void restart() {
-
-        throw new BlurpTerminatedException(Restart);
     }
 
     public void reset() {

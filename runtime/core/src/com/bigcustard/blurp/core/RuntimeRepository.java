@@ -55,7 +55,7 @@ public class RuntimeRepository {
 
         // Finally, run any commands that were deferred
         executeCommands(deferredCommands, deltaTime);
-        commands.clear();
+        deferredCommands.clear();
     }
 
     public RuntimeImageSprite getImageSprite(ImageSprite modelImageSprite) {
