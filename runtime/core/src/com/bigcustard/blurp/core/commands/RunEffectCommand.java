@@ -3,7 +3,6 @@ package com.bigcustard.blurp.core.commands;
 import aurelienribon.tweenengine.*;
 import com.bigcustard.blurp.apimodel.*;
 import com.bigcustard.blurp.core.*;
-import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.model.effects.*;
 import com.bigcustard.blurp.model.events.*;
@@ -12,11 +11,11 @@ public class RunEffectCommand<T> implements Command {
 
     private final Object target;
     private final EffectImpl effect;
-    private final SimpleEventHandler completionHandler;
+    private final SimpleEventHandler<T> completionHandler;
     private final ExistingEffectStrategy existingEffectStrategy;
     private final boolean removeOnComplete;
 
-    public RunEffectCommand(Object target, EffectBase effect, SimpleEventHandler completionHandler, ExistingEffectStrategy existingEffectStrategy, boolean removeOnComplete) {
+    public RunEffectCommand(Object target, EffectBase effect, SimpleEventHandler<T> completionHandler, ExistingEffectStrategy existingEffectStrategy, boolean removeOnComplete) {
 
         this.target = target;
         this.completionHandler = completionHandler;
@@ -56,12 +55,7 @@ public class RunEffectCommand<T> implements Command {
             if(!otherTweensRunning(source)) {
                 target.setRunningEffect(false);
                 if(onCompletion != null) {
-                    // TODO: VERY hacky but gets around Groovy closure coercion issue.
-                    if(onCompletion instanceof SpriteEventHandler) {
-                        ((SpriteEventHandler) onCompletion).handle((Sprite) target);
-                    } else if(onCompletion instanceof CameraEventHandler) {
-                        ((CameraEventHandler) onCompletion).handle((Camera) target);
-                    }
+                    onCompletion.handle(target);
                 }
             }
         }

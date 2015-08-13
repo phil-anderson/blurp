@@ -2,7 +2,7 @@ package com.bigcustard.blurp.model.events;
 
 import com.bigcustard.blurp.model.*;
 
-public interface CameraEventHandler extends SimpleEventHandler {
+public interface CameraEventHandler extends SimpleEventHandler<Camera> {
 
     public static CameraEventHandler NULL = new CameraEventHandler() {
         @Override
@@ -10,6 +10,4 @@ public interface CameraEventHandler extends SimpleEventHandler {
             // Do nothing
         }
     };
-
-    public void handle(Camera camera);
 }
