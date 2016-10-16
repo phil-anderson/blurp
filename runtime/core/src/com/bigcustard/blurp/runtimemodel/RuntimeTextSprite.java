@@ -2,6 +2,7 @@ package com.bigcustard.blurp.runtimemodel;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.utils.Align;
 import com.bigcustard.blurp.apimodel.TextSpriteImpl;
 import com.bigcustard.blurp.core.BlurpStore;
@@ -57,7 +58,8 @@ public class RuntimeTextSprite extends RuntimeSprite<TextSprite> {
 
         //todo
         font.getData().markupEnabled = markupEnabled;
-//
+
+        // todo
 //        if(wrapWidth == -1) {
 //            TextBounds bounds = font.getMultiLineBounds(text);
 //            setSize(bounds.width, bounds.height);
@@ -79,9 +81,11 @@ public class RuntimeTextSprite extends RuntimeSprite<TextSprite> {
     public void render(Batch batch, float parentAlpha) {
         font.setColor(getColor());
         if (wrapWidth == -1) {
-            font.draw(batch, text, 0, getHeight());
+            GlyphLayout layout = font.draw(batch, text, 0, getHeight());
+            setSize(layout.width, layout.height);
         } else {
-            font.draw(batch, text, 0, getHeight(), wrapWidth, alignment, true);
+            GlyphLayout layout = font.draw(batch, text, 0, getHeight(), wrapWidth, alignment, true);
+            setSize(layout.width, layout.height);
         }
     }
 
