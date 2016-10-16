@@ -98,7 +98,7 @@ public class BlurpStore {
 
         systemFont = new BitmapFont(Gdx.files.internal("system-font.fnt"));
         systemFont.getRegion().getTexture().setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
-        systemFont.setMarkupEnabled(true);
+        systemFont.getData().markupEnabled = true;
 
         Texture systemFontTexture = new Texture(Gdx.files.classpath("RobotoCondensed.png"), true);
         systemFontTexture.setFilter(Texture.TextureFilter.MipMapLinearNearest, Texture.TextureFilter.Linear);

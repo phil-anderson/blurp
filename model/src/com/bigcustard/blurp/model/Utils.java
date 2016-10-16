@@ -33,6 +33,16 @@ public class Utils {
 
     /**
      * @param low The lowest random number that could be created
+     * @param high The highest random number that could be created
+     * @return A random number that is between the low and high values
+     */
+    public int randomIntInRange(int low, int high) {
+        int range = high - low;
+        return low + randomiser.nextInt(range + 1);
+    }
+
+    /**
+     * @param low The lowest random number that could be created
      * @param high The high value that the random number is guaranteed to be less than
      * @return A random number that is greater than or equal the specified low value, but less than the specified high
      * value.

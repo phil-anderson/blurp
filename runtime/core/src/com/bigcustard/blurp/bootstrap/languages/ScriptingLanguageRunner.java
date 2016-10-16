@@ -28,8 +28,8 @@ public class ScriptingLanguageRunner implements Runner {
     public void run() {
 
         ScriptEngine scriptingEngine = language.getScriptingEngine();
-        Bindings bindings = scriptingEngine.createBindings();
-
+        Bindings bindings = scriptingEngine.getBindings(ScriptContext.ENGINE_SCOPE);
+        bindings.clear();
         bindings.put(language.getGlobalStrategy().transform("system"), BlurpStore.system);
         bindings.put(language.getGlobalStrategy().transform("screen"), BlurpStore.modelScreen);
         bindings.put(language.getGlobalStrategy().transform("camera"), BlurpStore.modelCamera);

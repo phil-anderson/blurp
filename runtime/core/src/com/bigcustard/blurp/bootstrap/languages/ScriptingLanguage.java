@@ -1,40 +1,44 @@
 package com.bigcustard.blurp.bootstrap.languages;
 
-import javax.script.*;
-import com.bigcustard.blurp.core.*;
-import org.codehaus.groovy.jsr223.*;
-import org.jruby.embed.jsr223.*;
+import org.codehaus.groovy.jsr223.GroovyScriptEngineFactory;
+import org.jruby.embed.jsr223.JRubyEngineFactory;
+import org.python.jsr223.PyScriptEngineFactory;
+
+import javax.script.ScriptEngine;
 
 public class ScriptingLanguage extends SupportedLanguage {
+
+    private static ScriptEngine groovy;
+    private static ScriptEngine jruby;
+    private static ScriptEngine jython;
+
+    static {
+        groovy = new GroovyScriptEngineFactory().getScriptEngine();
+        jruby = new JRubyEngineFactory().getScriptEngine();
+        jython = new PyScriptEngineFactory().getScriptEngine();
+    }
 
     private final String name;
 
     protected ScriptingLanguage(String name, String description, String... fileExtensions) {
-
         super(description, fileExtensions);
         this.name = name;
     }
 
     public ScriptEngine getScriptingEngine() {
-
-        ScriptEngine scriptEngine = getScriptEngineManager().getEngineByName(name);
-        if(scriptEngine == null) {
-            throw new BlurpException("Couldn't get ScriptEngine for language name '" + name + "'");
+        String s = name.toUpperCase();
+        if (s.equals("RUBY")) {
+            return jruby;
+        } else if (s.equals("GROOVY")) {
+            return groovy;
+        } else if (s.startsWith("PYTHON")) {
+            return jython;
+        } else {
+            throw new IllegalArgumentException("Unknown scripting language: " + name);
         }
-
-        return scriptEngine;
     }
 
     public Runner getRunner() {
-
         return new ScriptingLanguageRunner(this);
-    }
-
-    private ScriptEngineManager getScriptEngineManager() {
-
-        ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
-        scriptEngineManager.registerEngineName("ruby", new JRubyEngineFactory());
-        scriptEngineManager.registerEngineName("groovy", new GroovyScriptEngineFactory());
-        return scriptEngineManager;
     }
 }

@@ -79,7 +79,7 @@ public class ModelRepository {
     }
 
     public void dispose() {
-
+        animationSprites.clear();
         imageSprites.clear();
         textSprites.clear();
         createdSprites.clear();

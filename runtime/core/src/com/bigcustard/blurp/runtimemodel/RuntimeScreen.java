@@ -5,10 +5,11 @@ import com.badlogic.gdx.graphics.*;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.*;
 import com.bigcustard.blurp.model.Screen;
+import com.bigcustard.blurp.model.constants.Colours;
 
 public class RuntimeScreen {
 
-    private Colour backgroundColour;
+    private Colour backgroundColour = Colours.Black;
     public double viewportWidth, viewportHeight;
     public boolean viewportStretch;
 

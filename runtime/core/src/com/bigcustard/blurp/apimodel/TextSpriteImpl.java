@@ -16,7 +16,7 @@ public class TextSpriteImpl extends TextSprite implements EffectContainer {
 
     public TextSpriteImpl(String text, double x, double y) {
 
-        this.text = text;
+        setText(text);
         setPosition(x, y);
         scaleX = 1;
         scaleY = 1;

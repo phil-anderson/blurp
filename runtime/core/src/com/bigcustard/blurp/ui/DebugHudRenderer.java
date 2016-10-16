@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.glutils.*;
 import com.badlogic.gdx.math.*;
+import com.badlogic.gdx.utils.Align;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.util.*;
@@ -87,7 +88,7 @@ public class DebugHudRenderer {
     private void renderText(float reticuleSize, Vector3 mousePosStatic) {
 
         BitmapFont font = BlurpStore.defaultFont.getFont();
-        font.setScale(reticuleSize * 0.003f);
+        font.getData().setScale(reticuleSize * 0.003f);
         font.setColor(BlurpState.debugGdxColour());
 
         Vector3 mousePosMain = MouseState.getPosition(ScreenLayer.Main);
@@ -98,21 +99,21 @@ public class DebugHudRenderer {
 
         batch.begin(); // Assumes batch was left in "static camera" mode
 
-        font.drawMultiLine(batch, angleString, BlurpStore.mainCamera.viewportWidth / 2 - 100,
+        font.draw(batch, angleString, BlurpStore.mainCamera.viewportWidth / 2 - 100,
                            BlurpStore.mainCamera.viewportHeight / 2 + font.getCapHeight(),
-                           200, BitmapFont.HAlignment.CENTER);
-        font.drawMultiLine(batch, "x" + zoomString, BlurpStore.mainCamera.viewportWidth / 2 - 100,
+                           200, Align.center, false);
+        font.draw(batch, "x" + zoomString, BlurpStore.mainCamera.viewportWidth / 2 - 100,
                            BlurpStore.mainCamera.viewportHeight / 2,
-                           200, BitmapFont.HAlignment.CENTER);
-        font.drawMultiLine(batch, staticMouseString, BlurpStore.mainCamera.viewportWidth / 2 - 100,
+                           200, Align.center, false);
+        font.draw(batch, staticMouseString, BlurpStore.mainCamera.viewportWidth / 2 - 100,
                            BlurpStore.mainCamera.viewportHeight / 2 - reticuleSize * 1.25f,
-                           200, BitmapFont.HAlignment.CENTER);
+                           200, Align.center, false);
 
         if(!mousePosMain.equals(mousePosStatic)) {
             String mainMouseString = String.format("(x:%.1f  y:%.1f)", mousePosMain.x, mousePosMain.y);
-            font.drawMultiLine(batch, mainMouseString, BlurpStore.mainCamera.viewportWidth / 2 - 100,
+            font.draw(batch, mainMouseString, BlurpStore.mainCamera.viewportWidth / 2 - 100,
                                BlurpStore.mainCamera.viewportHeight / 2 - reticuleSize * 1.6f,
-                               200, BitmapFont.HAlignment.CENTER);
+                               200, Align.center, false);
         }
 
         batch.end();

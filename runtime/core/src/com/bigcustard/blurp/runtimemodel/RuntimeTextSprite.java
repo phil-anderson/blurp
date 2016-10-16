@@ -1,21 +1,26 @@
 package com.bigcustard.blurp.runtimemodel;
 
-import java.util.*;
-import com.badlogic.gdx.graphics.g2d.*;
-import com.bigcustard.blurp.apimodel.*;
-import com.bigcustard.blurp.core.*;
-import com.bigcustard.blurp.model.*;
-import com.bigcustard.blurp.model.constants.*;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.utils.Align;
+import com.bigcustard.blurp.apimodel.TextSpriteImpl;
+import com.bigcustard.blurp.core.BlurpStore;
+import com.bigcustard.blurp.model.TextSprite;
+import com.bigcustard.blurp.model.constants.Handle;
+import com.bigcustard.blurp.model.constants.Justification;
 
-import static com.badlogic.gdx.graphics.g2d.BitmapFont.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RuntimeTextSprite extends RuntimeSprite<TextSprite> {
 
-    private static final Map<Justification, HAlignment> JUSTIFICATION_TO_ALIGNMENT = new HashMap<Justification, HAlignment>();
+    // todo
+    private static final Map<Justification, Integer> JUSTIFICATION_TO_ALIGNMENT = new HashMap<Justification, Integer>();
+
     static {
-        JUSTIFICATION_TO_ALIGNMENT.put(Justification.AlignLeft, HAlignment.LEFT);
-        JUSTIFICATION_TO_ALIGNMENT.put(Justification.AlignCenter, HAlignment.CENTER);
-        JUSTIFICATION_TO_ALIGNMENT.put(Justification.AlignRight, HAlignment.RIGHT);
+        JUSTIFICATION_TO_ALIGNMENT.put(Justification.AlignLeft, Align.left);
+        JUSTIFICATION_TO_ALIGNMENT.put(Justification.AlignCenter, Align.center);
+        JUSTIFICATION_TO_ALIGNMENT.put(Justification.AlignRight, Align.right);
     }
 
     private BitmapFont font;
@@ -23,7 +28,7 @@ public class RuntimeTextSprite extends RuntimeSprite<TextSprite> {
     private float wrapWidth;
     private Handle.HHandle hHandle;
     private Handle.VHandle vHandle;
-    private HAlignment alignment;
+    private int alignment;
     private float fontSize;
     private boolean markupEnabled;
 
@@ -42,23 +47,24 @@ public class RuntimeTextSprite extends RuntimeSprite<TextSprite> {
         markupEnabled = modelSprite.colourTagsEnabled;
 
         // TODO: Add ability to change (and hence sync) fonts
-        if(newInstance) font = BlurpStore.defaultFont.getFont();
+        if (newInstance) font = BlurpStore.defaultFont.getFont();
     }
 
     @Override
     public void preRender() {
 
-        font.setScale(fontSize / (font.getLineHeight() / font.getScaleX()));
+        font.getData().setScale(fontSize / (font.getLineHeight() / font.getScaleX()));
 
-        font.setMarkupEnabled(markupEnabled);
-
-        if(wrapWidth == -1) {
-            TextBounds bounds = font.getMultiLineBounds(text);
-            setSize(bounds.width, bounds.height);
-        } else {
-            TextBounds bounds = font.getWrappedBounds(text, wrapWidth);
-            setSize(wrapWidth, bounds.height);
-        }
+        //todo
+        font.getData().markupEnabled = markupEnabled;
+//
+//        if(wrapWidth == -1) {
+//            TextBounds bounds = font.getMultiLineBounds(text);
+//            setSize(bounds.width, bounds.height);
+//        } else {
+//            TextBounds bounds = font.getWrappedBounds(text, wrapWidth);
+//            setSize(wrapWidth, bounds.height);
+//        }
 
         // Make sprite's height a multiple of the font's line height
         setHeight((float) (Math.ceil(getHeight() / fontSize) * fontSize));
@@ -71,26 +77,25 @@ public class RuntimeTextSprite extends RuntimeSprite<TextSprite> {
 
     @Override
     public void render(Batch batch, float parentAlpha) {
-
-            font.setColor(getColor());
-            if(wrapWidth == -1) {
-                font.drawMultiLine(batch, text, 0, getHeight());
-            } else {
-                font.drawWrapped(batch, text, 0, getHeight(), wrapWidth, alignment);
-            }
+        font.setColor(getColor());
+        if (wrapWidth == -1) {
+            font.draw(batch, text, 0, getHeight());
+        } else {
+            font.draw(batch, text, 0, getHeight(), wrapWidth, alignment, true);
+        }
     }
 
     private void calculateOrigins() {
 
         float originX = 0;
         float originY = 0;
-        if(hHandle != Handle.HHandle.Left) {
+        if (hHandle != Handle.HHandle.Left) {
             originX = getWidth();
-            if(hHandle == Handle.HHandle.Center) originX /= 2;
+            if (hHandle == Handle.HHandle.Center) originX /= 2;
         }
-        if(vHandle != Handle.VHandle.Bottom) {
+        if (vHandle != Handle.VHandle.Bottom) {
             originY = getHeight();
-            if(vHandle == Handle.VHandle.Middle) originY /= 2;
+            if (vHandle == Handle.VHandle.Middle) originY /= 2;
         }
         setOrigin(originX, originY);
     }
