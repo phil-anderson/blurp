@@ -1,12 +1,24 @@
 package com.bigcustard.blurp.bootstrap.languages;
 
-import java.io.*;
-import java.lang.reflect.*;
-import java.util.*;
-import javax.script.*;
-import com.bigcustard.blurp.core.*;
-import com.bigcustard.blurp.model.constants.*;
-import com.bigcustard.blurp.util.*;
+import com.bigcustard.blurp.core.BlurpException;
+import com.bigcustard.blurp.core.BlurpStore;
+import com.bigcustard.blurp.model.constants.Colours;
+import com.bigcustard.blurp.model.constants.EffectStyle;
+import com.bigcustard.blurp.model.constants.ExistingEffectStrategy;
+import com.bigcustard.blurp.model.constants.Handle;
+import com.bigcustard.blurp.model.constants.Justification;
+import com.bigcustard.blurp.model.constants.ScreenLayer;
+import com.bigcustard.blurp.model.constants.SpriteEventHandlers;
+import com.bigcustard.blurp.model.constants.TargetStyle;
+import com.bigcustard.blurp.util.Files;
+
+import javax.script.Bindings;
+import javax.script.ScriptContext;
+import javax.script.ScriptEngine;
+import java.io.Reader;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ScriptingLanguageRunner implements Runner {
 
@@ -64,7 +76,6 @@ public class ScriptingLanguageRunner implements Runner {
     }
 
     private void scriptEnginePutEnums(Enum[] enumValues, Bindings bindings){
-
         for(Enum enumValue : enumValues) {
             if(bindings.get(enumValue.name()) != null) {
                 throw new RuntimeException("Conflicting enumerations - " + enumValue.getClass() + " vs " + bindings.get(enumValue.name()).getClass());

@@ -114,7 +114,7 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
     protected void updateCollisionShapes() {
 
         collisionCircle.set(getX() + getWidth() / 2 - getOriginX(), getY() + getHeight() / 2 - getOriginY(),
-                            Math.min(getWidth() * getScaleX(), getHeight() * getScaleY()) / 2);
+                            Math.min(Math.abs(getWidth() * getScaleX()), Math.abs(getHeight() * getScaleY())) / 2);
 
         // TODO: If this is slow, we can try checking if width / height have changed.
         collisionRectangle.setVertices(new float[] { 0, 0, getWidth(), 0, getWidth(), getHeight(), 0, getHeight() });
