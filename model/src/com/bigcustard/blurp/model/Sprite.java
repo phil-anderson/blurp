@@ -1,10 +1,16 @@
 package com.bigcustard.blurp.model;
 
-import java.lang.reflect.*;
-import java.util.*;
-import com.bigcustard.blurp.model.constants.*;
-import com.bigcustard.blurp.model.effects.*;
-import com.bigcustard.blurp.model.events.*;
+import com.bigcustard.blurp.model.constants.Colours;
+import com.bigcustard.blurp.model.constants.ExistingEffectStrategy;
+import com.bigcustard.blurp.model.constants.ScreenLayer;
+import com.bigcustard.blurp.model.constants.SpriteEventHandlers;
+import com.bigcustard.blurp.model.constants.TargetStyle;
+import com.bigcustard.blurp.model.effects.EffectBase;
+import com.bigcustard.blurp.model.events.SpriteEventHandler;
+
+import java.lang.reflect.Array;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A sprite is an object that can be put on the screen, moved around, rotated, and generally mucked about with in
@@ -397,6 +403,10 @@ public abstract class Sprite<T> {
 
     public abstract T pullInFrontOf(Sprite otherSprite);
 
+    public T clone() {
+        return copy();
+    }
+    
     public abstract T copy();
 
     public void normaliseAngle() {
