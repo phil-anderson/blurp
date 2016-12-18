@@ -406,7 +406,7 @@ public abstract class Sprite<T> {
     public T clone() {
         return copy();
     }
-    
+
     public abstract T copy();
 
     public void normaliseAngle() {

@@ -147,7 +147,7 @@ public class BlurpScreen extends ScreenAdapter {
             BlurpStore.scriptCompleteOverlay.render(batch, shapes);
         }
 
-        if(BlurpState.debugMode) debugHudRenderer.render();
+        debugHudRenderer.render();
     }
 
     private void initialise() {
