@@ -43,7 +43,7 @@ public class DebugHudRenderer {
 
         if (mouseWithin(0, 0, size, size) && !justSwitchedMode) {
             if (MouseState.isLeftPressed()) {
-                BlurpState.debugMode = !BlurpState.debugMode;
+                BlurpStore.blurpScreen.enableDebug(!BlurpState.debugMode, BlurpState.debugColour);
                 justSwitchedMode = true;
                 BlurpStore.timer.after(300, new Runnable() {
                     public void run() {

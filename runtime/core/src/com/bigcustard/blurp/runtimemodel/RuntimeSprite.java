@@ -103,10 +103,10 @@ public abstract class RuntimeSprite<T extends Sprite> extends Actor implements R
 
         shapes.set(ShapeRenderer.ShapeType.Line);
 
-        shapes.getColor().a = targetStyle == TargetStyle.Rectangle ? 1 : 0.5f;
+        shapes.getColor().a = targetStyle == TargetStyle.Rectangle ? 1 : 0.3f;
         shapes.polygon(collisionRectangle.getTransformedVertices());
 
-        shapes.getColor().a = targetStyle == TargetStyle.Circle ? 1 : 0.5f;
+        shapes.getColor().a = targetStyle == TargetStyle.Circle ? 1 : 0.3f;
         shapes.circle(collisionCircle.x, collisionCircle.y, collisionCircle.radius,
                       (int) (9 * Math.cbrt(collisionCircle.radius)));
     }
