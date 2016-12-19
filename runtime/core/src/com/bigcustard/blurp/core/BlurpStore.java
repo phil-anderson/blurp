@@ -15,6 +15,8 @@ import com.bigcustard.blurp.model.Viewport;
 import com.bigcustard.blurp.runtimemodel.*;
 import com.bigcustard.blurp.ui.*;
 
+import java.lang.System;
+
 /**
  * This is where all the singletons for the model and runtime get instantiated, before being passed on to the model and
  * runtime singletons stores. It's done in a separate class to give tests the opportunity to use something else.
@@ -141,7 +143,7 @@ public class BlurpStore {
     }
 
     public static void dispose() {
-
+        BlurpState.debugMode = false;
         tweener.killAll();
         tweener.update(9999);
         blurpScreen.dispose();

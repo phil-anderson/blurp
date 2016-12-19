@@ -77,6 +77,7 @@ public class BlurpScreen extends ScreenAdapter {
             // Pass it on so blurpify method can throw it
             BlurpStore.blurpifier.setException(exception);
         }
+
         renderListener.handlePostRenderEvent(batch, delta);
 
         // TODO: I noticed that frames were being skipped in scripts that did virtually no processing between
@@ -129,7 +130,6 @@ public class BlurpScreen extends ScreenAdapter {
     }
 
     private void doRender() {
-
         beginBatch(); // In case the RenderListener ended it.
         BlurpStore.runtimeScreen.render();
         endBatch();
@@ -145,9 +145,9 @@ public class BlurpScreen extends ScreenAdapter {
 
         if(BlurpState.scriptComplete) {
             BlurpStore.scriptCompleteOverlay.render(batch, shapes);
+        } else {
+            debugHudRenderer.render();
         }
-
-        debugHudRenderer.render();
     }
 
     private void initialise() {
