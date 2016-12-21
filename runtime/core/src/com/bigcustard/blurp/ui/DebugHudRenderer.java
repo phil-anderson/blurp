@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.glutils.*;
 import com.badlogic.gdx.math.*;
+import com.badlogic.gdx.utils.Align;
 import com.bigcustard.blurp.core.*;
 import com.bigcustard.blurp.model.constants.*;
 import com.bigcustard.blurp.util.*;
@@ -80,7 +81,8 @@ public class DebugHudRenderer {
 
         float reticuleSize = BlurpStore.mainCamera.viewportWidth / 8;
         shapes.setColor(BlurpState.debugGdxColour());
-        renderCameraReticule(reticuleSize, BlurpStore.staticCamera.viewportWidth / 2f, BlurpStore.staticCamera.viewportHeight / 2f);
+
+        renderCameraReticule(reticuleSize);
         renderText(reticuleSize, mousePosStatic);
     }
 
@@ -113,8 +115,11 @@ public class DebugHudRenderer {
         shapes.end();
     }
 
-    private void renderCameraReticule(float reticuleSize, float x, float y) {
+    private void renderCameraReticule(float reticuleSize) {
         float zoom = (float) BlurpStore.modelCamera.zoom;
+        Vector3 center = Convert.screenToMainLayer(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+        float x = center.x;
+        float y = center.y;
 
         shapes.setProjectionMatrix(BlurpStore.mainCamera.combined);
         shapes.begin(ShapeRenderer.ShapeType.Line);
@@ -174,13 +179,13 @@ public class DebugHudRenderer {
                 BlurpStore.mainViewport.getScreenHeight() / 2 - reticuleSize * 1.25f,
                            200, center, false);
 
-//        Vector3 mousePosMain = MouseState.getPosition(ScreenLayer.Main);
-//        if(!mousePosMain.equals(mousePosStatic)) {
-//            String mainMouseString = String.format("(x:%.1f  y:%.1f)", mousePosMain.x, mousePosMain.y);
-//            font.draw(batch, mainMouseString, BlurpStore.mainCamera.viewportWidth / 2 - 100,
-//                               BlurpStore.mainCamera.viewportHeight / 2 - reticuleSize * 1.6f,
-//                               200, Align.center, false);
-//        }
+        Vector3 mousePosMain = MouseState.getPosition(ScreenLayer.Main);
+        if(!mousePosMain.equals(mousePosStatic)) {
+            String mainMouseString = String.format("(x:%.1f  y:%.1f)", mousePosMain.x, mousePosMain.y);
+            font.draw(batch, mainMouseString, BlurpStore.mainCamera.viewportWidth / 2 - 100,
+                               BlurpStore.mainCamera.viewportHeight / 2 - reticuleSize * 1.6f,
+                               200, Align.center, false);
+        }
 
         batch.end();
     }
