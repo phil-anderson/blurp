@@ -88,7 +88,7 @@ project(":runtime:core") {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         compile 'org.jruby:jruby-complete:1.7.25'
-        compile 'org.python:jython-standalone:2.7.0'
+        compile 'org.python:jython-standalone:2.7.1b3'
         compile 'org.codehaus.groovy:groovy-all:2.4.7'
         compile fileTree(dir: '../../libs', include: '*.jar')
 
