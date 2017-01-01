@@ -39,6 +39,8 @@ public class DebugHudRenderer {
     }
 
     private void renderHudButton() {
+        shapes.setProjectionMatrix(BlurpStore.staticCamera.combined);
+
         float size = BlurpStore.staticCamera.viewportWidth / 30;
         float alpha = 0.5f;
 
